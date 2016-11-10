@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.6.1'
 
-set :application, 'myfuture'
-set :repo_url, 'git@github.com:pramayu/myfuture.git'
+set :application, 'khapoo'
+set :repo_url, 'git@github.com:pramayu/booom.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
