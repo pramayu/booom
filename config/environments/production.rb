@@ -46,14 +46,15 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   host = '103.247.8.220'
   config.action_mailer.default_url_options = {host: host}
-  config.action_mailer.smtp_settings {
-    :address        => 'smtp.gmail.com',
-    :post           => 587,
-    :authentication => :plain,
-    :user_name      => 'dmonmad@gmail.com',
-    :password       => 'e32xpram',
-    :domain         => 'khapoo.com',
-    :enable_starttls_auto   => true
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "google.com",
+    authentication: :plain,
+    enable_starttls_auto: true,
+    user_name: "dmonmad@gmail.com",
+    password: "pramayu10",
+    openssl_verify_mode: 'none'
   }
 
   # Use the lowest log level to ensure availability of diagnostic information
