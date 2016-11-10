@@ -1,0 +1,16 @@
+<%= form_for @note do |f| %>
+  <div class="form-group saym pull-left"> 
+    <%= f.text_field :title, class: "form-control eorf iiuy", placeholder: "Note Title" %> 
+  </div>
+  <div class="lhdyte">
+    <div class="form-group saym"> 
+      <%= f.fields_for :memos, Memo.new do |memo| %>
+        <%= render 'memo_fields', f: memo %>
+        <div class="add65465 pull-left">
+          <%= link_to_add_association 'Add Memo', f, :memos, class: "btn btn-default mater dhgsr", "data-turbolinks": false %>
+        </div>
+      <% end %>
+    </div>
+    <%= f.submit "Send Note", class: "btn btn-default mater" %>
+  </div>
+<% end %>

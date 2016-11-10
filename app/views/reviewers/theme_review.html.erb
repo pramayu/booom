@@ -1,0 +1,46 @@
+<%= title "Choose Themes for Reviewed ~ KAPHOO" %>
+<div class="col-md-8 brek skiw">
+	<div class="wq87uy">
+		<% @themetos.each do |theme| %>
+			<div id="kjhgt565">
+				<%= render partial: 'theme', locals: {theme: theme} %>
+			</div>
+		 <% end %> 
+	</div>
+</div>
+<div class="col-md-4 brok kuio">
+	<div class="for_reviewer">
+		<div class="team kls">
+			<div class="ti_l">
+				<span>YOUR CHOOSES</span>
+			</div>
+		</div>
+	</div>
+	<div class="fresk">
+		<div id="forever">
+			<%= render @themes %>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="brn878">
+		<%= link_to "CHECK OUT", project_path(current_user.team_id), class: "gdt35", "data-turbolinks": false %>
+	</div>
+</div>
+<div class="clear"></div>
+<script>
+	$('.aktif').removeClass();
+	$('.themes').addClass('aktif');
+	<% @themetos.each do |theme| %>
+		$(document).ready(function(){
+			$('#add_to_pro_<%= theme.id %>').click(function(){
+			$.ajax({
+				type: "GET",
+				url: "<%= add_to_pro_path(theme) %>",
+				success: function(){
+					$('#dhg789_<%= theme.id %>').hide("slow");
+				}
+			});
+			});
+		});
+	 <% end %> 
+</script>

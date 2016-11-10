@@ -1,0 +1,22 @@
+<% index = category_counter + 1 %>
+<%= content_tag "div", id: "category3265", data: {category: category.to_json(only: [:slug])} do %>
+  <% unless category.slug.nil? %>
+    <li id="daddy_<%= category.id %>" class="_idih <%= 'tran' if (index + 1)%2 == 0 %>">
+      <ul class="list-inline keke">
+        <li class="_id cfdl">
+          <%= index %>
+        </li>
+        <li class="_name cfdl">
+          <%= category.name %>
+        </li>
+        <li class="_unit cfdl">
+          <ul class="list-inline siut">
+
+            <li><%= link_to category_edit_url(category.slug) do %><span class="lnr lnr-magic-wand"><% end %></li>
+            <li><a onclick="dellCategory(<%= category.id %>)" id="data_<%#= category.slug %>"><span class="lnr lnr-trash"></span></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  <% end %>
+<% end %>

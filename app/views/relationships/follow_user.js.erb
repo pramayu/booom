@@ -1,0 +1,5 @@
+$('#follow_button').attr('class', 'unfollow_btn')
+                   .text('Following')
+                   .attr('href', "/user/store/<%= @user.id %>/unfollow_user")
+                   .attr('id', 'unfollow_button');
+

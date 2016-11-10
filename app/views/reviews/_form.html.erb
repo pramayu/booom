@@ -1,0 +1,64 @@
+<% if @theme.present? %>
+	<%= form_for([@theme, @theme.reviews.build ], remote: true) do |f| %>
+		<div class="form-group">
+			<div id="star-rating"></div>
+		</div>
+		<div class="form-group">
+			<%= f.text_area :comment, class: "com_inpt rev_it form-control", id: "reviews_key_press", placeholder: "Comment", onkeypress: "onKeyPres(event, this)" %>
+		</div>
+	<% end %>
+<% elsif @code.present? %>
+	<%= form_for([@code, @code.reviews.build ], remote: true) do |f| %>
+		<div class="form-group">
+			<div id="star-rating"></div>
+		</div>
+		<div class="form-group">
+			<%= f.text_area :comment, class: "com_inpt rev_it form-control", id: "reviews_key_press", placeholder: "Comment", onkeypress: "onKeyPres(event, this)" %>
+		</div>
+	<% end %>
+<% elsif @graphic.present? %>
+	<%= form_for([@graphic, @graphic.reviews.build ], remote: true) do |f| %>
+		<div class="form-group">
+			<div id="star-rating"></div>
+		</div>
+		<div class="form-group">
+			<%= f.text_area :comment, class: "com_inpt rev_it form-control", id: "reviews_key_press", placeholder: "Comment", onkeypress: "onKeyPres(event, this)" %>
+		</div>
+	<% end %>
+<% elsif @t3d.present? %>
+	<%= form_for([@t3d, @t3d.reviews.build ], remote: true) do |f| %>
+		<div class="form-group">
+			<div id="star-rating"></div>
+		</div>
+		<div class="form-group">
+			<%= f.text_area :comment, class: "com_inpt rev_it form-control", id: "reviews_key_press", placeholder: "Comment", onkeypress: "onKeyPres(event, this)" %>
+		</div>
+	<% end %>
+<% elsif @video.present? %>
+	<%= form_for([@video, @video.reviews.build ], remote: true) do |f| %>
+		<div class="form-group">
+			<div id="star-rating"></div>
+		</div>
+		<div class="form-group">
+			<%= f.text_area :comment, class: "com_inpt rev_it com_course form-control", id: "reviews_key_press", placeholder: "Comment", onkeypress: "onKeyPres(event, this)" %>
+		</div>
+	<% end %>
+<% elsif @font.present? %>
+	<%= form_for([@font, @font.reviews.build ], remote: true) do |f| %>
+		<div class="form-group">
+			<div id="star-rating"></div>
+		</div>
+		<div class="form-group">
+			<%= f.text_area :comment, class: "com_inpt rev_it form-control", id: "reviews_key_press", placeholder: "Comment", onkeypress: "onKeyPres(event, this)" %>
+		</div>
+	<% end %>
+<% elsif @course.present? %>
+	<%= form_for([@course, @course.reviews.build ], remote: true) do |f| %>
+		<div class="form-group">
+			<div id="star-rating"></div>
+		</div>
+		<div class="form-group">
+			<%= f.text_area :comment, class: "com_inpt com_course rev_it form-control", id: "reviews_key_press", placeholder: "Comment", onkeypress: "onKeyPres(event, this)" %>
+		</div>
+	<% end %>
+<% end %> 

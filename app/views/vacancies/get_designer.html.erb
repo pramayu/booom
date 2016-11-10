@@ -1,0 +1,77 @@
+<div class="job_head">
+  <div class="container th-cus vhgf">
+    <div class="capr">
+      <h1><span><%= @vacancies.count %></span> Jobs for <%= params[:category].gsub(/-/, ' ').capitalize %></h1>
+      <div class="capr-co">
+        <h4>join us and get the job as you wish</h4>
+      </div>
+    </div>
+    <div class="capr_inpt">
+      <div class="inpt_group">
+        <div class="col-md-4 moo nb" style="width: 37.2%;">
+          <label for="sel1"><span>CITY</span>
+            <select class="form-control job_sch alll" id="sel1">
+              <option>Denpasar</option>
+              <option>Yogyakarta</option>
+              <option>Jakarta</option>
+              <option>Bandung</option>
+            </select>
+          </label>
+        </div>
+        <div class="col-md-4 moo me" style="width: 37.2%;">
+          <label for="sel3"><span>TYPE</span>
+            <select class="form-control job_sch alll" id="sel3">
+              <option>Full-Time</option>
+              <option>Contract</option>
+              <option>Part-Time</option>
+              <option>Freelance</option>
+              <option>Moonlighting</option>
+              <option>Internship</option>
+            </select>
+          </label>
+        </div>
+        <div class="col-md-4 moo mb">
+          <input type="button" value="SEARCH" class="btg_h">
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="job_content">
+  <div class="_designer_job">
+    <div class="container th-cus">
+      <div class="_data_job">
+        <% for agatha in @agathas %>
+          <div class="col-md-4 tmbl_job">
+            <div class="tmbl_it">
+              <div class="timeandopt">
+                <span class="tme"><%= time_ago_in_words(agatha.created_at) %></span>
+              </div>
+              <div class="who_uo">
+                <%= link_to vacancy_url(agatha.slug), class: "kjr" do %>
+                  <%= image_tag agatha.user.avatar_url(:thumb) %>
+                  <p class="who_am"><% if agatha.user.company.empty? %><%= agatha.first_n.capitalize + " " + agatha.last_n.capitalize %><% else %><%= agatha.user.company %><% end %></p>
+                <% end %>
+                <%= link_to vacancy_url(agatha), class: "vbg" do %>
+                  <p><%= truncate(agatha.name, length: 30) %></p>
+                <% end %>
+              </div>
+              <div class="btn-gri">
+                <div class="col-md-6 nht lf_re">
+                  <a href="#">Recruiters: <span><%= agatha.recruiter %></span></a>
+                </div>
+                <div class="col-md-6 nht rg_re">
+                  <a href="#">Experience: <span><%= agatha.experience %></span></a>
+                </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,356 @@
+<style>
+.title {
+  <% if current_user.ourstore.present? %>
+  background-image: url(<%= current_user.ourstore.header_url(:gregetno) %>);
+  <% else %>
+  background-image: url(<%= asset_path 'default/sn.png' %>);
+  <% end %>
+width: 100%;
+height: 245px;
+background-size: cover;
+margin-top: 60px;
+-webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+-moz-box-shadow:    0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+box-shadow:         0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+}
+</style>
+<% if current_user.company? %>
+  <%= title current_user.company + " Dashboard ~ KAPHOO" %>
+<% else %>
+  <%= title current_user.first_n + ' ' +current_user.last_n + " Dashboard ~ KAPHOO" %>
+<% end %>
+<div class="col-md-8 brek">
+  <div class="title">
+    <div class="title_con">
+      <div class="col-md-6 hy">
+        <% if current_user.reviewer == true %>
+          <h2>hi <span><%= current_user.first_n %></span>, this is your reviewer account center.</h2>
+          <p>Now you can review all the items in accordance with the skill you have.</p>
+        <% elsif current_user.admin == true %>
+            <h2>hi <span><%= current_user.first_n %></span>, this is your admin account center.</h2>
+            <p>Now you can manage all data in accordance with the authorization you have.</p>
+        <% else %>
+          <h2>hi <span><%= current_user.first_n %></span>, this is your account center.</h2>
+          <p>Now you can sell your digital items to millions of users and make money from it.</p>
+        <% end %>
+      </div>
+      <div class="col-md-6 hi">
+        <% unless current_user.reviewer == true || current_user.seller == false || current_user.admin? %>
+          <ul class="list-inline">
+            <li></i><span><%= _sell_sum(current_user.id) %></span><p>SELL</p></li>
+            <li></i><span><%= current_user.themes.where(aggree: true).count.to_i + current_user.codes.where(agree: true).count.to_i + current_user.graphics.where(agree: true).count.to_i + current_user.t3ds.where(agree: true).count.to_i + current_user.fonts.where(agree: true).count.to_i + current_user.courses.where(agree: true).count.to_i + current_user.videofxes.where(agree: true).count.to_i %></span><p>ITEMS</p></li>
+            <li></i><span><%= number_to_currency(current_user.balance) %></span><p>BALANCE</p></li>
+          </ul>
+        <% end %>
+        <% if current_user.admin? %>
+          <ul class="list-inline">
+            <li></i><span><%= _all_items %></span><p>ALL ITEMS</p></li>
+            <li></i><span><%= _item_sold %></span><p>ITEMS SOLD</p></li>
+            <li></i><span><%= number_to_currency(_all_price) %></span><p>REVENUE</p></li>
+            <li></i><span><%= @users.where('seller = true or job_post = true').count %></span><p>MEMBER</p></li>
+          </ul>
+        <% end %>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <% if current_user.reviewer? || current_user.admin? %>
+    <div class="cout_itms user_chooses">
+      <div class="kate_kat">
+        <% if current_user.reviewer? %>
+          <h2>All products are waiting for review</h2>
+          <p>Select and review all existing products in accordance with your team. </p>
+        <% elsif current_user.admin? %>
+          <h2>All products passed the selection</h2>
+          <p>The following are all products that had escaped from the selection</p>
+        <% end %>
+      </div>
+      <div class="foko_de kat_fros">
+        <div class="col-md-3 prfft treet">
+          <a>
+            <object data="" type="">
+              <%= render 'home/theme' %>
+            </object>
+            <h4 class="th_">
+              <% if current_user.reviewer? %>
+                <%= @themes.where(team_id: [false, nil]).count %>
+              <% elsif current_user.admin? %>
+                  <%= @themes.where('aggree = true and reject = false').count %>
+              <% end %>
+              <p>THEMES</p>
+            </h4>
+          </a>
+        </div>
+        <div class="col-md-3 prfft treet">
+          <a>
+            <object data="" type="">
+              <%= render 'home/code' %>
+              <h4 class="th_">
+                <% if current_user.reviewer? %>
+                  <%= @codes.where(team_id: [false, nil]).count %>
+                <% elsif current_user.admin? %>
+                  <%= @codes.where('agree = true and reject = false').count %>
+                <% end %>
+                <p>CODES</p>
+              </h4>
+            </object>
+          </a>
+        </div>
+        <div class="col-md-3 prfft treet">
+          <a>
+            <object data="" type="">
+              <%= render 'home/graphic' %>
+              <h4 class="th_">
+                <% if current_user.reviewer? %>
+                  <%= @graphics.where(team_id: [false, nil]).count %>
+                <% elsif current_user.admin? %>
+                  <%= @graphics.where('agree = true and reject = false').count %>
+                <% end %>
+                <p>GRAPHICS</p>
+              </h4>
+            </object>
+          </a>
+        </div>
+        <div class="col-md-3 prfft treet">
+          <a>
+            <object data="" type="">
+              <%= render 'home/threed' %>
+              <h4 class="th_">
+                <% if current_user.reviewer? %>
+                  <%= @t3ds.where(team_id: [false, nil]).count %>
+                <% elsif current_user.admin? %>
+                  <%= @t3ds.where('agree = true and reject = false').count %>
+                <% end %>
+                <p>3DREAM</p>
+              </h4>
+            </object>
+          </a>
+        </div>
+        <div class="col-md-3 prfft treet">
+          <a>
+            <object data="" type="">
+              <%= render 'home/video' %>
+              <h4 class="th_">
+                <% if current_user.reviewer? %>
+                  <%= @videofxes.where(team_id: [false, nil]).count %>
+                <% elsif current_user.admin? %>
+                  <%= @videofxes.where('agree = true and reject = false').count %>
+                <% end %>
+                <p>VIDOEFX</p>
+              </h4>
+            </object>
+          </a>
+        </div>
+        <div class="col-md-3 prfft treet">
+          <a>
+            <object data="" type="">
+              <%= render 'home/photo' %>
+              <h4 class="th_">
+                <%= 0 %>
+                <p>PHOTOSTOCK</p>
+              </h4>
+            </object>
+          </a>
+        </div>
+        <div class="col-md-3 prfft treet">
+          <a>
+            <object data="" type="">
+              <%= render 'home/font' %>
+              <h4 class="th_">
+                <% if current_user.reviewer? %>
+                  <%= @fonts.where(team_id: [false, nil]).count %>
+                <% elsif current_user.admin? %>
+                  <%= @fonts.where('agree = true and reject = false').count %>
+                <% end %>
+                <p>FONTS</p>
+              </h4>
+            </object>
+          </a>
+        </div>
+        <div class="col-md-3 prfft treet">
+          <a>
+            <object data="" type="">
+              <%= render 'home/course' %>
+              <h4 class="th_">
+                <% if current_user.reviewer? %>
+                  <%= @courses.where(team_id: [false, nil]).count %>
+                <% elsif current_user.admin? %>
+                  <%= @courses.where('agree = true and reject = false').count %>
+                <% end %>
+                <p>COURSES</p>
+              </h4>
+            </object>
+          </a>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <%= render "accounts/user_choose" %>
+  <% end %>
+</div>
+<div class="col-md-4 brok">
+  <% if current_user.reviewer? %>
+    <div class="for_reviewer">
+      <div class="team kls note">
+        <div class="ti_l">
+          <span>SHARED NOTE</span>
+        </div>
+        <div class="clerw">
+          <% @shared.each_with_index do |note, index| %> 
+            <div class="lee0879 <% if index+1 == 1 %> orange_ <% elsif index+1 == 2 %> green_ <% else %> blue_ <% end %>">
+              <div class="col-md-12">
+                <div class="col-md-9">
+                  <div class="name_">
+                    <p class="llh"><%= truncate(note.title, length: 23) %></p>
+                    <p class="tme dgf" style="margin:0px;">by <%= note.user.username %></p>
+                    <span class="tme"><%= note.created_at.strftime("%d.%m.%Y") %></span>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <p class="gdf"><%= note.memos.count %> tasks</p>
+                </div>
+              </div>
+              <div class="clear"></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="team kls note">
+        <div class="ti_l">
+          <span>PRIVATE NOTE</span>
+        </div>
+        <div class="clerw">
+          <% @notes.where(team_id: nil).each_with_index do |note, index| %> 
+            <div class="lee0879 <% if index+1 == 1 %> orange_ <% elsif index+1 == 2 %> green_ <% else %> blue_ <% end %>">
+              <div class="col-md-12">
+                <div class="col-md-9">
+                  <div class="name_">
+                    <p class="llh"><%= truncate(note.title, length: 23) %></p>
+                    <span class="tme"><%= note.created_at.strftime("%d.%m.%Y") %></span>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <p class="gdf"><%= note.memos.count %> tasks</p>
+                </div>
+              </div>
+              <div class="clear"></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% elsif current_user.admin? %>
+    <div class="for_reviewer">
+      <div class="team kls statistic">
+        <div class="ti_l">
+          <span>STATISTIC</span>
+        </div>
+      </div>
+      <div class="team kls note">
+        <div class="ti_l">
+          <span>NOTE</span>
+        </div>
+        <div class="clerw">
+          <% @notes.each_with_index do |note, index| %> 
+            <div class="lee0879 <% if index+1 == 1 %> orange_ <% elsif index+1 == 2 %> green_ <% else %> blue_ <% end %>">
+              <div class="col-md-12">
+                <div class="col-md-9">
+                  <div class="name_">
+                    <p class="llh"><%= truncate(note.title, length: 23) %></p>
+                    <span class="tme"><%= note.created_at.strftime("%d.%m.%Y") %></span>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <p class="gdf"><%= note.memos.count %> tasks</p>
+                </div>
+              </div>
+              <div class="clear"></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% elsif current_user.seller? || current_user.job_post? %>
+    <div class="for_seller">
+      <div class="recent kls">
+        <div class="ti_l">
+          <span>SALES HISTORIES</span>
+        </div>
+        <div class="rec_y">
+          <ul>
+            <% @notifications.where(notice_type: 'bought').each do |notif| %> 
+              <li>
+                <div class="ig">
+                  <%= image_tag notif.notified_by.avatar_url(:thumb), class: "img_j" %>
+                </div>
+                <div class="dfi">
+                  <!-- <p><a href="#">Anissa</a> bought <span>modern dashboard admin...</span></p> -->
+                  <p><a><%= notif.notified_by.first_n.capitalize %></a> <%= notif.notice_type %> 
+                <span>
+                  <% if notif.theme.present? %>
+                    <%= truncate(notif.theme.name, length: 18) %>
+                  <% elsif notif.code.present? %>
+                    <%= truncate(notif.code.name, length: 18) %>
+                  <% elsif notif.graphic.present? %>
+                    <%= truncate(notif.graphic.name, length: 18) %>
+                  <% elsif notif.font.present? %>
+                    <%= truncate(notif.font.name, length: 18) %>
+                  <% elsif notif.course.present? %>
+                    <%= truncate(notif.course.name, length: 18) %>
+                  <% elsif notif.t3d.present? %>
+                    <%= truncate(notif.t3d.name, length: 18) %>
+                  <% elsif notif.videofx.present? %>
+                    <%= truncate(notif.videofx.name, length: 18) %>
+                  <% end %>        	
+                </span></p>
+                <span class="tim"><%= time_ago_in_words(notif.created_at) %> ago</span>
+                </div>
+              </li>
+            <% end %> 
+          </ul>
+        </div>
+      </div>
+      <div class="kls">
+        <div class="ti_l">
+          <span>RECENT ACTIVITIES</span>
+        </div>
+        <div class="rec_y">
+          <ul>
+            <% @notifications.where.not(notice_type: 'bought').each do |notif| %>
+              <li>
+                <div class="ig">
+                  <%= image_tag notif.notified_by.avatar_url(:thumb), class: "img_j" %>
+                </div>
+                <div class="dfi">
+                  <p><%= link_to store_path(notif.notified_by) do %><% if notif.notice_type == 'approv' || notif.notice_type == 'reject' %>Reviewer<% else %><%= notif.notified_by.first_n %><% end %><% end%> <%= notif.notice_type %>ed <% if notif.theme.present? %><%= link_to item_path(notif.theme) do %><span><%= truncate(notif.theme.name, length: 18) %></span><% end %><% elsif notif.code.present? %><%= link_to item_code_path(notif.code) do %><span><%= truncate(notif.code.name, length: 30) %></span><% end %><% elsif notif.graphic.present? %><%= link_to item_graphic_path(notif.graphic) do %><span><%= truncate(notif.graphic.name, length: 30) %></span><% end %><% elsif notif.t3d.present? %><%= link_to item_t3d_path(notif.t3d) do %><span><%= truncate(notif.t3d.name, length: 30) %></span><% end %><% elsif notif.videofx.present? %><%= link_to item_videofx_path(notif.videofx) do %><span><%= truncate(notif.videofx.name, length: 30) %></span><% end %><% elsif notif.font.present? %><%= link_to item_font_path(notif.font) do %><span><%= truncate(notif.font.name, length: 30) %></span><% end %><% elsif notif.course.present? %><%= link_to item_course_path(notif.course) do %><span><%= truncate(notif.course.name, length: 30) %></span><% end %><% elsif notif.notice_type == 'send' %>your email<% else %>you as friend<% end %></p>
+                  <span class="tim"><%= time_ago_in_words(notif.created_at) %> ago</span>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="kls">
+        <div class="ti_l">
+          <span>FOLLOWERS(<%= current_user.followers.size %>)</span>
+        </div>
+        <div class="fuvk">
+          <ul class="list-inline">
+            <% @followers.each do |follower| %>
+              <li>
+                <% if follower.avatar.blank? %>
+                  <a href="#" title="<%= follower.company.capitalize %>"><%= image_tag("default/default_profile.png", class: "fujk") %></a>
+                <% else %>
+                  <%= link_to store_path(follower), title: "#{follower.company.capitalize}" do %>
+                    <%= image_tag follower.avatar_url(:taan), class: "fujk" %>
+                  <% end %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="clear"></div>

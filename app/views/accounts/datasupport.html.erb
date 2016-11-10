@@ -1,0 +1,66 @@
+<%= title "Data Support ~ KHAPOO" %>
+<div class="col-md-10 dsk data-sp">
+  <div class="theme_supp treash">
+    <% if params[:ithemes] %>
+      <%= render 'accounts/data_support_theme' %> 
+    <% elsif params[:icodes] %>
+      <%= render 'accounts/data_support_code' %>
+    <% elsif params[:igraphic] %>
+      <%= render 'accounts/data_support_graphic' %>
+    <% elsif params[:it3d] %>
+      <%= render 'accounts/data_support_t3d' %>
+    <% elsif params[:ivideo] %>
+      <%= render 'accounts/data_support_video' %>
+    <% elsif params[:ifont] %>
+      <%= render 'accounts/data_support_font' %>
+    <% elsif params[:icourse] %>
+      <%= render 'accounts/data_support_course' %>
+    <% end %>
+  </div>
+</div>
+<div class="col-md-2 dsu">
+  <div class="panel_menu">
+    <div class="mnu_t" role="tablist">
+      <p role="presentation" class="but ohhh active th_me">
+      <%= link_to datasupport_theme_path(:ithemes), class: "supp_dta", "data-turbolinks": false do  %>
+        <i class="lnr lnr-laptop-phone" aria-hidden="true"></i>
+      <% end %> 
+      </p>
+      <p class="but ohhh co_de" role="presentation">
+      <%= link_to datasupport_code_path(:icodes),class: "supp_dta", "data-turbolinks": false do %>
+        <i class="lnr lnr-coffee-cup" aria-hidden="true"></i>
+      <% end %> 
+      </p>
+      <p class="but ohhh grap_ic" role="presentation" >
+      <%= link_to datasupport_graphic_path(:igraphic),class: "supp_dta", "data-turbolinks": false do %>
+        <i class="lnr lnr-magic-wand" aria-hidden="true"></i>
+      <% end %> 
+      </p>
+      <p class="but ohhh t3_d" role="presentation">
+      <%= link_to datasupport_t3d_path(:it3d),class: "supp_dta", "data-turbolinks": false do %>
+        <i class="lnr lnr-layers" aria-hidden="true"></i>
+      <% end %>
+      </p>
+      <p class="but ohhh vid_ex" role="presentation" >
+      <%= link_to datasupport_videofx_path(:ivideo),class: "supp_dta", "data-turbolinks": false do %>
+        <i class="lnr lnr-film-play" aria-hidden="true"></i>
+      <% end %>
+      </p>
+      <p class="but ohhh font_i" role="presentation" >
+      <%= link_to datasupport_font_path(:ifont),class: "supp_dta", "data-turbolinks": false do %>
+        <i class="lnr lnr-highlight" aria-hidden="true"></i>
+      <% end %>
+      </p>
+      <p class="but ohhh cour_e" role="presentation" >
+      <%= link_to datasupport_course_path(:icourse),class: "supp_dta", "data-turbolinks": false do %>
+        <i class="lnr lnr-briefcase" aria-hidden="true"></i>
+      <% end %>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>
+<script>
+$('.aktif').removeClass();
+$('.sup_ot').addClass('aktif');
+</script>

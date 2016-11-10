@@ -1,0 +1,95 @@
+<% for code in @codes %> 
+  <li class="kqt34">
+    <div class="kquie">
+      <%= image_tag code.thumbnail_url(:thumbnail) %>
+      <div class="extras" data-tooltip-content="#dat_tooltip">
+        <div class="u_name">
+          <%= link_to "", item_code_path(code), class: "this_oiu", "data-turbolinks": false %>
+        </div>
+        <div class="raty-rate">
+          <div class="star-rating jger" data-score="<%= code.reviews.average(:rating) %>"></div>
+        </div>
+        <div class="vote">
+          <ul>
+            <li>
+              <% if signed_in? %>
+                <% if current_user.liked? code %>
+                  <%= link_to dislike_code_path(code.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{code.id}" do %>
+                    <i class="fa fa-heart ic_vote"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to like_code_path(code.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{code.id}" do %>
+                    <i class="fa fa-heart ic_vote"></i>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to sign_in_path, class: "vo_ic vo_ic_dis" do %>
+                  <i class="fa fa-heart ic_vote"></i>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <% if signed_in? %>
+                <% if current_user.akusuka.blank? %>
+                  <%= link_to new_akusuka_path, class: "mutq co_ic", remote: true do %>
+                    <i class="fa fa-folder" aria-hidden="true"></i>
+                  <% end %>
+                <% else %>
+                  <% if current_user.akusuka.codes.include?(code) %>
+                    <%= link_to code_unsuka_code_path(code), class: "mutq co_ic green", id: "unwish_#{code.id}", remote: true do %>
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to code_suka_code_path(code), class: "mutq co_ic", id: "wish_#{code.id}", remote: true do %>
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to sign_in_path, class: "mutq co_ic" do %>
+                  <i class="fa fa-folder" aria-hidden="true"></i>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <a onclick="bagcdCart(<%= code.id %>)" id= "bag_<%= code.id %>" class="co_ic loih">
+                <i class="fa fa-shopping-bag ic_vote"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="tooltip_j">
+          <div id="dat_tooltip">
+            <div class="img_o">
+              <% code.screenshots[0..0].each do |image| %>
+                <%= image_tag image.screenshot_url(:hover) %>
+              <% end %>  
+            </div>
+            <div class="titlw pull-left">
+              <h4 class="je"><%= truncate(code.name, length: 50) %></h4>
+              <span class="by"><%= code.user.company %> | </span> 
+              <span class="by">codes / <%= code.category.name %></span>
+            </div>
+            <div class="prce pull-right">
+              <span class="k">$<%= code.price.to_i.floor %></span>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="author">
+        <% if code.user.avatar.blank? %>
+          <%= image_tag('default/default_profile.png', width: 28)  %>
+        <% else %>
+          <%= image_tag code.user.avatar_url(:taan), width: 28 %>
+        <% end %>
+      </div>
+      <div class="sell_info">
+        <span class="icon-cart_3 icon_cart_3"></span><span class="dta_sell"><%= code.line_items.where(code_id: code.id).count %></span>
+      </div>
+      <div class="price_info">
+        <span class="icon-price icon_price_1"></span><span class="dta_price">$<%= code.price.to_i.floor %></span>
+      </div>
+    </div>
+  </li>
+<% end %> 

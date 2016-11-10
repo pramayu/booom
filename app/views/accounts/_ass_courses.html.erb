@@ -1,0 +1,61 @@
+<% @courses.each do |course| %>
+  <div class="col-md-3 sol" id="course_del<%= course.id %>">
+    <div class="soll soli">
+      <div class="img_k">
+        <%= image_tag course.thumbnail_url(:thumbnail), class: "isabela" %>
+        <div class="hof">
+          <div class="dhgft">
+            <%= link_to item_course_path(course), class: "btyr-hfg", "data-turbolinks": false do %>
+              <i class="fa fa-rocket" aria-hidden="true"></i>
+            <% end %>
+          </div>
+          <ul class="fhg">
+            <% if course.freeitems.map{|free| free.course_id}.join("").to_i == course.id %>
+              <li class="dhg734 kd64" style="border-radius: 0px;cursor:pointer;"><i style="color: #ff9c49;" class="fa fa-unlock-alt" aria-hidden="true"></i></li>
+            <% else %>
+              <li class="dhg734 kd64" onclick="courseFree(<%= course.id %>)" style="border-radius: 0px;cursor:pointer;"><i id="color_<%= course.id %>" style="color: #A1A1A1;" class="fa fa-unlock-alt" aria-hidden="true"></i></li>
+            <% end %>
+            <li class="dhg734 kd64 del_86" onclick="dellCourseAdmin(<%= course.id %>)"></li>
+          </ul>
+          <div class="tooltip_j">
+            <div id="dat_tooltip">
+              <div class="img_o">
+                <% course.freepis.each do |freepi| %>
+                  <video id="ajjayyy" class="video-js aja_<%= freepi.id %>" preload="auto" width="463" height="257" data-setup="{}" style="width: 463px !important; height: 257px !important">
+                    <source src="<%= freepi.cacaca %>" type='video/mp4'>
+                  </video>
+                <% end %> 
+              </div>
+              <div class="titlw pull-left">
+                <h4 class="je"><%= truncate(course.name, length: 50) %></h4>
+                <span class="by"><%= course.user.company %> | </span> 
+                <span class="by">courses / <%= course.category.name %></span>
+              </div>
+              <div class="prce pull-right">
+                <span class="k">$<%= course.price.to_i.floor %></span>
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <ul class="list-inline lf pull-left">
+          <li>
+            <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= course.sell %></span>
+          </li>
+          <li>
+            <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= course.price.to_i.floor %> / $<%= course.price_ext.to_i.floor %></span>
+          </li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script>
+$(function(){
+  $('.but').removeClass('active');
+  $('.cour_e').addClass('active');
+});
+</script>

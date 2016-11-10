@@ -1,0 +1,9 @@
+$('#rev-en').append("<%= j render @review %>");
+$('.rev_it').val('');
+$('.star-rating').raty({
+	path: "/assets/",
+	readOnly: true,
+	score: function(){
+		return $(this).attr("data-score");
+	}
+});

@@ -1,0 +1,19 @@
+<% index = softopen3d_counter + 1 %>
+<%= content_tag "div", id: "softopen3d3265", data: {softopen3d: softopen3d.to_json(only: [:slug])} do %>
+  <li id="daddyyoio51_<%= softopen3d.id %>" class="_idih <%= 'tran' if (index + 1)%2 == 0 %>">
+    <ul class="list-inline keke">
+      <li class="_id cfdl">
+        <%= index %>
+      </li>
+      <li class="_name cfdl">
+        <%= softopen3d.name %>
+      </li>
+      <li class="_unit cfdl">
+        <ul class="list-inline siut">
+          <li><%= link_to softopen3d_edit_url(softopen3d.id) do %><span class="lnr lnr-magic-wand"><% end %></li>
+          <li><a onclick="dellSoftopen3d(<%= softopen3d.id %>)" id="data_<%#= category.slug %>"><span class="lnr lnr-trash"></span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+<% end %>

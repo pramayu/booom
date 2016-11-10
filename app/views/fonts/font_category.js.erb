@@ -1,0 +1,8 @@
+$('#push_step').html("<%= escape_javascript(render('push')) %>");
+$('#push_step').show();
+$('.extras').tooltipster({
+   	functionInit: function(instance, helper){
+        var content = $(helper.origin).find('#dat_tooltip').detach();
+        instance.content(content);
+    }
+});

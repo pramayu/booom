@@ -1,0 +1,4 @@
+$('#dislike_<%= @theme.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= like_theme_path(@theme.slug) %>')
+						   .attr('id', 'like_<%= @theme.id %>')
+						   .removeClass('red');

@@ -1,0 +1,6 @@
+<%= form_for([@course, @course.headsecs.build], remote: true) do |f| %>
+	<%= f.text_field :name, class: "form-control this_load kwqtrs", id: "crthd", require: true %>
+	<div class="bge">
+		<%= f.submit "GO", class: "btn btn-goes" %>
+	</div>
+<% end %>

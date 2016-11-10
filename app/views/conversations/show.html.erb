@@ -1,0 +1,72 @@
+<%= title "Replies Messages ~ KHAPOO" %>
+
+<div class="mail-nav">
+  <div class="isi-menu-mail">
+    <div class="title-mail">
+      <div class="left-to pull-left">
+        <p class="dgaji67">Mail</p>
+        <% if unread_messages_count >= 1 %>
+          <span class="dshgq1">You have <%= unread_messages_count %> unread email</span>
+        <% elsif unread_messages_count <= 0 %>
+          <span class="dshgq1">You have't email</span>
+        <% end %>
+      </div>
+      <div class="right-to pull-right">
+        <%= link_to "NEW MESSAGE", new_conversation_path, class: "new_email", "data-turbolinks": false %>
+        <% if conversation.is_trashed?(current_user) %>
+          <%= link_to 'UNTRASH', untrash_conversation_path(conversation), "data-turbolinks": false, class: 'new_email', method: :post %>
+        <% else %>
+          <%= link_to 'MOVE TO TRASH', trash_conversation_path(conversation), "data-turbolinks": false, class: 'new_email', style: "background-color: #d9534f; border-color: #d43f3a;", method: :post,
+            data: {confirm: 'Are you sure?'} %>
+        <% end %>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <div class="menu-inbx">
+      <div class="list-inline mnu-uli">
+        <p class="mnu-f <%= active_page(:inbox) %>"><i class="fa fa-inbox" aria-hidden="true"></i><%= link_to "INBOX", mailbox_inbox_path, class: "inbox actig" %></p>
+        <p class="mnu-f <%= active_page(:sent) %>"><i class="fa fa-paper-plane" aria-hidden="true"></i><%= link_to "SENT", mailbox_sent_path, class: "sent" %></p>
+        <p class="mnu-f pempem <%= active_page(:trash) %>"><i class="fa fa-trash" aria-hidden="true"></i><%= link_to "TRASH", mailbox_trash_path, class: "trash" %></p>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <div class="col-md-4 freak-left">
+      <div class="seacbv">
+        <input type="text" class="form-control schmail" placeholder="Search email here...">
+      </div>
+      <% mailbox.conversations.each_with_index do |conversation, index| %>
+        <div class="receipt" role="tablist">
+          <div class="balamed <%= 'active' if index == 0 %>">
+            <%= link_to conversation_path(conversation), class: "djfgf" do  %>
+              <div class="imgdf">
+                <%= image_tag conversation.originator.avatar_url(:thumb) %>
+              </div>
+              <div class="condfer">
+                <p class="name"><%= conversation.originator.first_n.capitalize %> <%= conversation.originator.last_n.capitalize %> <span class="pull-right"> <%= conversation.messages.last.created_at.strftime("%b %d, %Y") %></span></p>
+                <p class="congst"><span class="subject"><%= conversation.subject.capitalize %> - </span> <%= truncate(conversation.messages.last.body, length: 20) %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="col-md-8 freak-right">
+      <%= render partial: 'messages' %>
+      <%= form_for :message, url: reply_conversation_path(conversation) do |f| %>
+        <div class="form-group hsdga5357">
+          <%= f.text_area :body, placeholder: "Reply Message", rows: 4, class: "form-control reply_form" %>
+        </div>
+        <%= f.submit "Reply", class: 'btn btn-danger pull-right niywag' %>
+      <% end %>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.message').addClass('aktif');
+</script>
+

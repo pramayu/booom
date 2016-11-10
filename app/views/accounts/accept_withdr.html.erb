@@ -1,0 +1,63 @@
+<%= title "Accept Withdrawals ~ KHAPOO" %>
+<div class="mail-nav all_notifi earning wth_drw setting wishlist">
+  <div class="col-md-8 ddgtet" style="width:99%;padding-top: 50px;">
+    <div class="isi-menu-mail kim-ii hewq">
+      <div class="earn_titlr">
+        <ul class="list-inline yoon">
+          <li class="act_" style="width:44px;"><%= image_tag "chk/rbtn-i.png" %></li>
+          <li class="id_" style="width: 75px;">ID</li>
+          <li class="username_" style="width: 180px;">USERNAME</li>
+          <li class="name_" style="width: 200px;">EMAIL ADDRESS</li>
+          <li class="status_" style="width: 125px;">STATUS</li>
+          <li class="unit_" style="width:120px">CASHOUT</li>
+          <li class="balance_" style="width:110px;">BALANCE</li>
+          <li class="purc_">DATE</li>
+        </ul>
+      </div>
+      <div class="content_earn">
+        <ul class="tqx">
+          <% @witdrs.each_with_index do |withdrawal, index| %>
+            <% unless withdrawal.status? %>
+              <div id="withdr">
+                <li class="_idih <%= 'tran' if (index + 1)%2 == 0 %>" id="foo_<%= withdrawal.id %>">
+                  <ul class="list-inline keke">
+                    <li class="_chk" style="width:54px;">
+                      <input type="checkbox" id="_chk_<%= withdrawal.id %>"> 
+                      <label  class="xxxd" onclick="updateWitdr(<%= withdrawal.id %>)" for="_chk_<%= withdrawal.id %>"><span class="jhrw"></span></label>
+                    </li>
+                    <li class="_id" style="width: 79px;">
+                      <%= index + 1%>
+                    </li>
+                    <li class="_username">
+                      <%= withdrawal.user.first_n + " " + withdrawal.user.last_n %>
+                    </li>
+                    <li class="_name" style="text-transform: lowercase; width: 204px;">
+                      <%= withdrawal.address %>
+                    </li>
+                    <li class="_status" style="width: 129px;" id="status_<%= withdrawal.id %>">
+                      Pending
+                    </li>
+                    <li class="_unit" style="width:124px;">
+                      <%= number_to_currency(withdrawal.mount) %> 
+                    </li>
+                    <li class="_balance" style="width:114px;">
+                      <%= number_to_currency(withdrawal.user.balance) %> 
+                    </li>
+                    <li class="_purc">
+                      <%= withdrawal.created_at.strftime("%b %d, %Y") %>
+                      <span class="lnr lnr-trash" onclick="dellWitdr(<%= withdrawal.id %>)"></span>
+                    </li>
+                  </ul>
+                </li>
+              </div>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.with_dr').addClass('aktif');
+</script>

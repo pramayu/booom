@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= if content_for?(:title) then yield(:title) end %></title>
+      <%= stylesheet_link_tag    'courses', 'icon_font/icomoon', 'font/font', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'courses', 'ckeditor/config', 'application', 'data-turbolinks-track': 'reload' %>
+      <%= csrf_meta_tags %>
+      <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+      <meta name='description' content='<%= yield_meta_tag(:description, 'Lifestyle, Music and more. Brought to you by the largest global community of creatives.') %>' />
+      <meta name='keywords' content='<%= yield_meta_tag(:keywords, 'defaults,ruby,rails,marketplace') %>' />
+  </head>
+  <body>
+    <div class="navbar navbar-default nav_top">
+      <div class="container th-cus">
+        <div class="navbar-header">
+          <%= link_to root_path, class: "navbar-brand" do %> <span class="font_lo">KAPHOO</span> <% end %>
+        </div>
+        <ul class="nav navbar-nav lft-mnu">
+          <li><a href="#">Free Goods</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Forums</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+        <ul class="navbar-nav nav navbar-right rgt-mnu">
+          <li>
+            <a>
+              <%= form_tag courses_path, id: "search-box", class: 'search-box', method: :get do %>
+                <%= text_field_tag :course_search, params[:course_search], size: 30, class: 'search-frm', placeholder: "Search" %>
+                <span class="submit-sch"><%= image_tag ("nav_icon/sch.png") %></span>
+                <%= submit_tag "", class: 'true_sbt' %>
+              <% end %>
+            </a>
+          </li>
+          <% if signed_in? %>
+            <li class="dropdown beew"><a data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="nhtre"><%= image_tag ("nav_icon/notif.png") %><% if current_user.notifications.where(read: false).count >= 1 %><span class="nh"><%= current_user.notifications.where(read: false).count %></span><% end %></a><%= render "themes/notification" %></li>
+          <% end %>
+          <li id="lay_cart00">
+            <%= link_to carts_path, "data-turbolinks": false do %>
+              <%= image_tag ("nav_icon/cart.png") %><span id="vhgfs"><%= render "layouts/cart" %></span>	
+            <% end %> 
+          </li>
+          <li>
+            <% if signed_in? %>
+              <div class="fhg">
+                <% if current_user.avatar.blank? %>
+                  <%= image_tag('default/default_profile.png', width: '25', class: 'usr_img') %>
+                <% else %>
+                  <%= image_tag current_user.avatar_url(:taan), class: 'usr_img', width: 25 %>
+                <% end %>
+                <div class="mnu_drp">
+                  <ul>
+                    <li> 
+                      <%= link_to dashboard_path do %>
+                        <i class="fa fa-dashboard"></i>Dashboard
+                      <% end %>
+                    </li>
+                    <li><a href="#"><i class="fa fa-envelope"></i>Message</a></li>
+                    <li><a href="#"><i class="fa fa-download"></i>My Purchase</a></li>
+                    <li>
+                      <%= link_to item_product_path(current_user) do %>
+                        <i class="fa fa-tasks"></i>Products
+                      <% end %>
+                    </li>
+                    <li><a href="#"><i class="fa fa-cube"></i>Withdrawal</a></li>
+                    <li><a href="#"><i class="fa fa-desktop"></i>Store Front</a></li>
+                    <li><a href="#"><i class="fa fa-bar-chart"></i>Earning</a></li>
+                    <li><a href="#"><i class="fa fa-retweet"></i>Activity</a></li>
+                    <li><a href="#"><i class="fa fa-rocket"></i>Wishlist</a></li>
+                    <li> 
+                      <%= link_to signout_path, method: "delete" do %>
+                        <i class="fa fa-power-off"></i>Logout
+                      <% end %>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            <% else %>
+              <%= link_to "LOG IN", sign_in_path, class: "log-in" %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navbar navbar-default nav_bot">
+      <div class="container th-cus">
+        <ul class="nav navbar-nav kat-mnu">
+          <li class="ho_li th"><%= link_to "themearts", themes_path %>
+          <div class="ajtt">
+            <ul class="drp_down_">
+              <% Category.all.where(to_item: 'theme').each do |theme| %>
+                <li class="ahahah"><%= link_to theme.name.capitalize, theme_category_path(theme.slug), class: "keeee", "data-turbolinks": false %></li>
+              <% end %>  
+            </ul>
+          </div>
+          </li> 
+          <li class="ho_li co"><%= link_to "codearts", codes_path %>
+          <div class="ajtt">
+            <ul class="drp_down_">
+              <% Category.all.where(to_item: 'code').each do |code| %>
+                <li class="ahahah"><%= link_to code.name.capitalize, code_category_path(code.slug), class: "keeee", "data-turbolinks": false %></li>
+              <% end %>  
+            </ul>
+          </div>
+          </li>
+          <li class="ho_li cu"><%= link_to "graphik", graphics_path %>
+          <div class="ajtt">
+            <ul class="drp_down_">
+              <% Category.all.where(to_item: 'graphic').each do |graphic| %>
+                <li class="ahahah"><%= link_to graphic.name.capitalize, graphic_category_path(graphic.slug), class: "keeee", "data-turbolinks": false %></li>
+              <% end %>  
+            </ul>
+          </div>
+          </li> 
+          <li class="ho_li cu"><%= link_to "3dream", t3dreams_path %>
+          <div class="ajtt">
+            <ul class="drp_down_">
+              <% Category.all.where(to_item: 'tigad').each do |tigad| %>
+                <li class="ahahah"><%= link_to tigad.name.capitalize, t3d_category_path(tigad.slug), class: "keeee", "data-turbolinks": false %></li>
+              <% end %>  
+            </ul>
+          </div>
+          </li> 
+          <li class="ho_li cu"><%= link_to "videoarts", videofxes_path %>
+          <div class="ajtt">
+            <ul class="drp_down_">
+              <% Category.all.where(to_item: 'video').each do |video| %>
+                <li class="ahahah"><%= link_to video.name.capitalize, videofx_category_path(video.slug), class: "keeee", "data-turbolinks": false %></li>
+              <% end %>  
+            </ul>
+          </div>
+          </li> 
+          <li class="ho_li ph"><a href="#">photostock</a></li>
+          <li class="ho_li cu"><%= link_to "fonts", fonts_path %>
+          <div class="ajtt">
+            <ul class="drp_down_">
+              <% Category.all.where(to_item: 'font').each do |font| %>
+                <li class="ahahah"><%= link_to font.name.capitalize, font_category_path(font.slug), class: "keeee", "data-turbolinks": false %></li>
+              <% end %>  
+            </ul>
+          </div>
+          </li> 
+          <li class="ho_li cu active_li"><%= link_to "courses", courses_path, class: "active_a" %>
+          <div class="ajtt">
+            <ul class="drp_down_">
+              <% Category.all.where(to_item: 'course').each do |course| %>
+                <li class="ahahah"><%= link_to course.name.capitalize, course_category_path(course.slug), class: "keeee", "data-turbolinks": false %></li>
+              <% end %>  
+            </ul>
+          </div>
+          </li> 
+        </ul>
+      </div>
+    </div>
+    <div class="main">
+      <%= yield %>
+    </div>
+    <footer>
+      <div class="foot_container">
+        <div class="container th-cus">
+          <div class="col-md-4 lft_foot">
+            <%= link_to "KHAPOO", root_path, class: "root_logo" %>
+            <div class="dcj">
+              <p>Waistcoat bitters godard williamsburg XOXO kale chips. Twee put a bird on it distillery shabby chic 3 wolf moon pour-over.</p>
+            </div>
+            <div class="_sosmed">
+              <p class="follow_us">
+              Follow Us
+              </p>
+              <ul class="list-inline _ic">
+                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-8 rg_foot">
+            <div class="col-md-2 fot_co">
+              <div class="title_foot">
+                <p class="com">Community</p>
+              </div>
+              <ul>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Forums</a></li>
+                <li><a href="#">Member</a></li>
+                <li><a href="#">Products</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 fot_co">
+              <div class="title_foot">
+                <p class="com">Sellers</p>
+              </div>
+              <ul>
+                <li><a href="#">How to Sell</a></li>
+                <li><a href="#">Profits Sales</a></li>
+                <li><a href="#">Success Stories</a></li>
+                <li><a href="#">Selling Tips</a></li>
+                <li><a href="#">Best Authors</a></li>
+                <li><a href="#">Withdrawal Balance</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 fot_co">
+              <div class="title_foot">
+                <p class="com">Help</p>
+              </div>
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms &amp; Conditions</a></li>
+                <li><a href="#">Licenses</a></li>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">FAQ</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 fot_co">
+              <div class="title_foot">
+                <p class="com">Vacancies</p>
+              </div>
+              <ul>
+                <li><a href="#">Post Jobs</a></li>
+                <li><a href="#">Apply Jobs</a></li>
+              </ul>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="counter_mem">
+        <div class="container th-cus">
+          <div class="col-md-3 copyrg">
+            <span>&copy; 2016, Sixarts. All rights reserved</span>
+          </div>
+          <div class="col-md-9 counter_aja">
+            <ul class="list-inline cts">
+              <li><span class="numb">9.090.878</span> Products</li>
+              <li><span class="numb">212.986</span> Members</li>
+              <li><span class="numb">397.764</span> Sellers</li>
+              <li><span class="numb">2.989.898</span> Vacancies</li>
+            </ul>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

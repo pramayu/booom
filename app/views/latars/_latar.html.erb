@@ -1,0 +1,19 @@
+<% index = latar_counter + 1 %>
+<%= content_tag "div", id: "latar3265", data: {latar: latar.to_json(only: [:slug])} do %>
+  <li id="daddyyoio51_<%= latar.id %>" class="_idih <%= 'tran' if (index + 1)%2 == 0 %>">
+    <ul class="list-inline keke">
+      <li class="_id cfdl">
+        <%= index %>
+      </li>
+      <li class="_name cfdl">
+        <%= latar.name %>
+      </li>
+      <li class="_unit cfdl">
+        <ul class="list-inline siut">
+          <li><%= link_to latar_edit_url(latar.id) do %><span class="lnr lnr-magic-wand"><% end %></li>
+          <li><a onclick="dellLatar(<%= latar.id %>)" id="data_<%#= category.slug %>"><span class="lnr lnr-trash"></span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+<% end %>

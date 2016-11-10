@@ -1,0 +1,154 @@
+<div class="modal-dialog revje" role="document" data-turbolinks="false">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+			<div class="modal-title" id="myModalLabelk">
+				<div class="container lkjy75">
+					<h4 class="tuiei">
+						<%= @graphic.name.capitalize %>
+					</h4>
+					<ul class="list-inline gfh">
+						<li><%= link_to @graphic.category.name, root_path, class: "jutr"  %></li>
+						<% @graphic.subcategories.each do |subcategory| %>
+						<li class="cius">
+							<%= link_to subcategory.name, root_path, class: "jutr" %>
+						</li> 
+						<% end %> 
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="modal-body" id="jkerop">
+			<div class="mengh">
+				<div class="hrte container">
+					<div class="col-md-4 sdfjsh37">
+						<div class="gfs">
+							<div class="djfhd98">
+								<%= link_to "DOWNLOAD", @graphic.brokes.map{|link|link.resources}.join(''), class: "nbdg" %>
+							</div>
+							<div class="hdgf87 djfhd98">
+								<ul class="khgg65">
+									<li class="vgx bgt"><span class="niuy date">Created</span><span class="fgd"><%= @graphic.created_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+									<li class="vgx bgt"><span class="niuy updated">Updated</span><span class="fgd"><%= @graphic.updated_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+									<li class="vgx bgt"><span class="niuy column">Industries</span><span class="fgd"><%= @graphic.industries.map {|industries| industries.name}.join(', ') %></span><div class="clear"></div></li>
+									<li class="vgx bgt"><span class="niuy software">Min Version</span><span class="fgd"><%= @graphic.softopen.name %></span><div class="clear"></div></li>
+									<% unless @graphic.includes.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">File Include</span><span class="fgd"><%= @graphic.includes.map {|inc| inc.name}.join(', ') %></span><div class="clear"></div></li>
+									<% end %>
+									<li class="vgx"><span class="niuy tags">Tags</span><span class="fgd"><%= @graphic.tags.map {|tag| tag.name}.join(', ') %></span><div class="clear"></div></li>
+									<span class="fgd"></span>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 dgf549">
+						<div class="gfds543">
+							<div class="col-md-4 jd33">
+								<ul class="lkj98">
+									<% @graphic.screenshots.each_with_index do |f, index| %>
+										<li data-target="#caro" data-slide-to="<%= index %>" class="<%= 'active if index == 0' %>">
+											<%= image_tag f.screenshot_url(:thumb) %>
+										</li>
+									<% end %>
+								</ul>
+							</div>
+							<div class="col-md-8 hgfe5">
+								<div class="dfhgd65">
+									<div id="caro" class="carousel slide" data-ride="carousel">
+										<div class="carousel-inner" role="listbox">
+											<% @graphic.screenshots.each_with_index do |screen, index| %>
+												<div class="item <%= 'active' if index == 0  %>">
+													<%= image_tag screen.screenshot_url(:screen), class: "ho_ve_r" %>
+												</div>
+											<% end %>
+										</div>
+									</div>
+									<div class="dhf97">
+										<ul>
+											<% unless @graphic.video_demo.blank? %>
+												<li class="cp" data-toggle="tooltip" data-placement="bottom" title="Preview"><%= link_to @graphic.video_demo, target: "blank" do  %> <i class="fa fa-video-camera" aria-hidden="true"></i> <% end %></li>
+											<% end %>
+										</ul>
+									</div>
+								</div>
+								<div class="jhgshgjh">
+									<ul class="list-inline xd">
+										<li role="presentation" class="active"><a href="#desct" role="tab" data-toggle="tab">Description</a></li>
+										<% if current_user.reviewer? %> 
+											<li role="presentation"><a href="#reviews" role="tab" data-toggle="tab">Give Reviews</a></li>
+										<% end %> 
+										<% unless @graphic.note.empty? %>
+											<li role="presentation"><a href="#message" role="tab" data-toggle="tab">Message</a></li>
+										<% end %> 
+									</ul>
+									<div class="dtert tab-content">
+										<div role="tabpanel" class="jhfre85 tab-pane active" id="desct">
+											<%= simple_format(@graphic.description) %>
+										</div>
+										<% if current_user.reviewer? %> 
+										<div role="tabpanel" class="jhfre85 revs tab-pane" id="reviews">
+											<%= form_for @graphic, remote: true do |f| %>
+												<div class="form-group mkg32">
+													<%= f.fields_for :revrest do |rev| %>
+														<%= rev.hidden_field :id %>
+														<%= rev.text_area :content, class: "form-control kjh530 nage554", placeholder: "Review Result" %>
+													<% end %> 
+												</div>
+												<div class="form-group mkg32">
+													<%= f.text_field :price, class: "form-control kjh530", placeholder: "Regular License Price"  %>
+												</div>
+												<div class="form-group mkg32">
+													<%= f.text_field :price_ext, class: "form-control kjh530", placeholder: "Extended License Price"  %>
+												</div>
+												<div class="form-group hjr96 mkg32">
+													<%= f.check_box :agree, {class: "dt5", id: "graphic_agree_#{@graphic.id}"} %>
+													<label for="graphic_agree_<%= @graphic.id %>"><span class="jhj kiup"></span><span class="nhg3">I have checked all the files associated with this stuff and I approve this proposal </span></label>
+												</div>
+												<div class="form-group hjr96 mkg32">
+													<%= f.check_box :reject, {class: "dt5", id: "graphic_reject_#{@graphic.id}"} %>
+													<label for="graphic_reject_<%= @graphic.id %>"><span class="jhj kiup"></span><span class="nhg3">I have checked all the files associated with this stuff and I reject this proposal </span></label>
+												</div>
+												<div class="dgf_byt">
+													<%= f.submit "GIVE RESULT", class: "btn btn-default btn_gdr" %>
+												</div>
+											<% end %> 
+										</div>
+										<% end %> 
+										<div role="tabpanel" class="jhfre85 tab-pane" id="message">
+											<p><%= @graphic.note %></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(document).ready(function(){
+	$('#graphic_agree_<%= @graphic.id %>').on('change', function(){
+		if(this.checked){
+			$.ajax({
+				type: "GET",
+				url: "/graphics/aprroved/<%= @graphic.slug %>/graphic",
+				success: function(){
+				}
+			});
+		};
+	});
+	$('#graphic_reject_<%= @graphic.id %>').on('change', function(){
+		if(this.checked){
+			$.ajax({
+				type: "GET",
+				url: "/graphics/reject/<%= @graphic.slug %>/graphic",
+				success: function(){
+				}
+			});
+		};
+	});
+});
+</script>

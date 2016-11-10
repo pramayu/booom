@@ -1,0 +1,5 @@
+1. add follower profile picture on shop
+2. jquery check email exists rails 
+   http://stackoverflow.com/questions/31579967/ajax-check-if-email-already-exist-ruby-on-rails
+3. like, and wishlist update to ajax
+4. after agree remove/nil team_id in products

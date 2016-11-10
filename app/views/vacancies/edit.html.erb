@@ -1,0 +1,24 @@
+<%= title "Edit Vacancy ~ KHAPOO" %>
+<div class="upload_item new_att">
+  <div class="container th-cus">
+    <div class="att_conten this_up">
+      <h3>Upload New Vacancy</h3>
+      <div class="drw">
+        <p>Sell design for popular products such as: Serif, Handwriting, Display, Blackletter, and Icons</p>
+      </div>
+      <ul class="list-inline cfde">
+        <li class="hge">
+          <%= link_to fonts_path do %>
+            <i class="fa fa-home" aria-hidden="true"></i>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="upload_content">
+  <div class="container th-cus">
+    <%= render "vacancies/form" %> 
+    <div class="clear"></div>
+  </div>
+</div>

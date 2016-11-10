@@ -1,0 +1,26 @@
+$('#srew_<%= @graphic.id %>').hide("slow");
+$('#reve').modal("hide");
+
+<% @graphic.screenshots.each_with_index do |graph, index| %>
+	$('#ghitem_<%= graph.id %>').remove();
+	$("#beta5").append("<%= escape_javascript render(partial: 'graphics/screenshot', locals: {graph: graph, index: index}) %>");
+	$('.mata').on("change", function(){
+		$(this).removeClass('active');
+	});
+<% end %>
+<% if @graphic.thumbnail_previously_changed? %>
+	$('.img_tre43').hide("fast", function(){
+		$(this).remove();
+	});
+	$("#jreg<%= @graphic.id %>").html("<%= escape_javascript render(partial: 'graphics/thumbnail', locals: {graphic: @graphic}) %>");
+<% end %>
+
+<% @graphic.brokes.each do |broke| %>
+	<% if broke.resources_previously_changed? %>
+		$('#fhg656').hide();
+		$('#hftu88').html("<%= escape_javascript render(partial: 'graphics/delbroke', locals: {broke: broke}) %>");
+		$('#hftu88').show();
+		$('#rhrh75').html("<%= escape_javascript render(partial: 'graphics/delbroke', locals: {broke: broke}) %>");
+		$('.l1_').hide();
+	<% end %>
+<% end %>

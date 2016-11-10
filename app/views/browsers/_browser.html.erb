@@ -1,0 +1,19 @@
+<% index = browser_counter + 1 %>
+<%= content_tag "div", id: "browser8698", data: {browser: browser.to_json(only: [:slug])} do %>
+  <li id="daddyoi_<%= browser.id %>" class="_idih <%= 'tran' if (index + 1)%2 == 0 %>">
+    <ul class="list-inline keke">
+      <li class="_id cfdl">
+        <%= index %>
+      </li>
+      <li class="_name cfdl">
+        <%= browser.name %>
+      </li>
+      <li class="_unit cfdl">
+        <ul class="list-inline siut">
+          <li><%= link_to browser_edit_path(browser) do %><span class="lnr lnr-magic-wand"><% end %></li>
+          <li><a onclick="dellBrowser(<%= browser.id %>)" id="data_<%#= category.slug %>"><span class="lnr lnr-trash"></span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+<% end %>

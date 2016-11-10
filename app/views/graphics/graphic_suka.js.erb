@@ -1,0 +1,4 @@
+$('#wish_<%= @graphic.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= graphic_unsuka_graphic_path(@graphic.slug) %>')
+						   .attr('id', 'unwish_<%= @graphic.id %>')
+						   .addClass('green');

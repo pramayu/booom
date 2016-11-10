@@ -1,0 +1,131 @@
+<style>
+	.hdr {
+		background-image: url(<%= @usr.ourstore.header_url(:thumbo) %>);
+		width: 100%;
+		height: 350px;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	.kwid {
+		width: 100%;
+		height: 150px;
+		background-repeat: no-repeat;
+		background-size: cover;
+		-webkit-border-radius: 0px !important;
+		-moz-border-radius: 0px !important;
+		border-radius: 0px !important;
+		margin-bottom: 12px !important;
+		box-shadow: none !important;
+	}
+</style>
+<%= title "Following ~ KAPHOO" %>
+<div class="store_e">
+	<%= render "accounts/trisnia" %>
+	<div class="this_wtf">
+		<%= render "accounts/tellmeway" %>
+		<div class="lst-ptr">
+			<div class="coirt">
+				<div class="container trew">
+					<div class="col-md-8 jhgy" style="width:75.666667%;padding:0px;">
+						<% @usr.following.each do |f| %>
+							<div class="col-md-3 bgal fol_bgal">
+								<div class="jwi kwid" style="background-image: url(<%= f.ourstore.header_url(:great) %>)">
+									<div class="img-l poytr">
+										<%= link_to store_path(f) do %>
+											<%= image_tag f.avatar_url(:thumbel) %>
+										<% end %>
+									</div>
+									<div class="nmed">
+										<p class="vsdt"><%= link_to f.company, store_path(f) %></p>
+										<span class="kj"><%= f.state.name %>, <%= f.country.name %></span>
+									</div>
+								</div>
+								<div class="bgd_tre pull-left">
+									<% if signed_in? %>
+										<% if f == current_user %>
+											<%= link_to "PROFILE", personal_path(current_user), class: 'btn_fret kgf' %>
+										<% else %>
+											<% if current_user_is_following(current_user.id, f.id) %>
+												<%= link_to unfollow_user_path(f), remote: true, class: 'btn_fret kutr unfollow_btn', id: 'unfollow_button', method: :post do %>
+												<span>Following</span>
+												<% end %>
+											<% else %>
+												<%= link_to "Follow", follow_user_path(f), remote: true, class: 'btn_fret kute _follow_btn', id: 'follow_button', method: :post %>
+											<% end %>
+										<% end %>
+									<% else %>
+										<%= link_to "SHOP", store_path(f), class: "btn_fret kgf" %>
+									<% end %>
+								</div>
+								<div class="bgdrj pull-right">
+									<ul class="list-inline">
+										<li>
+											<span class="loloi">ITEMS</span>
+											<p class="pot"><%= f.themes.size %></p>
+										</li>
+										<li>
+											<span class="loloi">SALES</span>
+											<p class="pot">208</p>
+										</li>
+										<li>
+											<span class="loloi">FOLLOWER</span>
+											<p class="pot"><%= f.followers.size %></p>
+										</li>
+										<li>
+											<span class="loloi">FOLLOWING</span>
+											<p class="pot"><%= f.following.size %></p>
+										</li>
+									</ul>
+								</div>					
+							</div>
+						<% end %>
+						<div class="clear"></div>
+					</div>
+					<div class="col-md-4 bgfdgh">
+						<div class="skiltr gh">
+							<div class="titl">
+								<p>SKILL</p>
+							</div>
+							<ul class="list-inline bfre">
+								<li><span>HTML</span></li>
+								<li><span>RUBY</span></li>
+								<li><span>PYTHON</span></li>
+								<li><span>WORDPRESS</span></li>
+								<li><span>SKIP</span></li>
+							</ul>
+						</div>
+						<div class="mesad gh">
+							<div class="titl">
+								<p>SEND MESSAGE</p>
+							</div>
+							<% if signed_in? %>
+							<form action="#">
+								<div class="form-group">
+									<span>to:</span>
+									<input type="text" value="<%= @usr.email %>" class="form-control vfe">
+								</div>
+								<div class="form-group">
+									<span>subject:</span>
+									<input type="text" class="form-control vfe">
+								</div>
+								<div class="form-group">
+									<span>content:</span>
+									<textarea class="form-control vfe"></textarea>
+								</div>
+								<div class="fbtn">
+									<input type="button" value="SEND" class="nbhg">
+								</div>
+							</form>
+							<% else %>
+							<div class="gf">
+								<span>Before sending a private message you need to <%= link_to "sign in", sign_in_path %> to your account. Thanks!</span>
+							</div>
+							<% end %>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

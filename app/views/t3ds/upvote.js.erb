@@ -1,0 +1,4 @@
+$('#like_<%= @t3d.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= dislike_t3d_path(@t3d.slug) %>')
+						   .attr('id', 'dislike_<%= @t3d.id %>')
+						   .addClass('red');

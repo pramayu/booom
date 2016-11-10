@@ -1,0 +1,126 @@
+<%= title "Curriculum Source Codes and Plugins " + "~ " + " KAPHOO" %>
+<div class="upload_item new_att">
+	<div class="container th-cus">
+		<div class="att_conten this_up">
+			<h3>Manage Curriculum for <span><%= @course.category.name %></span></h3>
+			<div class="drw">
+				<p>Sell design for popular products such as: Web Development, Cooking, Marketing, Design, and Academis</p>
+			</div>
+			<ul class="list-inline cfde">
+				<li class="hge">
+					<%= link_to courses_path do %>
+						<i class="fa fa-home" aria-hidden="true"></i>
+					<% end %>
+				</li>
+				<li><%= @course.category.name %></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="upload_content">
+	<div class="container th-cus">
+		<div class="col-md-8 fdr cfah">
+			<div class="name_des">
+				<div class="form-group liu">
+					<span class="ywe">Course Title</span>
+					<div class="myth">
+						<input type="text" value="<%= @course.name %>" class="form-control this_load" disabled>
+					</div>
+				</div>
+				<div class="form-group liu">
+					<span class="ywe">Create Sections</span>
+					<div class="myth">
+						<%= render "headsecs/form" %>
+						<div class="hjtro" id="headsec">
+							<%= render @headsecs %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group liu">
+					<span class="ywe">Course Length</span>
+					<div class="myth">
+						<input type="text" value="<%= @course.vi_length %>" class="form-control this_load" disabled>
+					</div>
+				</div>
+			<% unless @course.note.blank? %>
+				<div class="note">
+					<div class="liu">
+						<span class="ywe">Note for Reviewer</span>
+						<div class="myth">
+							<textarea class="form-control this_load" disabled><%= @course.note %></textarea>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+		<div class="col-md-4 fdr cfih">
+			<div class="subct vuih">
+				<div class="form-group liu">
+					<div class="fok">
+						<span class="ywe">Code Category</span>
+					</div>
+					<div class="myth">
+						<div class="nbgo">
+							<select name="" id="course_subcategory_ids_" class="form-control foh kde" disabled>
+								<option value="<%= @course.category.id %>" selected="selected"><%= @course.category.name %></option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="comp vuih">
+				<div class="form-group liu">
+					<div class="fok">
+						<span class="ywe">Skill Level</span>
+					</div>
+					<div class="myth">
+						<div class="nbgo">
+							<select name="" id="course_skill_level" class="form-control foh kde" disabled>
+								<option selected="selected" value="<%= @course.skill_level %>"><%= @course.skill_level %></option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="comp vuih">
+				<div class="form-group liu">
+					<div class="fok">
+						<span class="ywe">Language</span>
+					</div>
+					<div class="myth">
+						<div class="nbgo">
+							<select name="" id="course_language_id" class="form-control foh kde" disabled>
+								<option selected="selected" value="<%= @course.language.id %>"><%= @course.language.name %></option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tagst vuih">
+				<div class="form-group liu">
+					<div class="fok">
+						<span class="ywe">Tags</span>
+					</div>
+					<div class="myth">
+						<input class="form-control foh" id="tags" type="text" value="sads, dad" name="course[tag_list]" data-tagsinput-init="true" style="display: none;">
+						<div id="tags_tagsinput" class="tagsinput" style="width: 300px; min-height: 100px; height: 100px;">
+							<% @course.tags.each do |f| %>
+								<span class="tag">
+									<span><%= f.name %></span>
+								</span>
+								<!-- <div class="tags_clear"></div> -->
+							<% end %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="nghg">
+				<!-- <a href="#" title="" class="btn btn-dfg">SUBMIT REVIEW</a> -->
+				<%= link_to "SUBMIT REVIEW", item_course_path(@course), class: "btn btn-dfg", "data-turbolinks": false %>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="modal fade" id="lecture-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

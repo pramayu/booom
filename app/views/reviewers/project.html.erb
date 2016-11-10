@@ -1,0 +1,167 @@
+<%= title "Reviewer Projects ~ KHAPOO" %>
+<div class="setting wishlist">
+  <div class="col-md-8 brek brrroo">
+    <div class="user_chooses">
+      <div class="kate_kat">
+        <h2>Team: <%= @team.name.capitalize %></h2>
+        <p>create a good atmosphere together with your group, and produce the best products.</p>
+      </div>
+      <div class="shga859">
+        <div class="jhdut45">
+          <% @themes.each do |f| %>
+            <% unless f.aggree? || f.reject? %> 
+              <div class="col-md-3 ckj525" id="srew_<%= f.id %>">
+                <div class="nvcg976">
+                  <%= image_tag f.thumbnail_url(:thumbnail) %>
+                  <div class="add_to_pro">
+                    <a id="agree<%= f.id %>" class="btn_to_pro" remote="true">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <% end %> 
+          <% end %>
+          <% @codes.each do |f| %>
+            <% unless f.agree? || f.reject? %> 
+              <div class="col-md-3 ckj525" id="srew_<%= f.id %>">
+                <div class="nvcg976">
+                  <%= image_tag f.thumbnail_url(:thumbnail) %>
+                  <div class="add_to_pro">
+                    <a id="agree_code<%= f.id %>" class="btn_to_pro" remote="true">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <% end %> 
+          <% end %>
+          <% @graphics.each do |f| %>
+            <% unless f.agree? || f.reject? %> 
+              <div class="col-md-3 ckj525" id="srew_<%= f.id %>">
+                <div class="nvcg976">
+                  <%= image_tag f.thumbnail_url(:thumbnail) %>
+                  <div class="add_to_pro">
+                    <a id="agree_graphic<%= f.id %>" class="btn_to_pro" remote="true">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <% end %> 
+          <% end %>
+          <% @fonts.each do |f| %>
+            <% unless f.agree? || f.reject? %> 
+              <div class="col-md-3 ckj525" id="srew_<%= f.id %>">
+                <div class="nvcg976">
+                  <%= image_tag f.thumbnail_url(:thumbnail) %>
+                  <div class="add_to_pro">
+                    <a id="agree_font<%= f.id %>" class="btn_to_pro" remote="true">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <% end %> 
+          <% end %>
+          <% @t3ds.each do |f| %>
+            <% unless f.agree? || f.reject? %> 
+              <div class="col-md-3 ckj525" id="srew_<%= f.id %>">
+                <div class="nvcg976">
+                  <%= image_tag f.thumbnail_url(:thumbnail) %>
+                  <div class="add_to_pro">
+                    <a id="agree_t3d<%= f.id %>" class="btn_to_pro" remote="true">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <% end %> 
+          <% end %>
+          <% @videofxes.each do |f| %>
+            <% unless f.agree? || f.reject? %> 
+              <div class="col-md-3 ckj525" id="srew_<%= f.id %>">
+                <div class="nvcg976">
+                  <%= image_tag f.thumbnail_url(:thumbnail) %>
+                  <div class="add_to_pro">
+                    <a id="agree_video<%= f.id %>" class="btn_to_pro" remote="true">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <% end %> 
+          <% end %>
+          <% @courses.each do |f| %>
+            <% unless f.agree? || f.reject? %> 
+              <div class="col-md-3 ckj525" id="srew_<%= f.id %>">
+                <div class="nvcg976">
+                  <%= image_tag f.thumbnail_url(:thumbnail) %>
+                  <div class="add_to_pro">
+                    <a id="agree_course<%= f.id %>" class="btn_to_pro" remote="true">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <% end %> 
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-4 brok prek">
+  <div class="for_reviewer">
+    <div class="team kls">
+      <div class="ti_l kiko_9">
+        <span>TEAMS</span>
+      </div>
+    </div>
+    <ul class="hsgf754 list-inline">
+      <% @users.each do |user| %>
+        <li class="data-user">
+          <div class="imsg6">
+            <% if user.avatar.blank? %>
+              <%= image_tag('default/default_profile.png', width: '35', class: 'usr_img', title: "#{user.username}") %>
+            <% else %> 
+              <%= image_tag user.avatar_url(:thumb), width: '35', class: 'usr_img' %>
+            <% end %> 
+          </div>
+        </li>
+      <% end %>  
+    </ul>
+    <div class="team kls">
+      <div class="ti_l kiko_9">
+        <span>CHATTING</span>
+      </div>
+    </div>
+    <div class="jewt42">
+      <div class="newjha78">
+        <ul data-behavior='messagereviewers' data-team-id="<%= @team.id %>" class="msg_bgdf" data-taan-id="<%= current_user.id %>">
+          <% @messages.each do |messagereviewer| %>
+            <%= render messagereviewer %>
+          <% end %>  
+        </ul>
+      </div>
+      <div class="newmsg" id="newmsg">
+        <%= form_for [@team, Messagereviewer.new], remote: true do |f| %>
+          <%= f.text_field :content, class: "form-control chat_frm", placeholder: "type something" %>
+        <% end %> 
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="modal fade" id="reve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-turbolinks="false"></div>
+<script>
+$('.aktif').removeClass();
+$('.project').addClass('aktif');
+<% @themes.each do |theme| %>$(document).on("click", "#agree<%= theme.id %>", function(){$.ajax({type: "GET",url: "<%= theme_up_path(theme) %>",});});<% end %>
+<% @codes.each do |code| %>$(document).on("click", "#agree_code<%= code.id %>", function(){$.ajax({type: "GET",url: "<%= code_up_path(code) %>",});});<% end %>
+<% @graphics.each do |graphic| %>$(document).on("click", "#agree_graphic<%= graphic.id %>", function(){$.ajax({type: "GET",url: "<%= graphic_up_path(graphic) %>",});});<% end %>
+<% @fonts.each do |font| %>$(document).on("click", "#agree_font<%= font.id %>", function(){$.ajax({type: "GET",url: "<%= font_up_path(font) %>",});});<% end %>
+<% @t3ds.each do |t3d| %>$(document).on("click", "#agree_t3d<%= t3d.id %>", function(){$.ajax({type: "GET",url: "<%= t3d_up_path(t3d) %>",});});<% end %>
+<% @videofxes.each do |video| %>$(document).on("click", "#agree_video<%= video.id %>", function(){$.ajax({type: "GET",url: "<%= video_up_path(video) %>",});});<% end %>
+<% @courses.each do |course| %>$(document).on("click", "#agree_course<%= course.id %>", function(){$.ajax({type: "GET",url: "<%= course_up_path(course) %>",});});<% end %>
+</script>

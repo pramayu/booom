@@ -1,0 +1,46 @@
+<%= title "Choose Courses for Reviewed ~ KAPHOO" %>
+<div class="col-md-8 brek skiw">
+	<div class="wq87uy">
+		<% @coursesos.each do |course| %>
+			<div id="kjhgt565">
+				<%= render partial: 'course', locals: {course: course} %>
+			</div>
+		 <% end %> 
+	</div>
+</div>
+<div class="col-md-4 brok kuio">
+	<div class="for_reviewer">
+		<div class="team kls">
+			<div class="ti_l">
+				<span>YOUR CHOOSES</span>
+			</div>
+		</div>
+	</div>
+	<div class="fresk">
+		<div id="forever">
+			<%= render @courses %>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="brn878">
+		<%= link_to "CHECK OUT", project_path(current_user.team_id), class: "gdt35", "data-turbolinks": false %>
+	</div>
+</div>
+<div class="clear"></div>
+<script>
+	$('.aktif').removeClass();
+	$('.courses').addClass('aktif');
+	<% @coursesos.each do |course| %>
+		$(document).ready(function(){
+			$('#add_to_pro_course<%= course.id %>').click(function(){
+			$.ajax({
+				type: "GET",
+				url: "<%= add_to_pro_course_path(course) %>",
+				success: function(){
+					$('#dhg789hjk0_<%= course.id %>').hide("slow");
+				}
+			});
+			});
+		});
+	 <% end %> 
+</script>

@@ -1,0 +1,28 @@
+$('#srew_<%= @font.id %>').hide("slow");
+$('#reve').modal("hide");
+
+
+<%  if @font.thumbnail_previously_changed? %>
+$('.img_tre43').hide("fast", function(){
+	$(this).remove();
+});
+$("#jreg<%= @font.id %>").html("<%= escape_javascript render(partial: 'fonts/thumbnail', locals: {font: @font}) %>");
+<% end %>
+
+<% @font.screenshots.each_with_index do |fts, index| %>
+	$('#ftitem_<%= fts.id %>').remove();
+	$("#beta3").append("<%= escape_javascript render(partial: 'fonts/screenshot', locals: {fts: fts, index: index}) %>");
+	$('.mata').on("change", function(){
+		$(this).removeClass('active');
+	});
+<% end %>
+
+<% @font.brokes.each do |broke| %>
+	<% if broke.resources_previously_changed? %>
+		$('#fhg656').hide();
+		$('#hftu88').html("<%= escape_javascript render(partial: 'fonts/delbroke', locals: {broke: broke}) %>");
+		$('#hftu88').show();
+		$('#rhrh75').html("<%= escape_javascript render(partial: 'fonts/delbroke', locals: {broke: broke}) %>");
+		$('.l1_').hide();
+	<% end %>
+<% end %>

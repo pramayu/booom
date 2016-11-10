@@ -1,0 +1,72 @@
+<div class="user_chooses">
+	<div class="kate_kat">
+		<h2>Your sales platform for digital items</h2>
+		<p>Below choose one of the categories listed and begin the upload process. </p>
+	</div>
+	<div class="kat_fros">
+		<div class="col-md-3 prfft">
+			<%= link_to themes_path do %>
+			<object data="" type="">
+				<%= render 'home/theme' %>
+			</object>
+			<h4 class="th_">ThemeArts</h4>
+			<% end %>
+		</div>
+		<div class="col-md-3 prfft">
+			<%= link_to codes_path do %>
+				<object data="" type="">
+					<%= render 'home/code' %>
+					<h4 class="cd_">CodeArts</h4>
+				</object>
+			<% end %>
+		</div>
+		<div class="col-md-3 prfft">
+			<%= link_to graphics_path do %>
+				<object data="" type="">
+					<%= render 'home/graphic' %>
+				</object>
+				<h4 class="grp_">Graphiku</h4>
+			<% end %>
+		</div>
+		<div class="col-md-3 prfft">
+			<%= link_to t3dreams_path do %>
+				<object data="" type="">
+					<%= render 'home/threed' %>
+				</object>
+				<h4 class="drm_">3Dream</h4>
+			<% end %>
+		</div>
+		<div class="col-md-3 prfft">
+			<%= link_to videofxes_path do %>
+				<object data="" type="">
+					<%= render 'home/video' %>
+				</object>
+				<h4 class="vdo_">VideoArts</h4>
+			<% end %>
+		</div>
+		<div class="col-md-3 prfft">
+			<a href="#">
+				<object data="" type="">
+					<%= render 'home/photo' %>
+				</object>
+				<h4 class="pto_">Photostock</h4>
+			</a>
+		</div>
+		<div class="col-md-3 prfft">
+			<%= link_to fonts_path do %>
+				<object data="" type="">
+					<%= render 'home/font' %>
+				</object>
+				<h4 class="fot_">Fonts</h4>
+			<% end %>
+		</div>
+		<div class="col-md-3 prfft">
+			<%= link_to courses_path do %>
+				<object data="" type="">
+					<%= render 'home/course' %>
+				</object>
+				<h4 class="crs_">Course</h4>
+			<% end %>
+		</div>
+	</div>
+</div>

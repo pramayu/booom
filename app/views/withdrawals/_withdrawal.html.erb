@@ -1,0 +1,27 @@
+<li class="_idih <%= 'tran' if (index + 1)%2 == 0 %>" id="foo_<%= withdrawal.id %>">
+  <ul class="list-inline keke">
+    <li class="_id" style="width: 104px;">
+      <%= index + 1%>
+    </li>
+    <li class="_name" style="text-transform: lowercase; width: 255px;">
+      <%= withdrawal.address %>
+    </li>
+    <li class="_status">
+      <% if withdrawal.status? %>
+        Completed
+      <% else %>
+        Pending
+      <% end %>
+    </li>
+    <li class="_unit" style="width:100px;">
+      <%= number_to_currency(withdrawal.mount) %> 
+    </li>
+    <li class="_purc" style="width:151.5px;">
+      <%= withdrawal.created_at.strftime("%b %d, %Y") %>
+      <% unless withdrawal.status? %>
+        <span class="lnr lnr-trash" onclick="dellWitdr(<%= withdrawal.id %>)"></span>
+      <% end %>
+    </li>
+  </ul>
+</li>
+

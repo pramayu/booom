@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= if content_for?(:title) then yield(:title) end %></title>
+      <%= stylesheet_link_tag    'authentication', 'icon_font/icomoon', 'font/font', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'authentication', 'application', 'data-turbolinks-track': 'reload' %>
+      <%= csrf_meta_tags %>
+      <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  </head>
+  <body>
+    <% flash.each do |name, msg| %>
+      <div class="kotak alarem-<%= name %>" id="alerm_">
+        <!-- <a id="close_alarem"><span class="fa fa&#45;close alerem&#45;close"></span></a> -->
+        <div class="type_alrt pull-left">ERROR</div>
+        <div class="isi_alrt pull-right">
+          <h4>oooh Unsuccessfull Login :)</h4>
+          <p><%= msg %></p>
+        </div>
+        <div class="clear"></div>
+      </div>
+    <% end %>
+    <%= yield %>
+
+  </body>
+</html>

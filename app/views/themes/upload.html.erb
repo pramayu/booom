@@ -1,0 +1,239 @@
+<%= title "Upload WordPress Templates & Web Desings " + "~ " + " KAPHOO" %>
+<div class="upload_item new_att" data-turbolinks="false">
+  <div class="container th-cus">
+    <div class="att_conten this_up">
+      <h3>Upload New Product to <span><%= @theme.category.name %></span></h3>
+      <div class="drw">
+        <p>Sell themes for popular platforms such as: WordPress, Joomla, Drupal, OpenCart, PrestaShop, Tumblr. Even Site Templates!</p>
+      </div>
+      <ul class="list-inline cfde">
+        <li class="hge">
+          <%= link_to themes_path do %>
+            <i class="fa fa-home" aria-hidden="true"></i>
+          <% end %>
+        </li>
+        <li><%= @theme.category.name %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="upload_content" data-turbolinks="false">
+  <div class="container th-cus">
+    <%= form_for @theme, html: {multipart: true} do |f| %>
+      <div class="col-md-8 fdr cfah">
+        <div class="name_des">
+          <div class="form-group liu">
+            <span class="ywe">Themes title</span>
+            <div class="myth">
+              <%= f.text_field :name, class: "form-control this_load", require: true %>
+            </div>
+          </div>
+          <div class="form-group file_upload liu">
+            <span class="ywe">Screenshots</span>
+            <div class="myth bdgft">
+              <div class="thumbil">
+                <div class="jdg54">
+                  <div id="src_srr" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" id="beta" role="listbox">
+                      <% @theme.screenshots.each_with_index do |sf, index| %>
+                        <%= render partial: 'screenshot', locals: {sf: sf, index: index} %>
+                      <% end %>  
+                    </div>
+                    <a class="left jet_left carousel-control" href="#src_srr" role="button" data-slide="prev">
+                      <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </a>
+                    <a class="right jet_right carousel-control" href="#src_srr" role="button" data-slide="next">
+                      <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="screenshot scr_tre">
+                  <%= f.fields_for :screenshots, Screenshot.new do |q| %>
+                    <%= q.file_field :screenshot, multiple: true, name: "theme[screenshots_attributes][][screenshot]", class: "dhgd54" %>
+                    <label for="theme_screenshots_attributes_0_screenshot" class="dyeu746"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group liu">
+            <span class="ywe">Description</span>
+            <div class="myth">
+              <%= f.cktext_area :description, ckeditor: {uiColor: '#EEF1F8', toolbar: 'simple'}, placeholder: "description for your product", class: "form-control this_load" %>
+            </div>
+          </div>
+          <div class="form-group liu">
+            <span class="ywe">Demo URL</span>
+            <div class="myth">
+              <%= f.text_field :url_demo, class: "form-control this_load", require: true %>
+            </div>
+          </div>
+        </div>
+        <div class="note">
+          <div class="liu">
+            <span class="ywe">Note for Reviewer</span>
+            <div class="myth">
+              <%= f.text_area :note, class: "form-control this_load", require: true %>
+            </div>
+          </div>
+        </div>
+        <div class="up_btw">
+          <div class="liu">
+            <div class="myth">
+              <%= f.submit "UPLOAD", class: "btn_uh" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 fdr cfih">
+        <div class="file_upload vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Thumnail</span>
+            </div>
+            <div class="myth crekkk">
+              <div class="thumbil">
+                <div class="dhgf565" id="jreg<%= @theme.id %>">
+                  <%= render partial: 'thumbnail', locals: {theme: @theme} %>
+                </div>
+                <div class="cvfgt98">
+                  <%= f.file_field :thumbnail, class: "thumb_thg97" %>
+                  <label for="theme_thumbnail" class="lbk_tdr"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= content_tag "div", id: "brokes8837", data: {brokes: @theme.brokes.to_json(only: [:id])} do %>
+          <div class="file_upload vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Main File(ZIP)</span>
+              </div>
+              <div class="myth">
+                <div class="resources">
+                  <%= f.fields_for :resources, Broke.new do |q| %>
+                    <%= q.file_field :resources, multiple: true, name: "theme[brokes_attributes][][resources]", class: "lepas" %>
+                    <% if @theme.brokes.present? %>
+                      <% @theme.brokes.each do |broke| %> 
+                        <div id="rhrh75"></div>
+                        <div id="hdg98">
+                          <%= render partial: 'delbroke', locals: {broke: broke} %>
+                        </div>
+                      <% end %> 
+                    <% else %>
+                      <div id="hftu88"></div>
+                      <div id="fhg656">
+                        <%= render partial: 'addbroke' %>
+                      </div>
+                    <% end %>  
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="subct vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Theme Categories</span>
+            </div>
+            <div class="myth">
+              <%= select_tag("theme[subcategory_ids][]", options_for_select(@theme.category.subcategories.collect {|subcategory| [subcategory.name, subcategory.id]}, @theme.subcategories.collect { |subcategory| subcategory.id }), {multiple: true, class: "form-control chosen-select"}) %>
+            </div>
+          </div>
+        </div>
+        <% unless @theme.category.id == 1010 %>
+          <div class="brows vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Browser Support</span>
+              </div>
+              <div class="myth">
+                <%= select_tag("theme[browser_ids][]", options_for_select(Browser.all.collect {|browser| [browser.name, browser.id]}, @theme.browsers.collect { |browser| browser.id }), {multiple: true, class: "form-control chosen-select"}) %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="file vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Files Includes</span>
+            </div>
+            <div class="myth">
+              <ul class="list-inline gof">
+                <% @includes.each do |include| %>
+                  <li>
+                    <%= check_box_tag "theme[include_ids][]", include.id, @theme.include_ids.include?(include.id), id: dom_id(include), class: "jtrw" %>
+                    <label for="include_<%= include.id %>"><span class="mnf"></span><span class="kjl"><%= include.name %></span></label>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="comp vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Dependencies</span>
+            </div>
+            <div class="myth">
+              <div class="nbgo">
+                <%= f.collection_select(:dependency_id, @theme.category.dependencies, :id, :name, {prompt: "Choose dependencies"}, {class: "form-control foh kde"}) %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% unless @theme.category.id == 1010 %>
+          <div class="brows vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Support</span>
+              </div>
+              <div class="myth">
+                <%= select_tag("theme[compatible_ids][]", options_for_select(Compatible.all.collect {|compatible| [compatible.name, compatible.id]}, @theme.compatibles.collect { |compatible| compatible.id }), {multiple: true, class: "form-control chosen-select"}) %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="columns vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Columns</span>
+            </div>
+            <div class="myth">
+              <div class="nbgo">
+                <%= f.select :column, options_for_select([["1","1"], ["2","2"], ["3","3"], ["4+","4+"], ["N/A","na"]], @theme.column),  { prompt: " Choose columns" }, { class: "form-control foh kde" } %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% unless @theme.category.id == 1010 %>
+          <div class="layouts vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Themes Layout</span>
+              </div>
+              <div class="myth">
+                <div class="nbgo">
+                  <%= f.select :layout, options_for_select([["Fixed","fixed"], ["Liquid","liquid"], ["Responsive","responsive"], ["N/A","na"]], @theme.layout), { prompt: "Choose layout" }, { class: "form-control foh kde" } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="tagst vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Tags</span>
+            </div>
+            <div class="myth">
+              <%= f.text_field :tag_list, class: 'form-control foh', id: 'tags' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    <% end %>
+  </div>
+</div>

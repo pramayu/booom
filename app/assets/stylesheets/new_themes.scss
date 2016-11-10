@@ -1,0 +1,290 @@
+.font_category {
+	font-family: "FontAwesome";
+	font-size: 3em;
+	font-weight: normal !important;
+	color: #9C9C9C;
+}
+.font_category_2 {
+	font-family: "icomoon";
+	font-size: 3em;
+	font-weight: normal !important;
+	color: #9C9C9C;
+}
+.time_d {
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+.active_fs {
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+	-webkit-box-shadow: 0px 2px 18px 0px rgba(50, 50, 50, 0.2);
+	-moz-box-shadow:    0px 2px 18px 0px rgba(50, 50, 50, 0.2);
+	box-shadow:         0px 2px 18px 0px rgba(50, 50, 50, 0.2);
+	background-color: #fff;
+}
+.new_att {
+	background-color: #EEF1F8;
+	padding: 30px 0px;
+	padding-bottom: 20px;
+	.att_conten {
+		h3 {
+			font-size: 19px;
+		    color: #93a4bd;
+		    font-family: Roboto, "FuturaPT-DemiBold", Helvetica, Arial;
+		    font-weight: 700;
+		    margin-top: 0;
+		    &:before {
+		    	content: "";
+		    	position: absolute;
+		    	width: 30px;
+		    	height: 3px;
+		    	background-color: #93a4bd;
+		    	margin-top: 30px;
+		    }
+		}
+		p {
+			font-size: 16px;
+			font-family: "FuturaPT-Book", Helvetica, Arial, Roboto;
+			color: #93a2ab;
+			margin-top: 20px;
+			text-align: justify;
+		}
+	}
+}
+.new_form {
+	background-color: #f7f8fc;
+	.frm_categories {
+		.data_cate {
+			.lst_cate {
+				padding: 30px 20px;
+				text-align: center;
+				cursor: pointer;
+				width: 24.99%;
+				-webkit-transition: all .3s ease-in-out;
+				-moz-transition: all .3s ease-in-out;
+				transition: all .3s ease-in-out;
+				&:hover {
+					-webkit-box-shadow: 0px 2px 18px 0px rgba(50, 50, 50, 0.2);
+					-moz-box-shadow:    0px 2px 18px 0px rgba(50, 50, 50, 0.2);
+					box-shadow:         0px 2px 18px 0px rgba(50, 50, 50, 0.2);
+					background-color: #fff;
+					border-radius: 3px;
+				}
+				.cate_name {
+					font-family: "Roboto", Helvetica, Arial;
+					font-size: 14px;
+					font-weight: 600;
+					color: #848484;
+					-webkit-transition: color .3s ease-in-out;
+					-moz-transition: color .3s ease-in-out;
+					transition: color .3s ease-in-out;
+				}
+				.lst_cate_content {
+					cursor: pointer;
+					height: 65px;
+					.rdo_btn {
+						display: none;
+					}
+					.lbl_cate {
+						cursor: pointer;
+					}
+					#this_1000:before {
+						@extend .font_category;
+						@extend .time_d;
+						content: "\f1a9";
+						color: #0073BA;
+					}
+					#this_1001:before {
+						@extend .font_category_2;
+						content: "\e953";
+						@extend .time_d;
+						font-size: 2.5em;
+						color: #2D3941;
+					}
+					#this_1002:before {
+						@extend .font_category;
+						content: "\f13b";
+						@extend .time_d;
+						color: #E25218;
+					}
+					#this_1003:before {
+						@extend .font_category;
+						content: "\f1aa";
+						@extend .time_d;
+						color: #5AA426;
+					}
+					#this_1004:before {
+						@extend .font_category_2;
+						content: "\e950";
+						@extend .time_d;
+						color: #F05929;
+					}
+					#this_1005:before {
+						@extend .font_category;
+						content: "\f23d";
+						font-size: 2.7em;
+						@extend .time_d;
+						color: #F2C40F;
+					}
+					#this_1006:before {
+						@extend .font_category;
+						content: "\f173";
+						@extend .time_d;
+						color: #36465D;
+					}
+					#this_1007:before {
+						@extend .font_category;
+						content: "\f19a";
+						@extend .time_d;
+						color: #21759B;
+					}
+					#this_1008:before {
+						@extend .font_category;
+						content: "\f290";
+						color: #71BF47;
+					}
+					#this_1009:before {
+						@extend .font_category_2;
+						content: "\e951";
+						@extend .time_d;
+						color: #4E8EF7;
+					}
+					#this_1010:before {
+						@extend .font_category;
+						content: "\f247";
+						@extend .time_d;
+						color: #A5BA05;
+					}
+					#this_1011:before {
+						@extend .font_category_2;
+						content: "\e952";
+						@extend .time_d;
+						color: #95BE46;
+					}
+					#this_1012:before {
+						@extend .font_category;
+						content: "\f1d8";
+						@extend .time_d;
+						color: #673AB7;
+					}
+					#this_1013:before {
+						@extend .font_category;
+						content: "\f09a";
+						color: #3F51B5;
+						@extend .time_d;
+					}
+					#this_1014:before {
+						@extend .font_category;
+						content: "\f086";
+						color: #F44336;
+						@extend .time_d;
+					}
+				}
+			}
+		}
+	}
+}
+.left_cate {
+	background-color: #fff;
+	-webkit-box-shadow: 0.5px 0.866px 2px 0px rgba(217, 217, 217, 0.294);
+    -moz-box-shadow: 0.5px 0.866px 2px 0px rgba(217, 217, 217, 0.294);
+    box-shadow: 0.5px 0.866px 2px 0px rgba(217, 217, 217, 0.294);
+    padding:20px;
+    border-radius: 3px;
+    .name_ {
+    	.liu {
+    		// padding: 20px;
+    		.myth {
+    			.this_load {
+    				outline: none;
+    				box-shadow: none;
+    				border-color: #eef1f8;
+    				border-radius: 3px;
+    				font-family: Roboto, Helvetica, arial;
+    				font-size: 14px;
+    				color: #848484;
+    				font-weight: 400;
+    				background-color: #f7f8fc;
+    				height: 45px;
+    			}
+    		}
+    	}
+    }
+}
+.right_cate {
+	padding: 0px;
+	padding-left: 20px;
+	.btn_next {
+		background-color: #039be5;
+		color: #fff;
+		font-weight: 600;
+		font-family: Roboto, Helvetica, Arial;
+		border:none;
+		padding: 12px 95px;
+		border-radius: 3px;
+		outline: none;
+	}
+	.contact_us {
+		background-color: #fff;
+		padding: 10px;
+		border-radius: 3px;
+		margin-top: 15px;
+		-webkit-box-shadow: 0.5px 0.866px 2px 0px rgba(217, 217, 217, 0.294);
+		-moz-box-shadow: 0.5px 0.866px 2px 0px rgba(217, 217, 217, 0.294);
+		box-shadow: 0.5px 0.866px 2px 0px rgba(217, 217, 217, 0.294);
+		&:before {
+			position: absolute;
+			content: "";
+			width: 20px;
+			height: 2px;
+			background-color: #93a2ab;
+			margin-left: 24px;
+			margin-top: 20px;
+		} 
+		.ctu {
+			font-size: 16px;
+			color: #93a2ab;
+			margin-top: 0px;
+			font-family: "FuturaPT-Book", Roboto;
+			&:before {
+				content: "\f0e0";
+				font-family: "FontAwesome";
+				font-size: 14px;
+				color: #93a2ab;
+				padding-right: 10px;
+			}
+		}
+		.vgfst {
+			padding-top: 10px;
+			.fuck {
+				outline: none;
+				box-shadow: none;
+				border-color: #eef1f8;
+				border-radius: 3px;
+				font-family: Roboto, Helvetica, arial;
+				font-size: 14px;
+				color: #848484;
+				font-weight: 400;
+				background-color: #f7f8fc;
+			}
+			.val_send {
+				background-color: #dedede;
+				color: #fff;
+				font-weight: 600;
+				font-family: Roboto, Helvetica, Arial;
+				border: none;
+				padding: 10px 85px;
+				border-radius: 3px;
+				outline: none;
+			}
+		}
+	}
+}
+.pass {
+	padding: 30px 0px;
+}
+.fdr {
+	padding:0px;
+}

@@ -1,0 +1,59 @@
+<%= title "Earning Histories ~ KHAPOO" %>
+<div class="mail-nav earning">
+  <div class="isi-menu-mail">
+    <div class="earn_titlr">
+      <ul class="list-inline yoon">
+        <li class="id_" style="width: 186px;">ID TRANSACTION</li>
+        <li class="name_">PRODUCT NAME</li>
+        <li class="status_">STATUS</li>
+        <li class="unit_">UNIT PRICE</li>
+        <li class="purc_">PURCHASED</li>
+      </ul>
+    </div>
+    <div class="content_earn">
+      <ul class="tqx">
+        <% @sales.each_with_index do |sale, index| %>
+          <li class="_idih <%= 'tran' if (index + 1)%2 == 0 %>">
+            <% sale.line_item.cart.payment_noties.each do |payment| %>
+              <ul class="list-inline keke">
+                <li class="_id">
+                  <%= payment.transaction_id %>
+                </li>
+                <li class="_name">
+                  <% if sale.line_item.theme.present? %>
+                    <%= sale.line_item.theme.name %>
+                  <% elsif sale.line_item.code.present? %>
+                    <%= sale.line_item.code.name %>
+                  <% elsif sale.line_item.font.present? %>
+                    <%= sale.line_item.font.name %>
+                  <% elsif sale.line_item.videofx.present? %>
+                    <%= sale.line_item.videofx.name %>
+                  <% elsif sale.line_item.t3d.present? %>
+                    <%= sale.line_item.t3d.name %>
+                  <% elsif sale.line_item.course.present? %>
+                    <%= sale.line_item.course.name %>
+                  <% elsif sale.line_item.graphic.present? %>
+                    <%= sale.line_item.graphic.name %>
+                  <% end %>
+                </li>
+                <li class="_status">
+                  <%= payment.status %>
+                </li>
+                <li class="_unit">
+                  <%= number_to_currency(sale.line_item.unit_price) %> 
+                </li>
+                <li class="_purc" style="width: 156px;">
+                  <%= sale.line_item.cart.purchased_at.strftime("%b %d, %Y") %>
+                </li>
+              </ul>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<script>
+  $('.aktif').removeClass();
+  $('.earn').addClass('aktif');
+</script>

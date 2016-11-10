@@ -1,0 +1,8 @@
+$('#push_step_course').html("<%= escape_javascript(render('push')) %>");
+$('#push_step_course').show();
+$('.extras').tooltipster({
+   	functionInit: function(instance, helper){
+        var content = $(helper.origin).find('#dat_tooltip').detach();
+        instance.content(content);
+    }
+});

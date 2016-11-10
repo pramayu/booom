@@ -1,0 +1,9 @@
+<ul class="khgf">
+	<%= form_for([@course, @headsec, lecture], remote: true) do |fo| %>
+		<li class="cuji" id="fucv_<%= lecture.id %>">
+			<a class="add_lec" onclick="lecD(<%= lecture.id %>)"><i class="fa fa-trash fa-pencil_iuo" aria-hidden="true"></i></a>
+			<a class="add_lec" onclick="add_class(<%= lecture.id %>)" ><i class="fa fa-pencil fa-pencil_iuo" id="lect_s<%= lecture.id %>" aria-hidden="true"></i></a>
+			<%= fo.text_field :name, class:"head_edit", id: "lec_u_#{lecture.id}", readonly: true, onkeypress: "lecT(#{lecture.id}), this.style.width = ((this.value.length + 1) * 7) + 'px';"  %>
+		</li>
+	<% end %> 
+</ul>

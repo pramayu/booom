@@ -1,0 +1,17 @@
+<div class="cicih">
+  <div class="img_haf">
+    <% if review.user.avatar.present? %>
+      <%= image_tag review.user.avatar_url(:thumb), class: "img-coms" %>
+    <% else %>
+      <%= image_tag("default/default_profile.png", class: "img-coms") %>
+    <% end %>
+  </div>
+  <div class="con_com">
+    <h4 class="name_com pakde"><%= link_to store_path(review.user.id), class: "bude" do %><%= review.user.first_n + ' ' + review.user.last_n %><% end %><span class="star-rating" data-score="<%= review.rating %>"></span></h4>
+    <p><%= simple_format(review.comment) %></p>
+    <p class="tme">
+    <%= time_ago_in_words(review.created_at) unless review.created_at.blank? %>
+    </p>
+  </div>
+  <div class="clear"></div>
+</div>

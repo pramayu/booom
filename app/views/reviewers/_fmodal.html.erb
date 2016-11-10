@@ -1,0 +1,146 @@
+<div class="modal-dialog revje" role="document" data-turbolinks="false">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+			<div class="modal-title" id="myModalLabelk">
+				<div class="container lkjy75">
+					<h4 class="tuiei">
+						<%= @font.name.capitalize %>
+					</h4>
+					<ul class="list-inline gfh">
+						<li><%= link_to @font.category.name.capitalize, root_path, class: "jutr"  %></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="modal-body" id="jkerop">
+			<div class="mengh">
+				<div class="hrte container">
+					<div class="col-md-4 sdfjsh37">
+						<div class="gfs">
+							<div class="djfhd98">
+								<%= link_to "DOWNLOAD", @font.brokes.map{|link|link.resources}.join(''), class: "nbdg" %>
+							</div>
+							<div class="hdgf87 djfhd98">
+								<ul class="khgg65">
+									<li class="vgx bgt"><span class="niuy date">Created</span><span class="fgd"><%= @font.created_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+									<li class="vgx bgt"><span class="niuy updated">Updated</span><span class="fgd"><%= @font.updated_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+									<% unless @font.category.blank? %>
+									<li class="vgx bgt"><span class="niuy column">Industries</span><span class="fgd"><%= @font.industries.map {|industries| industries.name}.join(', ') %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @font.vector.blank? %>
+									<li class="vgx bgt"><span class="niuy browser">Vector</span><span class="fgd"><%= @font.vector %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @font.includes.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">File Include</span><span class="fgd"><%= @font.includes.map {|inc| inc.name}.join(', ') %></span><div class="clear"></div></li>
+									<% end %>
+									<li class="vgx"><span class="niuy tags">Tags</span><span class="fgd"><%= @font.tags.map {|tag| tag.name}.join(', ') %></span><div class="clear"></div></li>
+									<span class="fgd"></span>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 dgf549">
+						<div class="gfds543">
+							<div class="col-md-4 jd33">
+								<ul class="lkj98">
+									<% @font.screenshots.each_with_index do |f, index| %>
+										<li data-target="#caro" data-slide-to="<%= index %>" class="<%= 'active if index == 0' %>">
+											<%= image_tag f.screenshot_url(:thumb) %>
+										</li>
+									<% end %>
+								</ul>
+							</div>
+							<div class="col-md-8 hgfe5">
+								<div class="dfhgd65">
+									<div id="caro" class="carousel slide" data-ride="carousel">
+										<div class="carousel-inner" role="listbox">
+											<% @font.screenshots.each_with_index do |screen, index| %>
+												<div class="item <%= 'active' if index == 0  %>">
+													<%= image_tag screen.screenshot_url(:screen), class: "ho_ve_r" %>
+												</div>
+											<% end %>
+										</div>
+									</div>
+								</div>
+								<div class="jhgshgjh">
+									<ul class="list-inline xd">
+										<li role="presentation" class="active"><a href="#desct" role="tab" data-toggle="tab">Description</a></li>
+										<% if current_user.reviewer? %>
+											<li role="presentation"><a href="#reviews" role="tab" data-toggle="tab">Give Reviews</a></li>
+										<% end %> 
+										<% unless @font.note.empty? %>
+											<li role="presentation"><a href="#message" role="tab" data-toggle="tab">Message</a></li>
+										<% end %> 
+									</ul>
+									<div class="dtert tab-content">
+										<div role="tabpanel" class="jhfre85 tab-pane active" id="desct">
+											<%= simple_format(@font.description) %>
+										</div>
+										<% if current_user.reviewer? %> 
+										<div role="tabpanel" class="jhfre85 revs tab-pane" id="reviews">
+											<%= form_for @font, remote: true do |f| %>
+												<div class="form-group mkg32">
+													<%= f.fields_for :revrest do |rev| %>
+														<%= rev.hidden_field :id %>
+														<%= rev.text_area :content, class: "form-control kjh530 nage554", placeholder: "Review Result" %>
+													<% end %> 
+												</div>
+												<div class="form-group mkg32">
+													<%= f.text_field :price, class: "form-control kjh530", placeholder: "Regular License Price"  %>
+												</div>
+												<div class="form-group mkg32">
+													<%= f.text_field :price_ext, class: "form-control kjh530", placeholder: "Extended License Price"  %>
+												</div>
+												<div class="form-group hjr96 mkg32">
+													<%= f.check_box :agree, {class: "dt5", id: "font_agree_#{@font.id}"} %>
+													<label for="font_agree_<%= @font.id %>"><span class="jhj kiup"></span><span class="nhg3">I have checked all the files associated with this stuff and I approve this proposal </span></label>
+												</div>
+												<div class="form-group hjr96 mkg32">
+													<%= f.check_box :reject, {class: "dt5", id: "font_reject_#{@font.id}"} %>
+													<label for="font_reject_<%= @font.id %>"><span class="jhj kiup"></span><span class="nhg3">I have checked all the files associated with this stuff and I reject this proposal </span></label>
+												</div>
+												<div class="dgf_byt">
+													<%= f.submit "GIVE RESULT", class: "btn btn-default btn_gdr" %>
+												</div>
+											<% end %> 
+										</div>
+										<% end %> 
+										<div role="tabpanel" class="jhfre85 tab-pane" id="message">
+											<p><%= @font.note %></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(document).ready(function(){
+	$('#font_agree_<%= @font.id %>').on('change', function(){
+		if(this.checked){
+			$.ajax({
+				type: "GET",
+				url: "/fonts/aprroved/<%= @font.slug %>/font",
+				success: function(){
+				}
+			});
+		};
+	});
+	$('#font_reject_<%= @font.id %>').on('change', function(){
+		if(this.checked){
+			$.ajax({
+				type: "GET",
+				url: "/fonts/reject/<%= @font.slug %>/font",
+				success: function(){
+				}
+			});
+		};
+	});
+});
+</script>

@@ -1,0 +1,68 @@
+<%= title "Profile Setting ~ KAPHOO" %>
+<div class="setting">
+	<%= form_for @usr, html: {multipart: true} do |f| %>
+		<div class="col-md-8 brek brrroo">
+			<div class="user_chooses">
+				<div class="kate_kat">
+					<h2>Profile Setting</h2>
+					<p>update your profile to provide powerful security against your account</p>
+				</div>
+				<div class="data-acct">
+					<div class="form-group fk">
+					<span class="fl">Username</span>
+						<div class="fs">
+							<%= f.text_field :username, class: "form-control sami", require: true %>
+						</div>
+					</div>
+					<div class="form-group fk">
+					<span class="fl">Email address</span>
+						<div class="fs">
+							<%= f.text_field :email, class: "form-control sami", require: true %>
+						</div>
+					</div>
+					<div class="form-group fk">
+					<span class="fl">Password</span>
+						<div class="fs">
+							<%= f.password_field :password, class: "form-control sami", require: true %>
+						</div>
+					</div>
+					<div class="form-group fk">
+					<span class="fl">Password Confirmation</span>
+						<div class="fs">
+							<%= f.password_field :password_confirmation, class: "form-control sami", require: true %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 brok prek">
+			<div class="mnu_fuk">
+				<ul class="list-inline">
+					<li class="bh4 inahoho">
+						<%= link_to personal_path do %>
+							<i class="fa fa-user" aria-hidden="true"></i><p>Account</p>
+						<% end %>
+					</li>
+					<li class="bh5">
+						<%= link_to sosmed_path(current_user) do %>
+							<i class="fa fa-globe" aria-hidden="true"></i><p>SosMedia</p>
+						<% end %>
+					</li>
+					<li class="bh6">
+						<%= link_to secure_path(current_user) do %>
+							<i class="fa fa-globe" aria-hidden="true"></i><p>Security</p>
+						<% end %>
+					</li>
+				</ul>
+			</div>
+			<div class="btn-pi">
+				<%= f.submit "UPDATE", class: "btn_update" %>
+			</div>
+		</div>
+		<div class="clear"></div>
+	<% end %>
+</div>
+<script>
+	$('.bh4').removeClass('inahoho');
+	$('.bh6').addClass('inahoho');
+</script>

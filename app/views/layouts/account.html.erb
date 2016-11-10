@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= if content_for?(:title) then yield(:title) end %></title>
+      <%= stylesheet_link_tag    'account', 'icon_font/icomoon', 'font/font', media: 'all', 'data-turbolinks-track': 'true' %>
+      <%= javascript_include_tag 'account', 'ckeditor/config', 'application', 'data-turbolinks-track': 'true' %>
+      <%= csrf_meta_tags %>
+      <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+      <link href='https://fonts.googleapis.com/css?family=Nunito:400,700' rel='stylesheet' type='text/css'>
+      <link href="http://vjs.zencdn.net/5.10.8/video-js.css" rel="stylesheet">
+  </head>
+  <body>
+    <% flash.each do |name, msg| %>
+      <div class="kotak alarem-<%= name %>" id="alerm_">
+        <!-- <a id="close_alarem"><span class="fa fa&#45;close alerem&#45;close"></span></a> -->
+        <div class="type_alrt pull-left">SUCCESS</div>
+        <div class="isi_alrt pull-right">
+          <h4>yeew Successfull Login :)</h4>
+          <p><%= msg %></p>
+        </div>
+        <div class="clear"></div>
+      </div>
+    <% end %>
+    <div class="navbar navbar-default top_navbar">
+      <div class="container-fluid user_tin">
+        <div class="navbar-header">
+          <%= link_to dashboard_path, class: "navbar-brand" do %>
+            <span>kaphoo</span>
+          <% end %>
+        </div>
+        <% unless current_user.reviewer == true || current_user.admin? %>
+          <ul class="nav navbar-nav bal-ac">
+            <li class="wtg">
+              <% if current_user.seller == false && current_user.job_post == false %>
+                <a class="kier">BECOME</a>
+                <div class="drepp">
+                  <ul>
+                    <li>
+                      <%= link_to "Seller", beseller_path(current_user.id), class: "ou" %>
+                    </li>
+                    <li>
+                      <%= link_to "Job Post", bejobpost_path(current_user.id), class: "ot" %>
+                    </li>
+                  </ul>
+                </div>
+              <% elsif current_user.seller == true && current_user.job_post == false %>
+                <%= link_to "UPLOAD", upload_page_path, class: "kier" %>
+              <% elsif current_user.seller == false && current_user.job_post == true %>
+                <%= link_to "UPLOAD", new_vacancy_path, class: "kier" %>
+              <% else %>
+                <a class="kier">UPLOAD</a>
+                <div class="drepp">
+                  <ul>
+                    <li>
+                      <%= link_to "Seller", upload_page_path, class: "ou" %>
+                    </li>
+                    <li>
+                      <%= link_to "Job Post", new_vacancy_path, class: "ot" %>
+                    </li>
+                  </ul>
+                </div>
+              <% end %>
+            </li>
+          </ul>
+        <% end %>
+        <ul class="nav navbar-nav navbar-right user-ac">
+          <li class="search">
+            <input type="text" class="form-sch">
+          </li>
+          <li class="notife">
+            <ul class="list-inline">
+              <li><%= link_to mailbox_inbox_url do %><i class="lnr lnr-inbox" aria-hidden="true"></i><% unless unread_messages_count <= 0 %><span class="no"><%= unread_messages_count.to_s %></span><% end %><%end%></li>
+              <li><%= link_to personal_path(current_user), "data-turbolinks": false do %><i class="lnr lnr-cog" aria-hidden="true"></i><% end %></li> 
+              <li class="dropdown beew"><a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="nhtre"><i class="lnr lnr-alarm" aria-hidden="true"></i><% if current_user.notifications.where(read: false).count >= 1 %><span class="no"><%= current_user.notifications.where(read: false).count %></span><% end %></a><%= render "themes/notification" %></li>
+            </ul>
+          </li>
+          <li class="img_f">
+            <a href="#">
+              <% if current_user.avatar.blank? %>
+                <%= image_tag('default/default_profile.png', width: '30', class: 'usr_img') %>
+              <% else %>
+                <%= image_tag current_user.avatar_url(:taan), class: 'usr_img' %>
+              <% end %>
+              <span class="name"><%= current_user.username %></span>
+            </a>
+            <div class="drop">
+              <ul>
+                <% unless current_user.reviewer == true || current_user.admin? %>
+                  <% if current_user.seller == false && current_user.job_post == false %>
+                    <li>
+                      <%= link_to "Become Seller", beseller_path(current_user.id), class: "o" %>
+                    </li>
+                    <li>
+                      <%= link_to "Become Job Posts", bejobpost_path(current_user.id), class: "p" %>
+                    </li>
+                  <% elsif current_user.seller == true && current_user.job_post == false %>
+                    <li>
+                      <%= link_to "Become Job Posts", bejobpost_path(current_user.id), class: "p" %>
+                    </li>
+                  <% elsif current_user.seller == false && current_user.job_post == true %>
+                    <li>
+                      <%= link_to "Become Seller", beseller_path(current_user.id), class: "o" %>
+                    </li>
+                  <% end %>
+                <% end %>
+                <li>
+                  <%= link_to "Account", personal_path(current_user), class: 'q' %>
+                </li>
+                <li>
+                  <%= link_to "Profile", secure_path(current_user), class: 't' %>
+                </li>
+                <li>
+                  <%= link_to "Logout", signout_path, method: "delete", class: "u" %>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="_usr_das">
+      <div class="_usr_ui">
+        <div class="navbar navbar-default left_navbar reviewr_nav">
+          <div class="left_id">
+            <div class="bal">
+              <p>MAIN</p>
+            </div>
+            <div class="menu_if daki">
+              <p class="dash aktif"><i class="fa fa-circle-o f1" aria-hidden="true"></i><%= link_to "DASHBOARD", dashboard_path %></p>
+              <p class="message"><i class="fa fa-circle-o f2" aria-hidden="true"></i><%= link_to "MESSAGES", mailbox_inbox_path, "data-turbolinks": false %></p>
+              <% unless current_user.admin? %>
+                <% unless current_user.reviewer? %>
+                  <p class="puchase"><i class="fa fa-circle-o f3" aria-hidden="true"></i><%= link_to "MY PURCHASES", purchase_url, "data-turbolinks": false %></p> 
+                  <% unless current_user.seller == false %>
+                    <p class="product"><i class="fa fa-circle-o f5" aria-hidden="true"></i><%= link_to "PRODUCTS", item_product_path(current_user), "data-turbolinks": false %></p>
+                    <p class="store"><i class="fa fa-circle-o f6" aria-hidden="true"></i><%= link_to "STORE FRONT", store_front_path(current_user) %></p>
+                    <p class="withdraw"><i class="fa fa-circle-o f7" aria-hidden="true"></i><%= link_to "WITHDRAWALS", withdr_path,"data-turbolinks": false %></p>
+                    <p class="earn"><i class="fa fa-circle-o f8" aria-hidden="true"></i><%= link_to "EARNINGS", earning_path, "data-turbolinks": false %></p>
+                  <% end %>
+                  <p class="activity"><i class="fa fa-circle-o f10" aria-hidden="true"></i><%= link_to "ACTIVITY", activity_path %></p>
+                  <p class="wishlist"><i class="fa fa-circle-o f11" aria-hidden="true"></i><%= link_to "WISHLIST", wishlist_path(current_user) %></p>
+                <% end %>
+                <% if current_user.job_post? %>
+                  <p class="jpost"><i class="fa fa-circle-o f21" aria-hidden="true"></i><%= link_to "VACANCIES", vacancy_account_path, "data-turbolinks": false %></p>
+                <% end %>
+                <% if current_user.reviewer? %> 
+                  <% unless current_user.team_id == nil %> 
+                    <p class="project"><i class="fa fa-circle-o f12" aria-hidden="true"></i><%= link_to "PROJECT", project_path(current_user.team_id) %></p>
+                  <% end %> 
+                  <p class="notes"><i class="fa fa-circle-o f13" aria-hidden="true"></i><%= link_to "NOTE", note_account_path %></p>
+                <% end %>
+              <% end %>
+            </div>
+            <% unless current_user.admin? %>
+              <% if current_user.reviewer? %>
+                <div class="bal bol">
+                  <p>TASK</p>
+                </div>
+                <div class="menu_if daki">
+                  <p class="themes"><i class="fa fa-circle-o f14" aria-hidden="true"></i><%= link_to "THEMES", theme_review_path %></p>
+                  <p class="codes"><i class="fa fa-circle-o f15" aria-hidden="true"></i><%= link_to "CODES", code_review_path %></p>
+                  <p class="t3ds"><i class="fa fa-circle-o f16" aria-hidden="true"></i><%= link_to "3DREAM", t3d_review_path %></p>
+                  <p class="videos"><i class="fa fa-circle-o f17" aria-hidden="true"></i><%= link_to "VIDEOS", video_review_path %></p>
+                  <p class="fonts"><i class="fa fa-circle-o f18" aria-hidden="true"></i><%= link_to "FONTS", font_review_path %></p>
+                  <p class="courses"><i class="fa fa-circle-o f19" aria-hidden="true"></i><%= link_to "COURSES", course_review_path %></p>
+                  <p class="graphics"><i class="fa fa-circle-o f20" aria-hidden="true"></i><%= link_to "GRAPHICS", graph_review_path %></p>
+                </div>
+              <% end %>
+            <% end %>
+            <% if current_user.admin? %>
+              <div class="menu_if daki">
+                <p class="sup_ot"><i class="fa fa-circle-o f14" aria-hidden="true"></i><%= link_to "SUPPORTDATA", datasupport_theme_path(:ithemes), "data-turbolinks": false %></p>
+                <p class="products"><i class="fa fa-circle-o f19" aria-hidden="true"></i><%= link_to "PRODUCTS", all_themes_path(:themes) %></p>
+                <p class="rev_u"><i class="fa fa-circle-o f15" aria-hidden="true"></i><%= link_to "REVIEWER", reviewer_data_path(:reviewers) %></p>
+                <p class="member"><i class="fa fa-circle-o f16" aria-hidden="true"></i><%= link_to "MEMBER", member_jobpost_path(:members) %></p>
+                <p class="vacancy"><i class="fa fa-circle-o f17" aria-hidden="true"></i><%= link_to "VACANCY", all_vacancy_programmer_path(:programmer) %></p>
+                <p class="with_dr"><i class="fa fa-circle-o f18" aria-hidden="true"></i><%= link_to "WITHDRAWAL", accept_withdr_path(:withdrawals), "data-turbolinks": false %></p>
+                <p class="transca"><i class="fa fa-circle-o f19" aria-hidden="true"></i><%= link_to "TRANSACTION", data_order_path %></p>
+                <!-- <p class="category"><i class="fa fa&#45;circle&#45;o f19" aria&#45;hidden="true"></i><%#= link_to "ANALITICAL", root_path %></p> -->
+                <p class="teams"><i class="fa fa-circle-o f20" aria-hidden="true"></i><%= link_to "TEAMS",team_account_path %></p>
+                <p class="notes"><i class="fa fa-circle-o f21" aria-hidden="true"></i><%= link_to "NOTES", note_account_path %></p>
+                <p class="frees"><i class="fa fa-circle-o f14" aria-hidden="true"></i><%= link_to "FREE STUFF", free_item_path, "data-turbolinks": false %></p>
+              </div>
+            <% end %>
+          </div>				
+        </div>
+        <div class="content_add">
+          <div class="this_u">
+            <%= yield %>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

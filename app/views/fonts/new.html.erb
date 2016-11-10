@@ -1,0 +1,202 @@
+<%= title "Upload Handwriting and Sans Serif " + "~ " + " KAPHOO" %>
+<div class="upload_item new_att">
+  <div class="container th-cus">
+    <div class="att_conten this_up">
+      <h3>Upload New Product</h3>
+      <div class="drw">
+        <p>Sell design for popular products such as: Serif, Handwriting, Display, Blackletter, and Icons</p>
+      </div>
+      <ul class="list-inline cfde">
+        <li class="hge">
+          <%= link_to fonts_path do %>
+            <i class="fa fa-home" aria-hidden="true"></i>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="upload_content">
+  <div class="container th-cus">
+    <%= form_for @font, html: {multipart: true} do |f| %>
+      <div class="col-md-8 fdr cfah">
+        <div class="name_des">
+          <div class="form-group liu">
+            <span class="ywe">Font Name</span>
+            <div class="myth">
+              <%= f.text_field :name, class: "form-control this_load", require: true %>
+            </div>
+          </div>
+          <div class="form-group file_upload liu">
+            <span class="ywe">Screenshots</span>
+            <div class="myth bdgft">
+              <div class="thumbil">
+                <div class="jdg54">
+                  <div id="src_srr" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" id="beta" role="listbox">
+                      <% @font.screenshots.each_with_index do |sf, index| %>
+                        <%= render partial: 'screenshot', locals: {sf: sf, index: index} %>
+                      <% end %>  
+                    </div>
+                    <a class="left jet_left carousel-control" href="#src_srr" role="button" data-slide="prev">
+                      <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </a>
+                    <a class="right jet_right carousel-control" href="#src_srr" role="button" data-slide="next">
+                      <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="screenshot scr_tre">
+                  <%= f.fields_for :screenshots, Screenshot.new do |q| %>
+                    <%= q.file_field :screenshot, multiple: true, name: "font[screenshots_attributes][][screenshot]", class: "dhgd54", id: "scren_ot" %>
+                    <label for="scren_ot" class="dyeu746"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group liu">
+            <span class="ywe">Description</span>
+            <div class="myth">
+              <%= f.cktext_area :description, ckeditor: {uiColor: '#EEF1F8', toolbar: 'simple'}, placeholder: "description for your product", class: "form-control this_load" %>
+            </div>
+          </div>
+          <div class="form-group liu">
+            <span class="ywe">File Size</span>
+            <div class="myth">
+              <%= f.text_field :file_size, class: "form-control this_load", require: true %>
+            </div>
+          </div>
+        </div>
+        <div class="note">
+          <div class="liu">
+            <span class="ywe">Note for Reviewer</span>
+            <div class="myth">
+              <%= f.text_area :note, class: "form-control this_load", require: true %>
+            </div>
+          </div>
+        </div>
+        <div class="up_btw">
+          <div class="liu">
+            <div class="myth">
+              <%= f.submit "UPLOAD", class: "btn_uh" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 fdr cfih">
+        <div class="file_upload vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Thumnail</span>
+            </div>
+            <div class="myth crekkk">
+              <div class="thumbil">
+                <div class="dhgf565" id="jreg<%= @font.id %>">
+                  <%= render partial: 'thumbnail', locals: {theme: @font} %>
+                </div>
+                <div class="cvfgt98">
+                  <%= f.file_field :thumbnail, class: "thumb_thg97", id: "tmbl" %>
+                  <label for="tmbl" class="lbk_tdr"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= content_tag "div", id: "brokes88372", data: {brokes: @font.brokes.to_json(only: [:id])} do %>
+          <div class="file_upload vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Main File(ZIP)</span>
+              </div>
+              <div class="myth">
+                <div class="resources">
+                  <%= f.fields_for :resources, Broke.new do |q| %>
+                    <%= q.file_field :resources, multiple: true, name: "font[brokes_attributes][][resources]", class: "lepas", id: "brks" %>
+                    <% if @font.brokes.present? %>
+                      <% @font.brokes.each do |broke| %> 
+                        <div id="rhrh75"></div>
+                        <div id="hdg98">
+                          <a class="del_brok" id="del_brok" onclick="ftbroke(<%= broke.id %>)"></a>
+                          <label for="brks" class="fhft">
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                            <p class="jijil">DELETE OLD FILE</p>
+                          </label>
+                        </div>
+                      <% end %> 
+                    <% else %>
+                      <div id="hftu88"></div>
+                      <div id="fhg656">
+                        <label for="brks" class="fhft l1_" style="cursor: pointer;">
+                          <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                          <p class="jijil">DRAG &amp; DROP</p>
+                        </label>
+                      </div>
+                    <% end %>  
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="subct vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Font Category</span>
+            </div>
+            <div class="myth">
+              <div class="nbgo">
+                <%= f.collection_select(:category_id, @categories, :id, :name, { prompt: "Choose category"}, {class: "form-control foh kde"}) %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="brows vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Industry</span>
+            </div>
+            <div class="myth">
+              <%= select_tag("font[industry_ids][]", options_for_select(@industries.collect {|industry| [industry.name, industry.id]}, @font.industries.collect { |industry| industry.id }), {multiple: true, class: "form-control chosen-select"}) %>
+            </div>
+          </div>
+        </div>
+        <div class="comp vuih an">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Vector</span>
+            </div>
+            <div class="myth">
+              <ul class="list-inline kewqo">
+                <li><%= f.radio_button :vector, 'Yes' %> <label for="font_vector_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                <li><%= f.radio_button :vector, 'No', checked: "checked" %> <label for="font_vector_no"><span class="sesai"></span><span>No</span></label></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="file vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Files Includes</span>
+            </div>
+            <div class="myth">
+              <%= select_tag("font[include_ids][]", options_for_select(@includes.collect {|include| [include.name, include.id]}, @font.includes.collect { |include| include.id }), {multiple: true, class: "form-control chosen-select"}) %>
+            </div>
+          </div>
+        </div>
+        <div class="tagst vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Tags</span>
+            </div>
+            <div class="myth">
+              <%= f.text_field :tag_list, class: 'form-control foh', id: 'tags' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    <% end %>
+  </div>
+</div>
+

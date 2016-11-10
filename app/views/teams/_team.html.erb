@@ -1,0 +1,20 @@
+<% index = team_counter + 1 %>
+<%= content_tag "div", id: "team3265", data: {team: team.to_json(only: [:slug])} do %>
+  <li id="daddyyoio51_<%= team.id %>" class="_idih <%= 'tran' if (index + 1)%2 == 0 %>">
+    <ul class="list-inline keke">
+      <li class="_id cfdl">
+        <%= index %>
+      </li>
+      <li class="_name cfdl">
+        <%= team.name %>
+      </li>
+      <li class="_unit cfdl">
+        <ul class="list-inline siut">
+          <li><%= link_to team_edit_url(team.id) do %><span class="lnr lnr-magic-wand"><% end %></li>
+          <li><%= link_to show_team_url(team.id) do %><span class="lnr lnr-eye"><% end %></li>
+          <li><a onclick="dellTeam(<%= team.id %>)" id="data_<%#= category.slug %>"><span class="lnr lnr-trash"></span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+<% end %>

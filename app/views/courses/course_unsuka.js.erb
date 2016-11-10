@@ -1,0 +1,4 @@
+$('#unwish_<%= @course.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= course_suka_course_path(@course.slug) %>')
+						   .attr('id', 'wish_<%= @course.id %>')
+						   .removeClass('green');

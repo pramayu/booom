@@ -1,0 +1,10 @@
+//= require jquery
+//= require jquery.turbolinks
+//= require jquery_ujs
+//= require bootstrap-sprockets
+//= require jquery.nicescroll.min.js
+//= require chosen.jquery.js
+//= require tagsinput.js
+//= require ckeditor/init
+//= require tooltipster.bundle.min.js
+//= require coffee.js.coffee

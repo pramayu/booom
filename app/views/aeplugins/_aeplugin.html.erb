@@ -1,0 +1,19 @@
+<% index = aeplugin_counter + 1 %>
+<%= content_tag "div", id: "aeplugin3265", data: {aeplugin: aeplugin.to_json(only: [:slug])} do %>
+  <li id="daddyyoio51_<%= aeplugin.id %>" class="_idih <%= 'tran' if (index + 1)%2 == 0 %>">
+    <ul class="list-inline keke">
+      <li class="_id cfdl">
+        <%= index %>
+      </li>
+      <li class="_name cfdl">
+        <%= aeplugin.name %>
+      </li>
+      <li class="_unit cfdl">
+        <ul class="list-inline siut">
+          <li><%= link_to aeplugin_edit_url(aeplugin.id) do %><span class="lnr lnr-magic-wand"><% end %></li>
+          <li><a onclick="dellAeplugin(<%= aeplugin.id %>)" id="data_<%#= category.slug %>"><span class="lnr lnr-trash"></span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+<% end %>

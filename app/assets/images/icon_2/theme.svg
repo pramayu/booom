@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="theme" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#A9C1D4;stroke-width:0.5;stroke-miterlimit:10;}
+	#theme:hover .st0 {
+		stroke-dasharray:2000;
+		stroke-dashoffset:0;
+		-webkit-animation: dash 20s linear forwards;
+		-o-animation: dash 20s linear forwards;
+		-moz-animation: dash 20s linear forwards;
+		animation: dash 20s linear forwards;
+		stroke: #1B5E20;
+		fill:#81C784;
+	}
+	#theme {
+		cursor:pointer;
+	}
+	@-webkit-keyframes dash {
+		from {
+			stroke-dashoffset:2000;
+		}
+		to {
+			stroke-dashoffset:0;
+		}
+	}
+
+</style>
+<path class="st0" d="M25.8,8H6.3C6,8,5.8,8.2,5.8,8.5v15C5.8,23.8,6,24,6.3,24h19.5c0.3,0,0.5-0.2,0.5-0.5v-15C26.3,8.2,26,8,25.8,8
+	z M25.3,10H10.8V9h14.5V10z M8.8,10V9h1v1H8.8z M7.8,9v1h-1V9H7.8z M6.8,23V11h18.5v12H6.8z"/>
+</svg>

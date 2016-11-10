@@ -1,0 +1,73 @@
+<%= title "Completed Transaction ~ KHAPOO" %>
+<div class="mail-nav all_notifi earning wth_drw setting wishlist">
+  <div class="col-md-8 ddgtet" style="width:99%;padding-top: 50px;">
+    <div class="isi-menu-mail kim-ii hewq">
+      <div class="bthk pull-right">
+        <div class="btn-group data_" role="group" aria-label="...">
+          <%= link_to "DAY", data_order_day_path(:day), class: "btn btn-default day_" %>
+          <%= link_to "WEEK", data_order_week_path(:week), class: "btn btn-default week_" %>
+          <%= link_to "MONTH", data_order_month_path(:month), class: "btn btn-default month_" %>
+          <%= link_to "ALL TIME", data_order_path, class: "btn btn-default ashg all_" %>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="earn_titlr">
+        <ul class="list-inline yoon">
+          <li class="id_" style="width: 180px;">TRANSACTION ID</li>
+          <li class="paid_" style="width: 235px;border-right: 1px solid #ededf3;">PAID BY</li>
+          <li class="name_" style="width: 235px;">PURCHASED</li>
+          <li class="status_" style="width: 160px;">STATUS</li>
+          <li class="unit_" style="width:120px; border-right: none;">TOTAL PRICE</li>
+        </ul>
+      </div>
+      <div class="content_earn">
+        <ul class="tqx">
+          <% @orders.each_with_index do |order, index| %>
+              <div id="withdr">
+                <li class="_idih <%= 'tran' if (index + 1)%2 == 0 %>" id="foo_<%= order.id %>">
+                  <ul class="list-inline keke">
+                    <li class="_id" style="width: 190px;margin-left:0px !important;">
+                      <%= order.transaction_id %>
+                    </li>
+                    <li class="_paid" style="width: 239px; text-transform: lowercase;border-right: 1px solid #ededf3;">
+                      <% if !order.cart.user_id.nil? %>
+                        <%= order.cart.user.email.downcase %>
+                      <% else %>
+                        -
+                      <% end %>
+                    </li>
+                    <li class="_name" style="text-transform: lowercase; width: 239px;">
+                      <%= order.cart.purchased_at %>
+                    </li>
+                    <li class="_status" style="width: 164px;" >
+                      <%= order.status %>
+                    </li>
+                    <li class="_unit" style="width:181px;border-right: none !important">
+                      <%= number_to_currency(@total = order.cart.line_items.sum(:unit_price)) %>
+                    </li>
+                  </ul>
+                </li>
+              </div>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.transca').addClass('aktif');
+<% if params[:day] %>
+$('.ashg').removeClass().addClass('btn btn-default');
+$('.day_').addClass('ashg');
+<% elsif params[:week] %>
+$('.ashg').removeClass().addClass('btn btn-default');
+$('.week_').addClass('ashg');
+<% elsif params[:month] %>
+$('.ashg').removeClass().addClass('btn btn-default');
+$('.month_').addClass('ashg');
+<% else %>
+$('.ashg').removeClass().addClass('btn btn-default all_');
+$('.all_').addClass('ashg');
+<% end %>
+</script>

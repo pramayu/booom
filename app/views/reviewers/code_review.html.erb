@@ -1,0 +1,46 @@
+<%= title "Choose Codes for Reviewed ~ KAPHOO" %>
+<div class="col-md-8 brek skiw">
+	<div class="wq87uy">
+		<% @codeos.each do |code| %>
+			<div id="kjhgt565">
+				<%= render partial: 'code', locals: {code: code} %>
+			</div>
+		 <% end %> 
+	</div>
+</div>
+<div class="col-md-4 brok kuio">
+	<div class="for_reviewer">
+		<div class="team kls">
+			<div class="ti_l">
+				<span>YOUR CHOOSES</span>
+			</div>
+		</div>
+	</div>
+	<div class="fresk">
+		<div id="forever">
+			<%= render @codes %>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="brn878">
+		<%= link_to "CHECK OUT", project_path(current_user.team_id), class: "gdt35", "data-turbolinks": false %>
+	</div>
+</div>
+<div class="clear"></div>
+<script>
+	$('.aktif').removeClass();
+	$('.codes').addClass('aktif');
+	<% @codeos.each do |code| %>
+		$(document).ready(function(){
+			$('#add_to_pro_code<%= code.id %>').click(function(){
+			$.ajax({
+				type: "GET",
+				url: "<%= add_to_pro_code_path(code) %>",
+				success: function(){
+					$('#dhg789_<%= code.id %>').hide("slow");
+				}
+			});
+			});
+		});
+	 <% end %> 
+</script>

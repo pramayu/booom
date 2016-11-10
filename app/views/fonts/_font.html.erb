@@ -1,0 +1,23 @@
+<% unless font.agree?  || font.reject? %> 
+<div class="col-md-3 klie" id="klodff98_<%= font.id %>">
+	<div class="klhj867">
+		<%= image_tag font.thumbnail_url(:thumbnail) %>
+		<div class="clkj878">
+			<a id="del_to_pro_font<%= font.id %>" class="del_to_pro">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</a>
+		</div>
+	</div>
+</div>
+<% end %> 
+<script>
+	$('#del_to_pro_font<%= font.id %>').click(function(){
+		$.ajax({
+			type: "GET",
+			url: "<%= del_to_pro_font_path(font) %>",
+			success: function(){
+				$('#klodff98_<%= font.id %>').hide("slow");
+			}
+		});
+	});
+</script>

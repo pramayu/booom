@@ -1,0 +1,4 @@
+$('#like_<%= @font.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= dislike_font_path(@font.slug) %>')
+						   .attr('id', 'dislike_<%= @font.id %>')
+						   .addClass('red');

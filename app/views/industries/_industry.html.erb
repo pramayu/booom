@@ -1,0 +1,19 @@
+<% index = industry_counter + 1 %>
+<%= content_tag "div", id: "industry3265", data: {industry: industry.to_json(only: [:slug])} do %>
+  <li id="daddyyoio51_<%= industry.id %>" class="_idih <%= 'tran' if (index + 1)%2 == 0 %>">
+    <ul class="list-inline keke">
+      <li class="_id cfdl">
+        <%= index %>
+      </li>
+      <li class="_name cfdl">
+        <%= industry.name %>
+      </li>
+      <li class="_unit cfdl">
+        <ul class="list-inline siut">
+          <li><%= link_to industry_edit_url(industry.slug) do %><span class="lnr lnr-magic-wand"><% end %></li>
+          <li><a onclick="dellIndustry(<%= industry.id %>)" id="data_<%#= category.slug %>"><span class="lnr lnr-trash"></span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+<% end %>

@@ -1,0 +1,51 @@
+<%= title "Members ~ KHAPOO" %>
+<div class="setting wishlist reviewers_">
+  <div class="col-md-12 brek brrroo bsok">
+    <div class="left_cons23">
+      <% for user in @users %>
+        <div class="col-md-4 user_rev" id="isad_<%= user.id %>">
+          <div class="bewg">
+            <div class="lwqtr" style="background-image: url(<%= user.ourstore.header_url(:great) %>)">
+              <div class="kdj">
+                <ul class="list-inline lkh">
+                  <li class="email"><a href="#"><span class="fa fa-globe"></span></a></li>
+                  <li class="email"><a href="#"><span class="fa fa-envelope"></span></a></li>
+                  <li class="email"><a onclick="dellU(<%= user.id %>)" ><span class="fa fa-trash"></span></a></li>
+                </ul>
+              </div>
+              <div class="yo_img">
+                <%= image_tag user.avatar_url(:thumbel), class: "ssdf" %> 
+                <% if user.company.present? %>
+                  <p class="navl"><%= user.company %></p>
+                <% else %>
+                  <p class="navl"><%= user.first_n + " " + user.last_n %></p>
+                <% end %>
+                <span><%= user.email %></span>
+              </div>
+            </div>
+            <div class="dat_s">
+              <ul class="list-inline dteq">
+                <li class="items">
+                  <p class="iyt">ITEMS</p>
+                  <span class="mbg"><%= _item_by_user(user) %></span>
+                </li>
+                <li class="sold jh">
+                  <p class="iyt">SELL</p>
+                  <span class="mbg"><%= _sell_sum(user) %></span>
+                </li>
+                <li class="sold">
+                  <p class="iyt">BALANCE</p>
+                  <span class="mbg"><%= number_to_currency(user.balance) %></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.member').addClass('aktif');
+</script>

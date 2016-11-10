@@ -1,0 +1,68 @@
+<%= title "Member Vacacy ~ KAPHOO" %>
+<div class="setting wishlist">
+  <div class="col-md-8 brek brrroo">
+    <div class="user_chooses">
+      <div class="kate_kat">
+        <h2>Vacancies</h2>
+        <p>manage all the vacancies that you share</p>
+      </div>
+      <div class="sod data-acct gtre">
+        <div id="hatwi">
+          <% @vacancies.each do |vacancy| %>
+            <div class="col-md-4 tmbl_job" id="va_<%= vacancy.id %>">
+            <div class="tmbl_it">
+              <div class="timeandopt pull-left">
+                <span class="tme"><%= time_ago_in_words(vacancy.created_at) %></span>
+              </div>
+              <div class="pull-right detail" onclick="drp(<%= vacancy.id %>)">
+                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                <ul class="all_we" id="vacancy_<%= vacancy.id %>">
+                  <li class="more li1"><%= link_to edit_vacancy_url(vacancy), "data-turbolinks": false do %><i class="fa fa-pencil-square" aria-hidden="true"></i><% end %></li>
+                  <li class="more li2"><%= link_to vacancy, method: :delete, remote: true do %><i class="fa fa-trash" aria-hidden="true"></i><% end %></li>
+                </ul>
+              </div>
+              <div class="clear"></div>
+              <div class="who_uo">
+                <%= link_to vacancy_url(vacancy.slug), class: "kjrd" do %>
+                  <%= image_tag vacancy.user.avatar_url(:thumb) %>
+                  <p class="who_am"><% if vacancy.user.company.empty? %><%= vacancy.first_n.capitalize + " " + vacancy.last_n.capitalize %><% else %><%= vacancy.user.company %><% end %></p>
+                <% end %>
+                <%= link_to vacancy_url(vacancy), class: "vbg" do %>
+                  <p><%= truncate(vacancy.name, length: 30) %></p>
+                <% end %>
+              </div>
+              <div class="btn-gri">
+                <div class="col-md-6 nht lf_re">
+                  <a href="#">Recruiters: <span><%= vacancy.recruiter %></span></a>
+                </div>
+                <div class="col-md-6 nht rg_re">
+                  <a href="#">Experience: <span><%= vacancy.experience %></span></a>
+                </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 brok prek">
+    <div class="mnu_fuk">
+      <div class="recent kls">
+        <div class="ti_l">
+          <span>NOTE*</span>
+        </div>
+        <div class="pdjs">
+          <p>
+          Delete jobs if you've found the right candidate for the job you offer
+          </p> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.jpost').addClass('aktif');
+</script>

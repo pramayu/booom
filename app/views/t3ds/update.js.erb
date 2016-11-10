@@ -1,0 +1,28 @@
+$('#srew_<%= @t3d.id %>').hide("slow");
+$('#reve').modal("hide");
+
+
+<%  if @t3d.thumbnail_previously_changed? %>
+$('.img_tre43').hide("fast", function(){
+	$(this).remove();
+});
+$("#jreg<%= @t3d.id %>").html("<%= escape_javascript render(partial: 't3ds/thumbnail', locals: {t3d: @t3d}) %>");
+<% end %>
+
+<% @t3d.screenshots.each_with_index do |t3, index| %>
+	$('#t3item_<%= t3.id %>').remove();
+	$("#beta4").append("<%= escape_javascript render(partial: 't3ds/screenshot', locals: {t3: t3, index: index}) %>");
+	$('.mata').on("change", function(){
+		$(this).removeClass('active');
+	});
+<% end %>
+
+<% @t3d.brokes.each do |broke| %>
+	<% if broke.resources_previously_changed? %>
+		$('#fhg656').hide();
+		$('#hftu88').html("<%= escape_javascript render(partial: 't3ds/delbroke', locals: {broke: broke}) %>");
+		$('#hftu88').show();
+		$('#rhrh75').html("<%= escape_javascript render(partial: 't3ds/delbroke', locals: {broke: broke}) %>");
+		$('.l1_').hide();
+	<% end %>
+<% end %>

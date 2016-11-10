@@ -1,0 +1,338 @@
+<%= title "Mobile Apps and Marketing Courses ~ KAPHOO" %>
+<div class="_head">
+  <div class="container th-cus">
+    <div class="col-md-5 lft-hd">
+      <div class="title">
+        <% if params[:course_search].present? %>
+          <h2><%= @searchs.length %> Mobile Apps and Marketing Courses</h2>
+        <% else %>
+          <h2><%= @courses.length %> Mobile Apps and Marketing Courses</h2>
+        <% end %>
+      </div>
+      <div class="des">
+        <p>Lifestyle, Music and more. Brought to you by the largest global community of creatives.</p>
+      </div>
+      <div class="bg_btn">
+        <a href="#" class="gt_str">GET STARTED</a>
+      </div>
+    </div>
+    <div class="col-md-7 rgh-hd">
+      <%= image_tag ("head.png") %>
+    </div>
+  </div>
+</div>
+<% unless params[:recent] || params[:course_search].present? %>
+<div class="_recomended">
+  <div class="container th-cus-con">
+    <div class="title_i">
+      <div class="capd">
+        <h4 class="capd_c">Recommended Items</h4>
+      </div>
+      <div class="dsc">
+        <p class="dsc_c">Readymade echo park roof party stumptown hella blue bottle</p>
+      </div>
+    </div>
+    <div class="comd">
+      <ul class="comd_q">
+        <% for recent in @recoms %>
+          <li class="grp">
+          <div class="arts">
+              <%= image_tag recent.thumbnail_url(:thumbnail) %>
+              <div class="extras">
+                <div class="u_name">
+                  <%= link_to "", item_course_path(recent), class: "this_oiu", "data-turbolinks": false %>
+                </div>
+                <div class="tooltip_j">
+                  <div id="dat_tooltip">
+                    <div class="img_o">
+                      <% recent.freepis.each do |freepi| %>
+                        <video id="ajjayyy" class="video-js aja_<%= freepi.id %>" preload="auto" width="463" height="257" data-setup="{}" style="width: 463px !important; height: 257px !important">
+                          <source src="<%= freepi.cacaca %>" type='video/mp4'>
+                        </video>
+                      <% end %> 
+                    </div>
+                    <div class="titlw pull-left">
+                      <h4 class="je"><%= truncate(recent.name, length: 50) %></h4>
+                      <span class="by"><%= recent.user.company %> | </span> 
+                      <span class="by">courses / <%= recent.category.name %></span>
+                    </div>
+                    <div class="prce pull-right">
+                      <span class="k">$<%= recent.price.to_i.floor %></span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="author">
+                <% if recent.user.avatar.blank? %>
+                  <%= image_tag('default/default_profile.png', width: 28)  %>
+                <% else %>
+                  <%= image_tag recent.user.avatar_url(:taan), width: 28 %>
+                <% end %>
+              </div>
+              <div class="sell_info">
+                <span class="icon-cart_3 icon_cart_3"></span><span class="dta_sell"><%= recent.line_items.where(:course_id => recent.id).count %></span>
+              </div>
+              <div class="price_info">
+                <span class="icon-price icon_price_1"></span><span class="dta_price">$<%= recent.price.to_i.floor %></span>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      <div class="clear"></div>
+    </div>
+    <div class="more_btn">
+      <%= link_to "", courses_recoms_path(:recoms), class: "more_pl", "data-turbolinks": false %>
+    </div>
+  </div>
+</div>
+<% end %>
+<% unless params[:recoms] || params[:course_search].present? %>
+<div class="_recent" style="<%= 'background-color: #f7f8fc' if params[:recent] %>">
+  <div class="container th-cus-con">
+    <div class="title_i">
+      <div class="capd">
+        <h4 class="capd_c">What's New</h4>
+      </div>
+      <div class="dsc">
+        <p class="dsc_c">Food truck normcore craft beer austin, kinfolk drinking vinegar banh mi four loko etsy PBR&amp;B(lorem)</p>
+      </div>
+    </div>
+    <div class="wtf_i">
+      <ul class="rece">
+        <% @recents.each do |recent| %>
+          <li class="kulo">
+            <div class="arts">
+              <%= image_tag recent.thumbnail_url(:thumbnail) %>
+              <div class="extras">
+                <div class="u_name">
+                  <%= link_to "", item_course_path(recent), class: "this_oiu", "data-turbolinks": false %>
+                </div>
+                <div class="tooltip_j">
+                  <div id="dat_tooltip">
+                    <div class="img_o">
+                      <% recent.freepis.each do |freepi| %>
+                        <video id="ajjayyy" class="video-js aja_<%= freepi.id %>" preload="auto" width="463" height="257" data-setup="{}" style="width: 463px !important; height: 257px !important">
+                          <source src="<%= freepi.cacaca %>" type='video/mp4'>
+                        </video>
+                      <% end %> 
+                    </div>
+                    <div class="titlw pull-left">
+                      <h4 class="je"><%= truncate(recent.name, length: 50) %></h4>
+                      <span class="by"><%= recent.user.company %> | </span> 
+                      <span class="by">courses / <%= recent.category.name %></span>
+                    </div>
+                    <div class="prce pull-right">
+                      <span class="k">$<%= recent.price.to_i.floor %></span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="author">
+                <% if recent.user.avatar.blank? %>
+                  <%= image_tag('default/default_profile.png', width: 28)  %>
+                <% else %>
+                  <%= image_tag recent.user.avatar_url(:taan), width: 28 %>
+                <% end %>
+              </div>
+              <div class="sell_info">
+                <span class="icon-cart_3 icon_cart_3"></span><span class="dta_sell"><%= recent.line_items.where(:course_id => recent.id).count %></span>
+              </div>
+              <div class="price_info">
+                <span class="icon-price icon_price_1"></span><span class="dta_price">$<%= recent.price.to_i.floor %></span>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      <div class="clear"></div>
+    </div>
+    <% unless params[:recent] || params[:course_search].present? %>
+    <div class="more_btn">
+      <%= link_to "", courses_recent_path(:recent), class: "more_pl", "data-turbolinks": false %>
+    </div>
+  <% end %>
+  </div>
+</div>
+<% end %>
+<% unless params[:recent] || params[:recoms] || params[:course_search].present? %>
+<div class="_jobs">
+  <div class="container th-cus-con">
+    <div class="title_i">
+      <div class="capd">
+        <h4 class="capd_c">Job Vacancies</h4>
+      </div>
+      <div class="dsc">
+        <p class="dsc_c">VHS pop-up freegan hella small batch marfa, chartreuse street art semiotics kitsch meh cardigan.</p>
+      </div>
+    </div>
+    <div class="job_oo">
+      <% @vacancies.each do |vacancy| %>
+      <div class="col-md-4 tmbl_job">
+        <div class="tmbl_it">
+          <div class="timeandopt">
+            <span class="tme"><%= time_ago_in_words(vacancy.created_at) %></span>
+          </div>
+          <div class="who_uo">
+            <%= link_to vacancy_url(vacancy.slug), class: "kjrl" do %>
+              <%= image_tag vacancy.user.avatar_url(:thumb) %>
+              <p class="who_am"><% if vacancy.user.company.empty? %><%= vacancy.first_n.capitalize + " " + vacancy.last_n.capitalize %><% else %><%= vacancy.user.company %><% end %></p>
+            <% end %>
+            <%= link_to vacancy_url(vacancy), class: "vbg" do %>
+              <p><%= truncate(vacancy.name, length: 30) %></p>
+            <% end %>
+          </div>
+          <div class="btn-gri">
+            <div class="col-md-6 nht lf_re">
+              <a href="#">Recruiters: <span><%= vacancy.recruiter %></span></a>
+            </div>
+            <div class="col-md-6 nht rg_re">
+              <a href="#">Experience: <span><%= vacancy.experience %></span></a>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+    <div class="more_btn">
+      <a href="/vacancies" class="more_pl"></a>
+    </div>
+  </div>
+</div>
+<div class="_free_item _recent">
+  <div class="container th-cus-con">
+    <div class="title_i">
+      <div class="capd">
+        <h4 class="capd_c">Free Items for You</h4>
+      </div>
+      <div class="dsc">
+        <p class="dsc_c">Irony retro XOXO poutine tumblr, lomo freegan readymade pitchfork.</p>
+      </div>
+    </div>
+    <div class="wtf_i">
+     <%= render 'themes/freeitem' %> 
+    </div>
+  </div>
+</div>
+<% end %>
+<% if params[:course_search].present? %>
+<div class="_recomended">
+  <div class="container th-cus-con">
+    <div class="title_i">
+      <div class="capd">
+        <h4 class="capd_c">Searches Items</h4>
+      </div>
+      <div class="dsc">
+        <p class="dsc_c">Readymade echo park roof party stumptown hella blue bottle</p>
+      </div>
+    </div>
+    <div class="comd">
+      <ul class="comd_q">
+        <% for recent in @course_search %>
+          <li class="grp">
+          <div class="arts">
+              <%= image_tag recent.thumbnail_url(:thumbnail) %>
+              <div class="extras">
+                <div class="u_name">
+                  <%= link_to "", item_course_path(recent), class: "this_oiu", "data-turbolinks": false %>
+                </div>
+                <div class="vote">
+                  <ul>
+                    <li>
+                      <% if signed_in? %>
+                        <% if current_user.liked? recent %>
+                          <%= link_to dislike_course_path(recent.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{recent.id}" do %>
+                            <i class="fa fa-heart ic_vote"></i>
+                          <% end %>
+                        <% else %>
+                          <%= link_to like_course_path(recent.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{recent.id}" do %>
+                            <i class="fa fa-heart ic_vote"></i>
+                          <% end %>
+                        <% end %>
+                      <% else %>
+                        <%= link_to sign_in_path, class: "vo_ic vo_ic_dis" do %>
+                          <i class="fa fa-heart ic_vote"></i>
+                        <% end %>
+                      <% end %>
+                    </li>
+                    <li>
+                      <% if signed_in? %>
+                        <% if current_user.akusuka.blank? %>
+                          <%= link_to new_akusuka_path, class: "mutq co_ic", remote: true do %>
+                            <i class="fa fa-folder" aria-hidden="true"></i>
+                          <% end %>
+                        <% else %>
+                          <% if current_user.akusuka.courses.include?(recent) %>
+                            <%= link_to course_unsuka_course_path(recent), class: "mutq co_ic green", id: "unwish_#{recent.id}", remote: true do %>
+                              <i class="fa fa-folder" aria-hidden="true"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to course_suka_course_path(recent), class: "mutq co_ic", id: "wish_#{recent.id}", remote: true do %>
+                              <i class="fa fa-folder" aria-hidden="true"></i>
+                            <% end %>
+                          <% end %>
+                        <% end %>
+                      <% else %>
+                        <%= link_to sign_in_path, class: "mutq co_ic" do %>
+                          <i class="fa fa-folder" aria-hidden="true"></i>
+                        <% end %>
+                      <% end %>
+                    </li>
+                    <li>
+                      <a class="co_ic loih" id="bag_<%= recent.id %>" onclick="bagcoCart(<%= recent.id %>)">
+                        <i class="fa fa-shopping-bag ic_vote"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tooltip_j">
+                  <div id="dat_tooltip">
+                    <div class="img_o">
+                      <% recent.freepis.each do |freepi| %>
+                        <video id="ajjayyy" class="video-js aja_<%= freepi.id %>" preload="auto" width="463" height="257" data-setup="{}" style="width: 463px !important; height: 257px !important">
+                          <source src="<%= freepi.cacaca %>" type='video/mp4'>
+                        </video>
+                      <% end %> 
+                    </div>
+                    <div class="titlw pull-left">
+                      <h4 class="je"><%= truncate(recent.name, length: 50) %></h4>
+                      <span class="by"><%= recent.user.company %> | </span> 
+                      <span class="by">courses / <%= recent.category.name %></span>
+                    </div>
+                    <div class="prce pull-right">
+                      <span class="k">$<%= recent.price.to_i.floor %></span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="author">
+                <% if recent.user.avatar.blank? %>
+                  <%= image_tag('default/default_profile.png', width: 28)  %>
+                <% else %>
+                  <%= image_tag recent.user.avatar_url(:taan), width: 28 %>
+                <% end %>
+              </div>
+              <div class="sell_info">
+                <span class="icon-cart_3 icon_cart_3"></span><span class="dta_sell"><%= recent.line_items.where(:course_id => recent.id).count %></span>
+              </div>
+              <div class="price_info">
+                <span class="icon-price icon_price_1"></span><span class="dta_price">$<%= recent.price.to_i.floor %></span>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      <div class="clear"></div>
+    </div>
+    <div class="more_btn">
+      <%= link_to "", courses_recoms_path(:recoms), class: "more_pl", "data-turbolinks": false %>
+    </div>
+  </div>
+</div>
+<% end %>
+<div class="modal fade" id="theme_akusuka" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>

@@ -1,0 +1,76 @@
+<%= title "All Notifications ~ KHAPOO" %>
+<div class="mail-nav all_notifi">
+  <div class="isi-menu-mail kim-ii">
+    <div class="tidks">
+      <h2 class="dhfgwp">Your Notifications</h2>
+      <span class="desc_">With Wishlist, You Can Save The Products That You Will Purchase</span>
+    </div>
+    <div class="act_content">
+      <ul class="sjhdt">
+        <% for notif in @notifies %>
+          <li>
+            <div class="fto pull-left">
+              <%= image_tag notif.notified_by.avatar_url(:thumb), class: "juip" %>	
+            </div>
+            <div class="fghr">
+              <p>
+              <%= link_to store_path(notif.notified_by) do %>
+                <% if notif.notice_type == 'approv' || notif.notice_type == 'reject' %>
+                  Reviewer
+                <% else %> 
+                  <%= notif.notified_by.first_n %>
+                <% end %> 
+              <% end %>
+              <% if notif.notice_type == 'bought' %>
+                <%= notif.notice_type %>
+              <% else %>
+                <%= notif.notice_type %>ed
+              <% end %>
+              <% if notif.theme.present? %>
+                <%= link_to item_path(notif.theme) do %>
+                  <span><%= notif.theme.name %></span>
+                <% end %>
+              <% elsif notif.code.present? %>
+                <%= link_to item_code_path(notif.code) do %>
+                  <span><%= notif.code.name %></span>
+                <% end %>
+              <% elsif notif.graphic.present? %>
+                <%= link_to item_graphic_path(notif.graphic) do %>
+                  <span><%= notif.graphic.name %></span>
+                <% end %>
+              <% elsif notif.t3d.present? %>
+                <%= link_to item_t3d_path(notif.t3d) do %>
+                  <span><%= notif.t3d.name %></span>
+                <% end %>
+              <% elsif notif.videofx.present? %>
+                <%= link_to item_videofx_path(notif.videofx) do %>
+                  <span><%= notif.videofx.name %></span>
+                <% end %>
+              <% elsif notif.font.present? %>
+                <%= link_to item_font_path(notif.font) do %>
+                  <span><%= notif.font.name %></span>
+                <% end %>
+              <% elsif notif.course.present? %>
+                <%= link_to item_course_path(notif.course) do %>
+                  <span><%= notif.course.name %></span>
+                <% end %>
+              <% elsif notif.notice_type == 'send' %>
+                <span>Private Email, Please Check Your Email</span> 
+              <% else %>
+                you as friend
+              <% end %>
+              </p>
+              <span class="tye"><%= time_ago_in_words(notif.created_at) %> ago</span>
+            </div>
+            <%= link_to link_through_path(notif), class: "sqkj" do %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.activity').addClass('aktif');
+</script>

@@ -1,0 +1,186 @@
+<%= title "Upgrade Courses Items ~ KHAPOO" %>
+<div class="upload_item new_att">
+  <div class="container th-cus">
+    <div class="att_conten this_up">
+      <h3>Upload New Product to <span><%= @course.category.name %></span></h3>
+      <div class="drw">
+        <p>Sell design for popular products such as: Illustration, Logo, Business Card, Cloting Design, and Icons &amp; C++</p>
+      </div>
+      <ul class="list-inline cfde">
+        <li class="hge">
+          <%= link_to courses_path do %>
+            <i class="fa fa-home" aria-hidden="true"></i>
+          <% end %>
+        </li>
+        <li><%= @course.category.name %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="upload_content">
+  <div class="container th-cus">
+    <%= content_tag "div", id: "course997", data: {course: @course.to_json(only: [:slug])} do %>
+      <%= form_for @course, html: {multipart: true} do |f| %>
+        <div class="col-md-8 fdr cfah">
+          <div class="name_des">
+            <div class="form-group liu">
+              <span class="ywe">Course Title</span>
+              <div class="myth">
+                <%= f.text_field :name, class: "form-control this_load", require: true %>
+              </div>
+            </div>
+            <div class="form-group file_upload liu">
+              <span class="ywe">Trailer</span>
+              <div class="myth bdgft">
+                <div class="thumbil">
+                  <div class="jdg54">
+                    <div id="src_srr" class="carousel slide" data-ride="carousel">
+                      <div class="carousel-inner" id="beta5" role="listbox">
+                        <% @course.freepis.each_with_index do |freepi, index| %>
+                          <%= render partial: 'trailer', locals: {freepi: freepi, index: index} %>
+                        <% end %>  
+                      </div>
+                      <a class="left jet_left carousel-control" href="#src_srr" role="button" data-slide="prev">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                      </a>
+                      <a class="right jet_right carousel-control" href="#src_srr" role="button" data-slide="next">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="screenshot scr_tre sdcsd coure">
+                    <%= f.fields_for :cacacas, Freepi.new do |frt| %>
+                      <%= frt.file_field :cacacas, name: "course[freepis_attributes][][cacaca]", class: "dhgd54" %>
+                      <label for="course_cacacas_cacacas" class="dyeu746 hdye"><i class="fa fa-camera-retro" aria-hidden="true"></i></i></label>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group liu">
+              <span class="ywe">Description</span>
+              <div class="myth">
+                <%= f.cktext_area :description, ckeditor: {uiColor: '#EEF1F8', toolbar: 'simple'}, placeholder: "description for your product", class: "form-control this_load" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group liu">
+            <span class="ywe">Course Length</span>
+            <div class="myth">
+              <%= f.text_field :vi_length, class: "form-control this_load", require: true %>
+            </div>
+          </div>
+          <div class="note">
+            <div class="liu">
+              <span class="ywe">Note for Reviewer</span>
+              <div class="myth">
+                <%= f.text_area :note, class: "form-control this_load", require: true %>
+              </div>
+            </div>
+          </div>
+          <div class="up_btw">
+            <div class="liu">
+              <div class="myth">
+                <%= f.submit "UPLOAD", class: "btn_uh" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 fdr cfih">
+          <div class="file_upload vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Thumnail</span>
+              </div>
+              <div class="myth crekkk">
+                <div class="thumbil">
+                  <div class="dhgf565" id="jreg<%= @course.id %>">
+                    <%= render partial: 'thumbnail', locals: {course: @course} %>
+                  </div>
+                  <div class="cvfgt98">
+                    <%= f.file_field :thumbnail, class: "thumb_thg97" %>
+                    <label for="course_thumbnail" class="lbk_tdr"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="file_upload vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Main File(ZIP)</span>
+              </div>
+              <div class="myth">
+                <div class="resources">
+                  <%= f.fields_for :cokes, Cofile.new do |jw| %>
+                    <%= jw.file_field :cokes, multiple: true, name: "course[cofiles_attributes][][coke]", class: "lepas" %>
+                    <% if @course.cofiles.present? %>
+                      <% @course.cofiles.each do |cofile| %>
+                        <div id="rhrh75"></div>
+                        <div id="hdg98">
+                          <%= render partial: 'delbroke', locals: {cofile: cofile} %>
+                        </div>
+                      <% end %> 
+                    <% else %>
+                      <div id="hftu88"></div>
+                      <div id="fhg656">
+                        <%= render partial: 'addbroke' %>
+                      </div>
+                    <% end %> 
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="subct vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Code Category</span>
+              </div>
+              <div class="myth">
+                <div class="nbgo">
+                  <%= select_tag("course[subcategory_ids][]", options_for_select(@course.category.subcategories.collect {|subcategory| [subcategory.name, subcategory.id]}, @course.subcategories.collect { |subcategory| subcategory.id }), { class: "form-control foh kde", prompt: "Choose category"}) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="comp vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Skill Level</span>
+              </div>
+              <div class="myth">
+                <div class="nbgo">
+                  <%= f.select(:skill_level, ["Beginner", "Intermediate", "Expert"], {prompt: "Choose Skill Level"}, {class: "form-control foh kde"}) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="comp vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Language</span>
+              </div>
+              <div class="myth">
+                <div class="nbgo">
+                  <%= f.collection_select(:language_id, @languages, :id, :name, {prompt: "Choose Course Language"}, {class: "form-control foh kde"}) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tagst vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Tags</span>
+              </div>
+              <div class="myth">
+                <%= f.text_field :tag_list, class: 'form-control foh', id: 'tags' %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      <% end %>
+    <% end %> 
+  </div>
+</div>

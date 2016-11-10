@@ -1,0 +1,223 @@
+<%= title "All Vacancies ~ KHAPOO" %>
+<div class="setting wishlist">
+  <div class="col-md-10 brek brrroo">
+    <div class="user_chooses">
+      <div class="sod data-acct gtre">
+        <div id="hatwi">
+          <% if params[:programmer] %>
+            <% @vacancies.each do |vacancy| %>
+              <div class="col-md-4 tmbl_job" id="va_<%= vacancy.id %>">
+                <div class="tmbl_it">
+                  <div class="timeandopt pull-left">
+                    <span class="tme"><%= time_ago_in_words(vacancy.created_at) %></span>
+                    <% if _day_passed(vacancy).to_i >= 10 %>
+                      <span class="nanan_"></span>
+                    <% end %>
+                  </div>
+                  <div class="pull-right detail" onclick="drp(<%= vacancy.id %>)">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    <ul class="all_we" id="vacancy_<%= vacancy.id %>">
+                      <!-- <li class="more li1"><%#= link_to edit_vacancy_url(vacancy), "data&#45;turbolinks": false do %><i class="fa fa&#45;pencil&#45;square" aria&#45;hidden="true"></i><%# end %></li> -->
+                      <li class="more li2"><%= link_to vacancy, method: :delete, remote: true do %><i class="fa fa-trash" aria-hidden="true"></i><% end %></li>
+                    </ul>
+                  </div>
+                  <div class="clear"></div>
+                  <div class="who_uo">
+                    <%= link_to vacancy_url(vacancy.slug), class: "kjrd" do %>
+                      <%= image_tag vacancy.user.avatar_url(:thumb) %>
+                      <p class="who_am"><% if vacancy.user.company.empty? %><%= vacancy.first_n.capitalize + " " + vacancy.last_n.capitalize %><% else %><%= vacancy.user.company %><% end %></p>
+                    <% end %>
+                    <%= link_to vacancy_url(vacancy), class: "vbg" do %>
+                      <p><%= truncate(vacancy.name, length: 30) %></p>
+                    <% end %>
+                  </div>
+                  <div class="btn-gri">
+                    <div class="col-md-6 nht lf_re">
+                      <a href="#">Recruiters: <span><%= vacancy.recruiter %></span></a>
+                    </div>
+                    <div class="col-md-6 nht rg_re">
+                      <a href="#">Experience: <span><%= vacancy.experience %></span></a>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <script>
+                $(function(){
+                  $('.but').removeClass('active');
+                  $('.programmer').addClass('active');
+                });
+              </script>
+          <% elsif params[:designer] %>
+            <% @vacancies.each do |vacancy| %>
+              <div class="col-md-4 tmbl_job" id="va_<%= vacancy.id %>">
+                <div class="tmbl_it">
+                  <div class="timeandopt pull-left">
+                    <span class="tme"><%= time_ago_in_words(vacancy.created_at) %></span>
+                    <% if _day_passed(vacancy).to_i >= 10 %>
+                      <span class="nanan_"></span>
+                    <% end %>
+                  </div>
+                  <div class="pull-right detail" onclick="drp(<%= vacancy.id %>)">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    <ul class="all_we" id="vacancy_<%= vacancy.id %>">
+                      <!-- <li class="more li1"><%#= link_to edit_vacancy_url(vacancy), "data&#45;turbolinks": false do %><i class="fa fa&#45;pencil&#45;square" aria&#45;hidden="true"></i><%# end %></li> -->
+                      <li class="more li2"><%= link_to vacancy, method: :delete, remote: true do %><i class="fa fa-trash" aria-hidden="true"></i><% end %></li>
+                    </ul>
+                  </div>
+                  <div class="clear"></div>
+                  <div class="who_uo">
+                    <%= link_to vacancy_url(vacancy.slug), class: "kjrd" do %>
+                      <%= image_tag vacancy.user.avatar_url(:thumb) %>
+                      <p class="who_am"><% if vacancy.user.company.empty? %><%= vacancy.first_n.capitalize + " " + vacancy.last_n.capitalize %><% else %><%= vacancy.user.company %><% end %></p>
+                    <% end %>
+                    <%= link_to vacancy_url(vacancy), class: "vbg" do %>
+                      <p><%= truncate(vacancy.name, length: 30) %></p>
+                    <% end %>
+                  </div>
+                  <div class="btn-gri">
+                    <div class="col-md-6 nht lf_re">
+                      <a href="#">Recruiters: <span><%= vacancy.recruiter %></span></a>
+                    </div>
+                    <div class="col-md-6 nht rg_re">
+                      <a href="#">Experience: <span><%= vacancy.experience %></span></a>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+              <script>
+                $(function(){
+                  $('.but').removeClass('active');
+                  $('.designers').addClass('active');
+                });
+              </script>
+          <% elsif params[:animator] %>
+            <% @vacancies.each do |vacancy| %>
+              <div class="col-md-4 tmbl_job" id="va_<%= vacancy.id %>">
+                <div class="tmbl_it">
+                  <div class="timeandopt pull-left">
+                    <span class="tme"><%= time_ago_in_words(vacancy.created_at) %></span>
+                    <% if _day_passed(vacancy).to_i >= 10 %>
+                      <span class="nanan_"></span>
+                    <% end %>
+                  </div>
+                  <div class="pull-right detail" onclick="drp(<%= vacancy.id %>)">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    <ul class="all_we" id="vacancy_<%= vacancy.id %>">
+                      <!-- <li class="more li1"><%#= link_to edit_vacancy_url(vacancy), "data&#45;turbolinks": false do %><i class="fa fa&#45;pencil&#45;square" aria&#45;hidden="true"></i><%# end %></li> -->
+                      <li class="more li2"><%= link_to vacancy, method: :delete, remote: true do %><i class="fa fa-trash" aria-hidden="true"></i><% end %></li>
+                    </ul>
+                  </div>
+                  <div class="clear"></div>
+                  <div class="who_uo">
+                    <%= link_to vacancy_url(vacancy.slug), class: "kjrd" do %>
+                      <%= image_tag vacancy.user.avatar_url(:thumb) %>
+                      <p class="who_am"><% if vacancy.user.company.empty? %><%= vacancy.first_n.capitalize + " " + vacancy.last_n.capitalize %><% else %><%= vacancy.user.company %><% end %></p>
+                    <% end %>
+                    <%= link_to vacancy_url(vacancy), class: "vbg" do %>
+                      <p><%= truncate(vacancy.name, length: 30) %></p>
+                    <% end %>
+                  </div>
+                  <div class="btn-gri">
+                    <div class="col-md-6 nht lf_re">
+                      <a href="#">Recruiters: <span><%= vacancy.recruiter %></span></a>
+                    </div>
+                    <div class="col-md-6 nht rg_re">
+                      <a href="#">Experience: <span><%= vacancy.experience %></span></a>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+              <script>
+                $(function(){
+                  $('.but').removeClass('active');
+                  $('.animator').addClass('active');
+                });
+              </script>
+          <% elsif params[:network] %>
+            <% @vacancies.each do |vacancy| %>
+              <div class="col-md-4 tmbl_job" id="va_<%= vacancy.id %>">
+                <div class="tmbl_it">
+                  <div class="timeandopt pull-left">
+                    <span class="tme"><%= time_ago_in_words(vacancy.created_at) %></span>
+                    <% if _day_passed(vacancy).to_i >= 10 %>
+                      <span class="nanan_"></span>
+                    <% end %>
+                  </div>
+                  <div class="pull-right detail" onclick="drp(<%= vacancy.id %>)">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    <ul class="all_we" id="vacancy_<%= vacancy.id %>">
+                      <!-- <li class="more li1"><%#= link_to edit_vacancy_url(vacancy), "data&#45;turbolinks": false do %><i class="fa fa&#45;pencil&#45;square" aria&#45;hidden="true"></i><%# end %></li> -->
+                      <li class="more li2"><%= link_to vacancy, method: :delete, remote: true do %><i class="fa fa-trash" aria-hidden="true"></i><% end %></li>
+                    </ul>
+                  </div>
+                  <div class="clear"></div>
+                  <div class="who_uo">
+                    <%= link_to vacancy_url(vacancy.slug), class: "kjrd" do %>
+                      <%= image_tag vacancy.user.avatar_url(:thumb) %>
+                      <p class="who_am"><% if vacancy.user.company.empty? %><%= vacancy.first_n.capitalize + " " + vacancy.last_n.capitalize %><% else %><%= vacancy.user.company %><% end %></p>
+                    <% end %>
+                    <%= link_to vacancy_url(vacancy), class: "vbg" do %>
+                      <p><%= truncate(vacancy.name, length: 30) %></p>
+                    <% end %>
+                  </div>
+                  <div class="btn-gri">
+                    <div class="col-md-6 nht lf_re">
+                      <a href="#">Recruiters: <span><%= vacancy.recruiter %></span></a>
+                    </div>
+                    <div class="col-md-6 nht rg_re">
+                      <a href="#">Experience: <span><%= vacancy.experience %></span></a>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+              <script>
+                $(function(){
+                  $('.but').removeClass('active');
+                  $('.network').addClass('active');
+                });
+              </script>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 dsu">
+    <div class="panel_menu">
+      <div class="mnu_t" role="tablist">
+        <p role="presentation" class="but ohhh active programmer">
+        <%= link_to all_vacancy_programmer_path(:programmer), class: "supp_dta", "data-turbolinks": false do  %>
+          <i class="lnr lnr-code" aria-hidden="true"></i>
+        <% end %> 
+        </p>
+        <p class="but ohhh designers" role="presentation">
+        <%= link_to all_vacancy_designer_path(:designer),class: "supp_dta", "data-turbolinks": false do %>
+          <i class="lnr lnr-leaf" aria-hidden="true"></i>
+        <% end %> 
+        </p>
+        <p class="but ohhh animator" role="presentation" >
+        <%= link_to all_vacancy_animator_path(:animator),class: "supp_dta", "data-turbolinks": false do %>
+          <i class="lnr lnr-screen" aria-hidden="true"></i>
+        <% end %> 
+        </p>
+        <p class="but ohhh network" role="presentation">
+        <%= link_to all_vacancy_network_path(:network),class: "supp_dta", "data-turbolinks": false do %>
+          <i class="lnr lnr-construction" aria-hidden="true"></i>
+        <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.vacancy').addClass('aktif');
+</script>

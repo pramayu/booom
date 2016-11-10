@@ -1,0 +1,128 @@
+<%= title "Account Setting ~ KAPHOO" %>
+<div class="setting">
+  <%= form_for @usr, html: {multipart: true} do |f| %>
+    <div class="col-md-8 brek brrroo">
+      <div class="user_chooses">
+        <div class="kate_kat">
+          <h2>Account Setting</h2>
+          <p>We do not sell or share your details without your permission. Find out more in our Privacy Policy.</p>
+        </div>
+        <div class="data-acct">
+          <div class="col-md-6 bg1">
+            <div class="form-group fk">
+              <span class="fl">First name</span>
+              <div class="fs">
+                <%= f.text_field :first_n, class: "form-control sami", require: true %>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 bg2">
+            <div class="form-group fk">
+              <span class="fl">Last name</span>
+              <div class="fs">
+                <%= f.text_field :last_n, class: "form-control sami", require: true %>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <div class="form-group fk">
+            <span class="fl">Select country</span>
+            <div class="fs bubui">
+              <%= f.collection_select(:country_id, Country.order(:name), :id, :name, {include_blank: true}, {class: "form-control sami"}) %>
+            </div>
+          </div>
+          <div class="form-group fk">
+            <span class="fl">Select state</span>
+            <div class="fs bubui">
+              <%= f.grouped_collection_select(:state_id, Country.order(:name), :states, :name, :id, :name, {include_blank: true}, {class: "form-control sami"}) %>
+            </div>
+          </div>
+          <div class="form-group fk">
+            <span class="fl">City</span>
+            <div class="fs">
+              <%= f.text_field :city, class: "form-control sami", require: true %>
+            </div>
+          </div>
+          <div class="form-group fk">
+            <span class="fl">Company</span>
+            <div class="fs">
+              <%= f.text_field :company, class: "form-control sami", require: true %>
+            </div>
+          </div>
+          <div class="form-group fk">
+            <span class="fl">Postal Code</span>
+            <div class="fs">
+              <%= f.text_field :postal_code, class: "form-control sami", require: true %>
+            </div>
+          </div>
+          <div class="form-group fk">
+            <span class="fl">Skill</span>
+            <div class="fs">
+              <%= f.text_field :skill_user, class: "form-control sami", id: "skill_", require: true %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 brok prek">
+      <div class="mnu_fuk">
+        <ul class="list-inline">
+          <li class="bh4 inahoho">
+            <%= link_to personal_path do %>
+              <i class="fa fa-user" aria-hidden="true"></i><p>Account</p>
+            <% end %>
+          </li>
+          <li class="bh5">
+            <%= link_to sosmed_path do %>
+              <i class="fa fa-globe" aria-hidden="true"></i><p>Social Media</p>
+            <% end %>
+          </li>
+          <li class="bh6">
+            <%= link_to secure_path(current_user) do %>
+              <i class="fa fa-globe" aria-hidden="true"></i><p>Security</p>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+      <div class="recent kls">
+        <div class="ti_l">
+          <span>AVATAR</span>
+        </div>
+        <div class="pp">
+          <div class="form-group ppc">
+            <div class="hf">
+              <label for="user_avatar" class="label_avatar">BROWSE</label>
+              <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+              <div class="jht">
+                <span class="dg-avatar"></span>
+              </div>
+              <%= f.file_field :avatar, require: true, class: "upload_avatar" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="show_coun kls">
+        <div class="ti_l">
+          <span>SHOW COUNTRY</span>
+        </div>
+        <div class="form-group jg">
+          <%= f.check_box :show_country, {class: "ih"} %>
+          <label for="user_show_country"><span class="klew jef"></span><span class="niy">If You Want Show Your Country</span></label>
+        </div>
+      </div>
+      <div class="show_coun kls">
+        <div class="ti_l">
+          <span>FREELANCE</span>
+        </div>
+        <div class="form-group jg">
+          <%= f.check_box :freelance_av,  {class: "ih"} %>
+          <label for="user_freelance_av"><span class="klew jef"></span><span class="niy">Add Freelance Available</span></label>
+        </div>
+      </div>
+      <div class="btn-pi">
+        <%= f.submit "UPDATE", class: "btn_update" %>
+      </div>
+    </div>
+    <div class="clear"></div>
+  <% end %>
+</div>

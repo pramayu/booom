@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="graph" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#A9C1D4;stroke-width:0.5;stroke-miterlimit:10;}
+	#graph:hover .st0 {
+		stroke-dasharray:2000;
+		stroke-dashoffset:0;
+		-webkit-animation: dash 20s linear forwards;
+		-o-animation: dash 20s linear forwards;
+		-moz-animation: dash 20s linear forwards;
+		animation: dash 20s linear forwards;
+		stroke: #33691E;
+		fill:#C5E1A5;
+	}
+	#graph {
+		cursor:pointer;
+	}
+	@-webkit-keyframes dash {
+		from {
+			stroke-dashoffset:2000;
+		}
+		to {
+			stroke-dashoffset:0;
+		}
+	}
+
+</style>
+<path class="st0" d="M25,11.3L20.7,7c-0.1-0.1-0.2-0.1-0.4-0.1l0,0c-0.1,0-0.3,0.1-0.4,0.1L8.1,18.9C8,18.9,8,19,8,19.1l-1.1,5.4
+	c0,0.2,0,0.3,0.1,0.5c0.1,0.1,0.2,0.1,0.4,0.1c0,0,0.1,0,0.1,0l5.4-1.1c0.1,0,0.2-0.1,0.3-0.1L25,12C25.2,11.8,25.2,11.5,25,11.3z
+	 M12.8,22.8l-3.6-3.6l9.5-9.5l3.6,3.6L12.8,22.8z M8.8,20.2l3,3L8,24L8.8,20.2z M23,12.6L19.4,9l0.9-0.9l3.6,3.6L23,12.6z"/>
+</svg>

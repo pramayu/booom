@@ -1,0 +1,4 @@
+$('#like_<%= @video.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= dislike_videofx_path(@video.slug) %>')
+						   .attr('id', 'dislike_<%= @video.id %>')
+						   .addClass('red');

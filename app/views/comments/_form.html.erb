@@ -1,0 +1,50 @@
+<% if @theme.present? %>
+	<%= form_for([@theme, @theme.comments.build], remote: true) do |f| %>
+		<div class="form-group">
+			<%= f.text_area :content, id: "enter_com", class: "com_inpt form-control", placeholder: "Post Comments" %>
+		</div>
+		<%= f.submit "Post", class: "btn_com" %>
+	<% end %>
+<% elsif @code.present? %>
+	<%= form_for([@code, @code.comments.build], remote: true) do |f| %>
+		<div class="form-group">
+			<%= f.text_area :content, id: "enter_com", class: "com_inpt form-control", placeholder: "Post Comments" %>
+		</div>
+		<%= f.submit "Post", class: "btn_com" %>
+	<% end %>
+<% elsif @graphic.present? %>
+	<%= form_for([@graphic, @graphic.comments.build], remote: true) do |f| %>
+		<div class="form-group">
+			<%= f.text_area :content, id: "enter_com", class: "com_inpt form-control", placeholder: "Post Comments" %>
+		</div>
+		<%= f.submit "Post", class: "btn_com" %>
+	<% end %>
+<% elsif @t3d.present? %>
+	<%= form_for([@t3d, @t3d.comments.build], remote: true) do |f| %>
+		<div class="form-group">
+			<%= f.text_area :content, id: "enter_com", class: "com_inpt form-control", placeholder: "Post Comments" %>
+		</div>
+		<%= f.submit "Post", class: "btn_com" %>
+	<% end %>
+<% elsif @video.present? %>
+	<%= form_for([@video, @video.comments.build], remote: true) do |f| %>
+		<div class="form-group">
+			<%= f.text_area :content, id: "enter_com", class: "com_inpt com_course form-control", placeholder: "Post Comments" %>
+		</div>
+		<%= f.submit "Post", class: "btn_com" %>
+	<% end %>
+<% elsif @font.present? %>
+	<%= form_for([@font, @font.comments.build], remote: true) do |f| %>
+		<div class="form-group">
+			<%= f.text_area :content, id: "enter_com", class: "com_inpt form-control", placeholder: "Post Comments" %>
+		</div>
+		<%= f.submit "Post", class: "btn_com" %>
+	<% end %>
+<% elsif @course.present? %>
+	<%= form_for([@course, @course.comments.build], remote: true) do |f| %>
+		<div class="form-group">
+			<%= f.text_area :content, id: "enter_com", class: "com_inpt com_course form-control", placeholder: "Post Comments" %>
+		</div>
+		<%= f.submit "Post", class: "btn_com" %>
+	<% end %>
+<% end %>

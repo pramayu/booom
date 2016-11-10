@@ -1,0 +1,30 @@
+.ui-dialog {
+	padding: 0px;
+	background-color: rgb(252, 252, 252);
+	border: none;
+	width: 340px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19);
+	.ui-dialog-content {
+		height: 40px !important;
+		text-align: center;
+		border-left: 1px solid #c9c9c9 !important;
+	    border-right: 1px solid #c9c9c9 !important;
+	}
+	.ui-widget-content {
+		border: none;
+		background: rgb(252, 252, 252) !important;
+		.ui-widget-header {
+			background: #dedede !important;
+		}
+		.ui-dialog-titlebar {
+			border-bottom-left-radius: 0px !important;
+		    border-bottom-right-radius: 0px !important;
+		}
+	}
+	.ui-dialog-buttonpane {
+		margin-top: 0px !important;
+		border-left: 1px solid #c9c9c9 !important;
+		border-right: 1px solid #c9c9c9 !important;
+		border-bottom: 1px solid #c9c9c9 !important;
+	}
+}

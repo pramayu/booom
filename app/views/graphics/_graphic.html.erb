@@ -1,0 +1,23 @@
+<% unless graphic.agree? || graphic.reject? %> 
+<div class="col-md-3 klie" id="klodff_<%= graphic.id %>">
+	<div class="klhj867">
+		<%= image_tag graphic.thumbnail_url(:thumbnail) %>
+		<div class="clkj878">
+			<a id="del_to_pro_graph<%= graphic.id %>" class="del_to_pro">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</a>
+		</div>
+	</div>
+</div>
+<% end %> 
+<script>
+	$('#del_to_pro_graph<%= graphic.id %>').click(function(){
+		$.ajax({
+			type: "GET",
+			url: "<%= del_to_pro_graph_path(graphic) %>",
+			success: function(){
+				$('#klodff_<%= graphic.id %>').hide("slow");
+			}
+		});
+	});
+</script>

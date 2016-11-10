@@ -1,0 +1,21 @@
+<%#= content_tag "div", id: "headsec_ajayy", data: {headsec: headsec.to_json(only: [:id])} do %>
+	<%= content_tag "div", id: "course_iii", data: {course: @course.to_json(only: [:slug])} do %>
+		<ul class="hgtui">
+			<li id="headsec<%= headsec.id %>" class="jhqui">
+				<%= form_for([@course, headsec], remote: true) do |f| %>
+					<span class="bujir"><%= f.text_field :name, class: "head_edit bujir", id: "hdsec#{headsec.id}", readonly: true, onkeypress: "keyPrs(headsec.id), this.style.width = ((this.value.length + 1) * 7) + 'px';", require: true %></span>
+					<%= link_to new_course_headsec_lecture_path(@course, headsec.id), remote: true, class: "add_lec" do %> <i class="fa fa-plus" aria-hidden="true"></i> <% end %> <a class="add_lec" onclick="add_clas(<%= headsec.id %>)" ><i class="fa fa-pencil" id="head_s<%= headsec.id %>" aria-hidden="true"></i></a>
+				<% end %> 
+				<% unless headsec.lectures.blank? %>
+					<ul class="klg">
+						<div id="tie">
+							<% headsec.lectures.order('created_at asc').each do |f| %>
+									<%= render partial: 'headsecs/bepatient', locals: {f: f} %>
+							<% end %>
+						</div>
+					</ul>
+				<% end %>
+			</li>
+		</ul>
+	<% end %> 
+<%# end %> 

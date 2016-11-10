@@ -1,0 +1,288 @@
+<%= title "Waiting for approve the products ~ KHAPOO" %>
+<div class="col-md-10 dsk">
+	<div role="tabpanel" class="tab-pane fade in active" id="thumb">
+		<div class="themesf">
+			<%= content_tag "div", id: "themes654", data: {themes: @themes.to_json(only: [:id, :name, :slug])} do %>
+				<% @themes.each do |theme| %>
+					<div class="col-md-3 sol">
+						<div class="soll">
+							<div class="img_k">
+								<%= image_tag theme.thumbnail_url(:thumbnail), class: "isabela" %>
+								<div class="hof hgsd54657">
+									<div class="dhgft">
+										<a class="btyr-hfg" id="theme<%= theme.id %>"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>
+									</div>
+									<div class="tooltip_j">
+										<div id="dat_tooltip">
+											<div class="img_o">
+												<% theme.screenshots[0..0].each do |image| %>
+													<%= image_tag image.screenshot_url(:hover) %>
+												<% end %>  
+											</div>
+											<div class="titlw pull-left">
+												<h4 class="je"><%= truncate(theme.name, length: 50) %></h4>
+												<span class="by"><%= theme.user.company %> | </span> 
+												<span class="by">themes / <%= theme.category.name %></span>
+											</div>
+											<div class="prce pull-right">
+												<span class="k">$<%= theme.price.to_i.floor %></span>
+											</div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			<% end %> 
+			<%= content_tag "div", id: "codes3636", data: {codes: @codes.to_json(only: [:id, :name, :slug])} do %>
+				<% @codes.each do |code| %>
+					<div class="col-md-3 sol">
+						<div class="soll">
+							<div class="img_k">
+								<%= image_tag code.thumbnail_url(:thumbnail), class: "isabela" %>
+								<div class="hof hgsd54657">
+									<div class="dhgft">
+										<a class="btyr-hfg" id="code<%= code.id %>"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>
+									</div>
+									<div class="tooltip_j">
+										<div id="dat_tooltip">
+											<div class="img_o">
+												<% code.screenshots[0..0].each do |image| %>
+													<%= image_tag image.screenshot_url(:hover) %>
+												<% end %>  
+											</div>
+											<div class="titlw pull-left">
+												<h4 class="je"><%= truncate(code.name, length: 50) %></h4>
+												<span class="by"><%= code.user.company %> | </span> 
+												<span class="by">codes / <%= code.category.name %></span>
+											</div>
+											<div class="prce pull-right">
+												<span class="k">$<%= code.price.to_i.floor %></span>
+											</div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+			<%= content_tag "div", id: "graphics986", data: {graphics: @graphics.to_json(only: [:id, :name, :slug])} do %>
+				<% @graphics.each do |graphic| %>
+					<div class="col-md-3 sol">
+						<div class="soll">
+							<div class="img_k">
+								<%= image_tag graphic.thumbnail_url(:thumbnail), class: "isabela" %>
+								<div class="hof hgsd54657">
+									<div class="dhgft">
+										<a id="graphic<%= graphic.id %>" class="btyr-hfg"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>
+									</div>
+									<div class="tooltip_j">
+										<div id="dat_tooltip">
+											<div class="img_o">
+												<% graphic.screenshots[0..0].each do |image| %>
+													<%= image_tag image.screenshot_url(:hover) %>
+												<% end %>  
+											</div>
+											<div class="titlw pull-left">
+												<h4 class="je"><%= truncate(graphic.name, length: 50) %></h4>
+												<span class="by"><%= graphic.user.company %> | </span> 
+												<span class="by">graphics / <%= graphic.category.name %></span>
+											</div>
+											<div class="prce pull-right">
+												<span class="k">$<%= graphic.price.to_i.floor %></span>
+											</div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+			<%= content_tag "div", id: "t3reed875", data: {t3ds: @t3ds.to_json(only: [:id, :name, :slug])} do %>
+				<% @t3ds.each do |t3d| %>
+					<div class="col-md-3 sol">
+						<div class="soll">
+							<div class="img_k">
+								<%= image_tag t3d.thumbnail_url(:thumbnail), class: "isabela" %>
+								<div class="hof hgsd54657">
+									<div class="dhgft">
+										<a id="t3d<%= t3d.id %>" class="btyr-hfg"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>
+									</div>
+									<div class="tooltip_j">
+										<div id="dat_tooltip">
+											<div class="img_o">
+												<% t3d.screenshots[0..0].each do |image| %>
+													<%= image_tag image.screenshot_url(:hover) %>
+												<% end %>  
+											</div>
+											<div class="titlw pull-left">
+												<h4 class="je"><%= truncate(t3d.name, length: 50) %></h4>
+												<span class="by"><%= t3d.user.company %> | </span> 
+												<span class="by">3D Animation / <%= t3d.category.name %></span>
+											</div>
+											<div class="prce pull-right">
+												<span class="k">$<%= t3d.price.to_i.floor %></span>
+											</div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+			<%= content_tag "div", id: "videofxe334", data: {videofxes: @videofxes.to_json(only: [:id, :name, :slug])} do %>
+				<% @videofxes.each do |video| %>
+					<div class="col-md-3 sol">
+						<div class="soll">
+							<div class="img_k">
+								<%= image_tag video.thumbnail_url(:thumbnail), class: "isabela" %>
+								<div class="hof hgsd54657">
+									<div class="dhgft">
+										<a id="video<%= video.id %>" class="btyr-hfg"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>
+									</div>
+									<div class="tooltip_j">
+										<div id="dat_tooltip">
+											<div class="img_o">
+												<% video.videms.each do |videm| %>
+													<video id="ajjayyy" class="video-js aja_<%= videm.id %>" preload="auto" width="463" height="257" data-setup="{}" style="width: 463px !important; height: 257px !important">
+													    <source src="<%= videm.trailer %>" type='video/mp4'>
+													</video>
+												<% end %> 
+											</div>
+											<div class="titlw pull-left">
+												<h4 class="je"><%= truncate(video.name, length: 50) %></h4>
+												<span class="by"><%= video.user.company %> | </span> 
+												<span class="by">Videofx / <%= video.category.name %></span>
+											</div>
+											<div class="prce pull-right">
+												<span class="k">$<%= video.price.to_i.floor %></span>
+											</div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+			<%= content_tag "div", id: "font7352", data: {fonts: @fonts.to_json(only: [:id, :name, :slug])} do %>
+				<% @fonts.each do |font| %>
+					<div class="col-md-3 sol">
+						<div class="soll">
+							<div class="img_k">
+								<%= image_tag font.thumbnail_url(:thumbnail), class: "isabela" %>
+								<div class="hof hgsd54657">
+									<div class="dhgft">
+										<a id="font<%= font.id %>" class="btyr-hfg"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>
+									</div>
+									<div class="tooltip_j">
+										<div id="dat_tooltip">
+											<div class="img_o">
+												<% font.screenshots[0..0].each do |image| %>
+													<%= image_tag image.screenshot_url(:hover) %>
+												<% end %>  
+											</div>
+											<div class="titlw pull-left">
+												<h4 class="je"><%= truncate(font.name, length: 50) %></h4>
+												<span class="by"><%= font.user.company %> | </span> 
+												<span class="by">Fonts / <%= font.category.name %></span>
+											</div>
+											<div class="prce pull-right">
+												<span class="k">$<%= font.price.to_i.floor %></span>
+											</div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+			<%= content_tag "div", id: "course7543", data: {courses: @courses.to_json(only: [:id, :name, :slug])} do %>
+				<% @courses.each do |course| %>
+					<div class="col-md-3 sol">
+					<div class="soll">
+						<div class="img_k">
+							<%= image_tag course.thumbnail_url(:thumbnail), class: "isabela" %>
+							<div class="hof hgsd54657">
+								<div class="dhgft">
+									<a id="course<%= course.id %>" class="btyr-hfg"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>
+								</div>
+								<div class="tooltip_j">
+									<div id="dat_tooltip">
+										<div class="img_o">
+											<% course.freepis.each do |freepi| %>
+												<video id="ajjayyy" class="video-js aja_<%= freepi.id %>" preload="auto" width="463" height="257" data-setup="{}" style="width: 463px !important; height: 257px !important">
+												    <source src="<%= freepi.cacaca %>" type='video/mp4'>
+												</video>
+											<% end %> 
+										</div>
+										<div class="titlw pull-left">
+											<h4 class="je"><%= truncate(course.name, length: 50) %></h4>
+											<span class="by"><%= course.user.company %> | </span> 
+											<span class="by">courses / <%= course.category.name %></span>
+										</div>
+										<div class="prce pull-right">
+											<span class="k">$<%= course.price.to_i.floor %></span>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				<% end %>
+			<% end %> 
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="col-md-2 dsu">
+	<div class="panel_menu">
+		<div class="mnu_t" role="tablist">
+			<p role="presentation" class="but">
+				<%= link_to item_product_path(current_user), "data-turbolinks": false do  %>
+					<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+				<% end %> 
+			</p>
+			<p class="but active" role="presentation">
+				<%= link_to pending_approv_path(current_user), "data-turbolinks": false do %>
+					<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+				<% end %> 
+			</p>
+			<!-- <p class="but" role="presentation"><a href="#pap" aria-controls="pap" role="tab" data-toggle="tab"><i class="fa fa-retweet" aria-hidden="true"></i></a></p> -->
+			<p class="but" role="presentation" >
+				<%= link_to item_reject_path(current_user), "data-turbolinks": false do %>
+					<i class="fa fa-calendar-times-o" aria-hidden="true"></i>
+				<% end %> 
+			</p>
+			<p class="but" role="presentation">
+				<%= link_to item_follower_path(current_user), "data-turbolinks": false do %>
+					<i class="fa fa-cubes" aria-hidden="true"></i>
+				<% end %>
+			</p>
+			<p class="but" role="presentation" >
+				<%= link_to item_like_path(current_user), "data-turbolinks": false do %>
+					<i class="fa fa-heart" aria-hidden="true"></i>
+				<% end %>
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="jfhft64" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-turbolinks="false"></div>
+<script>
+	$('.aktif').removeClass();
+	$('.product').addClass('aktif');  
+</script>

@@ -1,0 +1,95 @@
+<% for theme in @themes %> 
+  <li class="kqt34">
+    <div class="kquie">
+      <%= image_tag theme.thumbnail_url(:thumbnail) %>
+      <div class="extras" data-tooltip-content="#dat_tooltip">
+        <div class="u_name">
+          <%= link_to "", item_path(theme), class: "this_oiu", "data-turbolinks": false %>
+        </div>
+        <div class="raty-rate">
+          <div class="star-rating jger" data-score="<%= theme.reviews.average(:rating) %>"></div>
+        </div>
+        <div class="vote">
+          <ul>
+            <li>
+              <% if signed_in? %>
+                <% if current_user.liked? theme %>
+                  <%= link_to dislike_theme_path(theme.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{theme.id}" do %>
+                    <i class="fa fa-heart ic_vote"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to like_theme_path(theme.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{theme.id}" do %>
+                    <i class="fa fa-heart ic_vote"></i>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to sign_in_path, class: "vo_ic vo_ic_dis" do %>
+                  <i class="fa fa-heart ic_vote"></i>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <% if signed_in? %>
+                <% if current_user.akusuka.blank? %>
+                  <%= link_to new_akusuka_path, class: "mutq co_ic", remote: true do %>
+                    <i class="fa fa-folder" aria-hidden="true"></i>
+                  <% end %>
+                <% else %>
+                  <% if current_user.akusuka.themes.include?(theme) %>
+                    <%= link_to theme_unsuka_theme_path(theme), class: "mutq co_ic green", id: "unwish_#{theme.id}", remote: true do %>
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to theme_suka_theme_path(theme), class: "mutq co_ic", id: "wish_#{theme.id}", remote: true do %>
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to sign_in_path, class: "mutq co_ic" do %>
+                  <i class="fa fa-folder" aria-hidden="true"></i>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <a onclick="bagCart(<%= theme.id %>)" class="co_ic loih" style="cursor: pointer;" id="bag_<%= theme.id %>">
+                <i class="fa fa-shopping-bag ic_vote"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="tooltip_j">
+          <div id="dat_tooltip">
+            <div class="img_o">
+              <% theme.screenshots[0..0].each do |image| %>
+                <%= image_tag image.screenshot_url(:hover) %>
+              <% end %>  
+            </div>
+            <div class="titlw pull-left">
+              <h4 class="je"><%= truncate(theme.name, length: 50) %></h4>
+              <span class="by"><%= theme.user.company %> | </span> 
+              <span class="by">themes / <%= theme.category.name %></span>
+            </div>
+            <div class="prce pull-right">
+              <span class="k">$<%= theme.price.to_i.floor %></span>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="author">
+        <% if theme.user.avatar.blank? %>
+          <%= image_tag('default/default_profile.png', width: 28)  %>
+        <% else %>
+          <%= image_tag theme.user.avatar_url(:taan), width: 28 %>
+        <% end %>
+      </div>
+      <div class="sell_info">
+        <span class="icon-cart_3 icon_cart_3"></span><span class="dta_sell"><%= theme.line_items.where(theme_id: theme.id).count %></span>
+      </div>
+      <div class="price_info">
+        <span class="icon-price icon_price_1"></span><span class="dta_price">$<%= theme.price.to_i.floor %></span>
+      </div>
+    </div>
+  </li>
+<% end %> 

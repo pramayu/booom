@@ -1,0 +1,26 @@
+<%= title "Add Subcategories ~ KHAPOO" %>
+<div class="setting">
+  <%= render "browsers/form" %>
+  <div class="col-md-8 brek brrroo">
+    <div class="all_cta">
+      <div class="isi-menu-mail">
+        <div class="earn_titlr befh">
+          <ul class="list-inline yoon">
+            <li class="id_">ID</li>
+            <li class="name_">BROWSER NAME</li>
+            <li class="unit_">ACTION</li>
+          </ul>
+        </div>
+        <div class="content_earn">
+          <ul class="tqx" id="onyou">
+           <%= render @browsers %> 
+          </ul>
+        </div>
+      </div>    
+    </div>
+  </div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.sup_ot').addClass('aktif');
+</script>

@@ -1,0 +1,4 @@
+$('#unwish_<%= @graphic.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= graphic_suka_graphic_path(@graphic.slug) %>')
+						   .attr('id', 'wish_<%= @graphic.id %>')
+						   .removeClass('green');

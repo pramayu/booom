@@ -1,0 +1,103 @@
+<%= title "Notes ~ KHAPOO" %>
+<div class="mail-nav all_notifi earning wth_drw setting wishlist">
+  <div class="col-md-8 ddgtet" style="width:76%;">
+    <div class="isi-menu-mail kim-ii hewq">
+      <div class="tidks">
+        <h2 class="dhfgwp">Notes</h2>
+        <span class="desc_">With Wishlist, You Can Save The Products That You Will Purchase</span>
+      </div>
+      <div class="conent_h">
+        <div class="col-md-12 nddd">
+          <%= render 'accounts/note_form' %> 
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="content_earn">
+        <div class="lalala123">
+          <% for note in @notes %>
+            <div class="col-md-6 nter" id="note_del<%= note.id %>">
+              <div class="vsfre">
+                <div class="toled">
+                  <h4 class="fad" style="<%= 'background-color: #8bc34a !important'if note.team_id.present? %>" id="fad_<%= note.id %>" title="<%= note.title %>"><%= truncate(note.title, length: 15) %></h4>
+                </div>
+                <div class="isi_oo">
+                  <div class="col-md-6 lrt">
+                    <span class="nj"><%= time_ago_in_words(note.updated_at) %> ago</span>
+                  </div>
+                  <div class="col-md-6 wrt">
+                    <%= link_to note_edit_url(note), class: 'tott' do %><span class="fa fa-edit"></span><% end %>
+                    <% if current_user.reviewer? %>
+                      <% unless note.team_id.present? %>
+                        <a class="tott" onclick="shared(<%= note.id %>)"><i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                      <% end %>
+                    <% end %>
+                    <a class="tott" onclick="dellNote(<%= note.id %>)"><span class="fa fa-trash-o"></span></a>
+                  </div>
+                  <div class="clear"></div>
+                  <ul class="sgdt">
+                    <% for memo in note.memos %>
+                      <li class="hdwqd34" id="memo123_<%= memo.id %>">
+                        <input type="checkbox" onclick="dellMemo(<%= note.id %>,<%= memo.id %>)" id="note_<%= memo.id %>"><label for="note_<%= memo.id %>"><span class="jhrws"></span><span class="yayay" title="<%= memo.content %>"><%= truncate(memo.content, length: 37) %></span></label>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <div class="clear"></div>
+        </div>
+        <% unless !current_user.reviewer? %>
+          <div class="lalala123 share">
+            <% for note in @shared %>
+              <% unless current_user.id == note.user_id %>
+                <div class="col-md-6 nter" id="note_del<%= note.id %>">
+                  <div class="vsfre">
+                    <div class="toled">
+                      <h4 class="fad" style="<%= 'background-color: #8bc34a !important'if note.team_id.present? %>" id="fad_<%= note.id %>" title="<%= note.title %>"><%= truncate(note.title, length: 15) %></h4>
+                    </div>
+                    <div class="isi_oo">
+                      <div class="col-md-6 lrt">
+                        <span class="nj"><%= time_ago_in_words(note.updated_at) %> ago</span>
+                      </div>
+                      <div class="col-md-6 wrt">
+                      </div>
+                      <div class="clear"></div>
+                      <ul class="sgdt">
+                        <% for memo in note.memos %>
+                          <li class="hdwqd34" id="memo123_<%= memo.id %>">
+                            <input type="checkbox" onclick="dellMemo(<%= note.id %>,<%= memo.id %>)" id="note_<%= memo.id %>"><label for="note_<%= memo.id %>"><span class="jhrws"></span><span class="yayay" title="<%= memo.content %>"><%= truncate(memo.content, length: 37) %></span></label>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+            <div class="clear"></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 brok prek" style="padding-top:0px;">
+    <div class="mnu_fuk">
+      <div class="recent kls">
+        <div class="ti_l">
+          <span>*IMPORTANT</span>
+        </div>
+        <div class="pdjs">
+          <p>
+          Delete the record if it is not used anymore to allow you to view the logs and make it look presentable
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.notes').addClass('aktif');
+</script>

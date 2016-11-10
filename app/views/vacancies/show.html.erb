@@ -1,0 +1,76 @@
+<%= title "#{@vacancy.name.capitalize} ~ KHAPOO" %>
+<div class="job_detail_head">
+      <div class="container th-cus">
+        <div class="jb_dt_con">
+          <div class="col-md-8 lfh">
+            <%= image_tag @vacancy.user.avatar_url(:thumbel), class: "cot" %>
+            <a class="ngr"><h3 class="job_tit"><%= @vacancy.name %></h3></a>
+            <a href="#" class="mht"><h4 class="jkh">by <span><% if @vacancy.user.company.nil? %><%= @vacancy.user.first_n + " " + @vacancy.user.last_n %><% else %><%= @vacancy.user.company %><% end %></span><span class="ver">VERIFIED</span></h4></a>
+            <div class="btg-gru">
+              <%= link_to "APPLY THIS JOB", @vacancy.url_form, class: "apply" %>
+            </div>
+          </div>
+          <div class="col-md-4 rgh">
+            <table class="tbl">
+              <tr>
+                <td class="nbj">Job Type:</td>
+                <td><%= @vacancy.job_type %></td>
+              </tr>
+              <tr>
+                <td class="nbj">Location:</td>
+                <td><% unless @vacancy.state.nil? %><%= @vacancy.state.name %>,<% end %> <%= @vacancy.country.name %></td>
+              </tr>
+              <tr>
+                <td class="nbj">Year Experience:</td>
+                <td><%= @vacancy.experience %></td>
+              </tr>
+              <tr>
+                <td class="nbj">Recruiter:</td>
+                <td><%= @vacancy.recruiter %></td>
+              </tr>
+            </table>	
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+    <div class="job_detail_isi">
+      <div class="container th-cus">
+        <div class="isi_jobs">
+          <div class="col-md-8 lf_job">
+            <div class="mofo">
+              <div class="job_dsc">
+                <div class="titl_y">
+                  <span class="nj"><%= @vacancy.created_at.strftime("%d %B, %Y") %></span>
+                  <h4>JOB DESCRIPTION</h4>
+                </div>
+                <div class="description">
+                  <div class="content_desc">
+                    <p class="cikik">
+                      <%= simple_format(@vacancy.description) %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 rg_job">
+            <div class="moko">
+              <div class="skl">
+                <div class="title_skl">
+                  <h4 class="nf">SKILL REQUIREMENTS</h4>
+                </div>
+                <div class="skl_vgf">
+                  <% @vacancy.skills.each do |sk| %>
+                    <p><%= sk.name %></p>
+                  <% end %>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+</div>

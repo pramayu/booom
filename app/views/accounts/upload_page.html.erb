@@ -1,0 +1,93 @@
+<%= title "Choose Product for Upload ~ KAPHOO" %>
+<div class="upload_page">
+	<div class="col-md-8 brek brrr">
+		<div class="user_chooses">
+			<div class="kate_kat">
+				<h2>Your sales platform for digital items</h2>
+				<p>Below choose one of the categories listed and begin the upload process. </p>
+			</div>
+			<div class="kat_fros">
+				<div class="col-md-3 prfft">
+				<%= link_to new_theme_path do %>
+					<object data="" type="">
+						<%= render 'home/theme' %>
+					</object>
+					<h4 class="th_">ThemeArts</h4>
+					<% end %>
+				</div>
+				<div class="col-md-3 prfft">
+					<%= link_to new_code_path do %>
+						<object data="" type="">
+							<%= render 'home/code' %>
+							<h4 class="cd_">CodeArts</h4>
+						</object>
+					<% end %>
+				</div>
+				<div class="col-md-3 prfft">
+					<%= link_to new_graphic_path do %>
+						<object data="" type="">
+							<%= render 'home/graphic' %>
+						</object>
+						<h4 class="grp_">Graphiku</h4>
+					<% end %>
+				</div>
+				<div class="col-md-3 prfft">
+					<%= link_to new_t3d_path do %>
+						<object data="" type="">
+							<%= render 'home/threed' %>
+						</object>
+						<h4 class="drm_">3Dream</h4>
+					<% end %>
+				</div>
+				<div class="col-md-3 prfft">
+					<%= link_to new_videofx_path do %>
+						<object data="" type="">
+							<%= render 'home/video' %>
+						</object>
+						<h4 class="vdo_">VideoArts</h4>
+					<% end %>
+				</div>
+				<div class="col-md-3 prfft">
+					<a href="#">
+						<object data="" type="">
+							<%= render 'home/photo' %>
+						</object>
+						<h4 class="pto_">Photostock</h4>
+					</a>
+				</div>
+				<div class="col-md-3 prfft">
+					<%= link_to new_font_path do %>
+						<object data="" type="">
+							<%= render 'home/font' %>
+						</object>
+						<h4 class="fot_">Fonts</h4>
+					<% end %>
+				</div>
+				<div class="col-md-3 prfft">
+					<%= link_to new_course_path do %>
+						<object data="" type="">
+							<%= render 'home/course' %>
+						</object>
+						<h4 class="crs_">Course</h4>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 brok">
+		<div class="recent kls">
+			<div class="ti_l">
+				<span>READ ME</span>
+			</div>
+			<div class="rec_y read_me">
+				<p class="intr">To give the best results when you upload your product, Please read the instructions below :</p>
+				<ul>
+					<li>Read and follow the upload instructions.</li>
+					<li>Added useful tags and ensured they're spelled correctly.</li>
+					<li>Added a thorough and useful item description.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>

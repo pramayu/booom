@@ -1,0 +1,4 @@
+$('#like_<%= @code.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= dislike_code_path(@code.slug) %>')
+						   .attr('id', 'dislike_<%= @code.id %>')
+						   .addClass('red');

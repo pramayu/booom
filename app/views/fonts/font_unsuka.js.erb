@@ -1,0 +1,4 @@
+$('#unwish_<%= @font.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= font_suka_font_path(@font.slug) %>')
+						   .attr('id', 'wish_<%= @font.id %>')
+						   .removeClass('green');

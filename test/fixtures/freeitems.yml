@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  theme: one
+  code: one
+  t3d: one
+  graphic: one
+  videofx: one
+  font: one
+  course: one
+
+two:
+  theme: two
+  code: two
+  t3d: two
+  graphic: two
+  videofx: two
+  font: two
+  course: two

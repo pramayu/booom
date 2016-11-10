@@ -1,0 +1,31 @@
+<%= form_for @subcategory do |f| %>
+  <div class="col-md-8 brek brrroo">
+    <div class="user_chooses">
+      <div class="kate_kat">
+        <h2>Add New Subcategory</h2>
+        <p>configuration your store to convince buyers with the quality of your products</p>
+      </div>
+      <div class="sod data-acct">
+        <div class="form-group fk">
+          <span class="fl">Subcategory Name</span>
+          <div class="fs">
+            <%= f.text_field :name, class: "form-control sami", require: true %>
+          </div>
+        </div>
+        <div class="form-group fk">
+          <span class="fl">Select Category</span>
+          <div class="fs">
+            <%= select_tag("subcategory[category_ids][]", options_for_select(@categories.collect {|category| [category.name, category.id]}, @subcategory.categories.collect {|category| category.id}), {multiple: true, class: "form-control sami chosen-select", require: true}) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 brok prek">
+    <div class="mnu_fuk">
+      <div class="btn-pi">
+        <%= f.submit "SUBMIT", class: "btn_update" %>
+      </div>
+    </div>
+  </div>
+<% end %>

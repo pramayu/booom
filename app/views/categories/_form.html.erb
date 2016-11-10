@@ -1,0 +1,31 @@
+<%= form_for @category do |f| %>
+  <div class="col-md-8 brek brrroo">
+    <div class="user_chooses">
+      <div class="kate_kat">
+        <h2>Add New Category</h2>
+        <p>configuration your store to convince buyers with the quality of your products</p>
+      </div>
+      <div class="sod data-acct">
+        <div class="form-group fk">
+          <span class="fl">Category Name</span>
+          <div class="fs">
+            <%= f.text_field :name, class: "form-control sami", require: true %>
+          </div>
+        </div>
+        <div class="form-group fk">
+          <span class="fl">Category for Item</span>
+          <div class="fs">
+            <%= f.select :to_item, options_for_select([["Theme","theme"],["Code","code"],["Graphic","graphic"],["3D","tigad"],["Font","font"],["Course","course"]], @category.to_item), {prompt: "Choose category item"}, {class: "form-control sami", require: true} %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 brok prek">
+    <div class="mnu_fuk">
+      <div class="btn-pi">
+        <%= f.submit "SUBMIT", class: "btn_update" %>
+      </div>
+    </div>
+  </div>
+<% end %>

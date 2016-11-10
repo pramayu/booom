@@ -1,0 +1,68 @@
+<%= title "All Products ~ KHAPOO" %>
+<div class="col-md-10 dsk data-sp tab-content">
+  <div class="theme_supp treash">
+    <div class="themesf">
+      <% if params[:themes] %>
+        <%= render "accounts/ass_themes" %>
+      <% elsif params[:codes] %>
+        <%= render "accounts/ass_codes" %>
+      <% elsif params[:graphics] %>
+        <%= render "accounts/ass_graphics" %>
+      <% elsif params[:t3ds] %>
+        <%= render "accounts/ass_t3ds" %>
+      <% elsif params[:videofxes] %>
+        <%= render "accounts/ass_videofxes" %>
+      <% elsif params[:fonts] %>
+        <%= render "accounts/ass_fonts" %>
+      <% elsif params[:courses] %>
+        <%= render "accounts/ass_courses" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="col-md-2 dsu">
+  <div class="panel_menu">
+    <div class="mnu_t" role="tablist">
+      <p role="presentation" class="but ohhh active th_me">
+      <%= link_to all_themes_path(:themes), class: "supp_dta", "data-turbolinks": false do  %>
+        <i class="lnr lnr-laptop-phone" aria-hidden="true"></i>
+      <% end %> 
+      </p>
+      <p class="but ohhh co_de" role="presentation">
+      <%= link_to all_codes_path(:codes),class: "supp_dta", "data-turbolinks": false do %>
+        <i class="lnr lnr-coffee-cup" aria-hidden="true"></i>
+      <% end %> 
+      </p>
+      <p class="but ohhh grap_ic" role="presentation" >
+      <%= link_to all_graphics_path(:graphics),class: "supp_dta", "data-turbolinks": false do %>
+        <i class="lnr lnr-magic-wand" aria-hidden="true"></i>
+      <% end %> 
+      </p>
+      <p class="but ohhh t3_d" role="presentation">
+      <%= link_to all_t3ds_path(:t3ds),class: "supp_dta", "data-turbolinks": false do %>
+        <i class="lnr lnr-layers" aria-hidden="true"></i>
+      <% end %>
+      </p>
+      <p class="but ohhh vid_ex" role="presentation" >
+      <%= link_to all_videofxes_path(:videofxes),class: "supp_dta", "data-turbolinks": false do %>
+        <i class="lnr lnr-film-play" aria-hidden="true"></i>
+      <% end %>
+      </p>
+      <p class="but ohhh font_i" role="presentation" >
+      <%= link_to all_fonts_path(:fonts),class: "supp_dta", "data-turbolinks": false do %>
+        <i class="lnr lnr-highlight" aria-hidden="true"></i>
+      <% end %>
+      </p>
+      <p class="but ohhh cour_e" role="presentation" >
+      <%= link_to all_courses_path(:courses),class: "supp_dta", "data-turbolinks": false do %>
+        <i class="lnr lnr-briefcase" aria-hidden="true"></i>
+      <% end %>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>
+<script>
+$('.aktif').removeClass();
+$('.products').addClass('aktif');
+</script>

@@ -1,0 +1,4 @@
+$('#wish_<%= @code.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= code_unsuka_code_path(@code.slug) %>')
+						   .attr('id', 'unwish_<%= @code.id %>')
+						   .addClass('green');

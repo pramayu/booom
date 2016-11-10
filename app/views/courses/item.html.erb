@@ -1,0 +1,336 @@
+<%= title @course.name.capitalize %>
+<% meta_tag :description, simple_format(@course.description) %>
+<% meta_tag :keywords, @course.tags.map {|tag| tag.name}.join(', ') %>
+<div class="_head_til" data-turbolinks="false">
+  <div class="container th-cus">
+    <div class="akw">
+      <h2><%= @course.name %></h2>
+      <p>by <span><%= @course.user.username %></span></p>
+      <ul class="list-inline">
+        <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+        <li class="cius"><%= link_to @course.category.name, root_path, class: "jutr"  %></li>
+        <% @course.subcategories.each do |subcategory| %>
+          <li class="cius">
+            <%= link_to subcategory.name.capitalize, root_path, class: "jutr" %>
+          </li> 
+        <% end %>
+        <li class="cius"><%= link_to @course.name, root_path, class: "jutr" %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="main_d" data-turbolinks="false">
+  <div class="container th-cus">
+    <div class="col-md-4 rgh_detail">
+      <div class="pricing">
+        <div class="suppo">
+          <input type="checkbox" id="supt">
+          <label for="supt"><span class="kg"></span>Support to 12 months + <span class="plusprice"> $10</span></label>
+          <ul>
+            <li>Checked by Professional</li>
+            <li>Always Updated</li>
+          </ul>
+        </div>
+        <div class="add_to_cart">
+          <a onclick="bagcoCart(<%= @course.id %>)" class="cart" style="cursor: pointer;">ADD TO CART</a>
+        </div>
+      </div>
+      <div class="likeandsale">
+        <div class="profile_auth">
+          <div class="bcgf">
+            <% if @course.user.avatar.nil? %>
+              <%= link_to (image_tag 'default/default_profile.png', width: '50'), root_path %>
+            <% else %>
+              <%= image_tag @course.user.avatar_url(:thumb) %>
+            <% end %>
+          </div>
+          <span class="ngd"><a href="#"><%= link_to @course.user.username, store_path(@course.user) %></a></span>
+          <% if signed_in? && @course.user == current_user %>
+            <p><%= link_to "PROFILE", personal_path(current_user), class: 'foll_btn' %></p>
+          <% else %>
+            <p><%= link_to "SHOP", store_path(@course.user), class: "foll_btn" %></p>
+          <% end %>
+
+          <div class="clear"></div>
+        </div>
+        <div class="likeinfo">
+          <p class="lkq">Likes <span class="numv"><%= @course.get_upvotes.size %></span></p>
+        </div>
+        <div class="saleinfo">
+          <p class="sle">Sales <span class="numv"><%= @course.sell %></span></p>
+        </div>
+      </div>
+      <div class="more_from">
+        <div class="ti_more">
+          <h4 class="nbc">More from <span><%= @course.user.username %></span></h4>
+        </div>
+        <ul class="more_con">
+          <% @random_counts.each do |other_theme| %>
+            <li>
+              <%= link_to (image_tag other_theme.thumbnail_url(:thumbnail), width: '93'), item_course_path(other_theme), "data-turbolinks": false  %>
+            </li> 
+          <% end %>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="descript_detail">
+        <ul class="ctag">
+          <li class="vgx bgt"><span class="niuy date">Created</span><span class="fgd"><%= @course.created_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+          <li class="vgx bgt"><span class="niuy updated">Updated</span><span class="fgd"><%= @course.updated_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+          <% unless @course.vi_length.blank? %>
+            <li class="vgx bgt"><span class="niuy file_included">Length</span><span class="fgd"><%= @course.vi_length.capitalize %></span><div class="clear"></div></li>
+          <% end %>
+          <% unless @course.skill_level.blank? %>
+            <li class="vgx bgt"><span class="niuy file_included">Skill</span><span class="fgd"><%= @course.skill_level %></span><div class="clear"></div></li>
+          <% end %>
+          <% unless @course.language.blank? %>
+            <li class="vgx bgt"><span class="niuy file_included">Language</span><span class="fgd"><%= @course.language.name %></span><div class="clear"></div></li>
+          <% end %>
+          <li class="vgx"><span class="niuy tags">Tags</span><span class="fgd"><%= @course.tags.map {|tag| tag.name}.join(', ') %></span><div class="clear"></div></li>
+          <span class="fgd"></span></ul>
+      </div>
+    </div>
+    <div class="col-md-8 lft_detail">
+      <div class="large_thumb nengg">
+        <div class="col-md-8 tgdf jwqu">
+          <div class="anjirr">
+            <div class="jewqp">
+              <% @course.freepis.each do |freepi| %> 
+                <%= videojs_rails sources: { mp4: "#{freepi.cacaca}" }, setup: "{}", controls: true, loop: true, poster: "#{ @course.thumbnail_url(:poster) }", width:"574", height:"393" %>
+              <% end %> 
+            </div>
+            <div class="aiuyd">
+              <ul>
+                <li class="ck" data-toggle="tooltip" data-placement="bottom" title="<%= @course.get_upvotes.size %> Likes">
+                  <% if signed_in? %>
+                    <% if current_user.liked? @course %>
+                      <%= link_to dislike_course_path(@course.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{@course.id}" do %>
+                        <i class="fa fa-heart ic_vote"></i>
+                      <% end %>
+                    <% else %>
+                      <%= link_to like_course_path(@course.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{@course.id}" do %>
+                        <i class="fa fa-heart ic_vote"></i>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to sign_in_path do %>
+                      <i class="fa fa-heart" aria-hidden="true"></i>
+                    <% end %>
+                  <% end %>
+                </li>
+                <li class="ch" data-toggle="tooltip" data-placement="bottom" title="Add to Wishlist">
+                  <% if signed_in? %>
+                    <% if current_user.akusuka.blank? %>
+                      <%= link_to new_akusuka_path, class: "mutq", remote: true do %>
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                      <% end %>
+                    <% else %>
+                      <% if current_user.akusuka.courses.include?(@course) %>
+                        <%= link_to course_unsuka_course_path(@course), class: "mutq green", id: "unwish_#{@course.id}", remote: true do %>
+                          <i class="fa fa-folder" aria-hidden="true"></i>
+                        <% end %>
+                      <% else %>
+                        <%= link_to course_suka_course_path(@course), class: "mutq", id: "wish_#{@course.id}", remote: true do %>
+                          <i class="fa fa-folder" aria-hidden="true"></i>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <a href="/sign_in" class="mutq">
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    </a>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="desc_detail">
+            <ul class="list-inline xd">
+              <li role="presentation" class="active"><a href="#detail_item" role="tab" data-toggle="tab">Item Details</a></li>
+              <li role="presentation"><a href="#curriculum" role="tab" data-toggle="tab">Curriculum</a></li>
+              <li role="presentation"><a href="#comment" role="tab" data-toggle="tab">Comments</a></li>
+              <li role="presentation"><a href="#reviews" role="tab" data-toggle="tab">Reviews</a></li>
+            </ul>
+            <div class="desc_co tab-content">
+              <div role="tabpanel" class="skinny tab-pane active" id="detail_item">
+                <%= simple_format(@course.description) %>
+              </div>
+              <div role="tabpanel" class="vangke tab-pane fade" id="comment">
+                <div class="com_end">
+                  <div class="count_co">
+                    <span class="num" id="com-counts"><%= pluralize(@course.comments.count, "Comment") %></span><span class="coh"></span>
+                  </div>
+                  <% if signed_in? %>
+                    <div class="com_form">
+                      <div class="img_pro_il">
+                        <% if current_user.avatar.blank? %>
+                          <%= image_tag("default/default_profile.png") %>
+                        <% else %>
+                          <%= image_tag(current_user.avatar_url(:thumb)) %>
+                        <% end %>
+                      </div>
+                      <%= render "comments/form" %>
+                      <!-- <div class="cht_j">
+                        <input type="checkbox" id="chk_enter">
+                        <label for="chk_enter"><span></span>Use enter for post</label>
+                        </div> -->
+                        <div class="clear"></div>
+                    </div>
+                  <% end %>
+                  <div class="bft" id="com-en">
+                    <%= render @comments %>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="curicu tab-pane fade" id="curriculum">
+                <% @course.headsecs.each_with_index do |headsec, index| %>
+                  <ul class="loloen">
+                    <li class="tuakin">
+                      <span class="nbgl">Section <%= index + 1 %>:</span><span class="mkj"> <%= truncate(headsec.name, length: 50) %></span>
+                      <ul class="kjgf">
+                        <% headsec.lectures.each_with_index do |lecture, index_l| %>
+                          <li class="kht"><span class="jhti">Lecture <%= index_l + 1 %>:</span><span class="kgq"> <%= truncate(lecture.name, length: 50) %></span></li>
+                        <% end %>
+                      </ul>
+                    </li>
+                  </ul>
+                <% end %>
+              </div>
+              <div role="tabpanel" class="vangke tab-pane fade" id="reviews">
+                <div class="com_end">
+                  <div class="count_co">
+                    <span class="num" id="rev-counts">Average Rating: <%= @avg_rev %></span><span class="coh"></span>
+                  </div>
+                  <div class="bft" id="rev-en">
+                    <%= render @reviews %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<!-- <div class="rec_om_" data&#45;turbolinks="false"> -->
+<!--   <div class="container th&#45;cus"> -->
+<!--     <div class="title"> -->
+<!--       <h2>Recommended Items</h2> -->
+<!--       <div class="des"> -->
+<!--         <p>Unfortunatelly has a lot of bugs and the performance is getting <br>completely bad after several hours of work.</p> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!--   <div class="container th&#45;cus&#45;con"> -->
+<!--     <div class="_r_com_e"> -->
+<!--       <ul class="_ftw"> -->
+<!--         <li class="_b_g"> -->
+<!--           <div class="_iut_g"> -->
+<!--             <%#= image_tag("recom/3.png") %> -->
+<!--             <a href="#" class="_hov_er"> -->
+<!--               <span class="u_name"><span class="this_oiu">Butcher celiac narwhal</span></span> -->
+<!--             </a> -->
+<!--             <div class="_act_ion"> -->
+<!--               <ul> -->
+<!--                 <li><a href="#"><i class="fa fa&#45;shopping&#45;bag" aria&#45;hidden="true"></i></a></li> -->
+<!--                 <li><a href="#"><i class="fa fa&#45;folder" aria&#45;hidden="true"></i></a></li> -->
+<!--                 <li><a href="#"><i class="fa fa&#45;heart" aria&#45;hidden="true"></i></a></li> -->
+<!--               </ul> -->
+<!--             </div> -->
+<!--             <div class="_tdfs"> -->
+<!--               <%#= image_tag("recom/1b.png") %> -->
+<!--             </div> -->
+<!--             <div class="_oiy"> -->
+<!--               <span class="icon&#45;cart_3 icon_cart_3"></span><span class="dta_sell">80</span> -->
+<!--             </div> -->
+<!--             <div class="_trew"> -->
+<!--               <span class="icon&#45;price icon_price_1"></span><span class="dta_price">$75</span> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </li> -->
+<!--         <li class="_b_g"> -->
+<!--           <div class="_iut_g"> -->
+<!--             <%#= image_tag("recom/2.png") %> -->
+<!--             <a href="#" class="_hov_er"> -->
+<!--               <span class="u_name"><span class="this_oiu">Butcher celiac narwhal</span></span> -->
+<!--             </a> -->
+<!--             <div class="_act_ion"> -->
+<!--               <ul> -->
+<!--                 <li><a href="#"><i class="fa fa&#45;shopping&#45;bag" aria&#45;hidden="true"></i></a></li> -->
+<!--                 <li><a href="#"><i class="fa fa&#45;folder" aria&#45;hidden="true"></i></a></li> -->
+<!--                 <li><a href="#"><i class="fa fa&#45;heart" aria&#45;hidden="true"></i></a></li> -->
+<!--               </ul> -->
+<!--             </div> -->
+<!--             <div class="_tdfs"> -->
+<!--               <%#= image_tag("recom/1b.png") %> -->
+<!--             </div> -->
+<!--             <div class="_oiy"> -->
+<!--               <span class="icon&#45;cart_3 icon_cart_3"></span><span class="dta_sell">80</span> -->
+<!--             </div> -->
+<!--             <div class="_trew"> -->
+<!--               <span class="icon&#45;price icon_price_1"></span><span class="dta_price">$75</span> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </li> -->
+<!--         <li class="_b_g"> -->
+<!--           <div class="_iut_g"> -->
+<!--             <%#= image_tag("recom/4.png") %> -->
+<!--             <a href="#" class="_hov_er"> -->
+<!--               <span class="u_name"><span class="this_oiu">Butcher celiac narwhal</span></span> -->
+<!--             </a> -->
+<!--             <div class="_act_ion"> -->
+<!--               <ul> -->
+<!--                 <li><a href="#"><i class="fa fa&#45;shopping&#45;bag" aria&#45;hidden="true"></i></a></li> -->
+<!--                 <li><a href="#"><i class="fa fa&#45;folder" aria&#45;hidden="true"></i></a></li> -->
+<!--                 <li><a href="#"><i class="fa fa&#45;heart" aria&#45;hidden="true"></i></a></li> -->
+<!--               </ul> -->
+<!--             </div> -->
+<!--             <div class="_tdfs"> -->
+<!--               <%#= image_tag("recom/1b.png") %> -->
+<!--             </div> -->
+<!--             <div class="_oiy"> -->
+<!--               <span class="icon&#45;cart_3 icon_cart_3"></span><span class="dta_sell">80</span> -->
+<!--             </div> -->
+<!--             <div class="_trew"> -->
+<!--               <span class="icon&#45;price icon_price_1"></span><span class="dta_price">$75</span> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </li> -->
+<!--         <li class="_b_g"> -->
+<!--           <div class="_iut_g"> -->
+<!--             <%#= image_tag("recom/1.png") %> -->
+<!--             <a href="#" class="_hov_er"> -->
+<!--               <span class="u_name"><span class="this_oiu">Butcher celiac narwhal</span></span> -->
+<!--             </a> -->
+<!--             <div class="_act_ion"> -->
+<!--               <ul> -->
+<!--                 <li><a href="#"><i class="fa fa&#45;shopping&#45;bag" aria&#45;hidden="true"></i></a></li> -->
+<!--                 <li><a href="#"><i class="fa fa&#45;folder" aria&#45;hidden="true"></i></a></li> -->
+<!--                 <li><a href="#"><i class="fa fa&#45;heart" aria&#45;hidden="true"></i></a></li> -->
+<!--               </ul> -->
+<!--             </div> -->
+<!--             <div class="_tdfs"> -->
+<!--               <%#= image_tag("recom/1b.png") %> -->
+<!--             </div> -->
+<!--             <div class="_oiy"> -->
+<!--               <span class="icon&#45;cart_3 icon_cart_3"></span><span class="dta_sell">80</span> -->
+<!--             </div> -->
+<!--             <div class="_trew"> -->
+<!--               <span class="icon&#45;price icon_price_1"></span><span class="dta_price">$75</span> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </li> -->
+<!--         <li class="clear"></li> -->
+<!--       </ul> -->
+<!--     </div> -->
+<!--     <div class="more_btn"> -->
+<!--       <a href="#" class="more_pl"></a> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div> -->
+<div class="modal fade" id="theme_akusuka" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-turbolinks="false"></div>
+
+

@@ -1,0 +1,98 @@
+<% for course in @courses %>
+  <li class="kqt34">
+    <div class="kquie">
+      <%= image_tag course.thumbnail_url(:thumbnail) %>
+      <div class="extras" data-tooltip-content="#dat_tooltip">
+        <div class="u_name">
+          <%= link_to "", item_course_path(course), class: "this_oiu", "data-turbolinks": false %>
+        </div>
+        <div class="raty-rate">
+          <div class="star-rating jger" data-score="<%= course.reviews.average(:rating) %>"></div>
+        </div>
+        <div class="vote">
+          <ul>
+            <li>
+              <% if signed_in? %>
+                <% if current_user.liked? course %>
+                  <%= link_to dislike_course_path(course.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{course.id}" do %>
+                    <i class="fa fa-heart ic_vote"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to like_course_path(course.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{course.id}" do %>
+                    <i class="fa fa-heart ic_vote"></i>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to sign_in_path, class: "vo_ic vo_ic_dis" do %>
+                  <i class="fa fa-heart ic_vote"></i>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <% if signed_in? %>
+                <% if current_user.akusuka.blank? %>
+                  <%= link_to new_akusuka_path, class: "mutq co_ic", remote: true do %>
+                    <i class="fa fa-folder" aria-hidden="true"></i>
+                  <% end %>
+                <% else %>
+                  <% if current_user.akusuka.courses.include?(course) %>
+                    <%= link_to course_unsuka_course_path(course), class: "mutq co_ic green", id: "unwish_#{course.id}", remote: true do %>
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to course_suka_course_path(course), class: "mutq co_ic", id: "wish_#{course.id}", remote: true do %>
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to sign_in_path, class: "mutq co_ic" do %>
+                  <i class="fa fa-folder" aria-hidden="true"></i>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <a onclick="bagcoCart(<%= course.id %>)" id="bag_<%= course.id %>" style="cursor: pointer;" class="co_ic loih">
+                <i class="fa fa-shopping-bag ic_vote"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="tooltip_j">
+          <div id="dat_tooltip">
+            <div class="img_o">
+              <% course.freepis.each do |freepi| %>
+                <video id="ajjayyy" class="video-js aja_<%= freepi.id %>" preload="auto" width="463" height="257" data-setup="{}" style="width: 463px !important; height: 257px !important">
+                  <source src="<%= freepi.cacaca %>" type='video/mp4'>
+                </video>
+              <% end %> 
+            </div>
+            <div class="titlw pull-left">
+              <h4 class="je"><%= truncate(course.name, length: 50) %></h4>
+              <span class="by"><%= course.user.company %> | </span> 
+              <span class="by">courses / <%= course.category.name %></span>
+            </div>
+            <div class="prce pull-right">
+              <span class="k">$<%= course.price.to_i.floor %></span>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="author">
+        <% if course.user.avatar.blank? %>
+          <%= image_tag('default/default_profile.png', width: 28)  %>
+        <% else %>
+          <%= image_tag course.user.avatar_url(:taan), width: 28 %>
+        <% end %>
+      </div>
+      <div class="sell_info">
+        <span class="icon-cart_3 icon_cart_3"></span><span class="dta_sell"><%= course.line_items.where(course_id: course.id).count %></span>
+      </div>
+      <div class="price_info">
+        <span class="icon-price icon_price_1"></span><span class="dta_price">$<%= course.price.to_i.floor %></span>
+      </div>
+    </div>
+  </li>
+<% end %> 
+

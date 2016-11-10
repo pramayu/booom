@@ -1,0 +1,5 @@
+$('#lecture<%= @lecture.id %>').hide().fadeIn(2000);
+$('#lecture').append("<%= j render @lecture %>");
+$('#lkf').val('');
+$('#lkh').val('');
+$('#tie').append("<%= j render(partial: 'headsecs/bepatient', locals: {f: @lecture}) %>");

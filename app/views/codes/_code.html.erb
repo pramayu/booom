@@ -1,0 +1,23 @@
+<% unless code.agree? || code.reject? %> 
+<div class="col-md-3 klie" id="klo_<%= code.id %>">
+	<div class="klhj867">
+		<%= image_tag code.thumbnail_url(:thumbnail) %>
+		<div class="clkj878">
+			<a id="del_to_pro_code<%= code.id %>" class="del_to_pro">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</a>
+		</div>
+	</div>
+</div>
+<% end %> 
+<script>
+	$('#del_to_pro_code<%= code.id %>').click(function(){
+		$.ajax({
+			type: "GET",
+			url: "<%= del_to_pro_code_path(code) %>",
+			success: function(){
+				$('#klo_<%= code.id %>').hide("slow");
+			}
+		});
+	});
+</script>

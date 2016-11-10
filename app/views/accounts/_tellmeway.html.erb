@@ -1,0 +1,98 @@
+<div class="fdse container">
+<div class="prodi">
+<%= image_tag @usr.avatar_url(:thumbel) %>
+</div>
+<div class="company">
+<p class="comn"><%= @usr.company %></p>
+<span class="loc"><%= @usr.state.name %>, <span class="coun"><%= @usr.country.name %></span></span>
+</div>
+<div class="sosfer">
+<div class="kle">
+<% unless @usr.social_network.blank? %>
+       <ul class="list-inline">
+       <% unless @usr.ourstore.website.empty? %>
+              <li><%= link_to "website", @usr.ourstore.website %></li>
+            <% end %>
+            <% unless @usr.social_network.facebook.empty? %>
+                   <li><%= link_to "facebook", @usr.social_network.facebook %></li>
+                 <% end %>
+                 <% unless @usr.social_network.dribbble.empty? %>
+                        <li><%= link_to "dribbble", @usr.social_network.dribbble %></li>
+                      <% end %>
+                      <% unless @usr.social_network.github.empty? %>
+                             <li><%= link_to "github", @usr.social_network.github %></li>
+                           <% end %>
+
+                           <% unless @usr.social_network.twitter.empty? %>
+                                  <li><%= link_to "twitter", @usr.social_network.twitter %></li>
+                                <% end %>
+                                <% unless @usr.social_network.deviant.empty? && @usr.social_network.digg.empty? && @usr.social_network.flickr.empty? && @usr.social_network.tumblr.empty? && @usr.social_network.youtube.empty? && @usr.social_network.behance.empty? %>
+                                       <li class="dropf dropup">
+                                       <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+ more</a>
+                                       <ul class="cfgk dropdown-menu">
+                                       <% unless @usr.social_network.deviant.empty? %>
+                                              <li><%= link_to "Deviantart", @usr.social_network.deviant %></li>
+                                            <% end %>
+                                            <% unless @usr.social_network.digg.empty? %>
+                                                   <li><%= link_to "digg", @usr.social_network.digg %></li>
+                                                 <% end %>
+                                                 <% unless @usr.social_network.flickr.empty? %>
+                                                        <li><%= link_to "flickr", @usr.social_network.flickr %></li>
+                                                      <% end %>
+                                                      <% unless @usr.social_network.tumblr.empty? %>
+                                                             <li><%= link_to "tumblr", @usr.social_network.tumblr %></li>
+                                                           <% end %>
+                                                           <% unless @usr.social_network.youtube.empty? %>
+                                                                  <li><%= link_to "youtube", @usr.social_network.youtube %></li>
+                                                                <% end %>
+                                                                <% unless @usr.social_network.behance.empty? %>
+                                                                       <li><%= link_to "Behance", @usr.social_network.behance %></li>
+                                                                     <% end %>
+                                                                     <% unless @usr.social_network.linkedin.empty? %>
+                                                                            <li><%= link_to "linkedin", @usr.social_network.linkedin %></li>
+                                                                          <% end %>
+                                                                          </ul>
+                                                                          </li>
+                                                                        <% end %>
+                                                                        </ul>
+                                                                      <% end %>
+                                                                      </div>
+                                                                      </div>
+                                                                      <div class="clear"></div>
+                                                                      <div class="desc-hk">
+                                                                      <div class="col-md-4 lfgt">
+                                                                      <div class="kiuq">
+                                                                      <p class="kwq"><%= truncate(@usr.ourstore.description, length: 100) %><a href="#">Read more.</a></%></p>
+                                                                      </div>
+                                                                      </div>
+                                                                      <div class="col-md-6 hdgf">
+                                                                        <div class="au">
+                                                                          <ul class="list-inline">
+                                                                            <li>
+                                                                              <span class="kif">SALES</span>
+                                                                              <p class="fe"><%= _sell_sum(@usr.id) %></p>
+                                                                            </li>
+                                                                            <li>
+                                                                              <%= link_to store_path(@usr) do %>
+                                                                                <span class="kif">ITEMS</span>
+                                                                                <p class="fe"><%= item_sum %></p>
+                                                                              <% end %>
+                                                                            </li>
+                                                                            <li>
+                                                                              <%= link_to follower_path(@usr) do %>
+                                                                                <span class="kif">FOLLOWER</span>
+                                                                                <p class="fe" id="foll_counts"><%= @usr.followers.size %></p>
+                                                                              <% end %>
+                                                                            </li>
+                                                                            <li>
+                                                                              <%= link_to following_path(@usr) do %>
+                                                                                <span class="kif">FOLLOWIG</span>
+                                                                                <p class="fe" id="wing_counts"><%= @usr.following.size %></p>
+                                                                              <% end %>
+                                                                            </li>
+                                                                          </ul>
+                                                                        </div>
+                                                                      </div>
+                                                                      <div class="clear"></div>
+                                                                      </div>
+</div>

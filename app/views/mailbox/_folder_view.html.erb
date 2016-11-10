@@ -1,0 +1,59 @@
+<%= title "Messages ~ KHAPOO" %>
+<div class="mail-nav">
+  <div class="isi-menu-mail">
+    <div class="title-mail">
+      <div class="left-to pull-left">
+        <p class="dgaji67">Mail</p>
+        <% if unread_messages_count >= 1 %>
+          <span class="dshgq1">You have <%= unread_messages_count %> unread email</span>
+        <% elsif unread_messages_count <= 0 %>
+          <span class="dshgq1">You have't email</span>
+        <% end %>
+      </div>
+      <div class="right-to pull-right">
+        <%= link_to "NEW MESSAGE", new_conversation_path, class: "new_email", "data-turbolinks": false %>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="menu-inbx">
+      <div class="list-inline mnu-uli">
+        <p class="mnu-f <%= active_page(:inbox) %>"><i class="fa fa-inbox" aria-hidden="true"></i><%= link_to "INBOX", mailbox_inbox_path, class: "inbox actig" %></p>
+        <p class="mnu-f <%= active_page(:sent) %>"><i class="fa fa-paper-plane" aria-hidden="true"></i><%= link_to "SENT", mailbox_sent_path, class: "sent" %></p>
+        <p class="mnu-f pempem <%= active_page(:trash) %>"><i class="fa fa-trash" aria-hidden="true"></i><%= link_to "TRASH", mailbox_trash_path, class: "trash" %></p>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="col-md-4 freak-left">
+      <div class="seacbv">
+        <input type="text" class="form-control schmail" placeholder="Search email here...">
+      </div>
+      <% mailbox.conversations.each_with_index do |conversation, index| %>
+        <div class="receipt" role="tablist">
+          <div class="balamed <%= 'active' if index == 0 %>">
+            <a href="#cover_<%= conversation.id %>" class="djfgf" role="tab" data-toggle="tab">
+              <div class="imgdf">
+                <%= image_tag conversation.originator.avatar_url(:thumb) %>
+              </div>
+              <div class="condfer">
+                <p class="name"><%= conversation.originator.first_n.capitalize %> <%= conversation.originator.last_n.capitalize %> <span class="pull-right"> <%= conversation.messages.last.created_at.strftime("%b %d, %Y") %></span></p>
+                <p class="congst"><span class="subject"><%= conversation.subject.capitalize %> - </span> <%= truncate(conversation.messages.last.body, length: 20) %></p>
+              </div>
+            </a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-8 freak-right">
+      <% if is_conversation %>
+        <%= render 'conversations/form' %>
+      <% else %>
+        <div class="tab-content">
+        <%# mailbox.conversations.each_with_index do |conversation, index| %>
+          <%= render partial: 'conversations/conversation', collection: messages %>
+        <%# end %>
+      <% end %>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

@@ -1,0 +1,230 @@
+<%= title "Member Wishlist ~ KAPHOO" %>
+<div class="setting wishlist">
+  <div class="col-md-8 brek brrroo">
+    <div class="user_chooses">
+      <% if current_user.akusuka.present? %>
+        <div class="kate_kat">
+          <h2>Wishlists: <%= current_user.akusuka.name.capitalize %></h2>
+          <p>with wishlist, you can save the products that you will purchase</p>
+        </div>
+        <div class="sod data-acct gtre">
+          <div id="hatwi">
+            <% current_user.akusuka.themes.each do |collection| %>
+              <div class="col-md-3 smu sku_<%= collection.id %>">
+                <div class="kow">
+                  <% if collection.blank? %>
+                    <%= image_tag("default/default_wish.png") %>
+                  <% else %>
+                    <%= image_tag collection.thumbnail_url(:thumbnail) %>
+                  <% end %>
+                  <%= link_to "", item_path(collection), class: "lwqrt" %>
+                  <div class="jhfre">
+                    <ul class="list-inline itms pull-left">
+                      <li>
+                        <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= collection.sell %></span>
+                      </li>
+                      <li>
+                        <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= collection.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="set_r pull-right">
+                      <span></span>
+                    </div>
+                    <div class="clear"></div>	
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <% current_user.akusuka.codes.each do |collection| %>
+              <div class="col-md-3 smu sku_<%= collection.id %>">
+                <div class="kow">
+                  <% if collection.blank? %>
+                    <%= image_tag("default/default_wish.png") %>
+                  <% else %>
+                    <%= image_tag collection.thumbnail_url(:thumbnail) %>
+                  <% end %>
+                  <%= link_to "", item_code_path(collection), class: "lwqrt" %>
+                  <div class="jhfre">
+                    <ul class="list-inline itms pull-left">
+                      <li>
+                        <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= collection.sell %></span>
+                      </li>
+                      <li>
+                        <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= collection.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="set_r pull-right">
+                      <span></span>
+                    </div>
+                    <div class="clear"></div>	
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <% current_user.akusuka.fonts.each do |collection| %>
+              <div class="col-md-3 smu sku_<%= collection.id %>">
+                <div class="kow">
+                  <% if collection.blank? %>
+                    <%= image_tag("default/default_wish.png") %>
+                  <% else %>
+                    <%= image_tag collection.thumbnail_url(:thumbnail) %>
+                  <% end %>
+                  <%= link_to "", item_font_path(collection), class: "lwqrt" %>
+                  <div class="jhfre">
+                    <ul class="list-inline itms pull-left">
+                      <li>
+                        <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= collection.sell %></span>
+                      </li>
+                      <li>
+                        <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= collection.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="set_r pull-right">
+                      <span></span>
+                    </div>
+                    <div class="clear"></div>	
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <% current_user.akusuka.courses.each do |collection| %>
+              <div class="col-md-3 smu sku_<%= collection.id %>">
+                <div class="kow">
+                  <% if collection.blank? %>
+                    <%= image_tag("default/default_wish.png") %>
+                  <% else %>
+                    <%= image_tag collection.thumbnail_url(:thumbnail) %>
+                  <% end %>
+                  <%= link_to "", item_course_path(collection), class: "lwqrt" %>
+                  <div class="jhfre">
+                    <ul class="list-inline itms pull-left">
+                      <li>
+                        <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= collection.sell %></span>
+                      </li>
+                      <li>
+                        <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= collection.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="set_r pull-right">
+                      <span></span>
+                    </div>
+                    <div class="clear"></div>	
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <% current_user.akusuka.videofxes.each do |collection| %>
+              <div class="col-md-3 smu sku_<%= collection.id %>">
+                <div class="kow">
+                  <% if collection.blank? %>
+                    <%= image_tag("default/default_wish.png") %>
+                  <% else %>
+                    <%= image_tag collection.thumbnail_url(:thumbnail) %>
+                  <% end %>
+                  <%= link_to "", item_videofx_path(collection), class: "lwqrt" %>
+                  <div class="jhfre">
+                    <ul class="list-inline itms pull-left">
+                      <li>
+                        <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= collection.sell %></span>
+                      </li>
+                      <li>
+                        <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= collection.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="set_r pull-right">
+                      <span></span>
+                    </div>
+                    <div class="clear"></div>	
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <% current_user.akusuka.graphics.each do |collection| %>
+              <div class="col-md-3 smu sku_<%= collection.id %>">
+                <div class="kow">
+                  <% if collection.blank? %>
+                    <%= image_tag("default/default_wish.png") %>
+                  <% else %>
+                    <%= image_tag collection.thumbnail_url(:thumbnail) %>
+                  <% end %>
+                  <%= link_to "", item_graphic_path(collection), class: "lwqrt" %>
+                  <div class="jhfre">
+                    <ul class="list-inline itms pull-left">
+                      <li>
+                        <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= collection.sell %></span>
+                      </li>
+                      <li>
+                        <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= collection.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="set_r pull-right">
+                      <span></span>
+                    </div>
+                    <div class="clear"></div>	
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <% current_user.akusuka.t3ds.each do |collection| %>
+              <div class="col-md-3 smu sku_<%= collection.id %>">
+                <div class="kow">
+                  <% if collection.blank? %>
+                    <%= image_tag("default/default_wish.png") %>
+                  <% else %>
+                    <%= image_tag collection.thumbnail_url(:thumbnail) %>
+                  <% end %>
+                  <%= link_to "", item_t3d_path(collection), class: "lwqrt" %>
+                  <div class="jhfre">
+                    <ul class="list-inline itms pull-left">
+                      <li>
+                        <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= collection.sell %></span>
+                      </li>
+                      <li>
+                        <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= collection.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="set_r pull-right">
+                      <span></span>
+                    </div>
+                    <div class="clear"></div>	
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="wish_zero">
+          <h4 class="hetj">
+            to add all the products that you would buy into the wishlist feature, you must first create a wishlist
+          </h4>
+          <%= link_to "CREATE WISHLIST", new_akusuka_path, class: "mutq", remote: true, class: "bager" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-4 brok prek">
+    <div class="mnu_fuk">
+      <div class="recent kls">
+        <div class="ti_l">
+          <span>WHAT IS WISHLIST</span>
+        </div>
+        <div class="pdjs">
+          <p>
+          Wishlists are groups of items compiled by different users on a theme.
+          </p>
+          <p>
+          Wishlist to make it easy for you, if you want a product you want to buy in the future
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<div class="modal fade" id="theme_akusuka" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
+<script>
+$('.aktif').removeClass();
+$('.wishlist').addClass('aktif');
+</script>

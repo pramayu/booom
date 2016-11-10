@@ -1,0 +1,159 @@
+<div class="modal-dialog revje" role="document" data-turbolinks="false">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" onclick="pauseVid()" id="vi_o<%= @course.id %>" class="close" data-dismiss="modal" aria-label="Close"></button>
+			<div class="modal-title" id="myModalLabelk">
+				<div class="container lkjy75">
+					<h4 class="tuiei">
+						<%= @course.name.capitalize %>
+					</h4>
+					<ul class="list-inline gfh">
+						<li><%= link_to @course.category.name, root_path, class: "jutr"  %></li>
+						<% unless @course.subcategories.blank? %> 
+							<% @course.subcategories.each do |subcategory| %>
+							<li class="cius">
+								<%= link_to subcategory.name, root_path, class: "jutr" %>
+							</li> 
+							<% end %> 
+						<% end %> 
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="modal-body" id="jkerop">
+			<div class="mengh">
+				<div class="hrte container">
+					<div class="col-md-4 sdfjsh37">
+						<div class="gfs">
+							<div class="djfhd98">
+								<%= link_to "DOWNLOAD", @course.cofiles.map{|link|link.coke}.join(''), class: "nbdg" %>
+							</div>
+							<div class="hdgf87 djfhd98">
+								<ul class="khgg65">
+									<li class="vgx bgt"><span class="niuy date">Created</span><span class="fgd"><%= @course.created_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+									<li class="vgx bgt"><span class="niuy updated">Updated</span><span class="fgd"><%= @course.updated_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+									<% unless @course.vi_length.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Length</span><span class="fgd"><%= @course.vi_length.capitalize %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @course.skill_level.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Skill</span><span class="fgd"><%= @course.skill_level %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @course.language.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Language</span><span class="fgd"><%= @course.language.name %></span><div class="clear"></div></li>
+									<% end %>
+									<li class="vgx"><span class="niuy tags">Tags</span><span class="fgd"><%= @course.tags.map {|tag| tag.name}.join(', ') %></span><div class="clear"></div></li>
+									<span class="fgd"></span>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 dgf549">
+						<div class="gfds543">
+							<div class="col-md-8 hgfe5 jrt878">
+								<div class="dfhgd65">
+									<% @course.freepis.each do |freepi| %>
+										<video id="vi_so<%= @course.id %>" class="video-js" controls preload="auto" width="574" height="393" poster="<%= @course.thumbnail_url(:poster) %>" data-setup="{}">
+											<source src="<%= freepi.cacaca %>" type="video/mp4" media="">
+										</video>
+									<% end %>
+								</div>
+								<div class="jhgshgjh">
+									<ul class="list-inline xd">
+										<li role="presentation" class="active"><a href="#desct" role="tab" data-toggle="tab">Description</a></li>
+										<li role="presentation"><a href="#curri" role="tab" data-toggle="tab">Curriculum</a></li>
+										<% if current_user.reviewer? %>
+											<li role="presentation"><a href="#reviews" role="tab" data-toggle="tab">Give Reviews</a></li>
+										<% end %> 
+										<% unless @course.note.empty? %>
+											<li role="presentation"><a href="#message" role="tab" data-toggle="tab">Message</a></li>
+										<% end %> 
+									</ul>
+									<div class="dtert tab-content">
+										<div role="tabpanel" class="jhfre85 tab-pane active" id="desct">
+											<%= simple_format(@course.description) %>
+										</div>
+										<div role="tabpanel" class="jhfre85 tab-pane" id="curri">
+											<% @course.headsecs.each_with_index do |headsec, index| %>
+											<ul class="loloen">
+												<li class="tuakin">
+													<span class="nbgl">Section <%= index + 1 %>:</span><span class="mkj"> <%= truncate(headsec.name, length: 50) %></span>
+													<ul class="kjgf">
+														<% headsec.lectures.each_with_index do |lecture, index_l| %>
+														<li class="kht"><span class="jhti">Lecture <%= index_l + 1 %>:</span><span class="kgq"> <%= truncate(lecture.name, length: 50) %></span></li>
+														<% end %>
+													</ul>
+												</li>
+											</ul>
+											<% end %>
+										</div>
+										<% if current_user.reviewer? %>
+										<div role="tabpanel" class="jhfre85 revs tab-pane" id="reviews">
+											<%= form_for @course, remote: true do |f| %>
+												<div class="form-group mkg32">
+													<%= f.fields_for :revrest do |rev| %>
+														<%= rev.hidden_field :id %>
+														<%= rev.text_area :content, class: "form-control kjh530 nage554", placeholder: "Review Result" %>
+													<% end %> 
+												</div>
+												<div class="form-group mkg32">
+													<%= f.text_field :price, class: "form-control kjh530", placeholder: "Regular License Price"  %>
+												</div>
+												<div class="form-group mkg32">
+													<%= f.text_field :price_ext, class: "form-control kjh530", placeholder: "Extended License Price"  %>
+												</div>
+												<div class="form-group hjr96 mkg32">
+													<%= f.check_box :agree, {class: "dt5", id: "course_agree_#{@course.id}"} %>
+													<label for="course_agree_<%= @course.id %>"><span class="jhj kiup"></span><span class="nhg3">I have checked all the files associated with this stuff and I approve this proposal </span></label>
+												</div>
+												<div class="form-group hjr96 mkg32">
+													<%= f.check_box :reject, {class: "dt5", id: "course_reject_#{@course.id}"} %>
+													<label for="course_reject_<%= @course.id %>"><span class="jhj kiup"></span><span class="nhg3">I have checked all the files associated with this stuff and I reject this proposal </span></label>
+												</div>
+												<div class="dgf_byt">
+													<%= f.submit "GIVE RESULT", class: "btn btn-default btn_gdr" %>
+												</div>
+											<% end %> 
+										</div>
+										<% end %> 
+										<div role="tabpanel" class="jhfre85 tab-pane" id="message">
+											<p><%= @course.note %></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	var vid = document.getElementById('vi_so<%= @course.id %>');
+	function pauseVid(){
+		vid.pause();
+	};
+	$(document).ready(function(){
+		$('#course_agree_<%= @course.id %>').on('change', function(){
+			if(this.checked){
+				$.ajax({
+					type: "GET",
+					url: "/courses/aprroved/<%= @course.slug %>/course",
+					success: function(){
+					}
+				});
+			};
+		});
+		$('#course_reject_<%= @course.id %>').on('change', function(){
+			if(this.checked){
+				$.ajax({
+					type: "GET",
+					url: "/courses/reject/<%= @course.slug %>/course",
+					success: function(){
+					}
+				});
+			};
+		});
+	});
+</script>

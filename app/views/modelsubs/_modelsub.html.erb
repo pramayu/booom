@@ -1,0 +1,19 @@
+<% index = modelsub_counter + 1 %>
+<%= content_tag "div", id: "modelsub3265", data: {modelsub: modelsub.to_json(only: [:slug])} do %>
+  <li id="daddyyoio51_<%= modelsub.id %>" class="_idih <%= 'tran' if (index + 1)%2 == 0 %>">
+    <ul class="list-inline keke">
+      <li class="_id cfdl">
+        <%= index %>
+      </li>
+      <li class="_name cfdl">
+        <%= modelsub.name %>
+      </li>
+      <li class="_unit cfdl">
+        <ul class="list-inline siut">
+          <li><%= link_to modelsub_edit_path(modelsub) do %><span class="lnr lnr-magic-wand"><% end %></li>
+          <li><a onclick="dellModelsub(<%= modelsub.id %>)" id="data_<%#= category.slug %>"><span class="lnr lnr-trash"></span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+<% end %>

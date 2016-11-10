@@ -1,0 +1,4 @@
+$('#unwish_<%= @video.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= video_suka_videofx_path(@video.slug) %>')
+						   .attr('id', 'wish_<%= @video.id %>')
+						   .removeClass('green');

@@ -1,0 +1,17 @@
+<% @receipts.each do |receipt| %>
+<% message = receipt.message %>
+<div class="img_hdg pull-left">
+  <%= image_tag message.sender.avatar_url(:thumb) %>
+</div>
+<div class="descye57">
+  <p class="name"><%= message.sender.first_n.capitalize %> <%= message.sender.last_n.capitalize %> <span class="tgl"><%= message.created_at.strftime("%b %d, %Y") %></span></p>
+  <span class="to_">subject: <%#= conversation.subject.capitalize %> <%= message.subject.capitalize %> </span> 
+</div>
+<div class="comtent relpiyi">
+  <p class="subject_i">
+  <p class="con_oo"i>
+  <%= simple_format(message.body) %>
+  </p>
+</div>
+<% end %>
+

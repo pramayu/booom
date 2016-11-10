@@ -1,0 +1,337 @@
+<%= title @graphic.name.capitalize %>
+<% meta_tag :description, @graphic.description.to_s %>
+<% meta_tag :keywords, @graphic.tags.map {|tag| tag.name}.join(', ') %>
+<div class="_head_til">
+  <div class="_head_til">
+    <div class="container th-cus">
+      <div class="akw">
+        <h2><%= @graphic.name %></h2>
+        <p>by <span><%= @graphic.user.username %></span></p>
+        <ul class="list-inline">
+          <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+          <li class="cius"><%= link_to @graphic.category.name, root_path, class: "jutr"  %></li>
+          <% @graphic.subcategories.each do |subcategory| %>
+            <li class="cius">
+              <%= link_to subcategory.name, root_path, class: "jutr" %>
+            </li> 
+          <% end %> 
+          <li class="cius"><%= link_to @graphic.name, root_path, class: "jutr" %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="main_d">
+    <div class="container th-cus">
+      <div class="col-md-4 rgh_detail">
+        <div class="pricing">
+          <div class="suppo">
+            <input type="checkbox" id="supt">
+            <label for="supt"><span class="kg"></span>Support to 12 months + <span class="plusprice"> $10</span></label>
+            <ul>
+              <li>Checked by Professional</li>
+              <li>Always Updated</li>
+            </ul>
+          </div>
+          <div class="add_to_cart">
+            <a onclick="baggCart(<%= @graphic.id %>)" class="cart" style="cursor: pointer;">ADD TO CART</a>
+          </div>
+        </div>
+        <div class="likeandsale">
+          <div class="profile_auth">
+            <div class="bcgf">
+              <% if @graphic.user.avatar.nil? %>
+                <%= link_to (image_tag 'default/default_profile.png', width: '50'), root_path %>
+              <% else %>
+                <%= image_tag @graphic.user.avatar_url(:thumb) %>
+              <% end %>
+            </div>
+            <span class="ngd"><a href="#"><%= link_to @graphic.user.username, store_path(@graphic.user) %></a></span>
+            <% if signed_in? && @graphic.user == current_user %>
+              <p><%= link_to "PROFILE", personal_path(current_user), class: 'foll_btn' %></p>
+            <% else %>
+              <p><%= link_to "SHOP", store_path(@graphic.user), class: "foll_btn" %></p>
+            <% end %>
+
+            <div class="clear"></div>
+          </div>
+          <div class="likeinfo">
+            <p class="lkq">Likes <span class="numv"><%= @graphic.get_upvotes.size %></span></p>
+          </div>
+          <div class="saleinfo">
+            <p class="sle">Sales <span class="numv"><%= @graphic.sell %></span></p>
+          </div>
+        </div>
+        <div class="more_from">
+          <div class="ti_more">
+            <h4 class="nbc">More from <span><%= @graphic.user.username %></span></h4>
+          </div>
+          <ul class="more_con">
+            <% @random_graphics.each do |other_theme| %>
+              <li>
+                <%= link_to (image_tag other_theme.thumbnail_url(:thumbnail), width: '93'), item_graphic_path(other_theme), "data-turbolinks": false  %>
+              </li> 
+            <% end %>
+          </ul>
+          <div class="clear"></div>
+        </div>
+        <div class="descript_detail">
+          <ul class="ctag">
+            <li class="vgx bgt"><span class="niuy date">Created</span><span class="fgd"><%= @graphic.created_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+            <li class="vgx bgt"><span class="niuy updated">Updated</span><span class="fgd"><%= @graphic.updated_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+            <li class="vgx bgt"><span class="niuy column">Industries</span><span class="fgd"><%= @graphic.industries.map {|industries| industries.name}.join(', ') %></span><div class="clear"></div></li>
+            <li class="vgx bgt"><span class="niuy software">Min Version</span><span class="fgd"><%= @graphic.softopen.name %></span><div class="clear"></div></li>
+            <% unless @graphic.includes.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">File Include</span><span class="fgd"><%= @graphic.includes.map {|inc| inc.name}.join(', ') %></span><div class="clear"></div></li>
+            <% end %>
+            <li class="vgx"><span class="niuy tags">Tags</span><span class="fgd"><%= @graphic.tags.map {|tag| tag.name}.join(', ') %></span><div class="clear"></div></li>
+            <span class="fgd"></span></ul>
+        </div>
+      </div>
+      <div class="col-md-8 lft_detail">
+        <div class="large_thumb">
+          <div class="col-md-4 jhdy">
+            <ul class="coiut">
+              <% @graphic.screenshots.each_with_index do |f, index| %>
+                <li data-target="#carousel" data-slide-to="<%= index %>" class="<%= 'active if index == 0' %>">
+                  <%= image_tag f.screenshot_url(:thumb) %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="col-md-8 tgdf">
+            <div class="anjirr">
+              <div id="carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                  <% @graphic.screenshots.each_with_index do |screen, index| %>
+                    <div class="item <%= 'active' if index == 0  %>">
+                      <%= image_tag screen.screenshot_url(:screen), class: "ho_ve_r" %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+              <div class="aiuyd">
+                <ul>
+                  <li class="ck" data-toggle="tooltip" data-placement="bottom" title="<%= @graphic.get_upvotes.size %> Likes">
+                    <% if signed_in? %>
+                      <% if current_user.liked? @graphic %>
+                        <%= link_to dislike_graphic_path(@graphic.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{@graphic.id}" do %>
+                          <i class="fa fa-heart ic_vote"></i>
+                        <% end %>
+                      <% else %>
+                        <%= link_to like_graphic_path(@graphic.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{@graphic.id}" do %>
+                          <i class="fa fa-heart ic_vote"></i>
+                        <% end %>
+                      <% end %>
+                    <% else %>
+                      <%= link_to sign_in_path do %>
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                      <% end %>
+                    <% end %>
+                  </li>
+                  <li class="ch" data-toggle="tooltip" data-placement="bottom" title="Add to Wishlist">
+                    <% if signed_in? %>
+                      <% if current_user.akusuka.blank? %>
+                        <%= link_to new_akusuka_path, class: "mutq", remote: true do %>
+                          <i class="fa fa-folder" aria-hidden="true"></i>
+                        <% end %>
+                      <% else %>
+                        <% if current_user.akusuka.graphics.include?(@graphic) %>
+                          <%= link_to graphic_unsuka_graphic_path(@graphic), class: "mutq green", id: "unwish_#{@graphic.id}", remote: true do %>
+                            <i class="fa fa-folder" aria-hidden="true"></i>
+                          <% end %>
+                        <% else %>
+                          <%= link_to graphic_suka_graphic_path(@graphic), class: "mutq", id: "wish_#{@graphic.id}", remote: true do %>
+                            <i class="fa fa-folder" aria-hidden="true"></i>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    <% else %>
+                      <a href="/sign_in" class="mutq">
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                      </a>
+                    <% end %>
+                  </li>
+                  <% unless @graphic.video_demo.blank? %>
+                    <li class="cp" data-toggle="tooltip" data-placement="bottom" title="Video Demo"><%= link_to @graphic.video_demo, target: "blank" do  %> <i class="fa fa-video-camera" aria-hidden="true"></i> <% end %></li>
+                  <% end %>
+                  <li class="cp" data-toggle="tooltip" data-placement="bottom" title="Screenshot"><%= link_to screenshot_graphic_path(@graphic), target: "blank" do  %> <i class="fa fa-picture-o" aria-hidden="true"></i> <% end %></li>
+                  <li class="cj" data-toggle="tooltip" data-placement="bottom" title="View Demo"><%= link_to @graphic.url_demo, target: "blank" do  %> <i class="fa fa-desktop" aria-hidden="true"></i> <% end %></li>
+
+                </ul>
+              </div>
+            </div>
+            <div class="desc_detail">
+              <ul class="list-inline xd">
+                <li role="presentation" class="active"><a href="#detail_item" role="tab" data-toggle="tab">Item Details</a></li>
+                <li role="presentation"><a href="#comment" role="tab" data-toggle="tab">Comments</a></li>
+                <li role="presentation"><a href="#reviews" role="tab" data-toggle="tab">Reviews</a></li>
+              </ul>
+              <div class="desc_co tab-content">
+                <div role="tabpanel" class="skinny tab-pane active" id="detail_item">
+                  <%= simple_format(@graphic.description) %>
+                </div>
+                <div role="tabpanel" class="vangke tab-pane fade" id="comment">
+                  <div class="com_end">
+                    <div class="count_co">
+                      <span class="num" id="com-counts"><%= pluralize(@graphic.comments.count, "Comment") %></span><span class="coh"></span>
+                    </div>
+                    <% if signed_in? %>
+                    <div class="com_form">
+                      <div class="img_pro_il">
+                        <% if current_user.avatar.blank? %>
+                          <%= image_tag("default/default_profile.png") %>
+                        <% else %>
+                          <%= image_tag(current_user.avatar_url(:thumb)) %>
+                        <% end %>
+                      </div>
+                      <%= render "comments/form" %>
+                      <!-- <div class="cht_j">
+                        <input type="checkbox" id="chk_enter">
+                        <label for="chk_enter"><span></span>Use enter for post</label>
+                        </div> -->
+                        <div class="clear"></div>
+                    </div>
+                  <% end %>
+                    <div class="bft" id="com-en">
+                      <%= render @comments %>
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="vangke tab-pane fade" id="reviews">
+                  <div class="com_end">
+                    <div class="count_co">
+                      <span class="num" id="rev-counts">Average Rating: <%= @avg_rev %></span><span class="coh"></span>
+                    </div>
+                    <div class="bft" id="rev-en">
+                      <%= render @reviews %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <!-- <div class="rec_om_"> -->
+  <!--   <div class="container th&#45;cus"> -->
+  <!--     <div class="title"> -->
+  <!--       <h2>Recommended Items</h2> -->
+  <!--       <div class="des"> -->
+  <!--         <p>Unfortunatelly has a lot of bugs and the performance is getting <br>completely bad after several hours of work.</p> -->
+  <!--       </div> -->
+  <!--     </div> -->
+  <!--   </div> -->
+  <!--   <div class="container th&#45;cus&#45;con"> -->
+  <!--     <div class="_r_com_e"> -->
+  <!--       <ul class="_ftw"> -->
+  <!--         <li class="_b_g"> -->
+  <!--           <div class="_iut_g"> -->
+  <!--             <%#= image_tag("recom/3.png") %> -->
+  <!--             <a href="#" class="_hov_er"> -->
+  <!--               <span class="u_name"><span class="this_oiu">Butcher celiac narwhal</span></span> -->
+  <!--             </a> -->
+  <!--             <div class="_act_ion"> -->
+  <!--               <ul> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;shopping&#45;bag" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;folder" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;heart" aria&#45;hidden="true"></i></a></li> -->
+  <!--               </ul> -->
+  <!--             </div> -->
+  <!--             <div class="_tdfs"> -->
+  <!--               <%#= image_tag("recom/1b.png") %> -->
+  <!--             </div> -->
+  <!--             <div class="_oiy"> -->
+  <!--               <span class="icon&#45;cart_3 icon_cart_3"></span><span class="dta_sell">80</span> -->
+  <!--             </div> -->
+  <!--             <div class="_trew"> -->
+  <!--               <span class="icon&#45;price icon_price_1"></span><span class="dta_price">$75</span> -->
+  <!--             </div> -->
+  <!--           </div> -->
+  <!--         </li> -->
+  <!--         <li class="_b_g"> -->
+  <!--           <div class="_iut_g"> -->
+  <!--             <%#= image_tag("recom/2.png") %> -->
+  <!--             <a href="#" class="_hov_er"> -->
+  <!--               <span class="u_name"><span class="this_oiu">Butcher celiac narwhal</span></span> -->
+  <!--             </a> -->
+  <!--             <div class="_act_ion"> -->
+  <!--               <ul> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;shopping&#45;bag" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;folder" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;heart" aria&#45;hidden="true"></i></a></li> -->
+  <!--               </ul> -->
+  <!--             </div> -->
+  <!--             <div class="_tdfs"> -->
+  <!--               <%#= image_tag("recom/1b.png") %> -->
+  <!--             </div> -->
+  <!--             <div class="_oiy"> -->
+  <!--               <span class="icon&#45;cart_3 icon_cart_3"></span><span class="dta_sell">80</span> -->
+  <!--             </div> -->
+  <!--             <div class="_trew"> -->
+  <!--               <span class="icon&#45;price icon_price_1"></span><span class="dta_price">$75</span> -->
+  <!--             </div> -->
+  <!--           </div> -->
+  <!--         </li> -->
+  <!--         <li class="_b_g"> -->
+  <!--           <div class="_iut_g"> -->
+  <!--             <%#= image_tag("recom/4.png") %> -->
+  <!--             <a href="#" class="_hov_er"> -->
+  <!--               <span class="u_name"><span class="this_oiu">Butcher celiac narwhal</span></span> -->
+  <!--             </a> -->
+  <!--             <div class="_act_ion"> -->
+  <!--               <ul> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;shopping&#45;bag" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;folder" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;heart" aria&#45;hidden="true"></i></a></li> -->
+  <!--               </ul> -->
+  <!--             </div> -->
+  <!--             <div class="_tdfs"> -->
+  <!--               <%#= image_tag("recom/1b.png") %> -->
+  <!--             </div> -->
+  <!--             <div class="_oiy"> -->
+  <!--               <span class="icon&#45;cart_3 icon_cart_3"></span><span class="dta_sell">80</span> -->
+  <!--             </div> -->
+  <!--             <div class="_trew"> -->
+  <!--               <span class="icon&#45;price icon_price_1"></span><span class="dta_price">$75</span> -->
+  <!--             </div> -->
+  <!--           </div> -->
+  <!--         </li> -->
+  <!--         <li class="_b_g"> -->
+  <!--           <div class="_iut_g"> -->
+  <!--             <%#= image_tag("recom/1.png") %> -->
+  <!--             <a href="#" class="_hov_er"> -->
+  <!--               <span class="u_name"><span class="this_oiu">Butcher celiac narwhal</span></span> -->
+  <!--             </a> -->
+  <!--             <div class="_act_ion"> -->
+  <!--               <ul> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;shopping&#45;bag" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;folder" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;heart" aria&#45;hidden="true"></i></a></li> -->
+  <!--               </ul> -->
+  <!--             </div> -->
+  <!--             <div class="_tdfs"> -->
+  <!--               <%#= image_tag("recom/1b.png") %> -->
+  <!--             </div> -->
+  <!--             <div class="_oiy"> -->
+  <!--               <span class="icon&#45;cart_3 icon_cart_3"></span><span class="dta_sell">80</span> -->
+  <!--             </div> -->
+  <!--             <div class="_trew"> -->
+  <!--               <span class="icon&#45;price icon_price_1"></span><span class="dta_price">$75</span> -->
+  <!--             </div> -->
+  <!--           </div> -->
+  <!--         </li> -->
+  <!--         <li class="clear"></li> -->
+  <!--       </ul> -->
+  <!--     </div> -->
+  <!--     <div class="more_btn"> -->
+  <!--       <a href="#" class="more_pl"></a> -->
+  <!--     </div> -->
+  <!--   </div> -->
+  <!-- </div> -->
+  <div class="modal fade" id="theme_akusuka" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
+
+

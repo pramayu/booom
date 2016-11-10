@@ -1,0 +1,366 @@
+<%= title @video.name.capitalize %>
+<% meta_tag :description, @video.description.to_s %>
+<% meta_tag :keywords, @video.tags.map {|tag| tag.name}.join(', ') %>
+<style type="text/css">
+.videojs {
+  width: 574px !important;
+  height: 393px !important;
+}
+</style>
+<div class="_head_til">
+  <div class="_head_til">
+    <div class="container th-cus">
+      <div class="akw">
+        <h2><%= @video.name %></h2>
+        <p>by <span><%= @video.user.username %></span></p>
+        <ul class="list-inline">
+          <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+          <li class="cius"><%= link_to @video.category.name, root_path, class: "jutr"  %></li>
+          <% @video.subcategories.each do |subcategory| %>
+            <li class="cius">
+              <%= link_to subcategory.name.capitalize, root_path, class: "jutr" %>
+            </li> 
+          <% end %>
+          <% unless @video.vidsub.blank? %>
+            <li class="cius"><%=link_to @video.vidsub.name.capitalize, root_path, class: "jutr" %></li>
+          <% end %>
+          <li class="cius"><%= link_to @video.name, root_path, class: "jutr" %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="main_d">
+    <div class="container th-cus">
+      <div class="col-md-4 rgh_detail">
+        <div class="pricing">
+          <div class="suppo">
+            <input type="checkbox" id="supt">
+            <label for="supt"><span class="kg"></span>Support to 12 months + <span class="plusprice"> $10</span></label>
+            <ul>
+              <li>Checked by Professional</li>
+              <li>Always Updated</li>
+            </ul>
+          </div>
+          <div class="add_to_cart">
+            <a onclick="bagvdCart(<%= @video.id %>)" class="cart" style="cursor: pointer;">ADD TO CART</a>
+          </div>
+        </div>
+        <div class="likeandsale">
+          <div class="profile_auth">
+            <div class="bcgf">
+              <% if @video.user.avatar.nil? %>
+                <%= link_to (image_tag 'default/default_profile.png', width: '50'), root_path %>
+              <% else %>
+                <%= image_tag @video.user.avatar_url(:thumb) %>
+              <% end %>
+            </div>
+            <span class="ngd"><a href="#"><%= link_to @video.user.username, store_path(@video.user) %></a></span>
+            <% if signed_in? && @video.user == current_user %>
+              <p><%= link_to "PROFILE", personal_path(current_user), class: 'foll_btn' %></p>
+            <% else %>
+              <p><%= link_to "SHOP", store_path(@video.user), class: "foll_btn" %></p>
+            <% end %>
+
+            <div class="clear"></div>
+          </div>
+          <div class="likeinfo">
+            <p class="lkq">Likes <span class="numv"><%= @video.get_upvotes.size %></span></p>
+          </div>
+          <div class="saleinfo">
+            <p class="sle">Sales <span class="numv"><%= @video.line_items.where(videofx_id: @video).count %></span></p>
+          </div>
+        </div>
+        <div class="more_from">
+          <div class="ti_more">
+            <h4 class="nbc">More from <span><%= @video.user.username %></span></h4>
+          </div>
+          <ul class="more_con">
+            <% @random_videos.each do |other_theme| %>
+              <li>
+                <%= link_to (image_tag other_theme.thumbnail_url(:thumbnail), width: '93'), item_videofx_path(other_theme), "data-turbolinks": false  %>
+              </li> 
+            <% end %>
+          </ul>
+          <div class="clear"></div>
+        </div>
+        <div class="descript_detail">
+          <ul class="ctag">
+            <li class="vgx bgt"><span class="niuy date">Created</span><span class="fgd"><%= @video.created_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+            <li class="vgx bgt"><span class="niuy updated">Updated</span><span class="fgd"><%= @video.updated_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+            <% unless @video.includes.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">File Include</span><span class="fgd"><%= @video.includes.map {|inc| inc.name}.join(', ') %></span><div class="clear"></div></li>
+            <% end %>
+            <% unless @video.alpha_channel.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">Alpha Channel</span><span class="fgd"><%= @video.alpha_channel.capitalize %></span><div class="clear"></div></li>
+            <% end %>
+            <% unless @video.looped_video.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">Looped Video</span><span class="fgd"><%= @video.looped_video.capitalize %></span><div class="clear"></div></li>
+            <% end %>
+            <% unless @video.require_plugin.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">Require Plugin</span><span class="fgd"><%= @video.require_plugin %></span><div class="clear"></div></li>
+            <% end %>
+            <% unless @video.duration.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">Duration</span><span class="fgd"><%= @video.duration %></span><div class="clear"></div></li>
+            <% end %>
+            <% unless @video.file_size.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">File Size</span><span class="fgd"><%= @video.file_size %></span><div class="clear"></div></li>
+            <% end %>
+            <% unless @video.framerates.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">Frame Rates</span><span class="fgd"><%= @video.framerates.map {|frame| frame.name}.join(', ') %></span><div class="clear"></div></li>
+            <% end %>
+            <% unless @video.aeplugins.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">Plugins</span><span class="fgd"><%= @video.aeplugins.map {|ae| ae.name}.join(', ') %></span><div class="clear"></div></li>
+            <% end %>
+            <% unless @video.resolution.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">Resolution</span><span class="fgd"><%= @video.resolution %></span><div class="clear"></div></li>
+            <% end %>
+            <% unless @video.softopen.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">Open with</span><span class="fgd"><%= @video.softopen.name.capitalize %></span><div class="clear"></div></li>
+            <% end %>
+            <% unless @video.encode.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">Encoding</span><span class="fgd"><%= @video.encode.name.capitalize %></span><div class="clear"></div></li>
+            <% end %>
+            <% unless @video.latar.blank? %>
+              <li class="vgx bgt"><span class="niuy file_included">Setting</span><span class="fgd"><%= @video.latar.name.capitalize %></span><div class="clear"></div></li>
+            <% end %>
+            <li class="vgx"><span class="niuy tags">Tags</span><span class="fgd"><%= @video.tags.map {|tag| tag.name}.join(', ') %></span><div class="clear"></div></li>
+            <span class="fgd"></span></ul>
+        </div>
+      </div>
+      <div class="col-md-8 lft_detail">
+        <div class="large_thumb nengg">
+          <div class="col-md-8 tgdf jwqu">
+            <div class="anjirr">
+              <div class="jewqp">
+                <% @video.videms.each do |videm| %>
+                  <%= videojs_rails sources: { mp4: "#{videm.trailer}" }, setup: "{}", controls: true, loop: true, poster: "#{ @video.thumbnail_url(:poster) }", width:"574", height:"393" %>
+                <% end %>
+              </div>
+              <div class="aiuyd">
+                <ul>
+                  <li class="ck" data-toggle="tooltip" data-placement="bottom" title="<%= @video.get_upvotes.size %> Likes">
+                    <% if signed_in? %>
+                      <% if current_user.liked? @video %>
+                        <%= link_to dislike_videofx_path(@video.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{@video.id}" do %>
+                          <i class="fa fa-heart ic_vote"></i>
+                        <% end %>
+                      <% else %>
+                        <%= link_to like_videofx_path(@video.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{@video.id}" do %>
+                          <i class="fa fa-heart ic_vote"></i>
+                        <% end %>
+                      <% end %>
+                    <% else %>
+                      <%= link_to sign_in_path do %>
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                      <% end %>
+                    <% end %>
+                  </li>
+                  <li class="ch" data-toggle="tooltip" data-placement="bottom" title="Add to Wishlist">
+                    <% if signed_in? %>
+                      <% if current_user.akusuka.blank? %>
+                        <%= link_to new_akusuka_path, class: "mutq", remote: true do %>
+                          <i class="fa fa-folder" aria-hidden="true"></i>
+                        <% end %>
+                      <% else %>
+                        <% if current_user.akusuka.videofxes.include?(@video) %>
+                          <%= link_to video_unsuka_videofx_path(@video), class: "mutq green", id: "unwish_#{@video.id}", remote: true do %>
+                            <i class="fa fa-folder" aria-hidden="true"></i>
+                          <% end %>
+                        <% else %>
+                          <%= link_to video_suka_videofx_path(@video), class: "mutq", id: "wish_#{@video.id}", remote: true do %>
+                            <i class="fa fa-folder" aria-hidden="true"></i>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    <% else %>
+                      <a href="/sign_in" class="mutq">
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                      </a>
+                    <% end %>
+                  </li>
+                  <% unless @video.video_demo.blank? %>
+                    <li class="cp" data-toggle="tooltip" data-placement="bottom" title="Video Demo"><%= link_to @video.video_demo, target: "blank" do  %> <i class="fa fa-video-camera" aria-hidden="true"></i> <% end %></li>
+                  <% end %>
+                  <% unless @video.screenshots.blank? %>
+                    <li class="cp" data-toggle="tooltip" data-placement="bottom" title="Screenshot"><%= link_to screenshot_videofx_path(@video), target: "blank" do  %> <i class="fa fa-picture-o" aria-hidden="true"></i> <% end %></li>
+                  <% end %>
+                  <li class="cj" data-toggle="tooltip" data-placement="bottom" title="View Demo"><%= link_to @video.url_demo, target: "blank" do  %> <i class="fa fa-desktop" aria-hidden="true"></i> <% end %></li>
+
+                </ul>
+              </div>
+            </div>
+            <div class="desc_detail">
+              <ul class="list-inline xd">
+                <li role="presentation" class="active"><a href="#detail_item" role="tab" data-toggle="tab">Item Details</a></li>
+                <li role="presentation"><a href="#comment" role="tab" data-toggle="tab">Comments</a></li>
+                <li role="presentation"><a href="#reviews" role="tab" data-toggle="tab">Reviews</a></li>
+              </ul>
+              <div class="desc_co tab-content">
+                <div role="tabpanel" class="skinny tab-pane active" id="detail_item">
+                  <%= simple_format(@video.description) %>
+                </div>
+                <div role="tabpanel" class="vangke tab-pane fade" id="comment">
+                  <div class="com_end">
+                    <div class="count_co">
+                      <span class="num" id="com-counts"><%= pluralize(@video.comments.count, "Comment") %></span><span class="coh"></span>
+                    </div>
+                    <% if signed_in? %>
+                      <div class="com_form">
+                        <div class="img_pro_il">
+                          <% if current_user.avatar.blank? %>
+                            <%= image_tag("default/default_profile.png") %>
+                          <% else %>
+                            <%= image_tag(current_user.avatar_url(:thumb)) %>
+                          <% end %>
+                        </div>
+                        <%= render "comments/form" %>
+                        <!-- <div class="cht_j">
+                          <input type="checkbox" id="chk_enter">
+                          <label for="chk_enter"><span></span>Use enter for post</label>
+                          </div> -->
+                          <div class="clear"></div>
+                      </div>
+                    <% end %>
+                    <div class="bft" id="com-en">
+                      <%= render @comments %>
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="vangke tab-pane fade" id="reviews">
+                  <div class="com_end">
+                    <div class="count_co">
+                      <span class="num" id="rev-counts">Average Rating: <%= @avg_rev %></span><span class="coh"></span>
+                    </div>
+                    <div class="bft" id="rev-en">
+                      <%= render @reviews %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <!-- <div class="rec_om_"> -->
+  <!--   <div class="container th&#45;cus"> -->
+  <!--     <div class="title"> -->
+  <!--       <h2>Recommended Items</h2> -->
+  <!--       <div class="des"> -->
+  <!--         <p>Unfortunatelly has a lot of bugs and the performance is getting <br>completely bad after several hours of work.</p> -->
+  <!--       </div> -->
+  <!--     </div> -->
+  <!--   </div> -->
+  <!--   <div class="container th&#45;cus&#45;con"> -->
+  <!--     <div class="_r_com_e"> -->
+  <!--       <ul class="_ftw"> -->
+  <!--         <li class="_b_g"> -->
+  <!--           <div class="_iut_g"> -->
+  <!--             <%#= image_tag("recom/3.png") %> -->
+  <!--             <a href="#" class="_hov_er"> -->
+  <!--               <span class="u_name"><span class="this_oiu">Butcher celiac narwhal</span></span> -->
+  <!--             </a> -->
+  <!--             <div class="_act_ion"> -->
+  <!--               <ul> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;shopping&#45;bag" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;folder" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;heart" aria&#45;hidden="true"></i></a></li> -->
+  <!--               </ul> -->
+  <!--             </div> -->
+  <!--             <div class="_tdfs"> -->
+  <!--               <%#= image_tag("recom/1b.png") %> -->
+  <!--             </div> -->
+  <!--             <div class="_oiy"> -->
+  <!--               <span class="icon&#45;cart_3 icon_cart_3"></span><span class="dta_sell">80</span> -->
+  <!--             </div> -->
+  <!--             <div class="_trew"> -->
+  <!--               <span class="icon&#45;price icon_price_1"></span><span class="dta_price">$75</span> -->
+  <!--             </div> -->
+  <!--           </div> -->
+  <!--         </li> -->
+  <!--         <li class="_b_g"> -->
+  <!--           <div class="_iut_g"> -->
+  <!--             <%#= image_tag("recom/2.png") %> -->
+  <!--             <a href="#" class="_hov_er"> -->
+  <!--               <span class="u_name"><span class="this_oiu">Butcher celiac narwhal</span></span> -->
+  <!--             </a> -->
+  <!--             <div class="_act_ion"> -->
+  <!--               <ul> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;shopping&#45;bag" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;folder" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;heart" aria&#45;hidden="true"></i></a></li> -->
+  <!--               </ul> -->
+  <!--             </div> -->
+  <!--             <div class="_tdfs"> -->
+  <!--               <%#= image_tag("recom/1b.png") %> -->
+  <!--             </div> -->
+  <!--             <div class="_oiy"> -->
+  <!--               <span class="icon&#45;cart_3 icon_cart_3"></span><span class="dta_sell">80</span> -->
+  <!--             </div> -->
+  <!--             <div class="_trew"> -->
+  <!--               <span class="icon&#45;price icon_price_1"></span><span class="dta_price">$75</span> -->
+  <!--             </div> -->
+  <!--           </div> -->
+  <!--         </li> -->
+  <!--         <li class="_b_g"> -->
+  <!--           <div class="_iut_g"> -->
+  <!--             <%#= image_tag("recom/4.png") %> -->
+  <!--             <a href="#" class="_hov_er"> -->
+  <!--               <span class="u_name"><span class="this_oiu">Butcher celiac narwhal</span></span> -->
+  <!--             </a> -->
+  <!--             <div class="_act_ion"> -->
+  <!--               <ul> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;shopping&#45;bag" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;folder" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;heart" aria&#45;hidden="true"></i></a></li> -->
+  <!--               </ul> -->
+  <!--             </div> -->
+  <!--             <div class="_tdfs"> -->
+  <!--               <%#= image_tag("recom/1b.png") %> -->
+  <!--             </div> -->
+  <!--             <div class="_oiy"> -->
+  <!--               <span class="icon&#45;cart_3 icon_cart_3"></span><span class="dta_sell">80</span> -->
+  <!--             </div> -->
+  <!--             <div class="_trew"> -->
+  <!--               <span class="icon&#45;price icon_price_1"></span><span class="dta_price">$75</span> -->
+  <!--             </div> -->
+  <!--           </div> -->
+  <!--         </li> -->
+  <!--         <li class="_b_g"> -->
+  <!--           <div class="_iut_g"> -->
+  <!--             <%#= image_tag("recom/1.png") %> -->
+  <!--             <a href="#" class="_hov_er"> -->
+  <!--               <span class="u_name"><span class="this_oiu">Butcher celiac narwhal</span></span> -->
+  <!--             </a> -->
+  <!--             <div class="_act_ion"> -->
+  <!--               <ul> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;shopping&#45;bag" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;folder" aria&#45;hidden="true"></i></a></li> -->
+  <!--                 <li><a href="#"><i class="fa fa&#45;heart" aria&#45;hidden="true"></i></a></li> -->
+  <!--               </ul> -->
+  <!--             </div> -->
+  <!--             <div class="_tdfs"> -->
+  <!--               <%#= image_tag("recom/1b.png") %> -->
+  <!--             </div> -->
+  <!--             <div class="_oiy"> -->
+  <!--               <span class="icon&#45;cart_3 icon_cart_3"></span><span class="dta_sell">80</span> -->
+  <!--             </div> -->
+  <!--             <div class="_trew"> -->
+  <!--               <span class="icon&#45;price icon_price_1"></span><span class="dta_price">$75</span> -->
+  <!--             </div> -->
+  <!--           </div> -->
+  <!--         </li> -->
+  <!--         <li class="clear"></li> -->
+  <!--       </ul> -->
+  <!--     </div> -->
+  <!--     <div class="more_btn"> -->
+  <!--       <a href="#" class="more_pl"></a> -->
+  <!--     </div> -->
+  <!--   </div> -->
+  <!-- </div> -->
+  <div class="modal fade" id="theme_akusuka" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
+
+

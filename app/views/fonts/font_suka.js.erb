@@ -1,0 +1,4 @@
+$('#wish_<%= @font.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= font_unsuka_font_path(@font.slug) %>')
+						   .attr('id', 'unwish_<%= @font.id %>')
+						   .addClass('green');

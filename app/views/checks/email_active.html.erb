@@ -1,0 +1,54 @@
+<style>
+	.active_mail {
+		text-align: left;
+	}
+	.active_mail .activ_em {
+		font-family: "bebas_neuebold";
+		font-size: 30px;
+		color: #848484;
+		letter-spacing: 2px;
+		font-weight: 700;
+		text-decoration: none;
+		line-height: 40px;
+		outline: none;
+		text-align: center;
+	}
+	.active_mail .laun {
+		text-align: center;
+		padding-bottom: 20px;
+	}
+	.active_mail .laun .fa {
+		font-size: 4em;
+		color: #848484;
+		font-weight: normal;
+		text-align: center;
+	}
+</style>
+<%= title "Account Activation ~ KAPHOO" %>
+<div class="container login signup cloud">
+	<div class="cloud_1">
+		<%= render "accounts/cloud1" %>
+	</div>
+	<div class="cloud_2">
+		<%= render "accounts/cloud2" %>
+	</div>
+	<div class="cloud_3">
+		<%= render "accounts/cloud3" %>
+	</div>
+	<div class="cloud_4">
+		<%= render "accounts/cloud4" %>
+	</div>
+	<div class="log-in-content">
+		<div class="col-md-6 left">
+			<h2 class="logo"><a href="#">kaphoo</a></h2>
+			<div class="cerik"></div>
+		</div>
+
+		<div class="col-md-6 right active_mail">
+			<div class="laun">
+				<i class="fa fa-rocket" aria-hidden="true"></i>
+			</div>
+			<h2 class="activ_em">Please check your email address to activate your Account</h2>
+		</div>		
+	</div>
+</div>

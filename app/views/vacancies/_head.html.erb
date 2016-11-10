@@ -1,0 +1,35 @@
+<div class="job_head">
+  <div class="container th-cus vhgf">
+    <div class="capr">
+      <h1><span><%= @vacancies.count %></span> Jobs for Programmer, Designer &amp; Animators</h1>
+      <div class="capr-co">
+        <h4>join us and get the job as you wish</h4>
+      </div>
+    </div>
+    <%= form_tag vacancies_search_path, method: :get do |f| %>
+      <div class="capr_inpt">
+        <div class="inpt_group">
+          <div class="col-md-4 moo nb">
+            <label for="sel1"><span>LOCATION</span>
+              <%= select_tag :location, options_for_select(State.all.map{|s|[s.name, s.id]}), {prompt: "Choose Location", class: "form-control job_sch", id: "sel1"} %>
+            </label>
+          </div>
+          <div class="col-md-4 moo mk">
+            <label for="sel2"><span>INDUSTRY</span>
+              <%= select_tag :category, options_for_select(Category.where(to_item: 'vacancies').map {|c| [c.name, c.id]}), {prompt: "Choose Industry", class: "form-control job_sch", id: "sel2"} %> 
+            </label>
+          </div>
+          <div class="col-md-4 moo me">
+            <label for="sel3"><span>TYPE</span>
+              <%= select_tag :type, options_for_select([["Full Time","Full Time"], ["Contract","Contract"], ["Part Time","Part Time"], ["Freelance","Freelance"], ["Moonlighting","Moonlighting"], ["Internship","Internship"]]), {prompt: "Choose job type",class: "form-control job_sch", id: "sel3"} %>
+            </label>
+          </div>
+          <div class="col-md-4 moo mb">
+            <%= submit_tag "SEARCH", class: "btg_h" %>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

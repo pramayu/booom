@@ -1,0 +1,497 @@
+<%= title "Favorite ~ KAPHOO" %>
+<div class="col-md-10 dsk">
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="follower">
+      <div class="tab-title pull-left">
+        <h4 class="ap">
+          favorites Products
+        </h4>
+      </div>
+      <div class="clear"></div>
+      <div class="themesf itm-fol">
+        <% @themes.each do |item| %>
+          <% unless item.user == current_user %>
+            <div class="col-md-3 sol">
+              <div class="soll">
+                <div class="img_k">
+                  <%= image_tag item.thumbnail_url(:thumbnail), class: "isabela" %>
+                  <div class="hof gdfs hgsd54657">
+                    <div class="des">
+                      <%= link_to "niputuintanpermatasari", item_path(item), class: "trewk" %>
+                      <ul class="mbfd">
+                        <li>
+                          <% if current_user.liked? item %>
+                            <%= link_to dislike_theme_path(item.slug), remote: true, method: :put, class: "hgfp red", id: "dislike_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_theme_path(item.slug), remote: true, method: :put, class: "hgfp", id: "like_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <li><a href="#" class="hgfp"><span class="fa fa-folder"></span></a></li>
+                        <li class="bvt"><a href="#" class="hgfp"><span class="fa fa-shopping-bag"></span></a></li>
+                      </ul>
+                    </div>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% item.screenshots[0..0].each do |image| %>
+                            <%= image_tag image.screenshot_url(:hover) %>
+                          <% end %>  
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(item.name, length: 50) %></h4>
+                          <span class="by"><%= item.user.company %> | </span> 
+                          <span class="by">themes / <%= item.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= item.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="info">
+                  <ul class="list-inline lf pull-left">
+                    <li>
+                      <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= item.sell %></span>
+                    </li>
+                    <li>
+                      <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= item.price.to_i %></span>
+                    </li>
+                  </ul>
+                  <div class="klwq pull-right" style="padding-top: 5px;">
+                    <span class="this-rating" data-score="<%= _raty(item) if item.reviews.present? %>"></span>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% @codes.each do |item| %>
+          <% unless item.user == current_user %>
+            <div class="col-md-3 sol">
+              <div class="soll">
+                <div class="img_k">
+                  <%= image_tag item.thumbnail_url(:thumbnail), class: "isabela" %>
+                  <div class="hof gdfs hgsd54657">
+                    <div class="des">
+                      <%= link_to "niputuintanpermatasari", item_code_path(item), class: "trewk" %>
+                      <ul class="mbfd">
+                        <li>
+                          <% if current_user.liked? item %>
+                            <%= link_to dislike_code_path(item.slug), remote: true, method: :put, class: "hgfp red", id: "dislike_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_code_path(item.slug), remote: true, method: :put, class: "hgfp", id: "like_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <li><a href="#" class="hgfp"><span class="fa fa-folder"></span></a></li>
+                        <li class="bvt"><a href="#" class="hgfp"><span class="fa fa-shopping-bag"></span></a></li>
+                      </ul>
+                    </div>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% item.screenshots[0..0].each do |image| %>
+                            <%= image_tag image.screenshot_url(:hover) %>
+                          <% end %>  
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(item.name, length: 50) %></h4>
+                          <span class="by"><%= item.user.company %> | </span> 
+                          <span class="by">codes / <%= item.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= item.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="info">
+                  <ul class="list-inline lf pull-left">
+                    <li>
+                      <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= item.sell %></span>
+                    </li>
+                    <li>
+                      <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= item.price.to_i %></span>
+                    </li>
+                  </ul>
+                  <div class="klwq pull-right" style="padding-top: 5px;">
+                    <span class="this-rating" data-score="<%= _raty_code(item) if item.reviews.present? %>"></span>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% @graphics.each do |item| %>
+          <% unless item.user == current_user %>
+            <div class="col-md-3 sol">
+              <div class="soll">
+                <div class="img_k">
+                  <%= image_tag item.thumbnail_url(:thumbnail), class: "isabela" %>
+                  <div class="hof gdfs hgsd54657">
+                    <div class="des">
+                      <%= link_to "niputuintanpermatasari", item_graphic_path(item), class: "trewk" %>
+                      <ul class="mbfd">
+                        <li>
+                          <% if current_user.liked? item %>
+                            <%= link_to dislike_graphic_path(item.slug), remote: true, method: :put, class: "hgfp red", id: "dislike_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_graphic_path(item.slug), remote: true, method: :put, class: "hgfp", id: "like_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <li><a href="#" class="hgfp"><span class="fa fa-folder"></span></a></li>
+                        <li class="bvt"><a href="#" class="hgfp"><span class="fa fa-shopping-bag"></span></a></li>
+                      </ul>
+                    </div>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% item.screenshots[0..0].each do |image| %>
+                            <%= image_tag image.screenshot_url(:hover) %>
+                          <% end %>  
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(item.name, length: 50) %></h4>
+                          <span class="by"><%= item.user.company %> | </span> 
+                          <span class="by">graphics / <%= item.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= item.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="info">
+                  <ul class="list-inline lf pull-left">
+                    <li>
+                      <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= item.sell %></span>
+                    </li>
+                    <li>
+                      <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= item.price.to_i %></span>
+                    </li>
+                  </ul>
+                  <div class="klwq pull-right" style="padding-top: 5px;">
+                    <span class="this-rating" data-score="<%= _raty_graph(item) if item.reviews.present? %>"></span>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% @t3ds.each do |item| %>
+          <% unless item.user == current_user %>
+            <div class="col-md-3 sol">
+              <div class="soll">
+                <div class="img_k">
+                  <%= image_tag item.thumbnail_url(:thumbnail), class: "isabela" %>
+                  <div class="hof gdfs hgsd54657">
+                    <div class="des">
+                      <%= link_to "niputuintanpermatasari", item_t3d_path(item), class: "trewk" %>
+                      <ul class="mbfd">
+                        <li>
+                          <% if current_user.liked? item %>
+                            <%= link_to dislike_t3d_path(item.slug), remote: true, method: :put, class: "hgfp red", id: "dislike_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_t3d_path(item.slug), remote: true, method: :put, class: "hgfp", id: "like_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <li><a href="#" class="hgfp"><span class="fa fa-folder"></span></a></li>
+                        <li class="bvt"><a href="#" class="hgfp"><span class="fa fa-shopping-bag"></span></a></li>
+                      </ul>
+                    </div>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% item.screenshots[0..0].each do |image| %>
+                            <%= image_tag image.screenshot_url(:hover) %>
+                          <% end %>  
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(item.name, length: 50) %></h4>
+                          <span class="by"><%= item.user.company %> | </span> 
+                          <span class="by">3D Animation / <%= item.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= item.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="info">
+                  <ul class="list-inline lf pull-left">
+                    <li>
+                      <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= item.sell %></span>
+                    </li>
+                    <li>
+                      <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= item.price.to_i %></span>
+                    </li>
+                  </ul>
+                  <div class="klwq pull-right" style="padding-top: 5px;">
+                    <span class="this-rating" data-score="<%= _raty_3d(item) if item.reviews.present? %>"></span>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% @videofxes.each do |item| %>
+          <% unless item.user == current_user %>
+            <div class="col-md-3 sol">
+              <div class="soll">
+                <div class="img_k">
+                  <%= image_tag item.thumbnail_url(:thumbnail), class: "isabela" %>
+                  <div class="hof gdfs hgsd54657">
+                    <div class="des">
+                      <%= link_to "niputuintanpermatasari", item_videofx_path(item), class: "trewk" %>
+                      <ul class="mbfd">
+                        <li>
+                          <% if current_user.liked? item %>
+                            <%= link_to dislike_videofx_path(item.slug), remote: true, method: :put, class: "hgfp red", id: "dislike_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_videofx_path(item.slug), remote: true, method: :put, class: "hgfp", id: "like_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <li><a href="#" class="hgfp"><span class="fa fa-folder"></span></a></li>
+                        <li class="bvt"><a href="#" class="hgfp"><span class="fa fa-shopping-bag"></span></a></li>
+                      </ul>
+                    </div>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% item.videms.each do |videm| %>
+                            <video id="ajjayyy" class="video-js aja_<%= videm.id %>" preload="auto" width="463" height="257" data-setup="{}" style="width: 463px !important; height: 257px !important">
+                              <source src="<%= videm.trailer %>" type='video/mp4'>
+                            </video>
+                          <% end %> 
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(item.name, length: 50) %></h4>
+                          <span class="by"><%= item.user.company %> | </span> 
+                          <span class="by">Videofx / <%= item.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= item.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="info">
+                  <ul class="list-inline lf pull-left">
+                    <li>
+                      <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= item.sell %></span>
+                    </li>
+                    <li>
+                      <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= item.price.to_i %></span>
+                    </li>
+                  </ul>
+                  <div class="klwq pull-right" style="padding-top: 5px;">
+                    <span class="this-rating" data-score="<%= _raty_vid(item) if item.reviews.present? %>"></span>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% @fonts.each do |item| %>
+          <% unless item.user == current_user %>
+            <div class="col-md-3 sol">
+              <div class="soll">
+                <div class="img_k">
+                  <%= image_tag item.thumbnail_url(:thumbnail), class: "isabela" %>
+                  <div class="hof gdfs hgsd54657">
+                    <div class="des">
+                      <%= link_to "niputuintanpermatasari", item_font_path(item), class: "trewk" %>
+                      <ul class="mbfd">
+                        <li>
+                          <% if current_user.liked? item %>
+                            <%= link_to dislike_font_path(item.slug), remote: true, method: :put, class: "hgfp red", id: "dislike_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_font_path(item.slug), remote: true, method: :put, class: "hgfp", id: "like_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <li><a href="#" class="hgfp"><span class="fa fa-folder"></span></a></li>
+                        <li class="bvt"><a href="#" class="hgfp"><span class="fa fa-shopping-bag"></span></a></li>
+                      </ul>
+                    </div>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% item.screenshots[0..0].each do |image| %>
+                            <%= image_tag image.screenshot_url(:hover) %>
+                          <% end %>  
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(item.name, length: 50) %></h4>
+                          <span class="by"><%= item.user.company %> | </span> 
+                          <span class="by">Fonts / <%= item.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= item.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="info">
+                  <ul class="list-inline lf pull-left">
+                    <li>
+                      <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= item.sell %></span>
+                    </li>
+                    <li>
+                      <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= item.price.to_i %></span>
+                    </li>
+                  </ul>
+                  <div class="klwq pull-right" style="padding-top: 5px;">
+                    <span class="this-rating" data-score="<%= _raty_font(item) if item.reviews.present? %>"></span>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% @courses.each do |item| %>
+          <% unless item.user == current_user %>
+            <div class="col-md-3 sol">
+              <div class="soll">
+                <div class="img_k">
+                  <%= image_tag item.thumbnail_url(:thumbnail), class: "isabela" %>
+                  <div class="hof gdfs hgsd54657">
+                    <div class="des">
+                      <%= link_to "niputuintanpermatasari", item_course_path(item), class: "trewk" %>
+                      <ul class="mbfd">
+                        <li>
+                          <% if current_user.liked? item %>
+                            <%= link_to dislike_course_path(item.slug), remote: true, method: :put, class: "hgfp red", id: "dislike_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_course_path(item.slug), remote: true, method: :put, class: "hgfp", id: "like_#{item.id}" do %>
+                              <i class="fa fa-heart"></i>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <li><a href="#" class="hgfp"><span class="fa fa-folder"></span></a></li>
+                        <li class="bvt"><a href="#" class="hgfp"><span class="fa fa-shopping-bag"></span></a></li>
+                      </ul>
+                    </div>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% item.freepis.each do |freepi| %>
+                            <video id="ajjayyy" class="video-js aja_<%= freepi.id %>" preload="auto" width="463" height="257" data-setup="{}" style="width: 463px !important; height: 257px !important">
+                              <source src="<%= freepi.cacaca %>" type='video/mp4'>
+                            </video>
+                          <% end %> 
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(item.name, length: 50) %></h4>
+                          <span class="by"><%= item.user.company %> | </span> 
+                          <span class="by">codes / <%= item.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= item.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="info">
+                  <ul class="list-inline lf pull-left">
+                    <li>
+                      <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= item.sell %></span>
+                    </li>
+                    <li>
+                      <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= item.price.to_i %></span>
+                    </li>
+                  </ul>
+                  <div class="klwq pull-right" style="padding-top: 5px;">
+                    <span class="this-rating" data-score="<%= _raty_course(item) if item.reviews.present? %>"></span>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
+<div class="col-md-2 dsu">
+  <div class="panel_menu">
+    <div class="mnu_t" role="tablist">
+      <p role="presentation" class="but">
+      <%= link_to item_product_path(current_user), "data-turbolinks": false do  %>
+        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+      <% end %> 
+      </p>
+      <p class="but" role="presentation">
+      <%= link_to pending_approv_path(current_user), "data-turbolinks": false do %>
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      <% end %> 
+      </p>
+      <!-- <p class="but" role="presentation"><a href="#pap" aria-controls="pap" role="tab" data-toggle="tab"><i class="fa fa-retweet" aria-hidden="true"></i></a></p> -->
+      <p class="but" role="presentation" >
+      <%= link_to item_reject_path(current_user), "data-turbolinks": false do %>
+        <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
+      <% end %> 
+      </p>
+      <p class="but" role="presentation">
+      <%= link_to item_follower_path(current_user), "data-turbolinks": false do %>
+        <i class="fa fa-cubes" aria-hidden="true"></i>
+      <% end %>
+      </p>
+      <p class="but active" role="presentation" >
+      <%= link_to item_like_path(current_user), "data-turbolinks": false do %>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+      <% end %>
+      </p>
+    </div>
+  </div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.product').addClass('aktif');
+</script>

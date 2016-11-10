@@ -1,0 +1,71 @@
+<%= form_for(@graphic) do |f| %>
+  <div class="new_att">
+    <div class="container th-cus">
+      <div class="att_conten">
+        <div class="col-md-9 fdr">
+          <h3>Add New Product</h3>
+          <p>
+          Adding your new product to the marketplace is simple process. Below choose one of the categories listed and begin the upload process. Once you have submitted your new product it will be entered into our review queue and one of our reviewers will approve it if it meets our seller requirements.
+          </p>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container th-cus-con">
+    <div class="pass">
+      <div class="col-md-9 left_cate">
+        <div class="name_">
+          <div class="form-group liu">
+            <div class="myth">
+              <%= f.text_field :name, class: "form-control this_load", require: true, placeholder: "Theme name" %>
+            </div>
+          </div>
+        </div>
+        <div class="data_cate">
+          <% @categories.each do |category| %>
+            <div class="lst_cate col-md-2" id="lst_<%= category.id %>">
+              <div class="lst_cate_content">
+                <%= f.radio_button :category_id, category.id, id: dom_id(category), class: "rdo_btn" %> 
+                <label id="this_<%= category.id %>" for="category_<%= category.id %>" class="lbl_cate">jhjh</label>
+              </div>
+              <p class="cate_name" id="nag_<%= category.id %>"><%= category.name %></p>
+            </div>
+          <% end %>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="col-md-3 right_cate">
+        <%= f.submit "NEXT", class: "btn_next" %>
+        <!-- <div class="contact_us"> -->
+        <!--   <h4 class="ctu">Contact Us</h4> -->
+        <!--   <form action="#"> -->
+        <!--     <div class="vgfst"> -->
+        <!--       <div class="form&#45;group"> -->
+        <!--         <input type="text" placeholder="From" class="form&#45;control fuck" value="<%#= current_user.email %>"> -->
+        <!--       </div> -->
+        <!--       <div class="form&#45;group"> -->
+        <!--         <input type="text" placeholder="Subject" class="form&#45;control fuck"> -->
+        <!--       </div> -->
+        <!--       <div class="form&#45;group"> -->
+        <!--         <textarea name="" id="" placeholder="Content" class="form&#45;control fuck"></textarea> -->
+        <!--       </div> -->
+        <!--       <input type="submit" value="SEND" class="val_send"> -->
+        <!--     </div> -->
+        <!--   </form> -->
+        <!-- </div> -->
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+<% end %>
+<script>
+<% @categories.each do |category| %>
+           $('#this_<%= category.id %>').click(function(){
+             $('.lst_cate').removeClass('active_fs')
+               $('#lst_<%= category.id %>').addClass('active_fs')
+           });
+        <% end %>
+</script>

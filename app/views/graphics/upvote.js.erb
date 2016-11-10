@@ -1,0 +1,4 @@
+$('#like_<%= @graphic.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= dislike_graphic_path(@graphic.slug) %>')
+						   .attr('id', 'dislike_<%= @graphic.id %>')
+						   .addClass('red');

@@ -1,0 +1,19 @@
+<% index = framerate_counter + 1 %>
+<%= content_tag "div", id: "framerate3265", data: {framerate: framerate.to_json(only: [:slug])} do %>
+  <li id="daddyyoio51_<%= framerate.id %>" class="_idih <%= 'tran' if (index + 1)%2 == 0 %>">
+    <ul class="list-inline keke">
+      <li class="_id cfdl">
+        <%= index %>
+      </li>
+      <li class="_name cfdl">
+        <%= framerate.name %>
+      </li>
+      <li class="_unit cfdl">
+        <ul class="list-inline siut">
+          <li><%= link_to framerate_edit_url(framerate.id) do %><span class="lnr lnr-magic-wand"><% end %></li>
+          <li><a onclick="dellFramerate(<%= framerate.id %>)" id="data_<%#= category.slug %>"><span class="lnr lnr-trash"></span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+<% end %>

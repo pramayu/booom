@@ -1,0 +1,21 @@
+<% index = subcategory_counter + 1 %>
+<%= content_tag "div", id: "subcategory3265", data: {subcategory: subcategory.to_json(only: [:slug])} do %>
+  <% unless subcategory.slug.nil? %>
+    <li id="daddyo_<%= subcategory.id %>" class="_idih <%= 'tran' if (index + 1)%2 == 0 %>">
+      <ul class="list-inline keke">
+        <li class="_id cfdl">
+          <%= index %>
+        </li>
+        <li class="_name cfdl">
+          <%= subcategory.name %>
+        </li>
+        <li class="_unit cfdl">
+          <ul class="list-inline siut">
+            <li><%= link_to subcategory_edit_path(subcategory) do %><span class="lnr lnr-magic-wand"><% end %></li>
+            <li><a onclick="dellSubcategory(<%= subcategory.id %>)" id="data_<%#= category.slug %>"><span class="lnr lnr-trash"></span></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  <% end %>
+<% end %>

@@ -1,0 +1,93 @@
+<%= title "Search vacancies ~ KHAPOO" %>
+<div class="job_head">
+  <div class="container th-cus vhgf">
+    <div class="capr">
+      <% if params[:category] == '1134' %>
+        <h1><span><%= @vacancies.count %></span> Jobs for Programmer</h1>
+      <% elsif params[:category] == '1135' %>
+        <h1><span><%= @vacancies.count %></span> Jobs for Designer</h1>
+      <% elsif params[:category] == '1136' %>
+        <h1><span><%= @vacancies.count %></span> Jobs for Animators</h1>
+      <% elsif params[:category] == '1137' %>
+        <h1><span><%= @vacancies.count %></span> Jobs for Network Security</h1>
+      <% else %>
+        <% if @vacancies.present? %>
+          <h1><span><%= @vacancies.count %></span> Jobs for Programmer, Network Security, etc</h1>
+        <% end %>
+      <% end %>
+      <div class="capr-co">
+        <h4>join us and get the job as you wish</h4>
+      </div>
+    </div>
+    <%= form_tag vacancies_search_path, method: :get do |f| %>
+      <div class="capr_inpt">
+        <div class="inpt_group">
+          <div class="col-md-4 moo nb">
+            <label for="sel1"><span>LOCATION</span>
+              <%= select_tag :location, options_for_select(State.all.order('name').map{|s|[s.name, s.id]}), {prompt: "Choose Location", class: "form-control job_sch", id: "sel1"} %>
+            </label>
+          </div>
+          <div class="col-md-4 moo mk">
+            <label for="sel2"><span>INDUSTRY</span>
+              <%= select_tag :category, options_for_select(Category.where(to_item: 'vacancies').order('name').map {|c| [c.name, c.id]}), {prompt: "Choose Industry", class: "form-control job_sch", id: "sel2"} %> 
+            </label>
+          </div>
+          <div class="col-md-4 moo me">
+            <label for="sel3"><span>TYPE</span>
+              <%= select_tag :type, options_for_select([["Full Time","Full Time"], ["Contract","Contract"], ["Part Time","Part Time"], ["Freelance","Freelance"], ["Moonlighting","Moonlighting"], ["Internship","Internship"]]), {prompt: "Choose job type",class: "form-control job_sch", id: "sel3"} %>
+            </label>
+          </div>
+          <div class="col-md-4 moo mb">
+            <%= submit_tag "SEARCH", class: "btg_h" %>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="job_content">
+  <div class="_designer_job">
+    <div class="container th-cus">
+      <div class="title_i">
+        <div class="capd">
+          <h4 class="capd_c">Search Jobs</h4>
+        </div>
+        <div class="dsc">
+          <p class="dsc_c">See all the search jobs list and choose as your skills</p>
+        </div>
+      </div>
+      <div class="_data_job">
+        <% for vacancy in @vacancies %>
+          <div class="col-md-4 tmbl_job">
+            <div class="tmbl_it">
+              <div class="timeandopt">
+                <span class="tme"><%= time_ago_in_words(vacancy.created_at) %></span>
+              </div>
+              <div class="who_uo">
+                <%= link_to vacancy_url(vacancy.slug), class: "kjr" do %>
+                  <%= image_tag vacancy.user.avatar_url(:thumb) %>
+                  <p class="who_am"><% if vacancy.user.company.empty? %><%= vacancy.first_n.capitalize + " " + vacancy.last_n.capitalize %><% else %><%= vacancy.user.company %><% end %></p>
+                <% end %>
+                <%= link_to vacancy_url(vacancy), class: "vbg" do %>
+                  <p><%= truncate(vacancy.name, length: 30) %></p>
+                <% end %>
+              </div>
+              <div class="btn-gri">
+                <div class="col-md-6 nht lf_re">
+                  <a href="#">Recruiters: <span><%= vacancy.recruiter %></span></a>
+                </div>
+                <div class="col-md-6 nht rg_re">
+                  <a href="#">Experience: <span><%= vacancy.experience %></span></a>
+                </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,746 @@
+<%= title "Download Purchased Items ~ KAPHOO" %>
+<div class="setting wishlist">
+  <div class="col-md-8 brek brrroo">
+    <div class="user_chooses">
+      <div class="kate_kat">
+        <h2>Download Purchased Item</h2>
+        <p>with wishlist, you can save the products that you will purchase</p>
+      </div>
+      <div class="sod data-acct gtre">
+        <div id="hatwi">
+          <% current_user.carts.where(status: 'success').each do |item| %>
+            <% item.line_items.each do |line| %>
+              <% if line.theme.present? %>
+                <div class="col-md-3 smu sku_<%= line.theme.id %>">
+                  <div class="kow kowo">
+                    <% if line.theme.blank? %>
+                      <%= image_tag("default/default_wish.png") %>
+                    <% else %>
+                      <%= image_tag line.theme.thumbnail_url(:thumbnail) %>
+                    <% end %>
+                    <div class="xion_xi">
+                      <div class="to_item_">
+                        <%= link_to item_path(line.theme), class: "lbh" do %>
+                          <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                        <% end %> 
+                      </div>
+                      <div class="tooltip_j">
+                        <div id="dat_tooltip">
+                          <div class="img_o">
+                            <% line.theme.screenshots[0..0].each do |image| %>
+                              <%= image_tag image.screenshot_url(:hover) %>
+                            <% end %>  
+                          </div>
+                          <div class="titlw pull-left">
+                            <h4 class="je"><%= truncate(line.theme.name, length: 50) %></h4>
+                            <span class="by"><%= line.theme.user.company %> | </span> 
+                            <span class="by">themes : <%= line.theme.category.name %></span>
+                            <% if line.support? %> 
+                              <span class="by">| Unlimited Support</span>
+                            <% else %> 
+                              <span class="by">| 6 Months Support</span>
+                            <% end %>
+                            <p class="gdr76 by"><span>Purchased : <%= item.purchased_at.strftime("%d %b %Y") %></span></p> 
+                          </div>
+                          <div class="prce pull-right">
+                            <span class="k" style="font-size: 20px;"><%= line.license %></span>
+                          </div>
+                          <div class="clear"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="jhfre">
+                      <ul class="list-inline itms pull-left">
+                        <li>
+                          <% line.theme.brokes.each do |file| %>
+                            <a href="<%= file.resources %>"><span class="fa fa-download js" aria-hidden="true"></span></a>
+                          <% end %> 
+                        </li>
+                      </ul>
+                      <div class="set_r pull-right">
+                        <% if line.theme.reviews.where(user_id: current_user.id).map {|review| review.theme_id }.join("").to_i == line.theme.id %>
+                          <span class="star-rating" data-score="<%= line.theme.reviews.where(user_id: current_user.id).map {|review| review.rating }.join("").to_i %>"></span>
+                        <% else %> 
+                          <%= form_for([line.theme, line.theme.reviews.build], remote: true) do |f| %>
+                            <div id="star-rating_<%= line.theme.id %>" class="ratinf_purc"></div>
+                            <div class="dskhdg087 hdfgsdh68_<%= line.theme.id %>">
+                              <span class="alive close_<%= line.theme.id %>"></span>
+                              <div class="gfste5325">
+                                <%= f.text_field :comment, class: "com_inpt rev_it  form-control", id: "reviews_purchased_#{ line.theme.id }", placeholder: "Comment" %>
+                              </div>
+                            </div>
+                            <script>
+$(document).ready(function(){
+  $('#star-rating_<%= line.theme.id %>').raty({
+    path: "/assets/",
+    scoreName: 'review[rating]'
+  });
+  $('#star-rating_<%= line.theme.id %>').click(function(){
+    $('.hdfgsdh68_<%= line.theme.id %>').css({
+      'display': 'block'
+    });
+  });
+  $('.close_<%= line.theme.id %>').click(function(){
+    $('#star-rating_<%= line.theme.id %>').raty({
+      click: function(score, evt) {
+        var next = $("selector");
+        next.raty('score', 0);
+      },
+      path: "/assets/"
+    });
+    $('.hdfgsdh68_<%= line.theme.id %>').hide("fast");
+  });
+  $("#reviews_purchased_<%= line.theme.id %>").keypress(function(e){
+    if(e.which == 13){
+      $.ajax({
+        type: "POST",
+        url: "/themes/<%= line.theme.slug %>/reviews",
+        success: function(){
+          $(this).val("");
+        }
+      });
+      $(".hdfgsdh68_<%= line.theme.id %>").hide("fast");
+    };
+  });
+});
+                            </script>
+                          <% end %>
+                        <% end %> 
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                </div>
+              <% elsif line.code.present? %>
+                <div class="col-md-3 smu sku_<%= line.code.id %>">
+                  <div class="kow kowo">
+                    <% if line.code.blank? %>
+                      <%= image_tag("default/default_wish.png") %>
+                    <% else %>
+                      <%= image_tag line.code.thumbnail_url(:thumbnail) %>
+                    <% end %>
+                    <div class="xion_xi">
+                      <div class="to_item_">
+                        <%= link_to item_code_path(line.code), class: "lbh" do %>
+                          <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                        <% end %> 
+                      </div>
+                      <div class="tooltip_j">
+                        <div id="dat_tooltip">
+                          <div class="img_o">
+                            <% line.code.screenshots[0..0].each do |image| %>
+                              <%= image_tag image.screenshot_url(:hover) %>
+                            <% end %>  
+                          </div>
+                          <div class="titlw pull-left">
+                            <h4 class="je"><%= truncate(line.code.name, length: 50) %></h4>
+                            <span class="by"><%= line.code.user.company %> | </span> 
+                            <span class="by">codes : <%= line.code.category.name %></span>
+                            <% if line.support? %> 
+                              <span class="by">| Unlimited Support</span>
+                            <% else %> 
+                              <span class="by">| 6 Months Support</span>
+                            <% end %>
+                            <p class="gdr76 by"><span>Purchased : <%= item.purchased_at.strftime("%d %b %Y") %></span></p> 
+                          </div>
+                          <div class="prce pull-right">
+                            <span class="k" style="font-size: 20px;"><%= line.license %></span>
+                          </div>
+                          <div class="clear"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="jhfre">
+                      <ul class="list-inline itms pull-left">
+                        <li>
+                          <% line.code.brokes.each do |file| %>
+                            <a href="<%= file.resources %>"><span class="fa fa-download js" aria-hidden="true"></span></a>
+                          <% end %> 
+                        </li>
+                      </ul>
+                      <div class="set_r pull-right">
+                        <% if line.code.reviews.where(user_id: current_user.id).map {|review| review.code_id }.join("").to_i == line.code.id %>
+                          <span class="star-rating" data-score="<%= line.code.reviews.where(user_id: current_user.id).map {|review| review.rating }.join("").to_i %>"></span>
+                        <% else %> 
+                          <%= form_for([line.code, line.code.reviews.build], remote: true) do |f| %>
+                            <div id="star-ratingcd_<%= line.code.id %>" class="ratinf_purc"></div>
+                            <div class="dskhdg087 hdfgsdh68cd_<%= line.code.id %>">
+                              <span class="alive close_<%= line.code.id %>"></span>
+                              <div class="gfste5325">
+                                <%= f.text_field :comment, class: "com_inpt rev_it  form-control", id: "reviews_purchasedcd_#{ line.code.id }", placeholder: "Comment" %>
+                              </div>
+                            </div>
+                            <script>
+$(document).ready(function(){
+  $('#star-ratingcd_<%= line.code.id %>').raty({
+    path: "/assets/",
+    scoreName: 'review[rating]'
+  });
+  $('#star-ratingcd_<%= line.code.id %>').click(function(){
+    $('.hdfgsdh68cd_<%= line.code.id %>').css({
+      'display': 'block'
+    });
+  });
+  $('.close_<%= line.code.id %>').click(function(){
+    $('#star-ratingcd_<%= line.code.id %>').raty({
+      click: function(score, evt) {
+        var next = $("selector");
+        next.raty('score', 0);
+      },
+      path: "/assets/"
+    });
+    $('.hdfgsdh68cd_<%= line.code.id %>').hide("fast");
+  });
+  $("#reviews_purchasedcd_<%= line.code.id %>").keypress(function(e){
+    if(e.which == 13){
+      $.ajax({
+        type: "POST",
+        url: "/codes/<%= line.code.slug %>/reviews",
+        success: function(){
+          $(this).val("");
+        }
+      });
+      $(".hdfgsdh68cd_<%= line.code.id %>").hide("fast");
+    };
+  });
+});
+                            </script>
+                          <% end %>
+                        <% end %> 
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                </div> 
+              <% elsif line.font.present? %>
+                <div class="col-md-3 smu sku_<%= line.font.id %>">
+                  <div class="kow kowo">
+                    <% if line.font.blank? %>
+                      <%= image_tag("default/default_wish.png") %>
+                    <% else %>
+                      <%= image_tag line.font.thumbnail_url(:thumbnail) %>
+                    <% end %>
+                    <div class="xion_xi">
+                      <div class="to_item_">
+                        <%= link_to item_font_path(line.font), class: "lbh" do %>
+                          <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                        <% end %> 
+                      </div>
+                      <div class="tooltip_j">
+                        <div id="dat_tooltip">
+                          <div class="img_o">
+                            <% line.font.screenshots[0..0].each do |image| %>
+                              <%= image_tag image.screenshot_url(:hover) %>
+                            <% end %>  
+                          </div>
+                          <div class="titlw pull-left">
+                            <h4 class="je"><%= truncate(line.font.name, length: 50) %></h4>
+                            <span class="by"><%= line.font.user.company %> | </span> 
+                            <span class="by">fonts : <%= line.font.category.name %></span>
+                            <% if line.support? %> 
+                              <span class="by">| Unlimited Support</span>
+                            <% else %> 
+                              <span class="by">| 6 Months Support</span>
+                            <% end %>
+                            <p class="gdr76 by"><span>Purchased : <%= item.purchased_at.strftime("%d %b %Y") %></span></p> 
+                          </div>
+                          <div class="prce pull-right">
+                            <span class="k" style="font-size: 20px;"><%= line.license %></span>
+                          </div>
+                          <div class="clear"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="jhfre">
+                      <ul class="list-inline itms pull-left">
+                        <li>
+                          <% line.font.brokes.each do |file| %>
+                            <a href="<%= file.resources %>"><span class="fa fa-download js" aria-hidden="true"></span></a>
+                          <% end %> 
+                        </li>
+                      </ul>
+                      <div class="set_r pull-right">
+                        <% if line.font.reviews.where(user_id: current_user.id).map {|review| review.font_id }.join("").to_i == line.font.id %>
+                          <span class="star-rating" data-score="<%= line.font.reviews.where(user_id: current_user.id).map {|review| review.rating }.join("").to_i %>"></span>
+                        <% else %> 
+                          <%= form_for([line.font, line.font.reviews.build], remote: true) do |f| %>
+                            <div id="star-ratingft_<%= line.font.id %>" class="ratinf_purc"></div>
+                            <div class="dskhdg087 hdfgsdh68ft_<%= line.font.id %>">
+                              <span class="alive close_<%= line.font.id %>"></span>
+                              <div class="gfste5325">
+                                <%= f.text_field :comment, class: "com_inpt rev_it  form-control", id: "reviews_purchasedft_#{ line.font.id }", placeholder: "Comment" %>
+                              </div>
+                            </div>
+                            <script>
+$(document).ready(function(){
+  $('#star-ratingft_<%= line.font.id %>').raty({
+    path: "/assets/",
+    scoreName: 'review[rating]'
+  });
+  $('#star-ratingft_<%= line.font.id %>').click(function(){
+    $('.hdfgsdh68ft_<%= line.font.id %>').css({
+      'display': 'block'
+    });
+  });
+  $('.close_<%= line.font.id %>').click(function(){
+    $('#star-ratingft_<%= line.font.id %>').raty({
+      click: function(score, evt) {
+        var next = $("selector");
+        next.raty('score', 0);
+      },
+      path: "/assets/"
+    });
+    $('.hdfgsdh68ft_<%= line.font.id %>').hide("fast");
+  });
+  $("#reviews_purchasedft_<%= line.font.id %>").keypress(function(e){
+    if(e.which == 13){
+      $.ajax({
+        type: "POST",
+        url: "/fonts/<%= line.font.slug %>/reviews",
+        success: function(){
+          $(this).val("");
+        }
+      });
+      $(".hdfgsdh68ft_<%= line.font.id %>").hide("fast");
+    };
+  });
+});
+                            </script>
+                          <% end %>
+                        <% end %> 
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                </div>
+              <% elsif line.videofx.present? %>
+                <div class="col-md-3 smu sku_<%= line.videofx.id %>">
+                  <div class="kow kowo">
+                    <% if line.videofx.blank? %>
+                      <%= image_tag("default/default_wish.png") %>
+                    <% else %>
+                      <%= image_tag line.videofx.thumbnail_url(:thumbnail) %>
+                    <% end %>
+                    <div class="xion_xi">
+                      <div class="to_item_">
+                        <%= link_to item_videofx_path(line.videofx), class: "lbh" do %>
+                          <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                        <% end %> 
+                      </div>
+                      <div class="tooltip_j">
+                        <div id="dat_tooltip">
+                          <div class="img_o">
+                            <% line.videofx.videms[0..0].each do |videm| %>
+                              <%= videojs_rails sources: { mp4: "#{videm.trailer}" }, setup: "{}", controls: false, loop: true, width:"463", height:"310", class: "najoiew" %>
+                            <% end %>  
+                          </div>
+                          <div class="titlw pull-left">
+                            <h4 class="je"><%= truncate(line.videofx.name, length: 50) %></h4>
+                            <span class="by"><%= line.videofx.user.company %> | </span> 
+                            <span class="by">Video : <%= line.videofx.category.name %></span>
+                            <% if line.support? %> 
+                              <span class="by">| Unlimited Support</span>
+                            <% else %> 
+                              <span class="by">| 6 Months Support</span>
+                            <% end %>
+                            <p class="gdr76 by"><span>Purchased : <%= item.purchased_at.strftime("%d %b %Y") %></span></p> 
+                          </div>
+                          <div class="prce pull-right">
+                            <span class="k" style="font-size: 20px;"><%= line.license %></span>
+                          </div>
+                          <div class="clear"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="jhfre">
+                      <ul class="list-inline itms pull-left">
+                        <li>
+                          <% line.videofx.brokes.each do |file| %>
+                            <a href="<%= file.resources %>"><span class="fa fa-download js" aria-hidden="true"></span></a>
+                          <% end %> 
+                        </li>
+                      </ul>
+                      <div class="set_r pull-right">
+                        <% if line.videofx.reviews.where(user_id: current_user.id).map {|review| review.videofx_id }.join("").to_i == line.videofx.id %>
+                          <span class="star-rating" data-score="<%= line.videofx.reviews.where(user_id: current_user.id).map {|review| review.rating }.join("").to_i %>"></span>
+                        <% else %> 
+                          <%= form_for([line.videofx, line.videofx.reviews.build], remote: true) do |f| %>
+                            <div id="star-ratingvd_<%= line.videofx.id %>" class="ratinf_purc"></div>
+                            <div class="dskhdg087 hdfgsdh68vd_<%= line.videofx.id %>">
+                              <span class="alive close_<%= line.videofx.id %>"></span>
+                              <div class="gfste5325">
+                                <%= f.text_field :comment, class: "com_inpt rev_it  form-control", id: "reviews_purchasedvd_#{ line.videofx.id }", placeholder: "Comment" %>
+                              </div>
+                            </div>
+                            <script>
+$(document).ready(function(){
+  $('#star-ratingvd_<%= line.videofx.id %>').raty({
+    path: "/assets/",
+    scoreName: 'review[rating]'
+  });
+  $('#star-ratingvd_<%= line.videofx.id %>').click(function(){
+    $('.hdfgsdh68vd_<%= line.videofx.id %>').css({
+      'display': 'block'
+    });
+  });
+  $('.close_<%= line.videofx.id %>').click(function(){
+    $('#star-ratingvd_<%= line.videofx.id %>').raty({
+      click: function(score, evt) {
+        var next = $("selector");
+        next.raty('score', 0);
+      },
+      path: "/assets/"
+    });
+    $('.hdfgsdh68vd_<%= line.videofx.id %>').hide("fast");
+  });
+  $("#reviews_purchasedvd_<%= line.videofx.id %>").keypress(function(e){
+    if(e.which == 13){
+      $.ajax({
+        type: "POST",
+        url: "/videofxes/<%= line.videofx.slug %>/reviews",
+        success: function(){
+          $(this).val("");
+        }
+      });
+      $(".hdfgsdh68vd_<%= line.videofx.id %>").hide("fast");
+    };
+  });
+});
+                            </script>
+                          <% end %>
+                        <% end %> 
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                </div>
+              <% elsif line.course.present? %>  
+                <div class="col-md-3 smu sku_<%= line.course.id %>">
+                  <div class="kow kowo">
+                    <% if line.course.blank? %>
+                      <%= image_tag("default/default_wish.png") %>
+                    <% else %>
+                      <%= image_tag line.course.thumbnail_url(:thumbnail) %>
+                    <% end %>
+                    <div class="xion_xi">
+                      <div class="to_item_">
+                        <%= link_to item_course_path(line.course), class: "lbh" do %>
+                          <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                        <% end %> 
+                      </div>
+                      <div class="tooltip_j">
+                        <div id="dat_tooltip">
+                          <div class="img_o">
+                            <% line.course.freepis[0..0].each do |free| %>
+                              <%= videojs_rails sources: { mp4: "#{free.cacaca}" }, setup: "{}", controls: false, loop: true, width:"463", height:"310", class: "najoiew" %>
+                            <% end %>  
+                          </div>
+                          <div class="titlw pull-left">
+                            <h4 class="je"><%= truncate(line.course.name, length: 50) %></h4>
+                            <span class="by"><%= line.course.user.company %> | </span> 
+                            <span class="by">Courses : <%= line.course.category.name %></span>
+                            <% if line.support? %> 
+                              <span class="by">| Unlimited Support</span>
+                            <% else %> 
+                              <span class="by">| 6 Months Support</span>
+                            <% end %>
+                            <p class="gdr76 by"><span>Purchased : <%= item.purchased_at.strftime("%d %b %Y") %></span></p> 
+                          </div>
+                          <div class="prce pull-right">
+                            <span class="k" style="font-size: 20px;"><%= line.license %></span>
+                          </div>
+                          <div class="clear"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="jhfre">
+                      <ul class="list-inline itms pull-left">
+                        <li>
+                          <% line.course.cofiles.each do |file| %>
+                            <a href="<%= file.coke %>"><span class="fa fa-download js" aria-hidden="true"></span></a>
+                          <% end %> 
+                        </li>
+                      </ul>
+                      <div class="set_r pull-right">
+                        <% if line.course.reviews.where(user_id: current_user.id).map {|review| review.course_id }.join("").to_i == line.course.id %>
+                          <span class="star-rating" data-score="<%= line.course.reviews.where(user_id: current_user.id).map {|review| review.rating }.join("").to_i %>"></span>
+                        <% else %> 
+                          <%= form_for([line.course, line.course.reviews.build], remote: true) do |f| %>
+                            <div id="star-ratingcr_<%= line.course.id %>" class="ratinf_purc"></div>
+                            <div class="dskhdg087 hdfgsdh68cr_<%= line.course.id %>">
+                              <span class="alive close_<%= line.course.id %>"></span>
+                              <div class="gfste5325">
+                                <%= f.text_field :comment, class: "com_inpt rev_it  form-control", id: "reviews_purchasedcr_#{ line.course.id }", placeholder: "Comment" %>
+                              </div>
+                            </div>
+                            <script>
+$(document).ready(function(){
+  $('#star-ratingcr_<%= line.course.id %>').raty({
+    path: "/assets/",
+    scoreName: 'review[rating]'
+  });
+  $('#star-ratingcr_<%= line.course.id %>').click(function(){
+    $('.hdfgsdh68cr_<%= line.course.id %>').css({
+      'display': 'block'
+    });
+  });
+  $('.close_<%= line.course.id %>').click(function(){
+    $('#star-ratingcr_<%= line.course.id %>').raty({
+      click: function(score, evt) {
+        var next = $("selector");
+        next.raty('score', 0);
+      },
+      path: "/assets/"
+    });
+    $('.hdfgsdh68cr_<%= line.course.id %>').hide("fast");
+  });
+  $("#reviews_purchasedcr_<%= line.course.id %>").keypress(function(e){
+    if(e.which == 13){
+      $.ajax({
+        type: "POST",
+        url: "/courses/<%= line.course.slug %>/reviews",
+        success: function(){
+          $(this).val("");
+        }
+      });
+      $(".hdfgsdh68cr_<%= line.course.id %>").hide("fast");
+    };
+  });
+});
+                            </script>
+                          <% end %>
+                        <% end %> 
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                </div>
+              <% elsif line.graphic.present? %>
+                <div class="col-md-3 smu sku_<%= line.graphic.id %>">
+                  <div class="kow kowo">
+                    <% if line.graphic.blank? %>
+                      <%= image_tag("default/default_wish.png") %>
+                    <% else %>
+                      <%= image_tag line.graphic.thumbnail_url(:thumbnail) %>
+                    <% end %>
+                    <div class="xion_xi">
+                      <div class="to_item_">
+                        <%= link_to item_graphic_path(line.graphic), class: "lbh" do %>
+                          <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                        <% end %> 
+                      </div>
+                      <div class="tooltip_j">
+                        <div id="dat_tooltip">
+                          <div class="img_o">
+                            <% line.graphic.screenshots[0..0].each do |image| %>
+                              <%= image_tag image.screenshot_url(:hover) %>
+                            <% end %>  
+                          </div>
+                          <div class="titlw pull-left">
+                            <h4 class="je"><%= truncate(line.graphic.name, length: 50) %></h4>
+                            <span class="by"><%= line.graphic.user.company %> | </span> 
+                            <span class="by">Graphics : <%= line.graphic.category.name %></span>
+                            <% if line.support? %> 
+                              <span class="by">| Unlimited Support</span>
+                            <% else %> 
+                              <span class="by">| 6 Months Support</span>
+                            <% end %>
+                            <p class="gdr76 by"><span>Purchased : <%= item.purchased_at.strftime("%d %b %Y") %></span></p> 
+                          </div>
+                          <div class="prce pull-right">
+                            <span class="k" style="font-size: 20px;"><%= line.license %></span>
+                          </div>
+                          <div class="clear"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="jhfre">
+                      <ul class="list-inline itms pull-left">
+                        <li>
+                          <% line.graphic.brokes.each do |file| %>
+                            <a href="<%= file.resources %>"><span class="fa fa-download js" aria-hidden="true"></span></a>
+                          <% end %> 
+                        </li>
+                      </ul>
+                      <div class="set_r pull-right">
+                        <% if line.graphic.reviews.where(user_id: current_user.id).map {|review| review.graphic_id }.join("").to_i == line.graphic.id %>
+                          <span class="star-rating" data-score="<%= line.graphic.reviews.where(user_id: current_user.id).map {|review| review.rating }.join("").to_i %>"></span>
+                        <% else %> 
+                          <%= form_for([line.graphic, line.graphic.reviews.build], remote: true) do |f| %>
+                            <div id="star-ratingpc_<%= line.graphic.id %>" class="ratinf_purc"></div>
+                            <div class="dskhdg087 hdfgsdh68pc_<%= line.graphic.id %>">
+                              <span class="alive close_<%= line.graphic.id %>"></span>
+                              <div class="gfste5325">
+                                <%= f.text_field :comment, class: "com_inpt rev_it  form-control", id: "reviews_purchasedpc_#{ line.graphic.id }", placeholder: "Comment" %>
+                              </div>
+                            </div>
+                            <script>
+$(document).ready(function(){
+  $('#star-ratingpc_<%= line.graphic.id %>').raty({
+    path: "/assets/",
+    scoreName: 'review[rating]'
+  });
+  $('#star-ratingpc_<%= line.graphic.id %>').click(function(){
+    $('.hdfgsdh68pc_<%= line.graphic.id %>').css({
+      'display': 'block'
+    });
+  });
+  $('.close_<%= line.graphic.id %>').click(function(){
+    $('#star-ratingpc_<%= line.graphic.id %>').raty({
+      click: function(score, evt) {
+        var next = $("selector");
+        next.raty('score', 0);
+      },
+      path: "/assets/"
+    });
+    $('.hdfgsdh68pc_<%= line.graphic.id %>').hide("fast");
+  });
+  $("#reviews_purchasedpc_<%= line.graphic.id %>").keypress(function(e){
+    if(e.which == 13){
+      $.ajax({
+        type: "POST",
+        url: "/graphics/<%= line.graphic.slug %>/reviews",
+        success: function(){
+          $(this).val("");
+        }
+      });
+      $(".hdfgsdh68pc_<%= line.graphic.id %>").hide("fast");
+    };
+  });
+});
+                            </script>
+                          <% end %>
+                        <% end %> 
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                </div>
+              <% elsif line.t3d.present? %>
+                <div class="col-md-3 smu sku_<%= line.t3d.id %>">
+                  <div class="kow kowo">
+                    <% if line.t3d.blank? %>
+                      <%= image_tag("default/default_wish.png") %>
+                    <% else %>
+                      <%= image_tag line.t3d.thumbnail_url(:thumbnail) %>
+                    <% end %>
+                    <div class="xion_xi">
+                      <div class="to_item_">
+                        <%= link_to item_t3d_path(line.t3d), class: "lbh" do %>
+                          <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                        <% end %> 
+                      </div>
+                      <div class="tooltip_j">
+                        <div id="dat_tooltip">
+                          <div class="img_o">
+                            <% line.t3d.screenshots[0..0].each do |image| %>
+                              <%= image_tag image.screenshot_url(:hover) %>
+                            <% end %>  
+                          </div>
+                          <div class="titlw pull-left">
+                            <h4 class="je"><%= truncate(line.t3d.name, length: 50) %></h4>
+                            <span class="by"><%= line.t3d.user.company %> | </span> 
+                            <span class="by">3D : <%= line.t3d.category.name %></span>
+                            <% if line.support? %> 
+                              <span class="by">| Unlimited Support</span>
+                            <% else %> 
+                              <span class="by">| 6 Months Support</span>
+                            <% end %>
+                            <p class="gdr76 by"><span>Purchased : <%= item.purchased_at.strftime("%d %b %Y") %></span></p> 
+                          </div>
+                          <div class="prce pull-right">
+                            <span class="k" style="font-size: 20px;"><%= line.license %></span>
+                          </div>
+                          <div class="clear"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="jhfre">
+                      <ul class="list-inline itms pull-left">
+                        <li>
+                          <% line.t3d.brokes.each do |file| %>
+                            <a href="<%= file.resources %>"><span class="fa fa-download js" aria-hidden="true"></span></a>
+                          <% end %> 
+                        </li>
+                      </ul>
+                      <div class="set_r pull-right">
+                        <% if line.t3d.reviews.where(user_id: current_user.id).map {|review| review.t3d_id }.join("").to_i == line.t3d.id %>
+                          <span class="star-rating" data-score="<%= line.t3d.reviews.where(user_id: current_user.id).map {|review| review.rating }.join("").to_i %>"></span>
+                        <% else %> 
+                          <%= form_for([line.t3d, line.t3d.reviews.build], remote: true) do |f| %>
+                            <div id="star-ratingt3_<%= line.t3d.id %>" class="ratinf_purc"></div>
+                            <div class="dskhdg087 hdfgsdh68t3_<%= line.t3d.id %>">
+                              <span class="alive close_<%= line.t3d.id %>"></span>
+                              <div class="gfste5325">
+                                <%= f.text_field :comment, class: "com_inpt rev_it  form-control", id: "reviews_purchasedt3_#{ line.t3d.id }", placeholder: "Comment" %>
+                              </div>
+                            </div>
+                            <script>
+$(document).ready(function(){
+  $('#star-ratingt3_<%= line.t3d.id %>').raty({
+    path: "/assets/",
+    scoreName: 'review[rating]'
+  });
+  $('#star-ratingt3_<%= line.t3d.id %>').click(function(){
+    $('.hdfgsdh68t3_<%= line.t3d.id %>').css({
+      'display': 'block'
+    });
+  });
+  $('.close_<%= line.t3d.id %>').click(function(){
+    $('#star-ratingt3_<%= line.t3d.id %>').raty({
+      click: function(score, evt) {
+        var next = $("selector");
+        next.raty('score', 0);
+      },
+      path: "/assets/"
+    });
+    $('.hdfgsdh68t3_<%= line.t3d.id %>').hide("fast");
+  });
+  $("#reviews_purchasedt3_<%= line.t3d.id %>").keypress(function(e){
+    if(e.which == 13){
+      $.ajax({
+        type: "POST",
+        url: "/t3ds/<%= line.t3d.slug %>/reviews",
+        success: function(){
+          $(this).val("");
+        }
+      });
+      $(".hdfgsdh68t3_<%= line.t3d.id %>").hide("fast");
+    };
+  });
+});
+                            </script>
+                          <% end %>
+                        <% end %> 
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>  
+            <% end %>  
+          <% end %>  
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 brok prek">
+    <div class="mnu_fuk">
+      <div class="recent kls">
+        <div class="ti_l">
+          <span>IMPORTANT*</span>
+        </div>
+        <div class="pdjs">
+          <p>
+          You should download your purchases immediately as items may be removed from time to time, and use download manager for downloading purchased files.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.puchase').addClass('aktif');
+</script>

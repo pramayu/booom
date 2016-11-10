@@ -1,0 +1,158 @@
+<%= title "Reviewer ~ KAPHOO" %>
+<div class="setting wishlist reviewers_">
+  <div class="col-md-8 brek brrroo">
+    <% if params[:reviewers] %>
+      <div class="left_cons23">
+        <% for user in @users %>
+          <div class="col-md-4 user_rev" id="isad_<%= user.id %>">
+            <div class="this_wt" style="background-image: url(<%= user.avatar_url(:tellme) unless user.avatar.nil? %>)">
+              <div class="convd">
+                <div class="vfde">
+                  <ul class="list-inline pull-right">
+                    <!-- <li class="email"><a href="#"><span class="fa fa&#45;pencil&#45;square&#45;o"></span></a></li> -->
+                    <li class="email"><a href="#"><span class="fa fa-envelope"></span></a></li>
+                    <li class="email"><a onclick="dellU(<%= user.id %>)" ><span class="fa fa-trash"></span></a></li>
+                  </ul>
+                </div>
+                <div class="img_">
+                  <% if !user.avatar.present? %>
+                    <%= image_tag "default/default_profile.png", class: "bvgr" %>
+                  <% else %>
+                    <%= image_tag user.avatar_url(:thumbel), class: "bvgr" %>
+                  <% end %>
+                  <p class="name"><%= user.first_n.capitalize + " " + user.last_n.capitalize %></p>
+                  <p class="email"><%= user.email.downcase %></p>
+                  <% if user.leader? %>
+                    <span class="lif">Leader of <%= user.team.name.capitalize %></span>
+                  <% else %>
+                    <span class="lif">Member of <%= user.team.name.capitalize %></span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% elsif params[:add_reviewer] %>
+      <div class="user_chooses">
+        <%= form_for @user do |f| %>
+          <div class="sod data-acct">
+            <div class="col-md-6 mk" style="padding-left: 0px;">
+              <div class="form-group fk">
+                <span class="fl">First Name</span>
+                <div class="fs">
+                  <%= f.text_field :first_n, class: "form-control sami" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mk" style="padding-right: 0px;">
+              <div class="form-group fk">
+                <span class="fl">Last Name</span>
+                <div class="fs">
+                  <%= f.text_field :last_n, class: "form-control sami" %>
+                </div>
+              </div>
+            </div>
+            <div class="clear"></div>
+            <div class="form-group fk">
+              <span class="fl">Username</span>
+              <div class="fs">
+                <%= f.text_field :username, class: "form-control sami" %>
+              </div>
+            </div>
+            <div class="form-group fk">
+              <span class="fl">Email Address</span>
+              <div class="fs">
+                <%= f.email_field :email, class: "form-control sami" %>
+              </div>
+            </div>
+            <div class="form-group fk">
+              <span class="fl">Select Teams</span>
+              <div class="fs">
+                <%= f.collection_select(:team_id, @teams, :id, :name, {prompt: ""}, {class: "form-control sami"}) %>
+              </div>
+            </div>
+            <div class="form-group fk">
+              <span class="fl">Password</span>
+              <div class="fs">
+                <%= f.password_field :password, class: "form-control sami" %>
+              </div>
+            </div>
+            <div class="form-group fk">
+              <span class="fl">Password Confirmation</span>
+              <div class="fs">
+                <%= f.password_field :password_confirmation, class: "form-control sami" %>
+              </div>
+            </div>
+            <div class="form-group fk">
+              <span class="fl">Temp Password</span>
+              <div class="fs">
+                <%= f.password_field :temp_password, class: "form-control sami" %>
+              </div>
+            </div>
+            <div class="col-md-4 jhf">
+              <div class="form-group fk">
+                <%= f.check_box :reviewer, class: "cvvg" %>
+                <label for="user_reviewer"><span class="klew jef"><span><span class="niy">Become Reviewer</span></span></label>
+              </div>
+            </div>
+            <div class="col-md-4 jhf">
+              <div class="form-group fk">
+                <%= f.check_box :admin, class: "cvvg" %>
+                <label for="user_admin"><span class="klew jef"><span><span class="niy">Become Administrator</span></span></label>
+              </div>
+            </div>
+            <div class="col-md-4 jhf">
+              <div class="form-group fk">
+                <%= f.check_box :leader, class: "cvvg" %>
+                <label for="user_leader"><span class="klew jef"><span><span class="niy">As a Leader</span></span></label>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-4 brok prek">
+    <div class="mnu_fuk">
+      <div class="recent kls">
+        <div class="ti_l">
+          <span>MANAGE REVIEWERS</span>
+        </div>
+        <div class="pdjs">
+          <p>
+          Manage your account reviewer can add and delete the account reviewer and you can also send a message to the reviewer.
+          </p>
+        </div>
+      </div>
+      <div class="btn-pi">
+        <%= f.submit "SUBMIT", class: "btn_update" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% end %>
+<% if params[:reviewers] %>
+<div class="col-md-4 brok prek" style="margin-top: -30px;padding-top: 0px;">
+    <div class="mnu_fuk">
+      <div class="recent kls">
+        <div class="ti_l">
+          <span>MANAGE REVIEWERS</span>
+        </div>
+        <div class="pdjs">
+          <p>
+          Manage your account reviewer can add and delete the account reviewer and you can also send a message to the reviewer.
+          </p>
+        </div>
+      </div>
+      <div class="btn-pi">
+        <%= link_to "ADD REVIEWER",register_new_reviewer_path(:add_reviewer), class: "btn_update" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="clear"></div> 
+</div>
+ <script>
+$('.aktif').removeClass();
+$('.rev_u').addClass('aktif');
+ </script>

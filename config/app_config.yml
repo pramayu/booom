@@ -1,0 +1,12 @@
+development:
+  PAYPAL_MAIL: khapoo@mail.com
+  PAYPAL_SECRET: khapoo
+  PAYPAL_CERT_ID: B4Y5KVUJ7JU9C
+  PAYPAL_URL: "https://www.sandbox.paypal.com/cgi-bin/webscr"
+# test:
+
+production:
+  PAYPAL_MAIL: khapoo@mail.com 
+  PAYPAL_SECRET: khapoo
+  PAYPAL_CERT_ID: B4Y5KVUJ7JU9C
+  PAYPAL_URL: "https://www.paypal.com/cgi-bin/webscr"

@@ -1,0 +1,97 @@
+<% for videofx in @videofxes %>
+  <li class="kqt34">
+    <div class="kquie">
+      <%= image_tag videofx.thumbnail_url(:thumbnail) %>
+      <div class="extras" data-tooltip-content="#dat_tooltip">
+        <div class="u_name">
+          <%= link_to "", item_videofx_path(videofx), class: "this_oiu", "data-turbolinks": false %>
+        </div>
+        <div class="raty-rate">
+          <div class="star-rating jger" data-score="<%= videofx.reviews.average(:rating) %>"></div>
+        </div>
+        <div class="vote">
+          <ul>
+            <li>
+              <% if signed_in? %>
+                <% if current_user.liked? videofx %>
+                  <%= link_to dislike_videofx_path(videofx.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{videofx.id}" do %>
+                    <i class="fa fa-heart ic_vote"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to like_videofx_path(videofx.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{videofx.id}" do %>
+                    <i class="fa fa-heart ic_vote"></i>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to sign_in_path, class: "vo_ic vo_ic_dis" do %>
+                  <i class="fa fa-heart ic_vote"></i>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <% if signed_in? %>
+                <% if current_user.akusuka.blank? %>
+                  <%= link_to new_akusuka_path, class: "mutq co_ic", remote: true do %>
+                    <i class="fa fa-folder" aria-hidden="true"></i>
+                  <% end %>
+                <% else %>
+                  <% if current_user.akusuka.courses.include?(videofx) %>
+                    <%= link_to video_unsuka_videofx_path(videofx), class: "mutq co_ic green", id: "unwish_#{videofx.id}", remote: true do %>
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to video_suka_videofx_path(videofx), class: "mutq co_ic", id: "wish_#{videofx.id}", remote: true do %>
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to sign_in_path, class: "mutq co_ic" do %>
+                  <i class="fa fa-folder" aria-hidden="true"></i>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <a onclick="bagvdCart(<%= videofx.id %>)" id="bag_<%= videofx.id %>"style="cursor: pointer;" class="co_ic loih">
+                <i class="fa fa-shopping-bag ic_vote"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="tooltip_j">
+          <div id="dat_tooltip">
+            <div class="img_o">
+              <% videofx.videms.each do |videm| %>
+                <video id="ajjayyy" class="video-js aja_<%= videm.id %>" preload="auto" width="463" height="257" data-setup="{}" style="width: 463px !important; height: 257px !important">
+                  <source src="<%= videm.trailer %>" type='video/mp4'>
+                </video>
+              <% end %> 
+            </div>
+            <div class="titlw pull-left">
+              <h4 class="je"><%= truncate(videofx.name, length: 50) %></h4>
+              <span class="by"><%= videofx.user.company %> | </span> 
+              <span class="by">courses / <%= videofx.category.name %></span>
+            </div>
+            <div class="prce pull-right">
+              <span class="k">$<%= videofx.price.to_i.floor %></span>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="author">
+        <% if videofx.user.avatar.blank? %>
+          <%= image_tag('default/default_profile.png', width: 28)  %>
+        <% else %>
+          <%= image_tag videofx.user.avatar_url(:taan), width: 28 %>
+        <% end %>
+      </div>
+      <div class="sell_info">
+        <span class="icon-cart_3 icon_cart_3"></span><span class="dta_sell"><%= videofx.line_items.where(videofx_id: videofx.id).count %></span>
+      </div>
+      <div class="price_info">
+        <span class="icon-price icon_price_1"></span><span class="dta_price">$<%= videofx.price.to_i.floor %></span>
+      </div>
+    </div>
+  </li>
+<% end %> 

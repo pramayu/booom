@@ -1,0 +1,469 @@
+<%= title "Upload Modeling and Material " + "~ " + " KAPHOO" %>
+<div class="upload_item new_att">
+  <div class="container th-cus">
+    <div class="att_conten this_up">
+      <h3>Upload New Product to <span><%= @t3d.category.name %></span></h3>
+      <div class="drw">
+        <p>Sell source code for popular platforms such as: PHP, Javascript, Java, Pyhton, Ruby, C &amp; C++</p>
+      </div>
+      <ul class="list-inline cfde">
+        <li class="hge">
+          <%= link_to codes_path do %>
+            <i class="fa fa-home" aria-hidden="true"></i>
+          <% end %>
+        </li>
+        <li><%= @t3d.category.name %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="upload_content">
+  <div class="container th-cus">
+    <%= form_for @t3d, html: {multipart: true} do |f| %>
+      <div class="col-md-8 fdr cfah">
+        <div class="name_des">
+          <div class="form-group liu">
+            <span class="ywe">3Dream title</span>
+            <div class="myth">
+              <%= f.text_field :name, class: "form-control this_load", require: true %>
+            </div>
+          </div>
+          <div class="form-group file_upload liu">
+            <span class="ywe">Screenshots</span>
+            <div class="myth bdgft">
+              <div class="thumbil">
+                <div class="jdg54">
+                  <div id="src_srr" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" id="beta4" role="listbox">
+                      <% @t3d.screenshots.each_with_index do |t3, index| %>
+                        <%= render partial: 'screenshot', locals: {t3: t3, index: index} %>
+                      <% end %>  
+                    </div>
+                    <a class="left jet_left carousel-control" href="#src_srr" role="button" data-slide="prev">
+                      <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </a>
+                    <a class="right jet_right carousel-control" href="#src_srr" role="button" data-slide="next">
+                      <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="screenshot scr_tre sdcsd">
+                  <%= f.fields_for :screenshots, Screenshot.new do |q| %>
+                    <%= q.file_field :screenshot, multiple: true, name: "t3d[screenshots_attributes][][screenshot]", class: "dhgd54" %>
+                    <label for="t3d_screenshots_attributes_0_screenshot" class="dyeu746"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group liu">
+            <span class="ywe">Description</span>
+            <div class="myth">
+              <%= f.cktext_area :description, ckeditor: {uiColor: '#EEF1F8', toolbar: 'simple'}, placeholder: "description for your product", class: "form-control this_load" %>
+            </div>
+          </div>
+          <div class="form-group liu">
+            <span class="ywe">Demo URL</span>
+            <div class="myth">
+              <%= f.text_field :url_demo, class: "form-control this_load", require: true %>
+            </div>
+          </div>
+          <div class="form-group liu">
+            <span class="ywe">Video Demo</span>
+            <div class="myth">
+              <%= f.text_field :video_demo, class: "form-control this_load", require: true %>
+            </div>
+          </div>
+          <% unless @t3d.category.id == 1048 %>
+            <div class="form-group liu">
+              <span class="ywe">Resolution</span>
+              <div class="myth">
+                <%= f.text_field :resolution, class: "form-control this_load", require: true %>
+              </div>
+            </div>
+            <% unless @t3d.category.id == 1047 || @t3d.category.id == 1051 %>
+              <div class="form-group liu">
+                <span class="ywe">Polygons count</span>
+                <div class="myth">
+                  <%= f.text_field :polygons_count, class: "form-control this_load", require: true %>
+                </div>
+              </div>
+              <div class="form-group liu">
+                <span class="ywe">Vertices count</span>
+                <div class="myth">
+                  <%= f.text_field :vertices_count, class: "form-control this_load", require: true %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="note">
+          <div class="liu">
+            <span class="ywe">Note for Reviewer</span>
+            <div class="myth">
+              <%= f.text_area :note, class: "form-control this_load", require: true %>
+            </div>
+          </div>
+        </div>
+        <div class="up_btw">
+          <div class="liu">
+            <div class="myth">
+              <%= f.submit "UPLOAD", class: "btn_uh" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 fdr cfih">
+        <div class="file_upload vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Thumnail</span>
+            </div>
+            <div class="myth crekkk">
+              <div class="thumbil">
+                <div class="dhgf565" id="jreg<%= @t3d.id %>">
+                  <%= render partial: 'thumbnail', locals: {t3d: @t3d} %>
+                </div>
+                <div class="cvfgt98">
+                  <%= f.file_field :thumbnail, class: "thumb_thg97" %>
+                  <label for="t3d_thumbnail" class="lbk_tdr"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= content_tag "div", id: "brokes88379", data: {brokes: @t3d.brokes.to_json(only: [:id])} do %>
+          <div class="file_upload vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Main File(ZIP)</span>
+              </div>
+              <div class="myth">
+                <div class="resources">
+                  <%= f.fields_for :resources, Broke.new do |q| %>
+                    <%= q.file_field :resources, multiple: true, name: "t3d[brokes_attributes][][resources]", class: "lepas" %>
+                    <% if @t3d.brokes.present? %>
+                      <% @t3d.brokes.each do |broke| %> 
+                        <div id="rhrh75"></div>
+                        <div id="hdg98">
+                          <%= render partial: 'delbroke', locals: {broke: broke} %>							
+                        </div>
+                      <% end %> 
+                    <% else %>
+                      <div id="hftu88"></div>
+                      <div id="fhg656">
+                        <%= render partial: 'addbroke' %>
+                      </div>
+                    <% end %>  
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="subct vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Code Category</span>
+            </div>
+            <div class="myth">
+              <div class="nbgo">
+                <%= select_tag("t3d[subcategory_ids][]", options_for_select(@apelokate.collect {|subcategory| [subcategory.name, subcategory.id]}, @t3d.subcategories.collect { |subcategory| subcategory.id }), { class: "form-control foh kde", prompt: "Choose category"}) %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subct vuih kled">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Subcategory</span>
+            </div>
+            <div class="myth">
+              <div class="nbgo">
+                <%= f.grouped_collection_select(:modelsub_id, Subcategory.order(:name), :modelsubs, :name, :id, :name, {include_blank: true}, {class: "form-control foh kde"}) %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="comp vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Genre</span>
+            </div>
+            <div class="myth">
+              <div class="nbgo">
+                <%= f.collection_select(:genre_id, @genre, :id, :name, {prompt: "Choose genre"}, {class: "form-control foh kde"}) %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% if @t3d.category.id == 1051 %>
+          <div class="file vuih" id="plugin">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Files Includes</span>
+              </div>
+              <div class="myth">
+                <ul class="list-inline gof">
+                  <% @plugin.each do |include| %>
+                    <li>
+                      <%= check_box_tag "t3d[include_ids][]", include.id, @t3d.include_ids.include?(include.id), id: dom_id(include), class: "jtrw" %>
+                      <label for="include_<%= include.id %>"><span class="mnf"></span><span class="kjl"><%= include.name %></span></label>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        <% elsif @t3d.category.id == 1047 %>
+          <div class="file vuih" id="plugin">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Files Includes</span>
+              </div>
+              <div class="myth">
+                <%= select_tag("t3d[include_ids][]", options_for_select(@texture.collect {|include| [include.name, include.id]}, @t3d.includes.collect { |include| include.id }), {multiple: true, class: "form-control chosen-select"}) %>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <div class="file vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Files Includes</span>
+              </div>
+              <div class="myth">
+                <%= select_tag("t3d[include_ids][]", options_for_select(@includes.collect {|include| [include.name, include.id]}, @t3d.includes.collect { |include| include.id }), {multiple: true, class: "form-control chosen-select"}) %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <% unless @t3d.category.id == 1048 || @t3d.category.id == 1047 || @t3d.category.id == 1051 %>
+          <div class="comp vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Geometry</span>
+              </div>
+              <div class="myth">
+                <div class="nbgo">
+                  <%= f.collection_select(:geometry_id, @geometry, :id, :name, {prompt: "Choose geometry"}, {class: "form-control foh kde"}) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <% unless @t3d.category.id == 1047 %>
+          <div class="comp vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Open with</span>
+              </div>
+              <div class="myth">
+                <%= select_tag("t3d[softopen3d_ids][]", options_for_select(@softopen3ds.collect {|softopen3d| [softopen3d.name, softopen3d.id]}, @t3d.softopen3ds.collect { |softopen3d| softopen3d.id }), {multiple: true, class: "form-control chosen-select"}) %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <% if @t3d.category.id == 1051 %>
+          <div class="file vuih ositem">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Operating System</span>
+              </div>
+              <div class="myth">
+                <%= select_tag("t3d[ositem_ids][]", options_for_select(@ositems.collect {|ositem| [ositem.name, ositem.id]}, @t3d.ositems.collect { |ositem| ositem.id }), {multiple: true, class: "form-control chosen-select"}) %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <% unless @t3d.category.id == 1051 %>
+          <% if @t3d.category.id == 1048 %>
+            <div class="comp vuih tile">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Tileable</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :tileable, 'Yes' %><label for="t3d_tileable_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :tileable, 'No', checked: "checked" %><label for="t3d_tileable_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="comp vuih an">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Animated</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :animated, 'Yes' %> <label for="t3d_animated_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :animated, 'No', checked: "checked" %> <label for="t3d_animated_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="comp vuih bit">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Bitmap Texture</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :bitmap_texture, 'Yes' %><label for="t3d_bitmap_texture_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :bitmap_texture, 'No', checked: "checked" %><label for="t3d_bitmap_texture_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="comp vuih proc">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Procedural Texture</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :procedural_texture, 'Yes' %><label for="t3d_procedural_texture_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :procedural_texture, 'No', checked: "checked" %><label for="t3d_procedural_texture_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <% elsif @t3d.category.id == 1047 %>
+            <div class="comp vuih lay">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Layered</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :layered, 'Yes' %><label for="t3d_layered_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :layered, 'No', checked: "checked" %><label for="t3d_layered_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="comp vuih tile">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Tileable</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :tileable, 'Yes' %><label for="t3d_tileable_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :tileable, 'No', checked: "checked" %><label for="t3d_tileable_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <div class="comp vuih lw">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Low Poly</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :low_poly, 'Yes' %> <label for="t3d_low_poly_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :low_poly, 'No', checked: "checked" %><label for="t3d_low_poly_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="comp vuih mat">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Material</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :material, 'Yes' %><label for="t3d_material_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :material, 'No', checked: "checked" %>  <label for="t3d_material_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="comp vuih an">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Animated</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :animated, 'Yes' %> <label for="t3d_animated_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :animated, 'No', checked: "checked" %> <label for="t3d_animated_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="comp vuih rig">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Rigged</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :rigged, 'Yes' %> <label for="t3d_rigged_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :rigged, 'No', checked: "checked" %> <label for="t3d_rigged_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="comp vuih tex">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Texture</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :texture, 'Yes' %> <label for="t3d_texture_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :texture, 'No', checked: "checked" %> <label for="t3d_texture_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="comp vuih map">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">UV Mapped</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :uv_mapped, 'Yes' %> <label for="t3d_uv_mapped_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :uv_mapped, 'No', checked: "checked" %> <label for="t3d_uv_mapped_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="comp vuih unwe">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Unwrapped UVs</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :unwrapped_uvs, 'Yes' %> <label for="t3d_unwrapped_uvs_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :unwrapped_uvs, 'No', checked: "checked" %> <label for="t3d_unwrapped_uvs_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <div class="tagst vuih">
+          <div class="form-group liu">
+            <div class="fok">
+              <span class="ywe">Tags</span>
+            </div>
+            <div class="myth">
+              <%= f.text_field :tag_list, class: 'form-control foh', id: 'tags' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    <% end %>
+  </div>
+</div>
+

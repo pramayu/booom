@@ -1,0 +1,23 @@
+<% unless t3d.agree? || t3d.reject? %> 
+<div class="col-md-3 klie" id="klodffg_<%= t3d.id %>">
+	<div class="klhj867">
+		<%= image_tag t3d.thumbnail_url(:thumbnail) %>
+		<div class="clkj878">
+			<a id="del_to_pro_t3d_<%= t3d.id %>" class="del_to_pro">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</a>
+		</div>
+	</div>
+</div>
+<% end %> 
+<script>
+	$('#del_to_pro_t3d_<%= t3d.id %>').click(function(){
+		$.ajax({
+			type: "GET",
+			url: "<%= del_to_pro_t3d_path(t3d) %>",
+			success: function(){
+				$('#klodffg_<%= t3d.id %>').hide("slow");
+			}
+		});
+	});
+</script>

@@ -1,0 +1,126 @@
+<% if params[:subcategory].present? %>
+  <%= title "Looking for #{@subcategory.name} for themes" %>
+<% else %> 
+  <%= title "Looking for #{@category.name} for codes" %>
+<% end %> 
+<div class="_head_l">
+  <div class="jer">
+    <div class="container kewet">
+      <div class="text_">
+        <%if params[:subcategory].present? %>
+          <h2 class="text-center"><%= @subcategory.name %></h2>
+        <% else %> 
+          <h2 class="text-center"><%= @category.name %></h2>
+        <% end %> 
+        <div class="never">
+          <% if params[:subcategory].present? %>
+            <p class="hello"><%= @codes.count %> premium <%= @subcategory.name %> resources are have high quality and find all codes related to your requirements.</p>
+          <% else %> 
+            <p class="hello"><%= @codes.count %> premium <%= @category.name %> resources are have high quality and find all codes related to your requirements.</p>
+          <% end %> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="belt">
+  <div class="container mek">
+    <% if params[:subcategory].present? %> 
+      <ul class="list-inline akaks">
+        <li><%= link_to codes_path, class: "terjatuh", "data-turbolinks": false do %><i class="fa fa-paper-plane" aria-hidden="true"></i><% end %></li>
+        <li><%= link_to @category.name, code_category_path(@category.slug), class: "terjatuh", "data-turbolinks": false %></li> 
+        <li><a><%= @subcategory.name.capitalize %></a></li>
+      </ul>
+    <% else %>
+      <div id="beeee" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+          <% @category.subcategories.each_slice(7).each_with_index do |f, index| %> 
+            <div class="item <%= 'active' if index == 0  %>">
+              <%= raw f.map{|g| raw(link_to(g.name, code_subcategory_path(@category.slug, g.slug), "data-turbolinks": false)).to_s}.join(" ")%>
+            </div>
+          <% end %> 
+        </div>
+      </div>
+    <% end %>  
+  </div> 
+</div>
+<div class="main_o">
+  <div class="container __ji">
+    <!-- <div class="fetr pull-right">
+      <div id="ddos" class="wrapper-dropdown-3" tabindex="1">
+      <span>All Themes</span>
+      <ul class="dropdown_ux">
+      <li><a href="#">Popular</a></li>
+      <li><a href="#">Best Seller</a></li>
+      <li><a href="#">Best Rated</a></li>
+      <li><a href="#">Recent</a></li>
+      </ul>
+      </div>
+      </div> -->
+      <div class="clear"></div>
+      <div class="col-md-3 leftr_l">
+        <div class="hf76">
+          <div class="titil">
+            <p class="twq kew kjlv">Filter Codes</p>
+          </div>
+          <div class="content">
+            <% if params[:subcategory].present? %>
+              <%= form_tag theme_subcategory_path, id: "search_filter", method: :get, remote: true do %>
+                <div class="form-group">
+                  <%= text_field_tag :search, params[:search], class: "form-control kre45", placeholder: "Wordpress, Drupal, Joomla, etc", onkeypress: "data_find()" %>
+                </div>
+                <div class="form-group">
+                  <p class="twq kjr">Price</p>
+                  <div class="beee">
+                    <%= text_field_tag :min, params[:min], class: "form-control kre45 kerpo", placeholder: "#{@minprice.to_i.floor}", onkeypress: "data_find_min()" %>
+                  </div>
+                  <div class="booo">
+                    <%= text_field_tag :max, params[:max], class: "form-control kre45 kerpo", placeholder: "#{@maxprice.to_i.floor}", onkeypress: "data_find_max()" %>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                  <p class="twq loreq">Sorted</p>
+                  <div class="mdgr754">
+                    <%= select_tag :sorter, options_for_select([["popular"], ["recents"], ["best seller"], ["best rated"]], params[:sorter]), { prompt: "Sort", class: "form-control jager24" } %>
+                  </div>
+                </div>
+                <%= submit_tag "Post", style: "display: none;" %>
+              <% end %>
+            <% else %> 
+              <%= form_tag code_category_path, id: "search_filter", method: :get, remote: true do %>
+                <div class="form-group">
+                  <%= text_field_tag :search, params[:search], class: "form-control kre45", placeholder: "Wordpress, Drupal, Joomla, etc", onkeypress: "data_find()" %>
+                </div>
+                <div class="form-group">
+                  <p class="twq kjr">Price</p>
+                  <div class="beee">
+                    <%= text_field_tag :min, params[:min], class: "form-control kre45 kerpo", placeholder: "#{@minprice.to_i.floor}", onkeypress: "data_find_min()" %>
+                  </div>
+                  <div class="booo">
+                    <%= text_field_tag :max, params[:max], class: "form-control kre45 kerpo", placeholder: "#{@maxprice.to_i.floor}", onkeypress: "data_find_max()" %>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                  <p class="twq loreq">Sorted</p>
+                  <div class="mdgr754">
+                    <%= select_tag :sorter, options_for_select([["popular"], ["recents"], ["best seller"], ["best rated"]], params[:sorter]), { prompt: "Sort", class: "form-control jager24" } %>
+                  </div>
+                </div>
+                <%= submit_tag "Post", style: "display: none;" %>
+              <% end %>
+            <% end %> 
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9 rgth_p">
+        <div class="sert9">
+          <ul class="lew jsdfgdjh9809" id="push_step">
+            <%= render 'push' %> 
+          </ul>
+        </div>
+      </div>
+      <div class="clear"></div>
+  </div>
+</div>

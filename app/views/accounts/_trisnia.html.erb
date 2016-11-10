@@ -1,0 +1,32 @@
+<div class="hdr">
+  <div class="con_re">
+    <div class="container lkhf">
+      <div class="fol-ire">
+        <ul class="list-inline gf">
+          <% if signed_in? %>
+            <% if @usr == current_user %>
+              <li class="fol">
+                <%= link_to "edit profile", personal_path(current_user), class: 'jku' %>
+              </li>
+            <% else %>
+              <% if current_user_is_following(current_user.id, @usr.id) %>
+                <li class="fol">
+                  <%= link_to unfollow_user_path, remote: true, class: 'jku unfollow_btn', id: 'unfollow_button', method: :post do %>
+                    <span>Following</span>
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="fol">
+                  <%= link_to "Follow", follow_user_path, remote: true, class: 'jku _follow_btn', id: 'follow_button', method: :post %>
+                </li>
+              <% end %>
+            <% end %>
+          <% end %>
+          <% unless @usr.freelance_av.blank? %>
+            <li class="hir"><a href="#" class="kit">hire me</a></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

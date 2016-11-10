@@ -1,0 +1,208 @@
+<div class="modal-dialog revje" role="document" data-turbolinks="false">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+			<div class="modal-title" id="myModalLabelk">
+				<div class="container lkjy75">
+					<h4 class="tuiei">
+						<%= @t3d.name.capitalize.capitalize %>
+					</h4>
+					<ul class="list-inline gfh">
+						<li><%= link_to @t3d.category.name, root_path, class: "jutr"  %></li>
+						<% unless @t3d.subcategories.blank? %> 
+							<% @t3d.subcategories.each do |subcategory| %>
+							<li class="cius">
+								<%= link_to subcategory.name, root_path, class: "jutr" %>
+							</li> 
+							<% end %> 
+						<% end %> 
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="modal-body" id="jkerop">
+			<div class="mengh">
+				<div class="hrte container">
+					<div class="col-md-4 sdfjsh37">
+						<div class="gfs">
+							<div class="djfhd98">
+								<%= link_to "DOWNLOAD", @t3d.brokes.map{|link|link.resources}.join(''), class: "nbdg" %>
+							</div>
+							<div class="hdgf87 djfhd98">
+								<ul class="khgg65">
+									<li class="vgx bgt"><span class="niuy date">Created</span><span class="fgd"><%= @t3d.created_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+									<li class="vgx bgt"><span class="niuy updated">Updated</span><span class="fgd"><%= @t3d.updated_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+									<% unless @t3d.includes.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">File Include</span><span class="fgd"><%= @t3d.includes.map {|inc| inc.name}.join(', ') %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.genre.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Genre</span><span class="fgd"><%= @t3d.genre.name.capitalize %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.geometry.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Geometry</span><span class="fgd"><%= @t3d.geometry.name.capitalize %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.softopen3ds.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Open With</span><span class="fgd"><%= @t3d.softopen3ds.map {|soft| soft.name}.join(', ') %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.ositems.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">OS</span><span class="fgd"><%= @t3d.ositems.map {|os| os.name}.join(', ') %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.polygons_count.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Polygons</span><span class="fgd"><%= @t3d.polygons_count %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.vertices_count.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Vertices</span><span class="fgd"><%= @t3d.vertices_count %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.resolution.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Resolution</span><span class="fgd"><%= @t3d.resolution %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.layered.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Layered</span><span class="fgd"><%= @t3d.layered %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.tileable.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Tileable</span><span class="fgd"><%= @t3d.tileable %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.animated.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Animated</span><span class="fgd"><%= @t3d.animated %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.material.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Material</span><span class="fgd"><%= @t3d.material %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.low_poly.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Low Poly</span><span class="fgd"><%= @t3d.low_poly %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.rigged.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Rigged</span><span class="fgd"><%= @t3d.rigged %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.texture.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Texture</span><span class="fgd"><%= @t3d.texture %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.uv_mapped.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">UV Mapped</span><span class="fgd"><%= @t3d.uv_mapped %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.unwrapped_uvs.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Unwrapped UVs</span><span class="fgd"><%= @t3d.unwrapped_uvs %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.bitmap_texture.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Bitmap</span><span class="fgd"><%= @t3d.bitmap_texture %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @t3d.procedural_texture.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Procedural</span><span class="fgd"><%= @t3d.procedural_texture %></span><div class="clear"></div></li>
+									<% end %>
+									<li class="vgx"><span class="niuy tags">Tags</span><span class="fgd"><%= @t3d.tags.map {|tag| tag.name}.join(', ') %></span><div class="clear"></div></li>
+									<span class="fgd"></span>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 dgf549">
+						<div class="gfds543">
+							<div class="col-md-4 jd33">
+								<ul class="lkj98">
+									<% @t3d.screenshots.each_with_index do |f, index| %>
+										<li data-target="#caro" data-slide-to="<%= index %>" class="<%= 'active if index == 0' %>">
+											<%= image_tag f.screenshot_url(:thumb) %>
+										</li>
+									<% end %>
+								</ul>
+							</div>
+							<div class="col-md-8 hgfe5">
+								<div class="dfhgd65">
+									<div id="caro" class="carousel slide" data-ride="carousel">
+										<div class="carousel-inner" role="listbox">
+											<% @t3d.screenshots.each_with_index do |screen, index| %>
+												<div class="item <%= 'active' if index == 0  %>">
+													<%= image_tag screen.screenshot_url(:screen), class: "ho_ve_r" %>
+												</div>
+											<% end %>
+										</div>
+									</div>
+									<div class="dhf97">
+										<ul>
+											<% unless @t3d.url_demo.blank? %>
+												<li class="cp" data-toggle="tooltip" data-placement="bottom" title="Preview"><%= link_to @t3d.url_demo, target: "blank" do  %> <i class="fa fa-video-camera" aria-hidden="true"></i> <% end %></li>
+											<% end %>
+										</ul>
+									</div>
+								</div>
+								<div class="jhgshgjh">
+									<ul class="list-inline xd">
+										<li role="presentation" class="active"><a href="#desct" role="tab" data-toggle="tab">Description</a></li>
+										<% if current_user.reviewer? %> 
+											<li role="presentation"><a href="#reviews" role="tab" data-toggle="tab">Give Reviews</a></li>
+										<% end %> 
+										<% unless @t3d.note.empty? %>
+											<li role="presentation"><a href="#message" role="tab" data-toggle="tab">Message</a></li>
+										<% end %> 
+									</ul>
+									<div class="dtert tab-content">
+										<div role="tabpanel" class="jhfre85 tab-pane active" id="desct">
+											<%= simple_format(@t3d.description) %>
+										</div>
+										<% if current_user.reviewer? %>
+										<div role="tabpanel" class="jhfre85 revs tab-pane" id="reviews">
+											<%= form_for @t3d, remote: true do |f| %>
+												<div class="form-group mkg32">
+													<%= f.fields_for :revrest do |rev| %>
+														<%#= rev.hidden_field :id %>
+														<%= rev.text_area :content, class: "form-control kjh530 nage554", placeholder: "Review Result" %>
+													<% end %> 
+												</div>
+												<div class="form-group mkg32">
+													<%= f.text_field :price, class: "form-control kjh530", placeholder: "Regular License Price"  %>
+												</div>
+												<div class="form-group mkg32">
+													<%= f.text_field :price_ext, class: "form-control kjh530", placeholder: "Extended License Price"  %>
+												</div>
+												<div class="form-group hjr96 mkg32">
+													<%= f.check_box :agree, {class: "dt5", id: "t3d_agree_#{@t3d.id}"} %>
+													<label for="t3d_agree_<%= @t3d.id %>"><span class="jhj kiup"></span><span class="nhg3">I have checked all the files associated with this stuff and I approve this proposal </span></label>
+												</div>
+												<div class="form-group hjr96 mkg32">
+													<%= f.check_box :reject, {class: "dt5", id: "t3d_reject_#{@t3d.id}"} %>
+													<label for="t3d_reject_<%= @t3d.id %>"><span class="jhj kiup"></span><span class="nhg3">I have checked all the files associated with this stuff and I reject this proposal </span></label>
+												</div>
+												<div class="dgf_byt">
+													<%= f.submit "GIVE RESULT", class: "btn btn-default btn_gdr" %>
+												</div>
+											<% end %> 
+										</div>
+										<% end %> 
+										<div role="tabpanel" class="jhfre85 tab-pane" id="message">
+											<p><%= @t3d.note %></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(document).ready(function(){
+	$('#t3d_agree_<%= @t3d.id %>').on('change', function(){
+		if(this.checked){
+			$.ajax({
+				type: "GET",
+				url: "/t3dreams/aprroved/<%= @t3d.slug %>/t3dream",
+				success: function(){
+				}
+			});
+		};
+	});
+	$('#t3d_reject_<%= @t3d.id %>').on('change', function(){
+		if(this.checked){
+			$.ajax({
+				type: "GET",
+				url: "/t3dreams/reject/<%= @t3d.slug %>/t3dream",
+				success: function(){
+				}
+			});
+		};
+	});
+});
+</script>

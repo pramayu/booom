@@ -1,0 +1,68 @@
+<%= title "User Sign Up ~ KAPHOO" %>
+<div class="container login signup cloud">
+  <div class="cloud_1">
+    <%= render "accounts/cloud1" %>
+  </div>
+  <div class="cloud_2">
+    <%= render "accounts/cloud2" %>
+  </div>
+  <div class="cloud_3">
+    <%= render "accounts/cloud3" %>
+  </div>
+  <div class="cloud_4">
+    <%= render "accounts/cloud4" %>
+  </div>
+  <div class="log-in-content">
+    <div class="col-md-6 left">
+      <h2 class="logo"><%= link_to "KAPHOO", root_path %></h2>
+      <div class="cerik"></div>
+    </div>
+    <div class="col-md-6 right">
+      <%= form_for @user do |f| %>
+        <div class="col-md-6 kut1">
+          <div class="form-group">
+            <div class="ic_on ic_on1">
+              <%= f.text_field :first_n, class: "form-control vfr", placeholder: "First Name" %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 kut2">
+          <div class="form-group">
+            <div class="ic_on ic_on1">
+              <%= f.text_field :last_n, class: "form-control vfr", placeholder: "Last Name" %>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <div class="form-group">
+          <div class="ic_on ic_on0">
+            <%= f.email_field :email, class: "form-control vfr", placeholder: "Email Address" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="ic_on ic_on1">
+            <%= f.text_field :username, class: "form-control vfr", placeholder: "Username" %>
+          </div>
+        </div>
+        <div class="col-md-6 kut1">
+          <div class="form-group">
+            <div class="ic_on ic_on2">
+              <%= f.password_field :password, class: "form-control vfr", placeholder: "Password" %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 kut2">
+          <div class="form-group">
+            <div class="ic_on ic_on3">
+              <%= f.password_field :password_confirmation, class: "form-control vfr", placeholder: "Confirm Password" %>
+            </div>
+          </div>
+        </div>
+        <div class="btn_sign_up bth-j">
+          <%= f.submit "Register", class: "btn btn-primary bt_sg joi" %>
+        </div>
+      <% end %>
+      <p class="text-center attr">Already have an account? <%= link_to "Sign in", sign_in_path %></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+$('#com-en').hide().fadeIn(1000);
+$('#com-en').append("<%= j render @comment %>");
+<% if @theme.present? %>
+	$('#com-counts').html('<%= escape_javascript @theme.comments.count.to_s %> Comments');
+<% elsif @code.present? %>
+	$('#com-counts').html('<%= escape_javascript @code.comments.count.to_s %> Comments');
+<% elsif @graphic.present? %>
+	$('#com-counts').html('<%= escape_javascript @graphic.comments.count.to_s %> Comments');
+<% elsif @t3d.present? %>
+	$('#com-counts').html('<%= escape_javascript @t3d.comments.count.to_s %> Comments');
+<% elsif @video.present? %>
+	$('#com-counts').html('<%= escape_javascript @video.comments.count.to_s %> Comments');
+<% elsif @font.present? %>
+	$('#com-counts').html('<%= escape_javascript @font.comments.count.to_s %> Comments');
+<% elsif @course.present? %>
+	$('#com-counts').html('<%= escape_javascript @course.comments.count.to_s %> Comments');
+<% end %>
+$('#enter_com').val('');

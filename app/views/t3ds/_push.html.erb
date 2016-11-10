@@ -1,0 +1,95 @@
+<% for t3d in @t3ds %> 
+  <li class="kqt34">
+    <div class="kquie">
+      <%= image_tag t3d.thumbnail_url(:thumbnail) %>
+      <div class="extras" data-tooltip-content="#dat_tooltip">
+        <div class="u_name">
+          <%= link_to "", item_t3d_path(t3d), class: "this_oiu", "data-turbolinks": false %>
+        </div>
+        <div class="raty-rate">
+          <div class="star-rating jger" data-score="<%= t3d.reviews.average(:rating) %>"></div>
+        </div>
+        <div class="vote">
+          <ul>
+            <li>
+              <% if signed_in? %>
+                <% if current_user.liked? t3d %>
+                  <%= link_to dislike_t3d_path(t3d.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{t3d.id}" do %>
+                    <i class="fa fa-heart ic_vote"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to like_t3d_path(t3d.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{t3d.id}" do %>
+                    <i class="fa fa-heart ic_vote"></i>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to sign_in_path, class: "vo_ic vo_ic_dis" do %>
+                  <i class="fa fa-heart ic_vote"></i>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <% if signed_in? %>
+                <% if current_user.akusuka.blank? %>
+                  <%= link_to new_akusuka_path, class: "mutq co_ic", remote: true do %>
+                    <i class="fa fa-folder" aria-hidden="true"></i>
+                  <% end %>
+                <% else %>
+                  <% if current_user.akusuka.t3ds.include?(t3d) %>
+                    <%= link_to t3d_unsuka_t3d_path(t3d), class: "mutq co_ic green", id: "unwish_#{t3d.id}", remote: true do %>
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to t3d_suka_t3d_path(t3d), class: "mutq co_ic", id: "wish_#{t3d.id}", remote: true do %>
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to sign_in_path, class: "mutq co_ic" do %>
+                  <i class="fa fa-folder" aria-hidden="true"></i>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <a onclick="bagtdCart(<%= t3d.id %>)" id="bag_<%= t3d.id %>" style="cursor: pointer;" class="co_ic loih">
+                <i class="fa fa-shopping-bag ic_vote"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="tooltip_j">
+          <div id="dat_tooltip">
+            <div class="img_o">
+              <% t3d.screenshots[0..0].each do |image| %>
+                <%= image_tag image.screenshot_url(:hover) %>
+              <% end %>  
+            </div>
+            <div class="titlw pull-left">
+              <h4 class="je"><%= truncate(t3d.name, length: 50) %></h4>
+              <span class="by"><%= t3d.user.company %> | </span> 
+              <span class="by">3D animation / <%= t3d.category.name %></span>
+            </div>
+            <div class="prce pull-right">
+              <span class="k">$<%= t3d.price.to_i.floor %></span>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="author">
+        <% if t3d.user.avatar.blank? %>
+          <%= image_tag('default/default_profile.png', width: 28)  %>
+        <% else %>
+          <%= image_tag t3d.user.avatar_url(:taan), width: 28 %>
+        <% end %>
+      </div>
+      <div class="sell_info">
+        <span class="icon-cart_3 icon_cart_3"></span><span class="dta_sell"><%= t3d.line_items.where(t3d_id: t3d.id).count %></span>
+      </div>
+      <div class="price_info">
+        <span class="icon-price icon_price_1"></span><span class="dta_price">$<%= t3d.price.to_i.floor %></span>
+      </div>
+    </div>
+  </li>
+<% end %> 

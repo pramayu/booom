@@ -1,0 +1,70 @@
+<%= title "Withdrawals ~ KHAPOO" %>
+<div class="mail-nav all_notifi earning wth_drw setting wishlist">
+  <div class="col-md-8 ddgtet" style="width:76%;">
+    <div class="isi-menu-mail kim-ii hewq">
+      <div class="tidks">
+        <h2 class="dhfgwp">Withdrawal</h2>
+        <span class="desc_">With Wishlist, You Can Save The Products That You Will Purchase</span>
+      </div>
+      <div class="conent_h">
+        <div class="col-md-12 nddd">
+          <% unless current_user.balance.to_i < 50 %>
+            <%= form_for([current_user, current_user.withdrawals.build], method: :post, remote: true) do |f| %>
+              <div class="form-group saym pull-left"> 
+                <%= f.email_field :address, class: "form-control eorf iiuy", placeholder: "Paypal Address" %> 
+              </div>
+              <div class="form-group saym pull-left"> 
+                <%= f.text_field :mount, class: "form-control eorf", placeholder: "Withdrawal" %> 
+              </div>
+              <%= f.submit "SEND", class: "btn btn-default mater" %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="earn_titlr">
+        <ul class="list-inline yoon">
+          <li class="id_" style="width: 90px;">ID</li>
+          <li class="name_" style="width: 251px;">EMAIL ADDRESS</li>
+          <li class="status_">STATUS</li>
+          <li class="unit_" style="width:96px">CASHOUT</li>
+          <li class="purc_">DATE</li>
+        </ul>
+      </div>
+      <div class="content_earn">
+        <ul class="tqx">
+          <% current_user.withdrawals.order("created_at desc").each_with_index do |withdrawal, index| %>
+            <div id="withdr">
+              <%= render partial: 'withdrawals/withdrawal', locals: { withdrawal: withdrawal, index: index} %>  
+            </div> 
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 brok prek" style="padding-top:0px;">
+    <div class="mnu_fuk">
+      <div class="recent kls">
+        <div class="ti_l">
+          <span>WHEN AND HOW WILL I GET PAID?</span>
+        </div>
+        <div class="pdjs">
+          <p>
+          Your earnings will be sent by your method of choice provided that some conditions are met as shown on the table below. All funds are in US Dollars.
+          </p>
+          <p>
+          Your cashout will be entered in the pending queue to be processed and will be done in the order it's received usually within 4 to 5 business days.
+          </p>
+          <p>
+          <b>Minimum balance to cashout is $50 for Members, for PayPal only.</b>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.withdraw').addClass('aktif');
+</script>

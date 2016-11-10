@@ -1,0 +1,4 @@
+$('#unwish_<%= @theme.id %>').attr('class', 'vo_ic')
+						   .attr('href', '<%= theme_suka_theme_path(@theme.slug) %>')
+						   .attr('id', 'wish_<%= @theme.id %>')
+						   .removeClass('green');

@@ -1,0 +1,74 @@
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+				<h4 class="modal-title" id="myModalLabel">Section: <%= @headsec.name %></h4>
+			</div>
+			<div class="modal-body">
+			<%= @delete %>
+			<%= form_for([@course, @headsec, @headsec.lectures.build], remote: true) do |f| %>
+				<div class="mengh">
+					<div class="form-group hrte">
+						<%= f.text_field :name, class: "form-control ngerw lou pull-left", placeholder: "Lecture", id: "lkf", require: true %>
+						<div class="gtrwql">
+							<%= f.submit "GO", class: "btn btn-cvt" %>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form-group hrte sget">
+						<%= f.text_area :description, class: "form-control ngerw", placeholder: "Description", id: "lkh" %>
+					</div>
+				</div>
+			<% end %>
+			<% unless @headsec.lectures.blank? %>
+				<div class="lectures_a" id="lecture">
+					<h4 class="mnhg">Lectures: </h4>
+					<%= render @lectures %>
+				</div>
+			<% end %>
+			</div>
+			<div class="modal-footer">
+				<!-- <button type="button" class="btn btn-default" data-dismiss="modal" id="ref_es" onClick="btnReload()">Finish</button> -->
+			</div>
+	</div>
+</div>
+<script>
+	$('.head_edit').each(function(){
+		var value = $(this).val();
+		var size = value.length;
+		size = size*2;
+		$(this).css('width', size*4);
+	});
+	function add_class(lecture_id) {
+		$('#lec_u_' + lecture_id).prop('readonly', false).addClass('lect_edit');
+	};
+	function lecT(lecture_id){
+		$('#lec_u_' + lecture_id).keypress(function(e){
+			if(e.which == 13){
+				$.ajax({
+					type: "PUT",
+					url: "/courses/<%= @course.slug %>/headsecs/<%= @headsec.id %>/lectures/" + lecture_id,
+					dataType: 'script',
+					success: function(){
+						
+					}
+				});
+			};
+		});
+	};
+	function lecD(lecture_id){
+		$.ajax({
+			type: "GET",
+			url: "/courses/<%= @course.slug %>/headsecs/<%= @headsec.id %>/delete/" + lecture_id,
+			dataType: 'script',
+			success: function(){
+				$('#edit_lecture_' + lecture_id).hide("fast", function(){
+					$(this).remove();
+				});
+				$('#head_' + lecture_id).hide("fast", function(){
+					$(this).remove();
+				});
+			}
+		});
+	};
+</script>

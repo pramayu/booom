@@ -1,0 +1,28 @@
+<div class="modal-dialog mangrove" role="document">
+	<div class="modal-content">
+		<%= form_for(@akusuka, remote: true) do |f| %>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+				<h4 class="modal-title" id="myModalLabelk">
+					<%= render @akusukas %>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="mengh">
+					<div class="form-group hrte">
+						<%= f.text_field :name, class: "form-control ngerw lou pull-left hgdloi", placeholder: "wishname", id: "lkf", require: true %>
+						<div class="gtrwql">
+							<%= f.submit "GO", class: "btn btn-cvt" %>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="gtrwql">
+					<button type="button" class="btn btn-default btn-cvt" data-dismiss="modal" id="ref_es" onClick="btnReload()">FINISH</button>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

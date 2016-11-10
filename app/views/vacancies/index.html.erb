@@ -1,0 +1,185 @@
+<%= title "Vacancies ~ KHAPOO" %>
+<%= render "vacancies/head" %>
+<div class="job_content">
+  <div class="_designer_job">
+    <div class="container th-cus">
+      <div class="title_i">
+        <div class="capd">
+          <h4 class="capd_c">Designer Jobs</h4>
+        </div>
+        <div class="dsc">
+          <p class="dsc_c">See all the latest jobs list and choose as your skills</p>
+        </div>
+      </div>
+      <div class="_data_job">
+        <% for designer in @designers %>
+          <div class="col-md-4 tmbl_job">
+            <div class="tmbl_it">
+              <div class="timeandopt">
+                <span class="tme"><%= time_ago_in_words(designer.created_at) %></span>
+              </div>
+              <div class="who_uo">
+                <%= link_to vacancy_url(designer.slug), class: "kjr" do %>
+                  <%= image_tag designer.user.avatar_url(:thumb) %>
+                  <p class="who_am"><% if designer.user.company.empty? %><%= designer.first_n.capitalize + " " + designer.last_n.capitalize %><% else %><%= designer.user.company %><% end %></p>
+                <% end %>
+                <%= link_to vacancy_url(designer), class: "vbg" do %>
+                  <p><%= truncate(designer.name, length: 30) %></p>
+                <% end %>
+              </div>
+              <div class="btn-gri">
+                <div class="col-md-6 nht lf_re">
+                  <a href="#">Recruiters: <span><%= designer.recruiter %></span></a>
+                </div>
+                <div class="col-md-6 nht rg_re">
+                  <a href="#">Experience: <span><%= designer.experience %></span></a>
+                </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="clear"></div>
+        <div class="more_btn">
+          <a href="/vacancies/category/designer" class="more_pl"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="_programmer">
+    <div class="container th-cus">
+      <div class="title_i">
+        <div class="capd">
+          <h4 class="capd_c">Programmers</h4>
+        </div>
+        <div class="dsc">
+          <p class="dsc_c">See all the latest jobs list and choose as your skills</p>
+        </div>
+      </div>
+      <div class="_data_job">
+        <% for programmer in @programmers %>
+          <div class="col-md-4 tmbl_job">
+            <div class="tmbl_it">
+              <div class="timeandopt">
+                <span class="tme"><%= time_ago_in_words(programmer.created_at) %></span>
+              </div>
+              <div class="who_uo">
+                <%= link_to vacancy_url(programmer.slug), class: "kjr" do %>
+                  <%= image_tag programmer.user.avatar_url(:thumb) %>
+                  <p class="who_am"><% if programmer.user.company.empty? %><%= programmer.first_n.capitalize + " " + programmer.last_n.capitalize %><% else %><%= programmer.user.company %><% end %></p>
+                <% end %>
+                <%= link_to vacancy_url(programmer.slug), class: "vbg" do %>
+                  <p><%= truncate(programmer.name, length: 30) %></p>
+                <% end %>
+              </div>
+              <div class="btn-gri">
+                <div class="col-md-6 nht lf_re">
+                  <a>Recruiters: <span><%= programmer.recruiter %></span></a>
+                </div>
+                <div class="col-md-6 nht rg_re">
+                  <a>Experience: <span><%= programmer.experience %></span></a>
+                </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="clear"></div>
+      </div>
+      <div class="more_btn">
+        <a href="/vacancies/category/programmer" class="more_pl"></a>
+      </div>
+    </div>
+  </div>
+  <div class="_animator">
+    <div class="container th-cus">
+      <div class="title_i">
+        <div class="capd">
+          <h4 class="capd_c">Animators</h4>
+        </div>
+        <div class="dsc">
+          <p class="dsc_c">See all the latest jobs list and choose as your skills</p>
+        </div>
+      </div>
+      <div class="_data_job">
+        <% for animator in @animators %>
+          <div class="col-md-4 tmbl_job">
+            <div class="tmbl_it">
+              <div class="timeandopt">
+                <span class="tme"><%= time_ago_in_words(animator.created_at) %></span>
+              </div>
+              <div class="who_uo">
+                <%= link_to vacancy_url(animator.slug), class: "kjr" do %>
+                  <%= image_tag animator.user.avatar_url(:thumb) %>
+                  <p class="who_am"><% if animator.user.company.empty? %><%= animator.first_n.capitalize + " " + animator.last_n.capitalize %><% else %><%= animator.user.company %><% end %></p>
+                <% end %>
+                <%= link_to vacancy_url(animator), class: "vbg" do %>
+                  <p><%= truncate(animator.name, length: 30) %></p>
+                <% end %>
+              </div>
+              <div class="btn-gri">
+                <div class="col-md-6 nht lf_re">
+                  <a>Recruiters: <span><%= animator.recruiter %></span></a>
+                </div>
+                <div class="col-md-6 nht rg_re">
+                  <a>Experience: <span><%= animator.experience %></span></a>
+                </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="clear"></div>
+      </div>
+      <div class="more_btn">
+        <a href="/vacancies/category/animator" class="more_pl"></a>
+      </div>
+    </div>
+  </div>
+  <div class="_programmer">
+    <div class="container th-cus">
+      <div class="title_i">
+        <div class="capd">
+          <h4 class="capd_c">Security Networking</h4>
+        </div>
+        <div class="dsc">
+          <p class="dsc_c">See all the latest jobs list and choose as your skills</p>
+        </div>
+      </div>
+      <div class="_data_job">
+        <% for network in @networks %>
+          <div class="col-md-4 tmbl_job">
+            <div class="tmbl_it">
+              <div class="timeandopt">
+                <span class="tme"><%= time_ago_in_words(network.created_at) %></span>
+              </div>
+              <div class="who_uo">
+                <%= link_to vacancy_url(network), class: "kjr" do %>
+                  <%= image_tag network.user.avatar_url(:thumb) %>
+                  <p class="who_am"><% if network.user.company.empty? %><%= network.first_n.capitalize + " " + network.last_n.capitalize %><% else %><%= network.user.company %><% end %></p>
+                <% end %>
+                <%= link_to vacancy_url(network), class: "vbg" do %>
+                  <p><%= truncate(network.name, length: 30) %></p>
+                <% end %>
+              </div>
+              <div class="btn-gri">
+                <div class="col-md-6 nht lf_re">
+                  <a>Recruiters: <span><%= network.recruiter %></span></a>
+                </div>
+                <div class="col-md-6 nht rg_re">
+                  <a>Experience: <span><%= network.experience %></span></a>
+                </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="clear"></div>
+      </div>
+      <div class="more_btn">
+        <a href="/vacancies/category/network-security" class="more_pl"></a>
+      </div>
+    </div>
+  </div>
+</div>
+

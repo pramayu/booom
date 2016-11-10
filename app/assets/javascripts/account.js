@@ -1,0 +1,17 @@
+//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= require jquery.turbolinks
+//= require bootstrap-sprockets
+//= require tooltipster.bundle.min.js
+//= require jquery.nicescroll.min.js
+//= require home_main.js
+//= require ckeditor/init
+//= require chosen.jquery.js
+//= require tagsinput.js
+//= require jquery-fileupload/basic
+//= require jquery.dropdown.js
+//= require account_main.js
+//= require video.js
+//= require cocoon
+//= require coffee.js.coffee

@@ -1,0 +1,16 @@
+$("#sguwjj<%= @line_item.id %>").html("<%= escape_javascript(render 'line_items/price_modal') %>");
+$("#sdfg629").html("<%= escape_javascript(render 'line_items/total') %>");
+$("#djfg68<%= @line_item.id %>").html("<%= escape_javascript render(partial: 'line_items/prc', locals: {item: @line_item}) %>");
+<% if @line_item.license == 'extended' %>
+	$("#khgd56<%= @line_item.id %>, #khgd56dg<%= @line_item.id %>").html("Extended");
+	$("#budgfei<%= @line_item.id %>, #iur983<%= @line_item.id %>").html("<%= escape_javascript link_to "Extended", edit_line_item_url(@line_item.id), remote: true %>");
+<% elsif @line_item.license == 'regular' %>
+	$("#khgd56dg<%= @line_item.id %>, #khgd56<%= @line_item.id %>").html("Regular");
+	$("#budgfei<%= @line_item.id %>, #iur983<%= @line_item.id %>").html("<%= escape_javascript link_to "Regular", edit_line_item_url(@line_item.id), remote: true %>");
+<% end %>
+<% if @line_item.support? %>
+	$("#fhye68<%= @line_item.id %>, #basget<%= @line_item.id %>").html("Unlimited Support");
+<% else %>
+	$("#fhye68<%= @line_item.id %>, #basget<%= @line_item.id %>").html("6 Months Support");
+<% end %>
+location.reload();

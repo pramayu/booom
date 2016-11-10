@@ -1,0 +1,30 @@
+$('#srew_<%= @video.id %>').hide("slow");
+$('#reve').modal("hide");
+
+
+<% @video.videms.each_with_index do |videm, index| %>
+	<% if videm.trailer_previously_changed? %>
+		$('#vitem_<%= videm.id %>').remove();
+		$("#beta5").append("<%= escape_javascript render(partial: 'videofxes/videmo', locals: {videm: videm, index: index}) %>");
+		$('.mata').on("change", function(){
+			$(this).removeClass('active');
+		});
+	<% end %>
+<% end %>
+
+<% if @video.thumbnail_previously_changed? %>
+	$('.img_tre43').hide("fast", function(){
+		$(this).remove();
+	});
+	$("#jreg<%= @video.id %>").html("<%= escape_javascript render(partial: 'videofxes/thumbnail', locals: {video: @video}) %>");
+<% end %>
+
+<% @video.brokes.each do |broke| %>
+	<% if broke.resources_previously_changed? %>
+		$('#fhg656').hide();
+		$('#hftu88').html("<%= escape_javascript render(partial: 'videofxes/delbroke', locals: {broke: broke}) %>");
+		$('#hftu88').show();
+		$('#rhrh75').html("<%= escape_javascript render(partial: 'videofxes/delbroke', locals: {broke: broke}) %>");
+		$('.l1_').hide();
+	<% end %>
+<% end %>

@@ -1,0 +1,95 @@
+<% for graphic in @graphics %> 
+  <li class="kqt34">
+    <div class="kquie">
+      <%= image_tag graphic.thumbnail_url(:thumbnail) %>
+      <div class="extras" data-tooltip-content="#dat_tooltip">
+        <div class="u_name">
+          <%= link_to "", item_graphic_path(graphic), class: "this_oiu", "data-turbolinks": false %>
+        </div>
+        <div class="raty-rate">
+          <div class="star-rating jger" data-score="<%= graphic.reviews.average(:rating) %>"></div>
+        </div>
+        <div class="vote">
+          <ul>
+            <li>
+              <% if signed_in? %>
+                <% if current_user.liked? graphic %>
+                  <%= link_to dislike_graphic_path(graphic.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{graphic.id}" do %>
+                    <i class="fa fa-heart ic_vote"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to like_graphic_path(graphic.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{graphic.id}" do %>
+                    <i class="fa fa-heart ic_vote"></i>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to sign_in_path, class: "vo_ic vo_ic_dis" do %>
+                  <i class="fa fa-heart ic_vote"></i>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <% if signed_in? %>
+                <% if current_user.akusuka.blank? %>
+                  <%= link_to new_akusuka_path, class: "mutq co_ic", remote: true do %>
+                    <i class="fa fa-folder" aria-hidden="true"></i>
+                  <% end %>
+                <% else %>
+                  <% if current_user.akusuka.graphics.include?(graphic) %>
+                    <%= link_to graphic_unsuka_graphic_path(graphic), class: "mutq co_ic green", id: "unwish_#{graphic.id}", remote: true do %>
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to graphic_suka_graphic_path(graphic), class: "mutq co_ic", id: "wish_#{graphic.id}", remote: true do %>
+                      <i class="fa fa-folder" aria-hidden="true"></i>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to sign_in_path, class: "mutq co_ic" do %>
+                  <i class="fa fa-folder" aria-hidden="true"></i>
+                <% end %>
+              <% end %>
+            </li>
+            <li>
+              <a onclick="baggCart(<%= graphic.id %>)" id="bag_<%= graphic.id %>" style="cursor: pointer;" class="co_ic loih">
+                <i class="fa fa-shopping-bag ic_vote"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="tooltip_j">
+          <div id="dat_tooltip">
+            <div class="img_o">
+              <% graphic.screenshots[0..0].each do |image| %>
+                <%= image_tag image.screenshot_url(:hover) %>
+              <% end %>  
+            </div>
+            <div class="titlw pull-left">
+              <h4 class="je"><%= truncate(graphic.name, length: 50) %></h4>
+              <span class="by"><%= graphic.user.company %> | </span> 
+              <span class="by">graphics / <%= graphic.category.name %></span>
+            </div>
+            <div class="prce pull-right">
+              <span class="k">$<%= graphic.price.to_i.floor %></span>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="author">
+        <% if graphic.user.avatar.blank? %>
+          <%= image_tag('default/default_profile.png', width: 28)  %>
+        <% else %>
+          <%= image_tag graphic.user.avatar_url(:taan), width: 28 %>
+        <% end %>
+      </div>
+      <div class="sell_info">
+        <span class="icon-cart_3 icon_cart_3"></span><span class="dta_sell"><%= graphic.line_items.where(graphic_id: graphic.id).count %></span>
+      </div>
+      <div class="price_info">
+        <span class="icon-price icon_price_1"></span><span class="dta_price">$<%= graphic.price.to_i.floor %></span>
+      </div>
+    </div>
+  </li>
+<% end %> 

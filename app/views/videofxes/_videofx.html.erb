@@ -1,0 +1,23 @@
+<% unless videofx.agree? || videofx.reject? %> 
+<div class="col-md-3 klie" id="klodffgt_<%= videofx.id %>">
+	<div class="klhj867">
+		<%= image_tag videofx.thumbnail_url(:thumbnail) %>
+		<div class="clkj878">
+			<a id="del_to_pro_video_<%= videofx.id %>" class="del_to_pro">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</a>
+		</div>
+	</div>
+</div>
+<% end %> 
+<script>
+	$('#del_to_pro_video_<%= videofx.id %>').click(function(){
+		$.ajax({
+			type: "GET",
+			url: "<%= del_to_pro_video_path(videofx) %>",
+			success: function(){
+				$('#klodffgt_<%= videofx.id %>').hide("slow");
+			}
+		});
+	});
+</script>

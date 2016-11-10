@@ -1,0 +1,59 @@
+<% @graphics.each do |graphic| %>
+  <div class="col-md-3 sol" id="graphic_del<%= graphic.id %>">
+    <div class="soll soli">
+      <div class="img_k">
+        <%= image_tag graphic.thumbnail_url(:thumbnail), class: "isabela" %>
+        <div class="hof hgsd54657">
+          <div class="dhgft">
+            <%= link_to item_graphic_path(graphic), class: "btyr-hfg", "data-turbolinks": false do %>
+              <i class="fa fa-rocket" aria-hidden="true"></i>
+            <% end %>
+          </div>
+          <ul class="fhg">
+            <% if graphic.freeitems.map{|free| free.graphic_id}.join("").to_i == graphic.id %>
+              <li class="dhg734 kd64" style="border-radius: 0px;cursor:pointer;"><i style="color: #ff9c49;" class="fa fa-unlock-alt" aria-hidden="true"></i></li>
+            <% else %>
+              <li class="dhg734 kd64" onclick="graphicFree(<%= graphic.id %>)" style="border-radius: 0px;cursor:pointer;"><i id="color_<%= graphic.id %>" style="color: #A1A1A1;" class="fa fa-unlock-alt" aria-hidden="true"></i></li>
+            <% end %>
+            <li class="dhg734 kd64 del_86" onclick="dellGraphicAdmin(<%= graphic.id %>)"</li>
+          </ul>
+          <div class="tooltip_j">
+            <div id="dat_tooltip">
+              <div class="img_o">
+                <% graphic.screenshots[0..0].each do |image| %>
+                  <%= image_tag image.screenshot_url(:hover) %>
+                <% end %>  
+              </div>
+              <div class="titlw pull-left">
+                <h4 class="je"><%= truncate(graphic.name, length: 50) %></h4>
+                <span class="by"><%= graphic.user.company %> | </span> 
+                <span class="by">graphics / <%= graphic.category.name %></span>
+              </div>
+              <div class="prce pull-right">
+                <span class="k">$<%= graphic.price.to_i.floor %></span>
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <ul class="list-inline lf pull-left">
+          <li>
+            <span class="icon-cart_3 icon_cart_3 js"></span><span class="dr"><%= graphic.sell %></span>
+          </li>
+          <li>
+            <span class="icon-price icon_price_1 js"></span><span class="dr">$<%= graphic.price.to_i.floor %> / $<%= graphic.price_ext.to_i.floor %></span>
+          </li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script>
+$(function(){
+  $('.but').removeClass('active');
+  $('.grap_ic').addClass('active');
+});
+</script>

@@ -1,0 +1,730 @@
+<style>
+.hdr {
+  <% if @usr.ourstore.present? %>
+  background-image: url(<%= @usr.ourstore.header_url(:thumbo) %>);
+  <% else %>
+  background-image: url(<%= asset_path 'default/snfg.png' %>)
+  <% end %>
+width: 100%;
+height: 350px;
+background-repeat: no-repeat;
+background-size: cover;
+}
+</style>
+<%= title  @usr.company + "~ KAPHOO" %>
+<div class="store_e">
+  <%= render "accounts/trisnia" %>
+  <div class="this_wtf">
+    <%= render "accounts/tellmeway" %>
+    <div class="lst-ptr">
+      <div class="coirt">
+        <div class="container trew">
+          <div class="col-md-8 jhgy" style="width:75.666667%;padding:0px;">
+            <% @usr.themes.where(aggree: true).each do |f| %>
+              <div class="col-md-3 bgal">
+                <div class="jwi">
+                  <div class="img-l">
+                    <%= image_tag f.thumbnail_url(:thumbnail) %>
+                  </div>
+                  <div class="hgre hgsd54657">
+                    <div class="diy">
+                      <span class="tir"><%= link_to truncate(f.name, length: 14), item_path(f) %></span>
+                    </div>
+                    <ul class="vtre">
+                      <li class="lik">
+                        <% if signed_in? %>
+                          <% if current_user.liked? f %>
+                            <%= link_to dislike_theme_path(f.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{f.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_theme_path(f.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{f.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to sign_in_path do %>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                          <% end %>
+                        <% end %>
+                      </li>
+                      <li class="colle">
+                        <% if signed_in? %>
+                          <% if current_user.akusuka.blank? %>
+                            <%= link_to new_akusuka_path, class: "mutq", remote: true do %>
+                              <i class="fa fa-folder-open" aria-hidden="true"></i>
+                            <% end %>
+                          <% else %>
+                            <% if current_user.akusuka.themes.include?(f) %>
+                              <%= link_to theme_unsuka_theme_path(f), class: "mutq green", id: "unwish_#{f.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% else %>
+                              <%= link_to theme_suka_theme_path(f), class: "mutq", id: "wish_#{f.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <a href="/sign_in" class="mutq">
+                            <i class="fa fa-folder-open" aria-hidden="true"></i>
+                          </a>
+                        <% end %>
+                      </li>
+                      <li class="cart"><a href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+                      <li class="demo">
+                        <%= link_to f.url_demo do %>
+                          <i class="fa fa-desktop" aria-hidden="true"></i>
+                        <% end %>
+                      </li>
+                    </ul>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% f.screenshots[0..0].each do |image| %>
+                            <%= image_tag image.screenshot_url(:hover) %>
+                          <% end %>  
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(f.name, length: 50) %></h4>
+                          <span class="by"><%= f.user.company %> | </span> 
+                          <span class="by">themes / <%= f.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= f.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="prideq">
+                    <ul class="list-inline pritr pull-left">
+                      <li class="selw">
+                        <span class="icon-cart_3 icon_cart_3 fdr"></span>
+                        <span class="hgt"><%= f.line_items.where(theme_id: f.id).count %></span>
+                      </li>
+                      <li class="pret">
+                        <span class="icon-price icon_price_1 fdr"></span>
+                        <span class="hgt">$<%= f.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="klwq pull-right">
+                      <span class="this-rating" data-score="<%= _raty(f) if f.reviews.present? %>"></span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>							
+              </div>
+            <% end %>
+            <% @usr.codes.where(agree: true).each do |c| %>
+              <div class="col-md-3 bgal">
+                <div class="jwi">
+                  <div class="img-l">
+                    <%= image_tag c.thumbnail_url(:thumbnail) %>
+                  </div>
+                  <div class="hgre hgsd54657">
+                    <div class="diy">
+                      <span class="tir"><%= link_to truncate(c.name, length: 14), item_code_path(c) %></span>
+                    </div>
+                    <ul class="vtre">
+                      <li class="lik">
+                        <% if signed_in? %>
+                          <% if current_user.liked? c %>
+                            <%= link_to dislike_code_path(c.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{c.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_code_path(c.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{c.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to sign_in_path do %>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                          <% end %>
+                        <% end %>
+                      </li>
+                      <li class="colle">
+                        <% if signed_in? %>
+                          <% if current_user.akusuka.blank? %>
+                            <%= link_to new_akusuka_path, class: "mutq", remote: true do %>
+                              <i class="fa fa-folder-open" aria-hidden="true"></i>
+                            <% end %>
+                          <% else %>
+                            <% if current_user.akusuka.codes.include?(c) %>
+                              <%= link_to code_unsuka_code_path(c), class: "mutq green", id: "unwish_#{c.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% else %>
+                              <%= link_to code_suka_code_path(c), class: "mutq", id: "wish_#{c.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <a href="/sign_in" class="mutq">
+                            <i class="fa fa-folder-open" aria-hidden="true"></i>
+                          </a>
+                        <% end %>
+                      </li>
+                      <li class="cart"><a href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+                      <li class="demo">
+                        <%= link_to c.url_demo do %>
+                          <i class="fa fa-desktop" aria-hidden="true"></i>
+                        <% end %>
+                      </li>
+                    </ul>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% c.screenshots[0..0].each do |image| %>
+                            <%= image_tag image.screenshot_url(:hover) %>
+                          <% end %>  
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(c.name, length: 50) %></h4>
+                          <span class="by"><%= c.user.company %> | </span> 
+                          <span class="by">codes / <%= c.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= c.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="prideq">
+                    <ul class="list-inline pritr pull-left">
+                      <li class="selw">
+                        <span class="icon-cart_3 icon_cart_3 fdr"></span>
+                        <span class="hgt"><%= c.line_items.where(code_id: c.id).count %></span>
+                      </li>
+                      <li class="pret">
+                        <span class="icon-price icon_price_1 fdr"></span>
+                        <span class="hgt">$<%= c.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="klwq pull-right">
+                      <span class="this-rating" data-score="<%= _raty_code(c) if c.reviews.present? %>"></span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>							
+              </div>
+            <% end %>
+            <% @usr.graphics.where(agree: true).each do |g| %>
+              <div class="col-md-3 bgal">
+                <div class="jwi">
+                  <div class="img-l">
+                    <%= image_tag g.thumbnail_url(:thumbnail) %>
+                  </div>
+                  <div class="hgre hgsd54657">
+                    <div class="diy">
+                      <span class="tir"><%= link_to truncate(g.name, length: 14), item_graphic_path(g) %></span>
+                    </div>
+                    <ul class="vtre">
+                      <li class="lik">
+                        <% if signed_in? %>
+                          <% if current_user.liked? g %>
+                            <%= link_to dislike_graphic_path(g.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{g.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_graphic_path(g.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{g.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to sign_in_path do %>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                          <% end %>
+                        <% end %>
+                      </li>
+                      <li class="colle">
+                        <% if signed_in? %>
+                          <% if current_user.akusuka.blank? %>
+                            <%= link_to new_akusuka_path, class: "mutq", remote: true do %>
+                              <i class="fa fa-folder-open" aria-hidden="true"></i>
+                            <% end %>
+                          <% else %>
+                            <% if current_user.akusuka.graphics.include?(g) %>
+                              <%= link_to graphic_unsuka_graphic_path(g), class: "mutq green", id: "unwish_#{g.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% else %>
+                              <%= link_to graphic_suka_graphic_path(g), class: "mutq", id: "wish_#{g.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <a href="/sign_in" class="mutq">
+                            <i class="fa fa-folder-open" aria-hidden="true"></i>
+                          </a>
+                        <% end %>
+                      </li>
+                      <li class="cart"><a href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+                      <li class="demo">
+                        <%= link_to g.url_demo do %>
+                          <i class="fa fa-desktop" aria-hidden="true"></i>
+                        <% end %>
+                      </li>
+                    </ul>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% g.screenshots[0..0].each do |image| %>
+                            <%= image_tag image.screenshot_url(:hover) %>
+                          <% end %>  
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(g.name, length: 50) %></h4>
+                          <span class="by"><%= g.user.company %> | </span> 
+                          <span class="by">graphics / <%= g.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= g.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="prideq">
+                    <ul class="list-inline pritr pull-left">
+                      <li class="selw">
+                        <span class="icon-cart_3 icon_cart_3 fdr"></span>
+                        <span class="hgt"><%= g.line_items.where(graphic_id: g.id).count %></span>
+                      </li>
+                      <li class="pret">
+                        <span class="icon-price icon_price_1 fdr"></span>
+                        <span class="hgt">$<%= g.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="klwq pull-right">
+                      <span class="this-rating" data-score="<%= _raty_graph(g) if g.reviews.present? %>"></span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>							
+              </div>
+            <% end %>
+            <% @usr.t3ds.where(agree: true).each do |t| %>
+              <div class="col-md-3 bgal">
+                <div class="jwi">
+                  <div class="img-l">
+                    <%= image_tag t.thumbnail_url(:thumbnail) %>
+                  </div>
+                  <div class="hgre hgsd54657">
+                    <div class="diy">
+                      <span class="tir"><%= link_to truncate(t.name, length: 14), item_t3d_path(t) %></span>
+                    </div>
+                    <ul class="vtre">
+                      <li class="lik">
+                        <% if signed_in? %>
+                          <% if current_user.liked? t %>
+                            <%= link_to dislike_t3d_path(t.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{t.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_t3d_path(t.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{t.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to sign_in_path do %>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                          <% end %>
+                        <% end %>
+                      </li>
+                      <li class="colle">
+                        <% if signed_in? %>
+                          <% if current_user.akusuka.blank? %>
+                            <%= link_to new_akusuka_path, class: "mutq", remote: true do %>
+                              <i class="fa fa-folder-open" aria-hidden="true"></i>
+                            <% end %>
+                          <% else %>
+                            <% if current_user.akusuka.t3ds.include?(t) %>
+                              <%= link_to t3d_unsuka_t3d_path(t), class: "mutq green", id: "unwish_#{t.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% else %>
+                              <%= link_to t3d_suka_t3d_path(t), class: "mutq", id: "wish_#{t.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <a href="/sign_in" class="mutq">
+                            <i class="fa fa-folder-open" aria-hidden="true"></i>
+                          </a>
+                        <% end %>
+                      </li>
+                      <li class="cart"><a href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+                      <li class="demo">
+                        <%= link_to t.url_demo do %>
+                          <i class="fa fa-desktop" aria-hidden="true"></i>
+                        <% end %>
+                      </li>
+                    </ul>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% t.screenshots[0..0].each do |image| %>
+                            <%= image_tag image.screenshot_url(:hover) %>
+                          <% end %>  
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(t.name, length: 50) %></h4>
+                          <span class="by"><%= t.user.company %> | </span> 
+                          <span class="by">3D Animation / <%= t.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= t.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="prideq">
+                    <ul class="list-inline pritr pull-left">
+                      <li class="selw">
+                        <span class="icon-cart_3 icon_cart_3 fdr"></span>
+                        <span class="hgt"><%= t.line_items.where(t3d_id: t.id).count %></span>
+                      </li>
+                      <li class="pret">
+                        <span class="icon-price icon_price_1 fdr"></span>
+                        <span class="hgt">$<%= t.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="klwq pull-right">
+                      <span class="this-rating" data-score="<%= _raty_3d(t) if t.reviews.present? %>"></span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>							
+              </div>
+            <% end %>
+            <% @usr.videofxes.where(agree: true).each do |v| %>
+              <div class="col-md-3 bgal">
+                <div class="jwi">
+                  <div class="img-l">
+                    <%= image_tag v.thumbnail_url(:thumbnail) %>
+                  </div>
+                  <div class="hgre hgsd54657">
+                    <div class="diy">
+                      <span class="tir"><%= link_to truncate(v.name, length: 14), item_videofx_path(v) %></span>
+                    </div>
+                    <ul class="vtre">
+                      <li class="lik">
+                        <% if signed_in? %>
+                          <% if current_user.liked? v %>
+                            <%= link_to dislike_videofx_path(v.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{v.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_videofx_path(v.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{v.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to sign_in_path do %>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                          <% end %>
+                        <% end %>
+                      </li>
+                      <li class="colle">
+                        <% if signed_in? %>
+                          <% if current_user.akusuka.blank? %>
+                            <%= link_to new_akusuka_path, class: "mutq", remote: true do %>
+                              <i class="fa fa-folder-open" aria-hidden="true"></i>
+                            <% end %>
+                          <% else %>
+                            <% if current_user.akusuka.videofxes.include?(v) %>
+                              <%= link_to video_unsuka_videofx_path(v), class: "mutq green", id: "unwish_#{v.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% else %>
+                              <%= link_to video_suka_videofx_path(v), class: "mutq", id: "wish_#{v.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <a href="/sign_in" class="mutq">
+                            <i class="fa fa-folder-open" aria-hidden="true"></i>
+                          </a>
+                        <% end %>
+                      </li>
+                      <li class="cart"><a href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+                      <li class="demo">
+                        <%= link_to v.url_demo do %>
+                          <i class="fa fa-desktop" aria-hidden="true"></i>
+                        <% end %>
+                      </li>
+                    </ul>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% v.videms.each do |videm| %>
+                            <video id="ajjayyy" class="video-js aja_<%= videm.id %>" preload="auto" width="463" height="257" data-setup="{}" style="width: 463px !important; height: 257px !important">
+                              <source src="<%= videm.trailer %>" type='video/mp4'>
+                            </video>
+                          <% end %> 
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(v.name, length: 50) %></h4>
+                          <span class="by"><%= v.user.company %> | </span> 
+                          <span class="by">videofx / <%= v.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= v.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="prideq">
+                    <ul class="list-inline pritr pull-left">
+                      <li class="selw">
+                        <span class="icon-cart_3 icon_cart_3 fdr"></span>
+                        <span class="hgt"><%= v.line_items.where(videofx_id: v.id).count %></span>
+                      </li>
+                      <li class="pret">
+                        <span class="icon-price icon_price_1 fdr"></span>
+                        <span class="hgt">$<%= v.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="klwq pull-right">
+                      <span class="this-rating" data-score="<%= _raty_vid(v) if v.reviews.present? %>"></span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>							
+              </div>
+            <% end %>
+            <% @usr.fonts.where(agree: true).each do |ft| %>
+              <div class="col-md-3 bgal">
+                <div class="jwi">
+                  <div class="img-l">
+                    <%= image_tag ft.thumbnail_url(:thumbnail) %>
+                  </div>
+                  <div class="hgre hgsd54657">
+                    <div class="diy">
+                      <span class="tir"><%= link_to truncate(ft.name, length: 14), item_font_path(ft) %></span>
+                    </div>
+                    <ul class="vtre">
+                      <li class="lik">
+                        <% if signed_in? %>
+                          <% if current_user.liked? ft %>
+                            <%= link_to dislike_font_path(ft.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{ft.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_font_path(ft.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{ft.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to sign_in_path do %>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                          <% end %>
+                        <% end %>
+                      </li>
+                      <li class="colle">
+                        <% if signed_in? %>
+                          <% if current_user.akusuka.blank? %>
+                            <%= link_to new_akusuka_path, class: "mutq", remote: true do %>
+                              <i class="fa fa-folder-open" aria-hidden="true"></i>
+                            <% end %>
+                          <% else %>
+                            <% if current_user.akusuka.fonts.include?(ft) %>
+                              <%= link_to font_unsuka_font_path(ft), class: "mutq green", id: "unwish_#{ft.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% else %>
+                              <%= link_to font_suka_font_path(ft), class: "mutq", id: "wish_#{ft.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <a href="/sign_in" class="mutq">
+                            <i class="fa fa-folder-open" aria-hidden="true"></i>
+                          </a>
+                        <% end %>
+                      </li>
+                      <li class="cart"><a href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+                    </ul>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% ft.screenshots[0..0].each do |image| %>
+                            <%= image_tag image.screenshot_url(:hover) %>
+                          <% end %>  
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(ft.name, length: 50) %></h4>
+                          <span class="by"><%= ft.user.company %> | </span> 
+                          <span class="by">fonts / <%= ft.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= ft.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="prideq">
+                    <ul class="list-inline pritr pull-left">
+                      <li class="selw">
+                        <span class="icon-cart_3 icon_cart_3 fdr"></span>
+                        <span class="hgt"><%= ft.line_items.where(font_id: ft.id).count %></span>
+                      </li>
+                      <li class="pret">
+                        <span class="icon-price icon_price_1 fdr"></span>
+                        <span class="hgt">$<%= ft.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="klwq pull-right">
+                      <span class="this-rating" data-score="<%= _raty_font(ft) if ft.reviews.present? %>"></span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>							
+              </div>
+            <% end %>
+            <% @usr.courses.where(agree: true).each do |ft| %>
+              <div class="col-md-3 bgal">
+                <div class="jwi">
+                  <div class="img-l">
+                    <%= image_tag ft.thumbnail_url(:thumbnail) %>
+                  </div>
+                  <div class="hgre hgsd54657">
+                    <div class="diy">
+                      <span class="tir"><%= link_to truncate(ft.name, length: 14), item_course_path(ft) %></span>
+                    </div>
+                    <ul class="vtre">
+                      <li class="lik">
+                        <% if signed_in? %>
+                          <% if current_user.liked? ft %>
+                            <%= link_to dislike_course_path(ft.slug), remote: true, method: :put, class: "vo_ic vo_ic_dis red", id: "dislike_#{ft.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to like_course_path(ft.slug), remote: true, method: :put, class: "vo_ic vo_ic_lik", id: "like_#{ft.id}" do %>
+                              <i class="fa fa-heart ic_vote"></i>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to sign_in_path do %>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                          <% end %>
+                        <% end %>
+                      </li>
+                      <li class="colle">
+                        <% if signed_in? %>
+                          <% if current_user.akusuka.blank? %>
+                            <%= link_to new_akusuka_path, class: "mutq", remote: true do %>
+                              <i class="fa fa-folder-open" aria-hidden="true"></i>
+                            <% end %>
+                          <% else %>
+                            <% if current_user.akusuka.courses.include?(ft) %>
+                              <%= link_to course_unsuka_course_path(ft), class: "mutq green", id: "unwish_#{ft.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% else %>
+                              <%= link_to course_suka_course_path(ft), class: "mutq", id: "wish_#{ft.id}", remote: true do %>
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <a href="/sign_in" class="mutq">
+                            <i class="fa fa-folder-open" aria-hidden="true"></i>
+                          </a>
+                        <% end %>
+                      </li>
+                      <li class="cart"><a href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+                    </ul>
+                    <div class="tooltip_j">
+                      <div id="dat_tooltip">
+                        <div class="img_o">
+                          <% ft.freepis.each do |freepi| %>
+                            <video id="ajjayyy" class="video-js aja_<%= freepi.id %>" preload="auto" width="463" height="257" data-setup="{}" style="width: 463px !important; height: 257px !important">
+                              <source src="<%= freepi.cacaca %>" type='video/mp4'>
+                            </video>
+                          <% end %> 
+                        </div>
+                        <div class="titlw pull-left">
+                          <h4 class="je"><%= truncate(ft.name, length: 50) %></h4>
+                          <span class="by"><%= ft.user.company %> | </span> 
+                          <span class="by">courses / <%= ft.category.name %></span>
+                        </div>
+                        <div class="prce pull-right">
+                          <span class="k">$<%= ft.price.to_i.floor %></span>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="prideq">
+                    <ul class="list-inline pritr pull-left">
+                      <li class="selw">
+                        <span class="icon-cart_3 icon_cart_3 fdr"></span>
+                        <span class="hgt"><%= ft.line_items.where(course_id: ft.id).count %></span>
+                      </li>
+                      <li class="pret">
+                        <span class="icon-price icon_price_1 fdr"></span>
+                        <span class="hgt">$<%= ft.price.to_i %></span>
+                      </li>
+                    </ul>
+                    <div class="klwq pull-right">
+                      <span class="this-rating" data-score="<%= _raty_course(ft) if ft.reviews.present? %>"></span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>							
+              </div>
+            <% end %>
+            <div class="clear"></div>
+          </div>
+          <div class="col-md-4 bgfdgh">
+            <% unless @usr.skills.blank? %> 
+              <div class="skiltr gh">
+                <div class="titl">
+                  <p>SKILL</p>
+                </div>
+                <ul class="list-inline bfre">
+                  <% @usr.skills.each do |skill| %> 
+                    <li class="jjjk"><span><%= skill.name.to_s.upcase %></span></li>
+                  <% end %> 
+                </ul>
+              </div>
+            <% end %> 
+            <div class="mesad gh">
+              <div class="titl">
+                <p>SEND MESSAGE</p>
+              </div>
+              <% if signed_in? %>
+                <div class="gf">
+                  <span>Send a private message to this account <a onclick="contact(<%= @usr.id %>)">Let's Go</a></span>
+                </div>
+              <% else %>
+                <div class="gf">
+                  <span>Before sending a private message you need to <%= link_to "sign in", sign_in_path %> to your account. Thanks!</span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="theme_akusuka" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
+<div class="modal fade" id="contact_a" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <script>
+$('.active_li').removeClass('active_li');
+$('.active_a').removeClass('active_a');
+  </script>

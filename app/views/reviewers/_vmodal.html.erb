@@ -1,0 +1,171 @@
+<div class="modal-dialog revje" role="document" data-turbolinks="false">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" onclick="pauseVid()" id="vi_o<%= @videofx.id %>" class="close" data-dismiss="modal" aria-label="Close"></button>
+			<div class="modal-title" id="myModalLabelk">
+				<div class="container lkjy75">
+					<h4 class="tuiei">
+						<%= @videofx.name.capitalize %>
+					</h4>
+					<ul class="list-inline gfh">
+						<li><%= link_to @videofx.category.name, root_path, class: "jutr"  %></li>
+						<% unless @videofx.subcategories.blank? %> 
+							<% @videofx.subcategories.each do |subcategory| %>
+							<li class="cius">
+								<%= link_to subcategory.name, root_path, class: "jutr" %>
+							</li> 
+							<% end %> 
+						<% end %> 
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="modal-body" id="jkerop">
+			<div class="mengh">
+				<div class="hrte container">
+					<div class="col-md-4 sdfjsh37">
+						<div class="gfs">
+							<div class="djfhd98">
+								<%= link_to "DOWNLOAD", @videofx.brokes.map{|link|link.resources}.join(''), class: "nbdg" %>
+							</div>
+							<div class="hdgf87 djfhd98">
+								<ul class="khgg65">
+									<li class="vgx bgt"><span class="niuy date">Created</span><span class="fgd"><%= @videofx.created_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+									<li class="vgx bgt"><span class="niuy updated">Updated</span><span class="fgd"><%= @videofx.updated_at.strftime("%d %B %Y") %></span><div class="clear"></div></li>
+									<% unless @videofx.includes.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">File Include</span><span class="fgd"><%= @videofx.includes.map {|inc| inc.name}.join(', ') %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @videofx.alpha_channel.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Alpha Channel</span><span class="fgd"><%= @videofx.alpha_channel.capitalize %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @videofx.looped_video.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Looped Video</span><span class="fgd"><%= @videofx.looped_video.capitalize %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @videofx.require_plugin.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Require Plugin</span><span class="fgd"><%= @videofx.require_plugin %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @videofx.duration.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Duration</span><span class="fgd"><%= @videofx.duration %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @videofx.file_size.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">File Size</span><span class="fgd"><%= @videofx.file_size %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @videofx.framerates.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Frame Rates</span><span class="fgd"><%= @videofx.framerates.map {|frame| frame.name}.join(', ') %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @videofx.aeplugins.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Plugins</span><span class="fgd"><%= @videofx.aeplugins.map {|ae| ae.name}.join(', ') %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @videofx.resolution.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Resolution</span><span class="fgd"><%= @videofx.resolution %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @videofx.softopen.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Open with</span><span class="fgd"><%= @videofx.softopen.name.capitalize %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @videofx.encode.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Encoding</span><span class="fgd"><%= @videofx.encode.name.capitalize %></span><div class="clear"></div></li>
+									<% end %>
+									<% unless @videofx.latar.blank? %>
+									<li class="vgx bgt"><span class="niuy file_included">Setting</span><span class="fgd"><%= @videofx.latar.name.capitalize %></span><div class="clear"></div></li>
+									<% end %>
+									<li class="vgx"><span class="niuy tags">Tags</span><span class="fgd"><%= @videofx.tags.map {|tag| tag.name}.join(', ') %></span><div class="clear"></div></li>
+									<span class="fgd"></span>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 dgf549">
+						<div class="gfds543">
+							<div class="col-md-8 hgfe5 jrt878">
+								<div class="dfhgd65">
+									<% @videofx.videms.each do |videm| %>
+										<video id="vi_s<%= @videofx.id %>" class="video-js" controls preload="auto" width="574" height="393" poster="<%= @videofx.thumbnail_url(:poster) %>" data-setup="{}">
+											<source src="<%= videm.trailer %>" type="video/mp4" media="">
+										</video>
+									<% end %>
+								</div>
+								<div class="jhgshgjh">
+									<ul class="list-inline xd">
+										<li role="presentation" class="active"><a href="#desct" role="tab" data-toggle="tab">Description</a></li>
+										<% if current_user.reviewer? %> 
+											<li role="presentation"><a href="#reviews" role="tab" data-toggle="tab">Give Reviews</a></li>
+										<% end %> 
+										<% unless @videofx.note.empty? %>
+											<li role="presentation"><a href="#message" role="tab" data-toggle="tab">Message</a></li>
+										<% end %> 
+									</ul>
+									<div class="dtert tab-content">
+										<div role="tabpanel" class="jhfre85 tab-pane active" id="desct">
+											<%= simple_format(@videofx.description) %>
+										</div>
+										<% if current_user.reviewer? %> 
+										<div role="tabpanel" class="jhfre85 revs tab-pane" id="reviews">
+											<%= form_for @videofx, remote: true do |f| %>
+												<div class="form-group mkg32">
+													<%= f.fields_for :revrest do |rev| %>
+														<%= rev.hidden_field :id %>
+														<%= rev.text_area :content, class: "form-control kjh530 nage554", placeholder: "Review Result" %>
+													<% end %> 
+												</div>
+												<div class="form-group mkg32">
+													<%= f.text_field :price, class: "form-control kjh530", placeholder: "Regular License Price"  %>
+												</div>
+												<div class="form-group mkg32">
+													<%= f.text_field :price_ext, class: "form-control kjh530", placeholder: "Extended License Price"  %>
+												</div>
+												<div class="form-group hjr96 mkg32">
+													<%= f.check_box :agree, {class: "dt5", id: "videofx_agree_#{@videofx.id}"} %>
+													<label for="videofx_agree_<%= @videofx.id %>"><span class="jhj kiup"></span><span class="nhg3">I have checked all the files associated with this stuff and I approve this proposal </span></label>
+												</div>
+												<div class="form-group hjr96 mkg32">
+													<%= f.check_box :reject, {class: "dt5", id: "videofx_reject_#{@videofx.id}" } %>
+													<label for="videofx_reject_<%= @videofx.id %>"><span class="jhj kiup"></span><span class="nhg3">I have checked all the files associated with this stuff and I reject this proposal </span></label>
+												</div>
+												<div class="dgf_byt">
+													<%= f.submit "GIVE RESULT", class: "btn btn-default btn_gdr" %>
+												</div>
+											<% end %> 
+										</div>
+										<% end %> 
+										<div role="tabpanel" class="jhfre85 tab-pane" id="message">
+											<p><%= @videofx.note %></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	var vid = document.getElementById('vi_s<%= @videofx.id %>');
+	function pauseVid(){
+		vid.pause();
+	};
+	$(document).ready(function(){
+		$('#videofx_agree_<%= @videofx.id %>').on('change', function(){
+			if(this.checked){
+				$.ajax({
+					type: "GET",
+					url: "/videofxes/aprroved/<%= @videofx.slug %>/videofx",
+					success: function(){
+					}
+				});
+			};
+		});
+		$('#videofx_reject_<%= @videofx.id %>').on('change', function(){
+			if(this.checked){
+				$.ajax({
+					type: "GET",
+					url: "/videofxes/reject/<%= @videofx.slug %>/videofx",
+					success: function(){
+					}
+				});
+			};
+		});
+	});
+</script>

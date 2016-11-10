@@ -1,0 +1,27 @@
+$('#srew_<%= @course.id %>').hide("slow");
+$('#reve').modal("hide");
+
+<% @course.freepis.each_with_index do |freepi, index| %>
+	$('#chitem_<%= freepi.id %>').remove();
+	$("#beta5").append("<%= escape_javascript render(partial: 'courses/trailer', locals: {freepi: freepi, index: index}) %>");
+	// $(".wtfthis").addClass("wtfthis vjs-paused video_iii-dimensions vjs-controls-enabled vjs-workinghover vjs-user-active")
+	$('.mata').on("change", function(){
+		$(this).removeClass('active');
+	});
+<% end %>
+
+<% if @course.thumbnail_previously_changed? %>
+	$('.img_tre43').hide("fast", function(){
+		$(this).remove();
+	});
+	$("#jreg<%= @course.id %>").html("<%= escape_javascript render(partial: 'courses/thumbnail', locals: {course: @course}) %>");
+<% end %>
+<% @course.cofiles.each do |cofile| %>
+	<% if cofile.coke_previously_changed? %>
+		$('#fhg656').hide();
+		$('#hftu88').html("<%= escape_javascript render(partial: 'courses/delbroke', locals: {cofile: cofile}) %>");
+		$('#hftu88').show();
+		$('#rhrh75').html("<%= escape_javascript render(partial: 'courses/delbroke', locals: {cofile: cofile}) %>");
+		$('.l1_').hide();
+	<% end %>
+<% end %>

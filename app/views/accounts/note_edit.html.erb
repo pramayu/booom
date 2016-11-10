@@ -1,0 +1,58 @@
+<%= title "Notes ~ KHAPOO" %>
+<style>
+.eorf {
+  padding-right: 75px;
+} 
+</style>
+<div class="mail-nav all_notifi earning wth_drw setting wishlist">
+  <div class="col-md-8 ddgtet" style="width:76%;">
+    <div class="isi-menu-mail kim-ii hewq">
+      <div class="tidks">
+        <h2 class="dhfgwp">Notes</h2>
+        <span class="desc_">With Wishlist, You Can Save The Products That You Will Purchase</span>
+      </div>
+      <div class="conent_h">
+        <div class="col-md-12 nddd">
+          <%= form_for @note do |f| %>
+            <div class="form-group saym pull-left"> 
+              <%= f.text_field :title, class: "form-control eorf iiuy", placeholder: "Note Title" %> 
+            </div>
+            <div class="lhdyte">
+              <div class="form-group saym"> 
+                <%= f.fields_for :memos, @note.memos do |memo| %>
+                  <%= render 'memo_fields', f: memo %>
+                  <div class="add65465 sjhtjhg">
+                    <%= link_to_add_association f, :memos, class: "btn btn-default mater dhgsr khdy", "data-turbolinks": false do %>
+                      <span class="fa fa-plus"></span>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+              <%= f.submit "Send Note", class: "btn btn-default mater" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 brok prek" style="padding-top:0px;">
+    <div class="mnu_fuk">
+      <div class="recent kls">
+        <div class="ti_l">
+          <span>*IMPORTANT</span>
+        </div>
+        <div class="pdjs">
+          <p>
+          Delete the record if it is not used anymore to allow you to view the logs and make it look presentable
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<script>
+$('.aktif').removeClass();
+$('.notes').addClass('aktif');
+</script>

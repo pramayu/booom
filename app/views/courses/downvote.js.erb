@@ -1,0 +1,4 @@
+$('#dislike_<%= @course.id %>').attr('class', 'vo_ic')
+  .attr('href', '<%= like_course_path(@course.slug) %>')
+  .attr('id', 'like_<%= @course.id %>')
+  .removeClass('red');

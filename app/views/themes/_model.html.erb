@@ -1,0 +1,60 @@
+<div class="modal fade klrt" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-circle-o" aria-hidden="true"></i></button>
+        <h4 class="modal-title text-center" id="myModalLabel">ADD WISHLISTS</h4>
+        <p class="saved text-center">SAVED</p>
+      </div>
+      <div class="modal-body">
+      <% if signed_in? %>
+        <% if current_user.collections.blank? %>
+          <div class="gtr">
+            <p>YOUR NEED TO CREATE DIRECTORY IN <%= link_to "WISHLIST", wishlist_path(current_user) %></p>
+          </div>
+        <% else %>
+          <%= form_for @theme, remote: true do |f| %>
+          <div class="mita">
+            <%= hidden_field_tag "theme[collection_ids][]", nil %>
+            <div id="comm_form_wraps">
+             <ul>
+              <% current_user.collections.each do |collection| %>
+              <li>
+                <%= check_box_tag "theme[collection_ids][]", collection.id, @theme.collection_ids.include?(collection), id: dom_id(collection) %>
+                <label for="collection_<%= collection.id %>" class="aku_<%= collection.id %>"><span class="klew"></span><span class="jutr"><%= collection.name %></span></label>
+              </li>
+              <% end %>
+            </ul>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+        <%#= form_for @coll, remote:true do |f| %>
+           <!-- <div class="form-group see_u_agn"> -->
+            <%#= f.text_field :name, class: "form-control vty", placeholder: "create collection name", label: false %>
+          <!-- </div> -->
+        <%#= f.submit "save", class: "ouyr" %>
+        <%# end %>
+      <% else %>
+        <div class="gtr">
+          <p>THIS ACTION NEED USER <a href="/sign_in">SIGN IN</a></p>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$(document).ready(function(){
+  $('.saved').fadeOut();
+  <% if signed_in? %>
+    <% current_user.collections.each do |collection| %>
+      $('#collection_<%= collection.id %>').click(function(){
+        $(this).parents('form:first').submit();
+        $('.saved').fadeIn().delay(800).fadeOut();
+        $('.mutq').addClass('green');
+      });
+    <% end %>
+  <% end %>
+ });
+</script>

@@ -1,0 +1,132 @@
+<div class="isi_theme">
+  <div class="col-md-4 wewof category">
+    <div class="frame">
+      <div class="title">
+        <div class="nao pull-left">
+          <span>CATEGORY</span>
+        </div>
+        <ul class="list-inline pull-right njw">
+          <li><%= link_to category_new_url, "data-turbilinks": false do %><span class="lnr lnr-magic-wand"></span><% end %></li>
+          <li><a href="#"><span class="lnr lnr-sync"></span></a></li>
+          <li><a ><span class="lnr lnr-chevron-down btn_non_collapse" id="category_btn_collapse"></span></a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div id="category_collapse">
+        <div class="nate">
+          <ul class="list-inline tkab">
+            <li class="id"><span>ID</span></li>
+            <li class="namue"><span>NAME CATEGORY</span></li>
+          </ul>
+        </div>
+        <div class="nate kone">
+          <ul class="list-inline tkab">
+            <% @categories.where('to_item = ?', 'font').limit(5).each_with_index do |foo, index| %>
+              <li class="id <%= 'bg' if (index + 1)%2 == 1 %>"><span><%= index + 1 %></span></li>
+              <li class="namue <%= 'bg' if (index + 1)%2 == 1 %>"><span><%= foo.name.upcase %></span></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 wewof subcategory">
+    <div class="frame">
+      <div class="title">
+        <div class="nao pull-left">
+          <span>SUBCATEGORY</span>
+        </div>
+        <ul class="list-inline pull-right njw">
+          <li><%= link_to subcategory_new_url, "data-turbilinks": false do %><span class="lnr lnr-magic-wand"></span><% end %></li>
+          <li><a href="#"><span class="lnr lnr-sync"></span></a></li>
+          <li><a ><span class="lnr lnr-chevron-down btn_non_collapse" id="subcategory_btn_collapse"></span></a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div id="subcategory_collapse">
+        <div class="nate">
+          <ul class="list-inline tkab">
+            <li class="id"><span>ID</span></li>
+            <li class="namue"><span>NAME SUBCATEGORY</span></li>
+          </ul>
+        </div>
+        <div class="nate kone">
+          <ul class="list-inline tkab">
+            <% @subcategories.each_with_index do |foo, index| %>
+              <li class="id <%= 'bg' if (index + 1)%2 == 1 %>"><span><%= index + 1 %></span></li>
+              <li class="namue <%= 'bg' if (index + 1)%2 == 1 %>"><span><%= foo.name.upcase %></span></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 wewof browser">
+    <div class="frame">
+      <div class="title">
+        <div class="nao pull-left">
+          <span>INCLUDE</span>
+        </div>
+        <ul class="list-inline pull-right njw">
+          <li><%= link_to include_new_url, "data-turbilinks": false do %><span class="lnr lnr-magic-wand"></span><% end %></li>
+          <li><a href="#"><span class="lnr lnr-sync"></span></a></li>
+          <li><a ><span class="lnr lnr-chevron-down btn_non_collapse" id="include_btn_collapse"></span></a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div id="include_collapse">
+        <div class="nate">
+          <ul class="list-inline tkab">
+            <li class="id"><span>ID</span></li>
+            <li class="namue"><span>INCLUDE NAME</span></li>
+          </ul>
+        </div>
+        <div class="nate kone">
+          <ul class="list-inline tkab">
+            <% @include_for_font.each_with_index do |foo, index| %>
+              <li class="id <%= 'bg' if (index + 1)%2 == 1 %>"><span><%= index + 1 %></span></li>
+              <li class="namue <%= 'bg' if (index + 1)%2 == 1 %>"><span><%= foo.name.upcase %></span></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 wewof category">
+    <div class="frame">
+      <div class="title">
+        <div class="nao pull-left">
+          <span>INDUSTRY</span>
+        </div>
+        <ul class="list-inline pull-right njw">
+          <li><%= link_to industry_new_url, "data-turbilinks": false do %><span class="lnr lnr-magic-wand"></span><% end %></li>
+          <li><a href="#"><span class="lnr lnr-sync"></span></a></li>
+          <li><a ><span class="lnr lnr-chevron-down btn_non_collapse" id="industry_btn_collapse"></span></a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div id="industry_collapse">
+        <div class="nate">
+          <ul class="list-inline tkab">
+            <li class="id"><span>ID</span></li>
+            <li class="namue"><span>INDUSTRY NAME</span></li>
+          </ul>
+        </div>
+        <div class="nate kone">
+          <ul class="list-inline tkab">
+            <% @industries.each_with_index do |foo, index| %>
+              <li class="id <%= 'bg' if (index + 1)%2 == 1 %>"><span><%= index + 1 %></span></li>
+              <li class="namue <%= 'bg' if (index + 1)%2 == 1 %>"><span><%= foo.name.upcase %></span></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$(function(){
+  $('.but').removeClass('active');
+  $('.font_i').addClass('active');
+});
+</script>

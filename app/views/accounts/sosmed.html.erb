@@ -1,0 +1,113 @@
+<%= title "Social Networks ~ KAPHOO" %>
+<div class="setting">
+	<%= form_for setup_user(@usr) do |f| %>
+		<div class="col-md-8 brek brrroo">
+			<div class="user_chooses">
+				<div class="kate_kat">
+					<h2>Social Networks</h2>
+					<p>add your social media accounts to get clients more</p>
+				</div>
+				<%= f.fields_for :social_network do |ff| %>
+					<div class="sod data-acct">
+						<%= ff.hidden_field :id %>
+						<div class="form-group fk">
+							<span class="fl">Behance</span>
+							<div class="fs">
+								<%= ff.text_field :behance, class: "form-control sami", require: true %>
+							</div>
+						</div>
+						<div class="form-group fk">
+							<span class="fl">DeviantArt</span>
+							<div class="fs">
+								<%= ff.text_field :deviant, class: "form-control sami", require: true %>
+							</div>
+						</div>
+						<div class="form-group fk">
+							<span class="fl">Digg</span>
+							<div class="fs">
+								<%= ff.text_field :digg, class: "form-control sami", require: true %>
+							</div>
+						</div>
+						<div class="form-group fk">
+							<span class="fl">Dribbble</span>
+							<div class="fs">
+								<%= ff.text_field :dribbble, class: "form-control sami", require: true %>
+							</div>
+						</div>
+						<div class="form-group fk">
+							<span class="fl">Flickr</span>
+							<div class="fs">
+								<%= ff.text_field :flickr, class: "form-control sami", require: true %>
+							</div>
+						</div>
+						<div class="form-group fk">
+							<span class="fl">Facebook</span>
+							<div class="fs">
+								<%= ff.text_field :facebook, class: "form-control sami", require: true %>
+							</div>
+						</div>
+						<div class="form-group fk">
+							<span class="fl">Github</span>
+							<div class="fs">
+								<%= ff.text_field :github, class: "form-control sami", require: true %>
+							</div>
+						</div>
+						<div class="form-group fk">
+							<span class="fl">Youtube</span>
+							<div class="fs">
+								<%= ff.text_field :youtube, class: "form-control sami", require: true %>
+							</div>
+						</div>
+						<div class="form-group fk">
+							<span class="fl">Linkedin</span>
+							<div class="fs">
+								<%= ff.text_field :linkedin, class: "form-control sami", require: true %>
+							</div>
+						</div>
+						<div class="form-group fk">
+							<span class="fl">Twitter</span>
+							<div class="fs">
+								<%= ff.text_field :twitter, class: "form-control sami", require: true %>
+							</div>
+						</div>
+						<div class="form-group fk">
+							<span class="fl">Tumblr</span>
+							<div class="fs">
+								<%= ff.text_field :tumblr, class: "form-control sami", require: true %>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		</div>
+		<div class="col-md-4 brok prek">
+			<div class="mnu_fuk">
+				<ul class="list-inline">
+					<li class="bh4 inahoho">
+						<%= link_to personal_path do %>
+							<i class="fa fa-user" aria-hidden="true"></i><p>Account</p>
+						<% end %>
+					</li>
+					<li class="bh5">
+						<%= link_to sosmed_path(current_user) do %>
+							<i class="fa fa-globe" aria-hidden="true"></i><p>SosMedia</p>
+						<% end %>
+					</li>
+					<li class="bh6">
+						<%= link_to secure_path(current_user) do %>
+							<i class="fa fa-globe" aria-hidden="true"></i><p>Security</p>
+						<% end %>
+					</li>
+				</ul>
+			</div>
+			<div class="btn-pi">
+				<%= f.submit "UPDATE", class: "btn_update" %>
+			</div>
+		</div>
+		<div class="clear"></div>
+	<% end %>
+</div>
+<script>
+	$('.bh4').removeClass('inahoho');
+	$('.bh5').addClass('inahoho');
+</script>

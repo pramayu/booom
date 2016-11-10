@@ -1,0 +1,46 @@
+<%= title "Team Members ~ KAPHOO" %>
+<div class="setting wishlist reviewers_">
+  <div class="col-md-12 brek brrroo" style="width:97%;">
+    <div class="user_chooses" style="padding-top:0px;">
+      <div class="kate_kat">
+        <h2><%= @team.name.capitalize %></h2>
+        <p>This team has <%= @team.users.count %> members</p>
+      </div>
+    </div>
+    <div class="left_cons23" style="padding-top: 20px;">
+      <% @team.users.each do |user| %>
+        <div class="col-md-3 user_rev">
+          <div class="this_wt" style="background-image: url(<%= user.avatar_url(:tellme) unless user.avatar.nil? %>)">
+            <div class="convd">
+              <div class="vfde">
+                <ul class="list-inline pull-right">
+                  <li class="email"><a href="#"><span class="fa fa-pencil-square-o"></span></a></li>
+                  <li class="email"><a href="#"><span class="fa fa-envelope"></span></a></li>
+                  <li class="email"><a href="#"><span class="fa fa-trash"></span></a></li>
+                </ul>
+              </div>
+              <div class="img_">
+                <% if !user.avatar.present? %>
+                  <%= image_tag "default/default_profile.png", class: "bvgr" %>
+                <% else %>
+                  <%= image_tag user.avatar_url(:thumbel), class: "bvgr" %>
+                <% end %>
+                <p class="name"><%= user.first_n.capitalize + " " + user.last_n.capitalize %></p>
+                <p class="email"><%= user.email.downcase %></p>
+                <% if user.leader? %>
+                  <span class="lif">Leader of <%= user.team.name.capitalize %></span>
+                <% else %>
+                  <span class="lif">Member of <%= user.team.name.capitalize %></span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div> 
+  </div>
+</div>
+ <script>
+$('.aktif').removeClass();
+$('.teams').addClass('aktif');
+ </script>

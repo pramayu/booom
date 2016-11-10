@@ -1,0 +1,21 @@
+<% index = conversation_counter %>
+<div role="tabpanel" class="tab-pane fade <%= 'in active' if index == 0 %>" id="cover_<%= conversation.id %>"> 
+  <%# conversation.receipts_for(current_user).each do |receipt| %>
+    <%# message = receipt.message %>
+    <div class="img_hdg pull-left">
+      <%= image_tag conversation.originator.avatar_url(:thumb) %>
+    </div>
+    <div class="descye57">
+      <p class="name"><%= conversation.originator.first_n.capitalize %> <%= conversation.originator.last_n.capitalize %> <span class="tgl"><%= conversation.messages.last.created_at.strftime("%b %d, %Y") %></span></p>
+      <span class="full-ht"> <%= link_to conversation_path(conversation) do %><i class="fa fa-reply" aria-hidden="true"></i><% end %></span>
+      <span class="to_">subject: <%#= conversation.subject.capitalize %> <%= conversation.subject.capitalize %> </span> 
+    </div>
+    <div class="comtent">
+      <p class="subject_i">
+      <p class="con_oo"i>
+      <%= simple_format(conversation.messages.first.body) %>
+      </p>
+    </div>
+  <%# end %>
+</div>
+

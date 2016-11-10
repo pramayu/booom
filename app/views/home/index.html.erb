@@ -1,0 +1,344 @@
+<%= title "Themes, 3D Model, Fonts, and More ~ KAPHOO" %>
+<div class="header">
+	<div class="navbar navbar-default this-nav">
+		<div class="container contain-cus">
+			<div class="navbar-header">
+				<a href="#" class="navbar-brand"><%= image_tag ("logo/logo.png"), class: "logo" %></a>
+			</div>
+			<ul class="nav navbar-nav navbar-right mnu">
+				<li><a href="#">HOME</a></li>
+				<li><a href="#">PRODUCTS</a></li>
+				<li><a href="#">FEATURES</a></li>
+				<li><a href="#">BLOG</a></li>
+				<li><a href="#">ABOUT</a></li>
+				<li><%= link_to "LOGIN", sign_in_path %></li>
+			</ul>
+		</div>
+	</div>
+	<div class="capt">
+		<div class="container contain-cus">
+			<h2>BUILD, GROW YOUR CREATIVITY &amp; WE</h2>
+			<h4>HELP YOU PROMOTING YOUR PRODUCTS</h4>
+			<%= link_to "GET STARTED", sign_up_path, class: "btn-start" %>
+			<div class="img_brw">
+				<%= image_tag("web_front.png", class: "img_1" )%>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="features">
+	<div class="container contain-cus">
+		<div class="title">
+			<h3>SIXART FEATURES</h3>
+			<p>Get the a variety of products of quality and professional sellers</p>
+			<div class="line">
+				<hr>
+			</div>
+		</div>
+		<div class="lst_1">
+			<div class="col-md-4">
+				<div class="icons_i">
+					<%= image_tag ("icon/_1.png") %>
+					<h4>
+						Free Products / Week
+					</h4>
+					<p>
+						Every week we will be on sale in the form of free products with good quality
+					</p>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="icons_i">
+					<%= image_tag ("icon/_2.png") %>
+					<h4>
+						Social Media Marketing
+					</h4>
+					<p>
+						To ease the process of marketing the
+						product. we provide facilities for
+						social media marketing.
+					</p>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="icons_i">
+					<%= image_tag ("icon/_3.png") %>
+					<h4>
+						Easy Transactions
+					</h4>
+					<p>
+						For the payment of any purchase of products
+						in our store. You will be given the ease
+						in the payment process
+					</p>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="icons_i">
+					<%= image_tag("icon/_4.png") %>
+					<h4>
+						Quality Products
+					</h4>
+					<p>
+						We offer a wide range of products that have
+						a very good quality and are made 
+						by a professional.
+					</p>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="icons_i">
+					<%= image_tag("icon/_5.png") %>
+					<h4>
+						Post &amp; Find Jobs
+					</h4>
+					<p>
+						We provide a place for you if you want to
+						hire employees who are professional
+						and experienced
+					</p>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="icons_i">
+					<%= image_tag("icon/_6.png") %>
+					<h4>
+						Wishlist Products
+					</h4>
+					<p>
+						This feature will make it easy for you
+						to compare products that have
+						the same quality.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="products" id="item_pro">
+	<div class="container contain-cus">
+		<div class="title">
+			<h3>What We Provide to You?</h3>
+			<p>We Offer a Variety of Products and Services for You</p>
+			<div class="line">
+				<hr>
+			</div>
+		</div>
+		<div class="pro-main">
+			<div class="top_oe grd" id="io">
+				<%= link_to themes_path do %>
+					<div class="col-md-3 _this_col col_top_1 vangkes1">
+						<%= link_to themes_path do %>
+							<object data="" type="">
+								<%= render 'home/theme' %>
+							</object>
+							<h4 class="th_">ThemeArts</h4>
+						<% end %>
+					</div>
+				<% end %>
+				<div class="ver">
+					<span class="sparator"></span>
+				</div>
+				<a href="#">
+					<div class="col-md-3 _this_col col_top_2 vangkes2">
+						<a href="#">
+							<object data="" type="">
+								<%= render 'home/code' %>
+								<h4 class="cd_">CodeArts</h4>
+							</object>
+						</a>
+					</div>
+				</a>
+				<div class="ver">
+					<span class="sparator"></span>
+				</div>
+				<a href="#">
+					<div class="col-md-3 _this_col col_top_3 vangkes3">
+						<a href="#">
+							<object data="" type="">
+								<%= render 'home/graphic' %>
+							</object>
+							<h4 class="grp_">Graphiku</h4>
+						</a>
+					</div>
+				</a>
+				<div class="ver">
+					<span class="sparator"></span>
+				</div>
+				<a href="#">
+					<div class="col-md-3 _this_col col_top_4 vangkes4">
+						<a href="#">
+							<object data="" type="">
+								<%= render 'home/threed' %>
+							</object>
+							<h4 class="drm_">3Dream</h4>
+						</a>
+					</div>
+				</a>
+				<div class="clear"></div>
+			</div>
+			<div class="hor">
+				<!-- <hr> -->
+			</div>
+			<div class="bottom_oe grd" id="oi">
+				<div class="col-md-3 _this_col col_top_1 vangkes5">
+					<a href="#">
+						<object data="" type="">
+							<%= render 'home/video' %>
+						</object>
+						<h4 class="vdo_">VideoArts</h4>
+					</a>
+				</div>
+				<span class="sparator"></span>
+				<div class="col-md-3 _this_col col_top_2 vangkes6">
+					<a href="#">
+						<object data="" type="">
+							<%= render 'home/photo' %>
+						</object>
+						<h4 class="pto_">Photostock</h4>
+					</a>
+				</div>
+				<span class="sparator"></span>
+				<div class="col-md-3 _this_col col_top_3 vangkes7">
+					<a href="#">
+						<object data="" type="">
+							<%= render 'home/font' %>
+						</object>
+						<h4 class="fot_">Fonts</h4>
+					</a>
+				</div>
+				<span class="sparator"></span>
+				<div class="col-md-3 _this_col vangkes8">
+					<a href="#">
+						<object data="" type="">
+							<%= render 'home/course' %>
+						</object>
+						<h4 class="crs_">Course</h4>
+					</a>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="team">
+	<div class="container contain-cus">
+		<div class="title">
+			<h3>how we work?</h3>
+			<div class="line">
+				<hr>
+			</div>
+			<div class="kui">
+				<p>
+					Pixarts is proudly based in Yogyakarta, Indonesia, but our people and community live and work from all over the world.
+					<br><br>
+					We believe good ideas deserve a chance to grow. We believe people deserve to earn a living doing what they love. We believe in making it easy to get things done.
+				</p>
+			</div>
+			<div class="awk">
+				<a href="#" class="bds">KNOW MORE</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="community">
+	<div class="container-contain-cus">
+		<div class="title">
+			<h3>our community</h3>
+			<div class="line">
+				<hr>
+			</div>
+		</div>
+		<div class="cout">
+			<p>
+				Pixarts is a platform for handcrafted, mousemade design content from independent creatives around the world. We're passionate about making beautiful design simple and accessible to everyone.
+			</p>
+			<div class="gdf">
+				<a href="#" class="bht">SIGN UP</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="blog">
+	<div class="container contain-cus">
+		<div class="title">
+			<h3>improve your skill</h3>
+			<div class="kl">
+				<p>We provide a free tutorial to improve your skills &amp; knowledge</p>
+			</div>
+			<div class="line">
+				<hr>
+			</div>
+		</div>
+		<div class="lst-blg">
+			<div class="col-md-4 ski">
+				<a href="#">
+					<%= image_tag("blog/1.png") %>
+					<div class="xnb">
+						<p>Be Good Designer...</p>
+						<div class="col-md-6 vdf">
+							<span>By Fooo</span>
+						</div>
+						<div class="col-md-6 vdf">
+							<span>Like</span>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-4 ski">
+				<a href="#">
+					<%= image_tag("blog/2.png") %>
+					<div class="xnb">
+						<p>Be Good Designer...</p>
+						<div class="col-md-6 vdf">
+							<span>By Fooo</span>
+						</div>
+						<div class="col-md-6 vdf">
+							<span>Like</span>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-4 ski">
+				<a href="#">
+					<%= image_tag("blog/3.png") %>
+					<div class="xnb">
+						<p>Be Good Designer...</p>
+						<div class="col-md-6 vdf">
+							<span>By Fooo</span>
+						</div>
+						<div class="col-md-6 vdf">
+							<span>Like</span>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="clear"></div>
+			<div class="bgdf">
+				<a href="#" class="njg">KNOW MORE</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="footer">
+	<div class="container-fluid">
+		<ul class="list-inline pull-left vft">
+			<li><a href="#">Free Goods</a></li>
+			<li><a href="#">Community</a></li>
+			<li><a href="#">Jobs</a></li>
+			<li><a href="#">Blog</a></li>
+			<li><a href="#">Forums</a></li>
+			<li><a href="#">Help</a></li>
+		</ul>
+		<ul class="list-inline pull-right xtx">
+			<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-github-alt" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+		</ul>
+	</div>
+</div>

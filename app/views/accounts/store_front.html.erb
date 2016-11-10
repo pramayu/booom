@@ -1,0 +1,57 @@
+<%= title "Setting Store ~ KAPHOO" %>
+<div class="setting">
+  <%= form_for setup_store(@usr) do |f| %>
+    <%= f.fields_for :ourstore do |ff| %>
+      <div class="col-md-8 brek brrroo">
+        <div class="user_chooses">
+          <div class="kate_kat">
+            <h2>Store</h2>
+            <p>configuration your store to convince buyers with the quality of your products</p>
+          </div>
+          <div class="sod data-acct">
+            <%= ff.hidden_field :id %>
+            <div class="form-group fk">
+              <span class="fl">Description</span>
+              <div class="fs">
+                <%= ff.text_area :description, class: "form-control sami txt_ar", require: true %>
+              </div>
+            </div>
+            <div class="form-group fk">
+              <span class="fl">Personal website</span>
+              <div class="fs">
+                <%= ff.text_field :website, class: "form-control sami", require: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 brok prek">
+        <div class="mnu_fuk">
+          <div class="recent kls">
+            <div class="ti_l">
+              <span>HEADER</span>
+            </div>
+            <div class="pp">
+              <div class="form-group ppc">
+                <div class="hf">
+                  <label for="user_avatar" class="label_avatar">BROWSE</label>
+                  <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                  <div class="jht">
+                    <span class="dg-avatar"></span>
+                  </div>
+                  <%= ff.file_field :header, require: true, class: "upload_avatar" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          </div>
+          <div class="btn-pi">
+            <%= f.submit "UPDATE", class: "btn_update" %>
+          </div>
+        </div>
+      <% end %>
+      </div>
+      <script>
+$('.aktif').removeClass();
+$('.store').addClass('aktif');
+      </script>

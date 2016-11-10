@@ -1,0 +1,33 @@
+$(function(){
+  jQuery("html").niceScroll({cursorcolor:"#c0bfbf"});
+  jQuery("#reve").niceScroll({cursorcolor:"#c0bfbf"});
+  jQuery("#jfhft64").niceScroll({cursorcolor:"#c0bfbf"});
+});
+
+$(document).ready(function(){
+  $('.vangkes2').hover(function(){
+    $('.vangkes1').toggleClass('no_border');
+  });
+  $('.vangkes3').hover(function(){
+    $('.vangkes2').toggleClass('no_border');
+  });
+  $('.vangkes4').hover(function(){
+    $('.vangkes3').toggleClass('no_border');
+  });
+  $('.vangkes5').hover(function(){
+    $('.vangkes1').toggleClass('no_border_top');
+  });
+  $('.vangkes6').hover(function(){
+    $('.vangkes2').toggleClass('no_border_top');
+    $('.vangkes5').toggleClass('no_border');
+  });
+  $('.vangkes7').hover(function(){
+    $('.vangkes3').toggleClass('no_border_top');
+    $('.vangkes6').toggleClass('no_border');
+  });
+  $('.vangkes8').hover(function(){
+    $('.vangkes4').toggleClass('no_border_top');
+    $('.vangkes7').toggleClass('no_border');
+  });
+});
+

@@ -1,0 +1,48 @@
+// Place all the styles related to the codes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "tooltipster.bundle.min.css";
+@import 'themes_homepage.scss';
+@import 'tagsinput';
+@import 'new_themes';
+@import 'choosen_input';
+@import 'upload_themes';
+@import 'video-js';
+@import 'show';
+@import 'dropdown'; 
+@import 'category';
+@import 'raty';
+@import 'manage_course';
+@import "store";
+body {
+    -webkit-font-smoothing: antialiased;
+}
+.navbar-brand {
+	outline: none !important;
+}
+.nh {
+    position: absolute;
+    font-size: 11px;
+    font-family: "FuturaPT-Bold", Roboto, Helvetica, Arial;
+    background-color: #6ac7f6;
+    color: #fff;
+    height: 20px;
+    border-radius: 100%;
+    padding-left: 12.5%;
+    padding-top: 1.49px;
+    width: 20px;
+    margin-top: -3px;
+    margin-left: -11px;
+}
+.root_logo {
+  font-family: "bebas_neuebold";
+  font-size: 30px;
+  color: #5cbbf3;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-decoration: none !important;
+  outline: none;
+  text-shadow: 0px 0px 4px rgba(92, 187, 243, 0.1);
+}

@@ -1,0 +1,118 @@
+<%= form_for @vacancy, html: {multipart: true} do |f| %>
+  <div class="col-md-8 fdr cfah">
+    <div class="name_des">
+      <div class="form-group liu">
+        <span class="ywe">Vacancy Name</span>
+        <div class="myth">
+          <%= f.text_field :name, class: "form-control this_load", require: true %>
+        </div>
+      </div>
+      <div class="form-group liu">
+        <span class="ywe">Description</span>
+        <div class="myth">
+          <%= f.cktext_area :description, ckeditor: {uiColor: '#EEF1F8', toolbar: 'simple'}, placeholder: "description for your product", class: "form-control this_load" %>
+        </div>
+      </div>
+      <div class="form-group liu">
+        <span class="ywe">Registration URL</span>
+        <div class="myth">
+          <%= f.text_field :url_form, class: "form-control this_load", require: true %>
+        </div>
+      </div>
+      <div class="up_btw">
+        <div class="liu">
+          <div class="myth">
+            <%= f.submit "UPLOAD", class: "btn_uh" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 fdr cfih">
+    <div class="file_upload vuih">
+      <div class="subct vuih">
+        <div class="form-group liu">
+          <div class="fok">
+            <span class="ywe">Vacancy Category</span>
+          </div>
+          <div class="myth">
+            <div class="nbgo">
+              <%= f.collection_select(:category_id, @category, :id, :name, { prompt: "Choose category"}, {class: "form-control foh kde"}) %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="subct vuih">
+        <div class="form-group liu">
+          <div class="fok">
+            <span class="ywe">Country</span>
+          </div>
+          <div class="myth">
+            <div class="nbgo">
+              <%= f.collection_select(:country_id, @country, :id, :name, { prompt: "Choose country"}, {class: "form-control foh kde"}) %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="subct vuih vamc_ooo">
+        <div class="form-group liu">
+          <div class="fok">
+            <span class="ywe">States</span>
+          </div>
+          <div class="myth">
+            <div class="nbgo">
+              <%= f.grouped_collection_select(:state_id, @country, :states, :name, :id, :name, { include_blank: true}, {class: "form-control foh kde"}) %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="subct vuih">
+        <div class="form-group liu">
+          <div class="fok">
+            <span class="ywe">Job Type</span>
+          </div>
+          <div class="myth">
+            <div class="nbgo">
+              <%= f.select :job_type, options_for_select([["Full Time","Full Time"], ["Contract","Contract"], ["Part Time","Part Time"], ["Freelance","Freelance"], ["Moonlighting","Moonlighting"], ["Internship","Internship"]], @vacancy.job_type), {prompt: "Choose job type"}, {class: "form-control foh kde"} %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="subct vuih">
+        <div class="form-group liu">
+          <div class="fok">
+            <span class="ywe">Recruiter</span>
+          </div>
+          <div class="myth">
+            <div class="nbgio">
+              <%= f.text_field :recruiter, placeholder: "Recriture", class: "form-control foh kde" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="subct vuih">
+        <div class="form-group liu">
+          <div class="fok">
+            <span class="ywe">Experience</span>
+          </div>
+          <div class="myth">
+            <div class="nbgio">
+              <%= f.text_field :experience, placeholder: "Experience", class: "form-control foh kde" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tagst vuih">
+        <div class="form-group liu">
+          <div class="fok">
+            <span class="ywe">Skill Needed</span>
+          </div>
+          <div class="myth">
+            <%= f.text_field :vacancy_skill, class: 'form-control foh', id: 'vacancy_' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

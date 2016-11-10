@@ -1,0 +1,19 @@
+<% index = include_counter + 1 %>
+<%= content_tag "div", id: "include3265", data: {include: include.to_json(only: [:slug])} do %>
+  <li id="daddyyoio51_<%= include.id %>" class="_idih <%= 'tran' if (index + 1)%2 == 0 %>">
+    <ul class="list-inline keke">
+      <li class="_id cfdl">
+        <%= index %>
+      </li>
+      <li class="_name cfdl">
+        <%= include.name %>
+      </li>
+      <li class="_unit cfdl">
+        <ul class="list-inline siut">
+          <li><%= link_to include_edit_url(include.id), "data-turbolinks": false do %><span class="lnr lnr-magic-wand"><% end %></li>
+          <li><a onclick="dellInclude(<%= include.id %>)" id="data_<%#= category.slug %>"><span class="lnr lnr-trash"></span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+<% end %>

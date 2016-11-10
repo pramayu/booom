@@ -1,0 +1,2 @@
+class Photostock < ApplicationRecord
+end

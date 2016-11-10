@@ -1,0 +1,46 @@
+<%= title "Choose Graphics for Reviewed ~ KAPHOO" %>
+<div class="col-md-8 brek skiw">
+	<div class="wq87uy">
+		<% @graphicos.each do |graphic| %>
+			<div id="kjhgt565">
+				<%= render partial: 'graphic', locals: {graphic: graphic} %>
+			</div>
+		 <% end %> 
+	</div>
+</div>
+<div class="col-md-4 brok kuio">
+	<div class="for_reviewer">
+		<div class="team kls">
+			<div class="ti_l">
+				<span>YOUR CHOOSES</span>
+			</div>
+		</div>
+	</div>
+	<div class="fresk">
+		<div id="forever">
+			<%= render @graphics %>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="brn878">
+		<%= link_to "CHECK OUT", project_path(current_user.team_id), class: "gdt35", "data-turbolinks": false %>
+	</div>
+</div>
+<div class="clear"></div>
+<script>
+	$('.aktif').removeClass();
+	$('.graphics').addClass('aktif');
+	<% @graphicos.each do |graphic| %>
+		$(document).ready(function(){
+			$('#add_to_pro_graphic<%= graphic.id %>').click(function(){
+			$.ajax({
+				type: "GET",
+				url: "<%= add_to_pro_graph_path(graphic) %>",
+				success: function(){
+					$('#dhg789tr_<%= graphic.id %>').hide("slow");
+				}
+			});
+			});
+		});
+	 <% end %> 
+</script>

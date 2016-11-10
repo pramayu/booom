@@ -1,0 +1,27 @@
+$('#srew_<%= @theme.id %>').hide("slow");
+$('#reve').modal("hide");
+
+<% if @theme.thumbnail_previously_changed? %>
+  $('.img_tre43').hide("fast", function(){
+    $(this).remove();
+  });
+$("#jreg<%= @theme.id %>").html("<%= escape_javascript render(partial: 'themes/thumbnail', locals: {theme: @theme}) %>");
+<% end %>
+
+<% @theme.screenshots.each_with_index do |sf, index| %>
+  $('#item_<%= sf.id %>').remove();
+  $("#beta").append("<%= escape_javascript render(partial: 'themes/screenshot', locals: {sf: sf, index: index}) %>");
+  $('.mata').on("change", function(){
+    $(this).removeClass('active');
+  });
+<% end %>
+
+<% @theme.brokes.each do |broke| %>
+  <% if broke.resources_previously_changed? %>
+    $('#fhg656').hide();
+    $('#hftu88').html("<%= escape_javascript render(partial: 'themes/delbroke', locals: {broke: broke}) %>");
+    $('#hftu88').show();
+    $('#rhrh75').html("<%= escape_javascript render(partial: 'themes/delbroke', locals: {broke: broke}) %>");
+    $('.l1_').hide();
+  <% end %>
+<% end %>

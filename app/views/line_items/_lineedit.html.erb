@@ -1,0 +1,82 @@
+<div class="modal-dialog line_cart" role="document">
+	<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+				<h4 class="modal-title" id="myModalLabel">Edit Shopping Cart</h4>
+			</div>
+			<%= form_for @line_item, remote: true do |f| %>
+				<div class="modal-body" id="cart_lined">
+						<div class="mengh">
+							<div class="imgs_u">
+								<% if @line_item.theme.present? %> 
+									<%= image_tag @line_item.theme.thumbnail_url(:thumbnail), width: '120' %>
+								<% elsif @line_item.code.present? %>
+									<%= image_tag @line_item.code.thumbnail_url(:thumbnail), width: '120' %>
+								<% elsif @line_item.font.present? %>
+									<%= image_tag @line_item.font.thumbnail_url(:thumbnail), width: '120' %>
+								<% elsif @line_item.course.present? %>
+									<%= image_tag @line_item.course.thumbnail_url(:thumbnail), width: '120' %>
+								<% elsif @line_item.graphic.present? %>
+									<%= image_tag @line_item.graphic.thumbnail_url(:thumbnail), width: '120' %>
+								<% elsif @line_item.t3d.present? %>
+									<%= image_tag @line_item.t3d.thumbnail_url(:thumbnail), width: '120' %>
+								<% elsif @line_item.videofx.present? %>
+									<%= image_tag @line_item.videofx.thumbnail_url(:thumbnail), width: '120' %>
+								<% end %> 
+							</div>
+							<div class="kdg68">
+								<% if @line_item.theme.present? %> 
+									<h2 class="ytr"><%= @line_item.theme.name %></h2>
+									<span class="by">by <%= @line_item.theme.user.username %></span>
+								<% elsif @line_item.code.present? %>
+									<h2 class="ytr"><%= @line_item.code.name %></h2>
+									<span class="by">by <%= @line_item.code.user.username %></span>
+								<% elsif @line_item.font.present? %>
+									<h2 class="ytr"><%= @line_item.font.name %></h2>
+									<span class="by">by <%= @line_item.font.user.username %></span>
+								<% elsif @line_item.course.present? %>
+									<h2 class="ytr"><%= @line_item.course.name %></h2>
+									<span class="by">by <%= @line_item.course.user.username %></span>
+								<% elsif @line_item.graphic.present? %>
+									<h2 class="ytr"><%= @line_item.graphic.name %></h2>
+									<span class="by">by <%= @line_item.graphic.user.username %></span>
+								<% elsif @line_item.t3d.present? %>
+									<h2 class="ytr"><%= @line_item.t3d.name %></h2>
+									<span class="by">by <%= @line_item.t3d.user.username %></span>
+								<% elsif @line_item.videofx.present? %>
+									<h2 class="ytr"><%= @line_item.videofx.name %></h2>
+									<span class="by">by <%= @line_item.videofx.user.username %></span>
+								<% end %> 
+								<h2 class="price"><span>$</span><span id="sguwjj<%= @line_item.id %>"><%= render "line_items/price_modal" %></span></h2>
+								<% if @line_item.license == 'extended' %>
+									<p class="hfld"><span>License: </span><span id="khgd56dg<%= @line_item.id %>">Extended</span></p>
+								<% elsif @line_item.license == 'regular' %> 
+									<p class="hfld"><span>License: </span><span id="khgd56<%= @line_item.id %>">Regular</span></p>
+								<% end %> 
+								<% if @line_item.support? %>
+									<p class="hfld sdsd"><span>Support: </span><span id="fhye68<%= @line_item.id %>">Unlimited Support</span></p>
+								<% else %>
+									<p class="hfld sdsd"><span>Support: </span><span id="basget<%= @line_item.id %>">6 Months Support</span></p>
+								<% end %> 
+							</div>
+						</div>
+						<div class="jhdg658">
+							<div class="col-md-6 yaaaaa">
+								<div class="form-group gjh">
+									<%= f.select :license, options_for_select([["Regular", "regular"], ["Extended", "extended"]], @line_item.license), {}, {class: "form-control asal_tahan_aja"} %>
+								</div>
+							</div>
+							<div class="col-md-6 yaaaaa">
+								<div class="form-group ooter">
+									<%= f.check_box :support, class: "not_sengaja" %>
+									<label for="line_item_support"><span class="shgi"></span><span class="shgt">Unlimited Support + $30</span></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				<div class="modal-footer">
+					<%= f.submit "SAVE", class: "btn btn-default",  id: "ref_es" %>
+				</div>
+			<% end %>
+	</div>
+</div>

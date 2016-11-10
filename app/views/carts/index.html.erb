@@ -1,0 +1,106 @@
+<%= title "Shopping Carts ~ KHAPOO" %>
+<div class="main_o jgfjsdhgjd">
+  <div class="container __ji">
+    <div class="col-md-9 rgth_p">
+      <div class="sangkat_r">
+        <ul class="list-inline jhdg29">
+          <li class="d3y8"><a href="#">Clear Cart</a></li>
+          <li class="sjg7 pull-right"><span id="kjf83"><%= render "line_items/item" %></span> Items</li>
+        </ul>
+        <div class="ghsgak7">
+          <%= content_tag "div", id: "sjhdg4570", data: {carts: @carts.to_json(only: [:id])} do %>
+            <% @carts.each do |item| %>
+              <div class="jshdf65" id="idgste4_<%= item.id %>">
+                <div class="heiu">
+                  <a href="" id="line_<%= item.id %>"><span class="fa fa-trash"></span></a>
+                </div>
+                <div class="odkjh7">
+                  <% if item.theme.present? %> 
+                    <%= image_tag item.theme.thumbnail_url(:thumbnail), width: '120' %>
+                  <% elsif item.code.present? %>
+                    <%= image_tag item.code.thumbnail_url(:thumbnail), width: '120' %>
+                  <% elsif item.font.present? %>
+                    <%= image_tag item.font.thumbnail_url(:thumbnail), width: '120' %>
+                  <% elsif item.course.present? %>
+                    <%= image_tag item.course.thumbnail_url(:thumbnail), width: '120' %>
+                  <% elsif item.graphic.present? %>
+                    <%= image_tag item.graphic.thumbnail_url(:thumbnail), width: '120' %>
+                  <% elsif item.t3d.present? %>
+                    <%= image_tag item.t3d.thumbnail_url(:thumbnail), width: '120' %>
+                  <% elsif item.videofx.present? %>
+                    <%= image_tag item.videofx.thumbnail_url(:thumbnail), width: '120' %>
+                  <% end %>  
+                </div>
+                <div class="sdhgsdj975">
+                  <% if item.theme.present? %> 
+                    <h4 class="gdt"><a href="#"><%= item.theme.name %></a></h4>
+                    <span class="by">by <%= item.theme.user.username %></span>
+                  <% elsif item.code.present? %>
+                    <h4 class="gdt"><a href="#"><%= item.code.name %></a></h4>
+                    <span class="by">by <%= item.code.user.username %></span>
+                  <% elsif item.font.present? %>
+                    <h4 class="gdt"><a href="#"><%= item.font.name %></a></h4>
+                    <span class="by">by <%= item.font.user.username %></span>
+                  <% elsif item.course.present? %>
+                    <h4 class="gdt"><a href="#"><%= item.course.name %></a></h4>
+                    <span class="by">by <%= item.course.user.username %></span>
+                  <% elsif item.graphic.present? %>
+                    <h4 class="gdt"><a href="#"><%= item.graphic.name %></a></h4>
+                    <span class="by">by <%= item.graphic.user.username %></span>
+                  <% elsif item.t3d.present? %>
+                    <h4 class="gdt"><a href="#"><%= item.t3d.name %></a></h4>
+                    <span class="by">by <%= item.t3d.user.username %></span>
+                  <% elsif item.videofx.present? %>
+                    <h4 class="gdt"><a href="#"><%= item.videofx.name %></a></h4>
+                    <span class="by">by <%= item.videofx.user.username %></span>
+                  <% end %> 
+                  <h2 class="price"><span>$</span><span id="djfg68<%= item.id %>"><%= render partial: "line_items/prc", locals: {item: item} %></span></h2>
+                  <% unless item.course.present? %> 
+                    <% if item.license == 'extended' %>
+                      <p class="hfld"><span>License: </span><span id="budgfei<%= item.id %>"><%= link_to "Extended", edit_line_item_url(item.id), remote: true %></span></p>
+                    <% elsif item.license == 'regular' %> 
+                      <p class="hfld"><span>License: </span><span id="iur983<%= item.id %>"><%= link_to "Regular", edit_line_item_url(item.id), remote: true %></span></p>
+                    <% end %>
+                    <% if item.support? %>
+                      <p class="hfld sdsd"><span>Support: </span><span id="fhye68<%= item.id %>">Unlimited Support</span></p>
+                    <% else %>
+                      <p class="hfld sdsd"><span>Support: </span><span id="basget<%= item.id %>">6 Months Support</span></p>
+                    <% end %>
+                  <% end %> 
+                </div>
+              </div>
+            <% end %> 
+          <% end %> 
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 leftr_l djhg753">
+      <div class="dhg77">
+        <div class="riyo">
+          <p class="dt5i">SUMMARY</p>
+        </div>
+        <div class="kdjfu">
+          <h4 class="khg87">TOTAL PRICE</h4>
+          <h2 class="dkg6"><span id="sdfg629"><%= render "line_items/total" %></span> USD</h2>
+          <div class="kshg">
+            <% if signed_in? %> 
+              <%= form_tag "https://www.sandbox.paypal.com/cgi-bin/webscr" do %>
+                <%= hidden_field_tag :cmd, "_s-xclick" %>
+                <%= hidden_field_tag :encrypted, @cart.paypal_encrypted(dashboard_url, payment_noties_url) %>
+                <%= hidden_field_tag :custom, "#{current_user.id}" %>
+                <%= submit_tag "CHECKOUT", class: "chect" %>
+              <% end %> 
+            <% else %>
+              <%= link_to "CHECKOUT", sign_in_path, class: "chect" %>
+            <% end %>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="tengteng3x" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <script>
+$('.active_li').removeClass('active_li');
+$('.active_a').removeClass('active_a');
+  </script>

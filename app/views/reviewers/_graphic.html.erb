@@ -1,0 +1,14 @@
+<% unless graphic.team_id? %> 
+<div class="col-md-3 dhs8798" id="dhg789tr_<%= graphic.id %>">
+	<div class="dsuy8378">
+		<%= image_tag graphic.thumbnail_url(:thumbnail) %>
+		<% if current_user.leader? %> 
+		<div class="add_to_pro">
+			<a id="add_to_pro_graphic<%= graphic.id %>" class="btn_to_pro" remote="true">
+				<i class="fa fa-plus" aria-hidden="true"></i>
+			</a>
+		</div>
+		<% end %> 
+	</div>
+</div>
+<% end %> 

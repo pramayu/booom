@@ -1,0 +1,332 @@
+<%= title "Upgrade Videofx Items ~ KHAPOO" %>
+<div class="upload_item new_att">
+  <div class="container th-cus">
+    <div class="att_conten this_up">
+      <h3>Upload New Product to <span><%= @video.category.name %></span></h3>
+      <div class="drw">
+        <p>Sell design for popular products such as: Illustration, Logo, Business Card, Cloting Design, and Icons &amp; C++</p>
+      </div>
+      <ul class="list-inline cfde">
+        <li class="hge">
+          <%= link_to videofxes_path do %>
+            <i class="fa fa-home" aria-hidden="true"></i>
+          <% end %>
+        </li>
+        <li><%= @video.category.name %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="upload_content">
+  <div class="container th-cus">
+    <%= content_tag "div", id: "videofx997", data: {video: @video.to_json(only: [:name, :slug])} do %>
+      <%= form_for @video, html: {multipart: true} do |f| %>
+        <div class="col-md-8 fdr cfah">
+          <div class="name_des">
+            <div class="form-group liu">
+              <span class="ywe">Code title</span>
+              <div class="myth">
+                <%= f.text_field :name, class: "form-control this_load", require: true %>
+              </div>
+            </div>
+            <div class="form-group file_upload liu">
+              <span class="ywe">Trailer</span>
+              <div class="myth bdgft">
+                <div class="thumbil">
+                  <div class="jdg54">
+                    <div id="src_srr" class="carousel slide" data-ride="carousel">
+                      <div class="carousel-inner" id="beta5" role="listbox">
+                        <% @video.videms.each_with_index do |videm, index| %>
+                          <%= render partial: 'videmo', locals: {videm: videm, index: index} %>
+                        <% end %>  
+                      </div>
+                      <a class="left jet_left carousel-control" href="#src_srr" role="button" data-slide="prev">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                      </a>
+                      <a class="right jet_right carousel-control" href="#src_srr" role="button" data-slide="next">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="screenshot scr_tre sdcsd coure">
+                    <%= f.fields_for :trailer, Videm.new do |hg| %>
+                      <%= hg.file_field :trailer, name: "videofx[videms_attributes][][trailer]", class: "dhgd54" %>
+                      <label for="videofx_trailer_trailer" class="dyeu746 hdye"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group liu">
+              <span class="ywe">Description</span>
+              <div class="myth">
+                <%= f.cktext_area :description, ckeditor: {uiColor: '#EEF1F8', toolbar: 'simple'}, placeholder: "description for your product", class: "form-control this_load" %>
+              </div>
+            </div>
+            <div class="form-group liu">
+              <span class="ywe">Video Duration</span>
+              <div class="myth">
+                <%= f.text_field :duration, class: "form-control this_load", require: true %>
+              </div>
+            </div>
+            <div class="form-group liu">
+              <span class="ywe">Resolution</span>
+              <div class="myth">
+                <%= f.text_field :resolution, class: "form-control this_load", require: true %>
+              </div>
+            </div>
+            <div class="form-group liu">
+              <span class="ywe">File Size</span>
+              <div class="myth">
+                <%= f.text_field :file_size, class: "form-control this_load", require: true %>
+              </div>
+            </div>
+            <div class="form-group liu">
+              <span class="ywe">Demo URL</span>
+              <div class="myth">
+                <%= f.text_field :url_demo, class: "form-control this_load", require: true %>
+              </div>
+            </div>
+            <div class="form-group liu">
+              <span class="ywe">Video Demo</span>
+              <div class="myth">
+                <%= f.text_field :video_demo, class: "form-control this_load", require: true %>
+              </div>
+            </div>
+          </div>
+          <div class="note">
+            <div class="liu">
+              <span class="ywe">Note for Reviewer</span>
+              <div class="myth">
+                <%= f.text_area :note, class: "form-control this_load", require: true %>
+              </div>
+            </div>
+          </div>
+          <div class="up_btw">
+            <div class="liu">
+              <div class="myth">
+                <%= f.submit "UPLOAD", class: "btn_uh" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 fdr cfih">
+          <div class="file_upload vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Thumnail</span>
+              </div>
+              <div class="myth crekkk">
+                <div class="thumbil">
+                  <div class="dhgf565" id="jreg<%= @video.id %>">
+                    <%= render partial: 'thumbnail', locals: {video: @video} %>
+                  </div>
+                  <div class="cvfgt98">
+                    <%= f.file_field :thumbnail, class: "thumb_thg97" %>
+                    <label for="videofx_thumbnail" class="lbk_tdr"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="file_upload vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Main File(ZIP)</span>
+              </div>
+              <div class="myth">
+                <div class="resources">
+                  <%= f.fields_for :resources, Broke.new do |q| %>
+                    <%= q.file_field :resources, multiple: true, name: "videofx[brokes_attributes][][resources]", class: "lepas" %>
+                    <% if @video.brokes.present? %>
+                      <% @video.brokes.each do |broke| %>
+                        <div id="rhrh75"></div>
+                        <div id="hdg98">
+                          <%= render partial: 'delbroke', locals: {broke: broke} %>
+                        </div>
+                      <% end %> 
+                    <% else %>
+                      <div id="hftu88"></div>
+                      <div id="fhg656">
+                        <%= render partial: 'addbroke' %>
+                      </div>
+                    <% end %> 
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="subct vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Code Category</span>
+              </div>
+              <div class="myth">
+                <div class="nbgo">
+                  <%= select_tag("videofx[subcategory_ids][]", options_for_select(@video.category.subcategories.collect {|subcategory| [subcategory.name, subcategory.id]}, @video.subcategories.collect { |subcategory| subcategory.id }), { class: "form-control foh kde", prompt: "Choose category"}) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="subct vuih goku">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Video for</span>
+              </div>
+              <div class="myth">
+                <div class="nbgo">
+                  <%= f.grouped_collection_select(:vidsub_id, Subcategory.order(:name), :vidsubs, :name, :id, :name, {include_blank: true}, {class: "form-control foh kde"}) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% unless @video.category.id == 1054 || @video.category.id == 1055 %>
+            <div class="file vuih">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Files Includes</span>
+                </div>
+                <div class="myth">
+                  <%= select_tag("videofx[include_ids][]", options_for_select(@includes.collect {|include| [include.name, include.id]}, @video.includes.collect { |include| include.id }), {multiple: true, class: "form-control chosen-select"}) %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <% if @video.category.id == 1052 || @video.category.id == 1056 %>
+            <div class="comp vuih an">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Alpha Channel</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :alpha_channel, 'Yes' %> <label for="videofx_alpha_channel_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :alpha_channel, 'No', checked: "checked" %> <label for="videofx_alpha_channel_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="comp vuih an">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Looped Video</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :looped_video, 'Yes' %> <label for="videofx_looped_video_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :looped_video, 'No', checked: "checked" %> <label for="videofx_looped_video_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <% elsif @video.category.id == 1055 %>
+            <div class="comp vuih an">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Require Plugin</span>
+                </div>
+                <div class="myth">
+                  <ul class="list-inline kewqo">
+                    <li><%= f.radio_button :require_plugin, 'Yes' %> <label for="videofx_require_plugin_yes"><span class="sesai"></span><span>Yes</span></label></li>
+                    <li><%= f.radio_button :require_plugin, 'No', checked: "checked" %> <label for="videofx_require_plugin_no"><span class="sesai"></span><span>No</span></label></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <% unless @video.category.id == 1054 || @video.category.id == 1055 %>
+            <div class="file vuih">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Frame Rates</span>
+                </div>
+                <div class="myth">
+                  <%= select_tag("videofx[framerate_ids][]", options_for_select(Framerate.all.collect {|framerate| [framerate.name, framerate.id]}, @video.framerates.collect { |framerate| framerate.id }), {multiple: true, class: "form-control chosen-select"}) %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <% if @video.category.id == 1054 %>
+            <div class="file vuih">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Plugins</span>
+                </div>
+                <div class="myth">
+                  <%= select_tag("videofx[aeplugin_ids][]", options_for_select(Aeplugin.all.collect {|aeplugin| [aeplugin.name, aeplugin.id]}, @video.aeplugins.collect { |aeplugin| aeplugin.id }), {multiple: true, class: "form-control chosen-select"}) %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <% if @video.category.id == 1054 %>
+            <div class="comp vuih">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Software Min Version</span>
+                </div>
+                <div class="myth">
+                  <div class="nbgo">
+                    <%= f.collection_select(:softopen_id, @after_effects, :id, :name, {prompt: "Choose software"}, {class: "form-control foh kde"}) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% elsif @video.category.id == 1055 %>
+            <div class="comp vuih">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Software Min Version</span>
+                </div>
+                <div class="myth">
+                  <div class="nbgo">
+                    <%= f.collection_select(:softopen_id, @apple_motions, :id, :name, {prompt: "Choose software"}, {class: "form-control foh kde"}) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <% unless @video.category.id == 1054 || @video.category.id == 1055 %>
+            <div class="comp vuih">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Encoding</span>
+                </div>
+                <div class="myth">
+                  <div class="nbgo">
+                    <%= f.collection_select(:encode_id, @encodes, :id, :name, {prompt: "Choose encode"}, {class: "form-control foh kde"}) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <% if @video.category.id == 1052 %>
+            <div class="comp vuih">
+              <div class="form-group liu">
+                <div class="fok">
+                  <span class="ywe">Setting</span>
+                </div>
+                <div class="myth">
+                  <div class="nbgo">
+                    <%= f.collection_select(:latar_id, @latars, :id, :name, {prompt: "Choose settings"}, {class: "form-control foh kde"}) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <div class="tagst vuih">
+            <div class="form-group liu">
+              <div class="fok">
+                <span class="ywe">Tags</span>
+              </div>
+              <div class="myth">
+                <%= f.text_field :tag_list, class: 'form-control foh', id: 'tags' %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      <% end %>
+    <% end %> 
+  </div>
+</div>
+
