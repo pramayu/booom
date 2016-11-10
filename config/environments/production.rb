@@ -44,7 +44,7 @@ Rails.application.configure do
   config.force_ssl = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = '127.0.0.1:3000'
+  host = '103.247.8.220'
   config.action_mailer.default_url_options = {host: host}
   config.action_mailer.smtp_settings {
     :address        => 'smtp.gmail.com',
@@ -52,7 +52,7 @@ Rails.application.configure do
     :authentication => :plain,
     :user_name      => 'dmonmad@gmail.com',
     :password       => 'e32xpram',
-    :domain         => 'fluxcats.com'
+    :domain         => 'khapoo.com',
     :enable_starttls_auto   => true
   }
 
