@@ -2,7 +2,6 @@ set :stage, :production
 server '103.247.8.220', user: 'pramayu', roles: %w{web app}
 
 # server-based syntax
-#
 # ======================
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:

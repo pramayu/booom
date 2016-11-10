@@ -16,9 +16,9 @@ set :deploy_to, '/home/pramayu/khapoo'
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 #
-#
 set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
 
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
