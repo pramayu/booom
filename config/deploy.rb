@@ -9,7 +9,7 @@ set :repo_url, 'git@github.com:pramayu/booom.git'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/home/pramayu/khapoo'
-
+set :rbenv_path, '/home/pramayu/.rbenv'
 # Default value for :scm is :git
 # set :scm, :git
 set :passenger_restart_with_touch, true

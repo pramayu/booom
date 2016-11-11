@@ -54,7 +54,6 @@ Rails.application.configure do
     enable_starttls_auto: true,
     user_name: "dmonmad@gmail.com",
     password: "pramayu10",
-    openssl_verify_mode: 'none'
   }
 
   # Use the lowest log level to ensure availability of diagnostic information
