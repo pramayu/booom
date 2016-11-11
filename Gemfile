@@ -71,6 +71,7 @@ group :production do
   gem 'capistrano-rails-db'
   gem 'capistrano-rails-console'
   gem 'capistrano-upload-config'
+  gem 'capistrano-passenger'
   gem 'sshkit-sudo'
 end
 
