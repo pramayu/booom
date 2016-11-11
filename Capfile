@@ -8,15 +8,11 @@ require "capistrano/deploy"
 #
 # For documentation on these, see for example:
 #
-#
  require 'capistrano/rbenv'
  set :rbenv_type, :user # or :system, depends on your rbenv setup
- set :rbenv_ruby, '2.3.1'
- set :rbenv_path, '/home/pramayu/.rbenv'
+ set :rbenv_ruby, '2.3.0'
  require 'capistrano/bundler'
  require 'capistrano/rails'
- require 'capistrano/passenger'
-#
 #
 #   https://github.com/capistrano/rvm
 #   https://github.com/capistrano/rbenv

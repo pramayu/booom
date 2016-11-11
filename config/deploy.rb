@@ -8,18 +8,15 @@ set :repo_url, 'git@github.com:pramayu/booom.git'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/pramayu/khapoo'
-# set :rbenv_path, '/home/pramayu/.rbenv'
+set :deploy_to, '/home/pramayu/khapoo_app'
+
 # Default value for :scm is :git
 # set :scm, :git
-set :passenger_restart_with_touch, true
+
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
-#
 set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-
-
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
 # set :format_options, command_output: true, log_file: 'log/capistrano.log', color: :auto, truncate: :auto
