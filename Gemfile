@@ -41,6 +41,7 @@ gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 gem 'warden'
 gem 'mailboxer'
 gem "cocoon"
+gem 'therubyracer',  platforms: :ruby
 # end
 
 
